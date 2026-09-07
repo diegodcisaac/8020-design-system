@@ -10,9 +10,11 @@ Cinco registros, escolhidos pelo papel do slide na narrativa:
 
 - `.slide.s-faixa`: faixa de tinta à esquerda (um terço) com `.faixa` e o conteúdo em `.conteudo`. É o padrão de todo slide de evidência: texto, lista, gráfico, comparação, perfis, atores, passos, números, próximos passos.
 - `.slide.s-topo`: faixa de 240 px no topo, para conteúdo largo: tabela de muitas colunas, fases, fluxo, esquema. O conteúdo tem 392 px úteis.
-- `.slide.s-quieto`: a margem 80/20, com `.conteudo` e `.cromo`. Sumário, recap de capítulo, transições.
+- `.slide.s-quieto`: a margem 80/20, com `.conteudo` e `.cromo`. Sumário, recap de capítulo, transições. Não tem faixa, logo não tem `.cap`: o recap que não vem logo depois do capítulo que fecha declara qual é em `data-capitulo="Capítulo N"` no slide.
 - `.slide.s-cheio` com `.tema-laranja` ou `.tema-escuro`: os momentos. Mensagem-mãe em laranja; aparte, foto de respiro (`.com-foto`, com `.foto-cheia`, `.veu` e `.sobre`) e contracapa em escuro.
 - `.faixa.laranja` dentro de `.s-faixa`: a abertura de capítulo e a capa. Uma por capítulo, nunca em dois slides seguidos.
+
+O registro define a largura do `.conteudo`, e o conteúdo tem de caber nela: 685 px na faixa à esquerda, 808 px no quieto, 1088 px no topo. SVG com viewBox mais largo encolhe e derruba o texto abaixo do piso de 14 px; o verificador cobra isso em `svg-largo-demais`.
 
 A faixa carrega: `.cap` (`<b>Capítulo N</b> Nome`, até 30 caracteres), `h2` (título descritivo, até 48 caracteres, nunca o achado), `.frase` (a frase central, obrigatória, até 110 caracteres, com o núcleo em `<strong>`) e o `.pe`, que o sistema escreve. Na capa o `.pe` pode trazer `<span class="quando">` com a data; o contador entra ao lado. Na capa o último termo do título vai em `<em>`: é a assinatura da marca.
 
@@ -73,7 +75,7 @@ Título da faixa 48 caracteres; frase central 110; título de slide quieto 60; s
 O mesmo arquivo imprime um slide por página (`@page` de 1280 por 720), com a faixa colorida, o contador no rodapé e o laranja do dado em hachura. Comando:
 
 ```bash
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="deck.pdf" --print-to-pdf-no-header "file:///caminho/da/peca/deck.html"
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="deck.pdf" --print-to-pdf-no-header "file:///caminho/absoluto/da/peca/deck.html"
 ```
 
 ## Checklist de saída

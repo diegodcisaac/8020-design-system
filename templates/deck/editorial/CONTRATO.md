@@ -10,6 +10,8 @@ Se a peça é densa de dado ou de decisão (diagnóstico, plano de canais, orça
 
 ## Gramática
 
+O registro define a largura útil do `.conteudo`: 685 px na faixa à esquerda, 808 px no quieto, 1088 px no topo. Conteúdo largo, como diagrama de viewBox 1088, é do registro topo.
+
 Cada slide é um filho direto de `.deck`, com um comentário `<!-- NN · tipo -->` antes e um `<aside class="notas">` no fim, com a nota do apresentador. O autor não escreve contador nem trilho: o `deck.js` escreve.
 
 | Tipo | O que o autor escreve | O que o deck.js escreve |
@@ -114,7 +116,7 @@ Toda `img` leva `alt` descritivo, ou `alt=""` quando é decorativa ao lado do no
 O mesmo arquivo imprime um slide por página em 1280 por 720, sem moldura, sem notas e sem animação; o laranja do dado vira hachura. Pelo Chrome headless:
 
 ```
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf=deck.pdf --print-to-pdf-no-header "file:///caminho/deck.html"
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf=deck.pdf --print-to-pdf-no-header "file:///caminho/absoluto/da/peca/deck.html"
 ```
 
 Conferir o PDF página a página antes de enviar: o que passa na tela passa no papel, e o contrário também.

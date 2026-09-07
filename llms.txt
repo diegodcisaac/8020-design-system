@@ -76,8 +76,12 @@
   mostra. Caixa fora do slide, texto sobre texto, rótulo cruzando traço em SVG,
   fonte mínima efetiva e rolagem horizontal na página. Roda no Playwright, com
   `__URL__` e `__DIR__` trocados. Zero erro nas duas passadas é a condição de saída.
+- [conferir.py](conferir.py): cuida do repositório em vez da peça. Conta o que
+  existe (checagens, páginas, formas, regras, slides) e confere contra o que o
+  README, o guia, este arquivo e o índice afirmam, mais os links internos, o teste
+  de regressão e o próprio sistema. `python3 conferir.py`.
 - [exemplo-com-defeito.html](exemplo-com-defeito.html): o teste de regressão do
-  verificador. Quatro slides escritos para reprovar, que disparam 35 das 48
+  verificador. Quatro slides escritos para reprovar, que disparam 35 das 49
   checagens. Se ele parar de reprovar, o verificador quebrou.
 - Bloco que mostra de propósito o que o sistema recusa se declara com
   `data-antipadrao`, e no CSS entre `/* antipadrão: */` e `/* fim do antipadrão */`.

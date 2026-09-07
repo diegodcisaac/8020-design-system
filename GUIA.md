@@ -92,7 +92,7 @@ Toda faixa carrega as três coisas da regra 38: capítulo, título descritivo e 
 
 ## O catálogo
 
-Nove páginas com os blocos ao vivo e o código para copiar. Fundamentos primeiro, depois o conteúdo, depois os dois formatos.
+Dez páginas com os blocos ao vivo e o código para copiar. Fundamentos primeiro, depois o conteúdo, depois os dois formatos.
 
 - [patterns/tipografia.html](patterns/tipografia.html): a escala com salto, a assinatura em itálico, o rótulo em caixa baixa, os tamanhos do slide
 - [patterns/cores.html](patterns/cores.html): os seis primitivos, os papéis, os momentos, os quatro papéis do laranja e a matriz de contraste medida ao vivo
@@ -112,7 +112,7 @@ Deck e book imprimem do mesmo arquivo, pelo Chrome headless. O deck pagina um sl
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
   --headless=new --disable-gpu --no-pdf-header-footer \
   --print-to-pdf="deck.pdf" --print-to-pdf-no-header \
-  "http://localhost:PORTA/caminho/deck.html"
+  "file:///caminho/absoluto/da/peca/deck.html"
 ```
 
 O PDF se lê página a página antes de sair: o que passa na tela passa no papel, e o contrário também.

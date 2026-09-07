@@ -22,7 +22,7 @@ As regras estão em [RULES.md](RULES.md) e valem sobre qualquer vontade pontual.
 ```
 8020-design-system/
   README.md  RULES.md  GUIA.md  MIGRACAO.md  llms.txt  index.html
-  verificar.py  verificar-geometria.js  exemplo-com-defeito.html
+  verificar.py  verificar-geometria.js  exemplo-com-defeito.html  conferir.py
   tokens/     8020.css  brand.json  gerar-brand.py
   voice/      plataforma.md  tom-de-voz.md  vocabulario.md
   assets/     regua.css  deck.css  deck.js  book.css  book.js  dado.js  pagina.js
@@ -57,21 +57,27 @@ Duas passadas, e zero erro nas duas é a condição de saída da peça.
 python3 verificar.py caminho/da/peca.html
 ```
 
-`verificar.py` lê o HTML sem abrir navegador e devolve os achados por slide ou por seção, cada um apontando a regra que cobra. São 48 checagens de marca, superfície, dado, acessibilidade, hierarquia, limites de texto e editorial, em cinco escopos (deck, parte de book, hub, página e catálogo). Só biblioteca padrão do Python 3. Aceita `--pasta`, `--so-erros`, `--json`, `--tipo` e `--regras`, e sai com código 1 quando houver erro.
+`verificar.py` lê o HTML sem abrir navegador e devolve os achados por slide ou por seção, cada um apontando a regra que cobra. São 49 checagens de marca, superfície, dado, acessibilidade, hierarquia, limites de texto e editorial, em cinco escopos (deck, parte de book, hub, página e catálogo). Só biblioteca padrão do Python 3. Aceita `--pasta`, `--so-erros`, `--json`, `--tipo`, `--regras` e `--fragmento` (para peça em construção, que ainda não tem sumário nem esquema), e sai com código 1 quando houver erro.
 
 `verificar-geometria.js` mede o que só a renderização mostra: caixa fora dos 1280 por 720 do slide, texto sobre texto, rótulo de SVG cruzando traço, fonte mínima efetiva e rolagem horizontal na página. Roda no Playwright, com `__URL__` e `__DIR__` trocados; o Playwright não abre `file://`, então a peça precisa de um servidor local (`python3 -m http.server` na pasta basta).
 
-`exemplo-com-defeito.html` é o teste de regressão: quatro slides escritos de propósito para reprovar, que disparam 35 das 48 checagens. Se ele parar de reprovar, o verificador quebrou.
+`conferir.py` cuida do repositório em vez da peça: conta o que existe (checagens, páginas, formas, regras, slides) e confere contra o que este README, o guia, o `llms.txt` e o índice afirmam, mais os links internos e o teste de regressão. Número de documento envelhece calado, e já envelheceu duas vezes aqui.
+
+```bash
+python3 conferir.py
+```
+
+`exemplo-com-defeito.html` é o teste de regressão: quatro slides escritos de propósito para reprovar, que disparam 35 das 49 checagens. Se ele parar de reprovar, o verificador quebrou.
 
 ## Impressão
 
-Deck e book imprimem do mesmo arquivo, pelo Chrome headless. O deck pagina um slide por página em 1280 por 720; o book quebra página antes de cada capítulo e vira duas colunas, quatro de conteúdo para uma de margem.
+Deck e book imprimem do mesmo arquivo, pelo Chrome headless. O deck pagina um slide por página em 1280 por 720; o book quebra página antes de cada capítulo e vira duas colunas, quatro de conteúdo para uma de margem. O Chrome abre `file://` direto: servidor local só é preciso para o Playwright.
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
   --headless=new --disable-gpu --no-pdf-header-footer \
   --print-to-pdf="deck.pdf" --print-to-pdf-no-header \
-  "http://localhost:PORTA/caminho/deck.html"
+  "file:///caminho/absoluto/da/peca/deck.html"
 ```
 
 ## Conteúdo dos exemplos

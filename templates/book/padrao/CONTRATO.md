@@ -30,7 +30,7 @@ Só as classes de `tokens/8020.css`, `assets/regua.css` e `assets/book.css`. Um 
 | 1. Leitura do desafio | O que muda na comunicação da rede | 5 min | O plano troca seis comunicações locais por uma presença de rede sem tirar o gerente da decisão |
 | 2. Diagnóstico | Onde a marca já é lembrada | 4 min | A marca é primeira em quatro das seis cidades; as duas exceções têm a mesma causa |
 | 2. Diagnóstico | De onde vêm os clientes novos | 7 min | Quatro canais trazem 85% dos clientes novos; nenhum é o que leva a maior verba |
-| 2. Diagnóstico | Três públicos, uma frase para cada | 8 min | Os três públicos já existem na cidade; o plano dá a cada um uma frase e um lugar |
+| 2. Diagnóstico | A quem o plano fala, e o que diz a cada um | 8 min | Os três públicos já existem na cidade; o plano dá a cada um uma frase e um lugar |
 | 3. Mensagem, canais e cronograma | A mensagem que cabe na porta do armazém | 6 min | Uma frase vale para seis cidades quando cada loja adapta o exemplo; o fluxo da pauta cabe na redação pequena |
 | 3. Mensagem, canais e cronograma | Cronograma de entrada | 7 min | Quatro fases, R$ 546 mil e três metas cabem entre setembro e abril |
 
@@ -61,7 +61,7 @@ A camada já cuida do essencial: topo, progresso, diálogo, botão de continuar 
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
   --headless=new --disable-gpu --no-pdf-header-footer \
   --print-to-pdf="parte-1.pdf" \
-  "http://localhost:PORTA/templates/book/padrao/partes/parte-1.html"
+  "file:///caminho/absoluto/da/peca/partes/parte-1.html"
 ```
 
 Gere um PDF por página (hub e partes) e leia página a página: o scrollytelling imprime no estado inicial, com todos os passos visíveis.
