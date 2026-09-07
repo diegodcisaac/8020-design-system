@@ -9,6 +9,8 @@
 /* lista de padrões: um por bloco, filete de abertura em tinta */
 .padroes { display: grid; gap: var(--s-8); }
 .titulo-formas { margin-bottom: var(--s-7); max-width: var(--max-prose); }
+/* a barra do topo é fixa: a âncora precisa parar abaixo dela, em toda seção */
+section[id], [id]:target { scroll-margin-top: 76px; }
 .padrao { border-top: 1px solid var(--ink); padding-top: var(--s-4); display: grid; gap: var(--s-4); scroll-margin-top: 72px; }
 .padrao h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); }
 .padrao p.quando { font-size: var(--t-small); color: var(--muted); max-width: var(--measure); }
