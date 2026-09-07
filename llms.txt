@@ -70,7 +70,8 @@
 
 - [verificar.py](verificar.py): lê o HTML e aponta o que a regra proíbe, por
   slide ou por seção. `python3 verificar.py peca.html`. Sai com código 1 quando
-  houver erro; `--regras` lista as checagens, `--json` devolve legível por máquina.
+  houver erro; `--regras` lista as checagens, `--json` devolve legível por máquina
+  e `--fragmento` alivia o contrato do deck inteiro enquanto a peça está em construção.
 - [verificar-geometria.js](verificar-geometria.js): o que só a renderização
   mostra. Caixa fora do slide, texto sobre texto, rótulo cruzando traço em SVG,
   fonte mínima efetiva e rolagem horizontal na página. Roda no Playwright, com

@@ -33,6 +33,8 @@ Na peça dupla, o book carrega o argumento completo, com a prova e as fontes, e 
 python3 verificar.py caminho/da/peca.html
 ```
 
+Durante a montagem, quando o sumário, as separatrizes e o recap ainda não existem, `--fragmento` transforma essas cinco checagens de contrato em aviso e mantém todo o resto como erro. Na entrega, roda-se sem ele.
+
 A segunda passada é a geometria, que só a renderização mostra. O Playwright não abre `file://`, então a peça precisa de um servidor local; em `verificar-geometria.js` trocam-se `__URL__` e `__DIR__` e o arquivo inteiro vai para o Playwright. Zero erro nas duas é a condição de saída.
 
 ## A receita de cada tipo de slide

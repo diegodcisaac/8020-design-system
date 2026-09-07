@@ -252,7 +252,11 @@ def titulo_do_slide(s):
 
 
 def capitulo_do_slide(s):
-    """so o marcador canonico: <b>Capitulo N</b> dentro do .cap da faixa"""
+    """data-capitulo declarado vence; senao, <b>Capitulo N</b> dentro do .cap da faixa.
+    Registro sem faixa (quieto, cheio) nao tem .cap e herdaria do slide anterior,
+    o que erra quando o recap nao vem logo depois do capitulo que ele fecha."""
+    if s.attrs.get("data-capitulo"):
+        return s.attrs["data-capitulo"]
     cap = s.um(classe="cap")
     if cap is not None:
         b = cap.um(("b",))
@@ -327,6 +331,10 @@ ENDERECO_RE = re.compile(r"\S+@\S+|https?://\S+|\S*/\S*|"
                           r"\b[\w.-]+\.(?:com|br|org|net|gov|html|css|js|svg|jpg|png|json|py|md)\b", re.I)
 
 DIAGRAMAS = {"esquema", "fluxo", "atores-mapa", "matriz", "diagrama", "rede"}
+
+# largura util do .conteudo em cada registro, medida no template do deck padrao.
+# viewBox maior que isso encolhe o SVG e derruba o texto abaixo do piso de 14 px.
+LARGURA_UTIL = {"s-faixa": 685, "s-quieto": 808, "s-topo": 1088, "s-cheio": 1088}
 
 LIMITES = [("cap", 30, "capítulo mais rótulo"), ("frase", 110, "frase central"),
            ("statement", 70, "statement"), ("citacao", 120, "citação"),
@@ -651,6 +659,29 @@ def c_recap(p):
             yield p.body, f"{c} não fecha com \"O que aprendemos no capítulo\"."
 
 
+@checagem("svg-largo-demais", "erro", 47, escopos=("deck",))
+def c_svg_largo(p):
+    for sl in p.slides:
+        reg = next((c for c in sl.classes if c in LARGURA_UTIL), None)
+        if reg is None:
+            continue
+        util = LARGURA_UTIL[reg]
+        for svg in sl.desc(("svg",)):
+            if svg.ancestral(("svg",)) is not None:
+                continue
+            vb = (svg.attrs.get("viewbox") or svg.attrs.get("viewBox") or "").split()
+            if len(vb) != 4:
+                continue
+            try:
+                larg = float(vb[2])
+            except ValueError:
+                continue
+            if larg > util + 15:
+                yield svg, (f"O viewBox tem {int(larg)} de largura e o registro `{reg}` só dá {util} px: "
+                            f"o SVG encolhe {round((1 - util / larg) * 100)}% e o texto cai abaixo do piso. "
+                            f"Conteúdo largo vai para `s-topo`.")
+
+
 @checagem("tabela-larga", "erro", 49, escopos=("deck",))
 def c_tabela(p):
     for s in p.slides:
@@ -807,12 +838,19 @@ def c_marca(p):
 
 
 # ------------------------------------------------------------------ execucao
-def verificar(caminho, tipo=None):
+# o contrato didatico do deck inteiro: so cobravel quando a peca esta fechada
+CONTRATO_INTEIRO = {"deck-sem-sumario", "deck-sem-esquema", "deck-sem-contracapa",
+                    "capitulo-sem-separatriz", "capitulo-sem-recap"}
+
+
+def verificar(caminho, tipo=None, fragmento=False):
     p = Peca(caminho, tipo)
     achados = []
     for codigo, nivel, ref, escopos, f in CHECAGENS:
         if p.escopo not in escopos:
             continue
+        if fragmento and codigo in CONTRATO_INTEIRO:
+            nivel = "aviso"
         for r in f(p):
             no, msg = r[0], r[1]
             if no.isento():
@@ -854,6 +892,9 @@ def main():
     ap.add_argument("--json", action="store_true", help="saida legivel por maquina")
     ap.add_argument("--regras", action="store_true", help="lista as checagens e sai")
     ap.add_argument("--tipo", choices=TODOS, help="forca o escopo em vez de deduzir do arquivo")
+    ap.add_argument("--fragmento", action="store_true",
+                    help="peca em construcao ou recorte: sumario, separatriz, recap, esquema e "
+                         "contracapa viram aviso, porque ainda nao existem")
     ap.add_argument("--sem-cor", action="store_true")
     a = ap.parse_args()
 
@@ -874,7 +915,7 @@ def main():
     cor = not a.sem_cor and sys.stdout.isatty()
     total, saida = 0, []
     for c in sorted(set(alvos)):
-        p, achados = verificar(c, a.tipo)
+        p, achados = verificar(c, a.tipo, a.fragmento)
         if a.json:
             saida.append(dict(arquivo=os.path.relpath(c), escopo=p.escopo,
                               slides=len(p.slides), achados=[x.dic() for x in achados]))

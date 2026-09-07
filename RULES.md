@@ -10,7 +10,7 @@ Duas passadas fecham toda peça: `verificar.py` na estrutura e no texto, `verifi
 
 1. O papel claro é o substrato de toda peça: fundo off-white, tinta em chumbo quente. O laranja `#fa4616` é o momento e o acento; como fundo, só dentro de um momento (`tema-laranja`), nunca o substrato da peça. Nunca outro laranja.
 2. A tinta da base é o chumbo quente; o branco é a tinta dos momentos (`tema-laranja`, `tema-escuro`). Todo par de texto e fundo sai da matriz de contraste (`tokens/brand.json`), que é medida e não estimada. Branco sobre o laranja vale a partir de 24 px, ou de 19 px em peso 700; abaixo disso o texto dentro do momento laranja é preto, e a camada já resolve.
-3. A imagem é sempre reta: retângulo sem raio, sem borda e sem máscara. Foto de página inteira leva véu na base para o texto ficar legível; foto ao lado de texto ocupa metade da folha. Toda imagem gerada é marcada como ilustrativa na legenda ou na fonte, e nenhuma imagem traz pessoa real, marca d'água ou texto legível. Ver `patterns/imagens.html`.
+3. A imagem é sempre reta: retângulo sem raio, sem borda e sem máscara. Foto de página inteira leva véu na base para o texto ficar legível; foto ao lado de texto ocupa metade da folha. A legenda sobre a foto também vai na base sobre o véu, nunca numa caixa de papel. Toda imagem gerada é marcada como ilustrativa na legenda ou na fonte, e nenhuma imagem traz pessoa real, marca d'água ou texto legível. Ver `patterns/imagens.html`.
 4. Sem gradiente. A superfície é chapada: papel, areia, chumbo, laranja. O que parecia profundidade vem do filete de 1 px e da diferença de tinta. As únicas rampas contínuas que o sistema aceita são funcionais: o véu sobre a foto, a hachura que substitui o laranja na impressão e o preenchimento vazio de imagem.
 5. Montserrat é a única família, do corpo ao display. O salto do último termo para o itálico é assinatura, marcado no HTML com `<em>`, não acaso. Aparece em título de capa, de hero e de abertura de parte, uma vez por peça.
 6. A paleta é fechada: laranja, laranja aprofundado, branco, preto e chumbos profundos. Sem azul, verde, ouro, areia ou vermelho. O acento é escasso: no máximo três momentos de acento por página ou slide em peça cliente. A escassez é o que dá impacto. Os chumbos profundos cobrem as variações já registradas em `tokens/brand.json`: `#120e0b` é o chão do momento escuro, e `#faf7f2`, `#1a140f` e `#2a201a` são os tons do papel claro. É a mesma família de chumbo quente e papel, não cores novas: a paleta segue fechada.
@@ -55,7 +55,7 @@ Duas passadas fecham toda peça: `verificar.py` na estrutura e no texto, `verifi
 
 ## Didática (deck longo)
 
-28. Todo capítulo fecha com um slide de conclusão rotulado "O que aprendemos no capítulo NN", com cada aprendizado escrito por inteiro, compreensível se lido isoladamente, e a fonte do método junto.
+28. Todo capítulo fecha com um slide de conclusão rotulado "O que aprendemos no capítulo NN", com cada aprendizado escrito por inteiro, compreensível se lido isoladamente, e a fonte do método junto. O recap não tem faixa e por isso não tem `.cap`: quando ele não vem logo depois do capítulo que fecha, declara qual é em `data-capitulo`.
 29. O deck é sequencial e numerado: número do slide e capítulo no rodapé de todos os slides, separatriz numerada por capítulo, sumário no início e página única de fechamento com a estratégia inteira em um esquema com hierarquia (tese no topo, desdobramentos abaixo, acordo entre as partes na base, conectores anotados). Capa e contracapa são descritivas: dizem nome, cliente, data e o que a peça contém.
 
 ## A Régua 80/20 (novo na 4.0)
@@ -71,6 +71,8 @@ Duas passadas fecham toda peça: `verificar.py` na estrutura e no texto, `verifi
 ## Deck (novo na 4.0)
 
 37. **Cinco registros, escolhidos pelo papel do slide na narrativa, não por gosto.** Faixa à esquerda para evidência; faixa no topo para conteúdo largo (tabela, fases, fluxo, esquema); quieto para navegação e recap; cheio com momento para o aparte, o respiro e a mensagem-mãe; faixa laranja para capa e separatriz.
+
+37a. **O registro tem largura, e o conteúdo tem de caber nela.** O `.conteudo` dá 685 px na faixa à esquerda, 808 px no quieto e 1088 px no topo. SVG com viewBox mais largo que isso encolhe, e o texto dele cai abaixo do piso de 14 px sem ninguém perceber na tela grande. Diagrama e linha do tempo de 1088 são do registro topo.
 38. **Toda faixa carrega três coisas: capítulo, título descritivo e frase central.** A frase central é obrigatória, tem o núcleo em `<strong>` e é onde o achado do slide aparece. Faixa sem frase é slide sem tese.
 39. **O sistema escreve o cromo.** Contador, trilho, moldura, miniaturas, atalhos e visão do apresentador saem do `deck.js`. O autor escreve só os slides, e a numeração sobrevive a inserção e remoção. Sem JavaScript os slides empilham na vertical e continuam legíveis.
 40. **O deck imprime do mesmo arquivo**, um slide por página em 1280 por 720, com a faixa colorida, o contador no rodapé e o laranja do dado virando hachura. Não existe arquivo de impressão separado.
@@ -111,6 +113,8 @@ Duas passadas fecham toda peça: `verificar.py` na estrutura e no texto, `verifi
 
 50a. **Contraexemplo se declara.** Uma página que mostra de propósito o que o sistema recusa marca o bloco com `data-antipadrao`, e o marca também no CSS, entre `/* antipadrão: */` e `/* fim do antipadrão */`. As duas passadas ignoram o que está declarado. Fora dessa marcação não existe exceção: o que o verificador aponta, se corrige. A página `patterns/proibido.html` é o único uso previsto.
 
+50b. **Peça em construção se verifica com `--fragmento`.** O contrato didático do deck inteiro (sumário, separatriz, recap, esquema, contracapa) só é cobrável quando a peça está fechada. Durante a montagem, e num recorte, essas cinco checagens viram aviso, e todo o resto continua erro. Ferramenta que acusa o que ainda não existe é ferramenta que se aprende a ignorar.
+
 ## O que o verificador cobra
 
 `verificar.py` lê o HTML da peça e devolve os achados por slide ou por seção. Cada checagem aponta a regra:
@@ -149,6 +153,7 @@ Duas passadas fecham toda peça: `verificar.py` na estrutura e no texto, `verifi
 | `marca-no-texto` | aviso | 24 |
 | `faixa-sem-frase` | erro | 38 |
 | `limite-de-texto` | erro | 48 |
+| `svg-largo-demais` | erro | 37a, 47 |
 | `deck-sem-sumario`, `capitulo-sem-separatriz`, `capitulo-sem-recap`, `deck-sem-esquema`, `deck-sem-contracapa` | erro | 28, 29 |
 | `slide-sem-notas` | aviso | 8f |
 | `deck-sem-script` | erro | 39 |

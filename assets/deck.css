@@ -141,7 +141,9 @@ html.js .deck .slide.atual { display: grid; }
 .slide .foto-area { background: var(--surface-2); position: relative; overflow: hidden; }
 .slide .foto-area img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .slide .foto-area:not(:has(img))::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(135deg, transparent 0 14px, var(--rule) 14px 15px); }
-.slide .foto-area span { position: absolute; left: 24px; bottom: 20px; font-size: 15px; color: var(--meta); background: var(--paper); padding: 4px 10px; }
+/* regra 3: texto sobre foto vai direto ou na base sobre véu de chumbo, nunca em caixa */
+.slide .foto-area:has(img):has(span)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(to top, rgba(18, 14, 11, .85) 0%, rgba(18, 14, 11, 0) 100%); pointer-events: none; }
+.slide .foto-area span { position: absolute; left: 24px; right: 24px; bottom: 18px; font-size: 15px; color: rgba(255, 255, 255, .86); }
 .slide .foto-cheia { position: absolute; inset: 0; }
 .slide .foto-cheia img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .slide .veu { position: absolute; left: 0; right: 0; bottom: 0; height: 62%; background: linear-gradient(to top, rgba(18, 14, 11, .92) 0%, rgba(18, 14, 11, .55) 55%, rgba(18, 14, 11, 0) 100%); pointer-events: none; }

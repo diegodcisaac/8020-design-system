@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>O que o sistema recusa, patterns do 8020-DS 4.0</title>
-<meta name="description" content="Os 17 antipadrões do 8020-DS 4.0, errado ao lado de certo, cada um com a regra que o proíbe e a checagem do verificador que o cobra.">
+<meta name="description" content="Os 18 antipadrões do 8020-DS 4.0, errado ao lado de certo, cada um com a regra que o proíbe e a checagem do verificador que o cobra.">
 <link rel="stylesheet" href="../tokens/8020.css">
 <link rel="stylesheet" href="../assets/regua.css">
 <link rel="stylesheet" href="_catalogo.css">
@@ -55,6 +55,10 @@
   .d-img-velha span { background: rgba(255,255,255,.86); color: var(--ink); padding: 6px 10px; font-size: var(--t-small); justify-self: start; }
   .d-img-nova::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 62%; background: linear-gradient(to top, rgba(18,14,11,.92), rgba(18,14,11,0)); }
   .d-img-nova span { position: relative; color: #fff; font-size: var(--t-small); }
+  .d-legenda-velha, .d-legenda-nova { height: 132px; position: relative; overflow: hidden; background: var(--8020-tinta-2); }
+  .d-legenda-velha span { position: absolute; left: 16px; bottom: 14px; font-size: var(--t-small); color: var(--meta); background: var(--paper); padding: 4px 10px; }
+  .d-legenda-nova::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(to top, rgba(18,14,11,.85), rgba(18,14,11,0)); }
+  .d-legenda-nova span { position: absolute; left: 16px; right: 16px; bottom: 12px; font-size: var(--t-small); color: rgba(255,255,255,.86); z-index: 1; }
   /* fim do antipadrão */
 </style>
 </head>
@@ -75,7 +79,7 @@
       <p class="lead">Cada par mostra a forma que a 4.0 não aceita ao lado da que ela usa, com a regra que a proíbe e a checagem do verificador que a cobra. A coluna da esquerda é reprodução fiel: o cartão tem sombra de verdade, o gradiente é gradiente, a barra é uma caixa esticada. É a única página do catálogo onde isso aparece.</p>
     </div>
     <aside class="margem fixa">
-      <span class="n">17</span>
+      <span class="n">18</span>
       <p>Pares. Todos saem de erro que já apareceu em peça, não de hipótese.</p>
       <p><span class="quadrado"></span>O código ao pé de cada par é o da checagem em <code>verificar.py</code>. Rodar o verificador na peça encontra o mesmo problema sem ninguém precisar lembrar da página.</p>
     </aside>
@@ -230,7 +234,7 @@
 <section class="bloco" id="imagem">
   <div class="container folha">
     <div class="miolo pilha-l">
-      <div class="pilha"><h2>Imagem</h2><p class="lead">A política em um par.</p></div>
+      <div class="pilha"><h2>Imagem</h2><p class="lead">A política de imagem, em dois pares.</p></div>
       <div class="pilha par">
   <div class="pilha"><h3>Imagem com raio, borda e máscara</h3><p class="porque">A imagem é reta, sem raio e sem borda. Quando o texto entra por cima, o véu na base resolve a legibilidade; a caixa em volta do texto, não.</p></div>
   <div class="antes-agora">
@@ -238,9 +242,16 @@
     <div><span class="rotulo">Dentro</span><div class="d-img-nova"><span>Texto sobre foto, com véu na base</span></div><p class="nota">Retângulo reto e véu de chumbo, com o texto direto sobre a foto.</p></div>
   </div>
   <p class="cobra">regra 31 · <code>raio</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Legenda sobre a foto dentro de uma caixa</h3><p class="porque">A caixa de papel sobre a imagem é a solução preguiçosa para a legibilidade, e ela recorta um retângulo claro no meio da fotografia. O véu na base resolve sem cortar nada. Este par saiu da migração de uma peça de cliente: a própria camada fazia errado.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-legenda-velha"><span>Imagem ilustrativa gerada para o exemplo.</span></div><p class="nota">Retângulo de papel sobre a foto, com a legenda em cinza dentro.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="d-legenda-nova"><span>Imagem ilustrativa gerada para o exemplo.</span></div><p class="nota">Véu de chumbo na base e a legenda em branco, direto sobre a foto.</p></div>
+  </div>
+  <p class="cobra">regra 31 · <code>raio</code></p>
 </div>
     </div>
-    <aside class="margem fixa"><span class="n">1</span><p>par nesta seção.</p></aside>
+    <aside class="margem fixa"><span class="n">2</span><p>pares nesta seção.</p></aside>
   </div>
 </section>
 
