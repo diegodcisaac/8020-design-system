@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layouts, patterns do 8020-DS 4.0</title>
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="../assets/deck.css">
+<link rel="stylesheet" href="_catalogo.css">
+<style>
+/* Local desta página: só o que a camada não tem, sempre por papel semântico.
+   .demo-grade: a contenção em areia que mostra a folha de exemplo dentro da folha da página.
+   .escala-espaco .b: a barra e o valor na mesma linha. .pilha-demo: linhas de amostra.
+   .duas-minis .mini: anula o .mini do visualizador (deck.css), que é botão de miniatura.
+   .palco .faixa h2: devolve os 36 px do slide, porque section.bloco h2 (regua.css) tem
+   especificidade maior e reduziria o título da faixa a 28 px dentro do catálogo. */
+.demo-grade { background: var(--surface-2); padding: var(--s-6); }
+.escala-espaco .b { display: flex; align-items: center; gap: var(--s-3); min-width: 0; }
+.escala-espaco .b i { flex: none; }
+.pilha-demo p { border-top: 1px solid var(--rule); padding-top: var(--s-2); font-size: var(--t-small); color: var(--ink-body); }
+.duas-minis .mini { cursor: default; color: inherit; font-size: inherit; }
+.duas-minis .mini .t strong { color: var(--ink); }
+.palco .faixa h2 { font-size: 36px; line-height: 1.12; letter-spacing: -.02em; }
+/* O _catalogo.css escreve --zoom no próprio .palco a partir de 1199 px, e esse valor vence o
+   --zoom que .duas-minis .mini herda; o palco então não cabe na coluna entre 600 e 1199 px.
+   As regras a seguir devolvem ao palco da dupla uma escala que cabe em cada faixa. */
+.duas-minis .mini .palco { --zoom: .31; }
+@media (max-width: 1199px) { .duas-minis .mini .palco { --zoom: .25; } }
+@media (max-width: 999px) { .duas-minis { grid-template-columns: 1fr; } .duas-minis .mini .palco { --zoom: .45; } }
+@media (max-width: 699px) { .duas-minis .mini .palco { --zoom: .4; } }
+@media (max-width: 599px) { .duas-minis .mini .palco { --zoom: .26; } }
+</style>
+</head>
+<body>
+<div class="topo"><div class="container"><a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a><nav aria-label="Seções da página"><a class="peso" data-t="Grade" href="#grade">Grade</a><a class="peso" data-t="Página" href="#pagina">Página</a><a class="peso" data-t="Espaço" href="#espaco">Espaço</a><a class="peso" data-t="Quebras" href="#quebras">Quebras</a><a class="peso" data-t="Slide" href="#slide">Slide</a><a class="peso" data-t="Impressão" href="#impressao">Impressão</a></nav><span class="meta">layouts.html</span></div></div>
+<section class="abertura"><div class="container folha"><div class="miolo"><h1>Layout: <strong>quatro partes</strong> de conteúdo, uma de margem.</h1><p class="lead">A proporção do nome vira estrutura: folha e slide dividem em 4 : 1. O conteúdo ocupa quatro partes; a quinta é a margem viva, que carrega número, nota, estado e fonte, e no deck o cromo inteiro. O resto é uma escala de espaço com nome, três pontos de quebra e cinco registros de slide.</p></div><aside class="margem fixa"><span class="n">4 : 1</span><p><code>minmax(0, 4fr) minmax(0, 1fr)</code>, com 48 px entre as colunas. A margem fixa (<code>.margem.fixa</code>) acompanha a rolagem a 80 px do topo, como esta.</p><p>Abaixo de 900 px a folha vira uma coluna e a margem deixa de ser fixa.</p></aside></div></section><section class="bloco" id="grade"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>A grade 80/20</h2><p class="lead"><code>.folha</code> é uma grade de duas colunas, <code>.miolo</code> e <code>.margem</code>. O miolo leva o argumento, o dado e a ação. A margem leva o que serve ao argumento sem competir com ele: o número que resume, a nota, o estado, a fonte. Ela lê a 13 px em <code>--muted</code>; o número lê a 22 px em 300, em tinta.</p></div><div class="pilha"><div><div class="demo-grade"><div class="folha">
+  <div class="miolo">
+    <p class="corpo">Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria. A lembrança acompanha a porta, não a mídia.</p>
+  </div>
+  <aside class="margem aberta">
+    <span class="n">71 %</span>
+    <p>Lembrança espontânea em Rio Verde, a maior das seis cidades.</p>
+    <p><span class="estado">Em produção</span></p>
+    <p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas.</p>
+  </aside>
+</div></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-folha">Copiar</button></div><pre><code id="c-folha">&lt;div class="folha"&gt;
+  &lt;div class="miolo"&gt;
+    &lt;p class="corpo"&gt;Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria. A lembrança acompanha a porta, não a mídia.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;aside class="margem aberta"&gt;
+    &lt;span class="n"&gt;71 %&lt;/span&gt;
+    &lt;p&gt;Lembrança espontânea em Rio Verde, a maior das seis cidades.&lt;/p&gt;
+    &lt;p&gt;&lt;span class="estado"&gt;Em produção&lt;/span&gt;&lt;/p&gt;
+    &lt;p class="fonte"&gt;Pesquisa de junho de 2026, 1.240 entrevistas.&lt;/p&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre></details></div><div class="regras">
+  <div><strong>O que a margem carrega</strong>O número que resume a seção (<code>.n</code>), a nota curta, o estado (<code>.estado</code>), a fonte e, no deck, o capítulo, o contador, o progresso vertical e as teclas. No book, as notas de rodapé alinhadas ao parágrafo.</div>
+  <div><strong>O que nunca carrega</strong>O argumento principal, gráfico, imagem, ação primária, decoração. Se a margem ficou mais interessante que o miolo, o texto está no lugar errado.</div>
+  <div><strong>Três variantes</strong><code>.margem.fixa</code>: filete de tinta em cima e acompanha a rolagem. <code>.margem.aberta</code>: o mesmo filete, sem fixar. <code>.margem</code> simples: sem filete, para a margem que segue o miolo.</div>
+  <div><strong>Abaixo de 900 px</strong>A folha vira uma coluna: o miolo vem primeiro e a margem fecha o bloco, sem ficar fixa. Nada some.</div>
+</div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-folha-css">Copiar</button></div><pre><code id="c-folha-css">.folha { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 1fr); column-gap: var(--s-7); row-gap: var(--s-6); align-items: start; }
+.folha &gt; .miolo { min-width: 0; }
+.folha &gt; .margem { min-width: 0; font-size: var(--t-small); color: var(--muted); line-height: 1.55; }
+.margem.fixa { position: sticky; top: 80px; }
+.margem.fixa, .margem.aberta { border-top: 1px solid var(--ink); padding-top: var(--s-3); }
+.margem .n { display: block; font-size: var(--t-h3); font-weight: var(--w-fino); color: var(--ink); letter-spacing: -.02em; margin-bottom: var(--s-2); }
+@media (max-width: 899px) { .folha { grid-template-columns: 1fr; } .folha &gt; .margem, .margem.fixa { position: static; } }</code></pre></details></div><aside class="margem fixa"><span class="n">48 px</span><p>Entre miolo e margem, 48 px (<code>--s-7</code>). Entre os parágrafos da margem, 12 px.</p><p>A margem é um <code>aside</code>: quem lê por leitor de tela encontra o número e a nota como conteúdo complementar, depois do miolo.</p><p>No slide a mesma proporção vale no registro quieto: conteúdo em <code>4fr</code>, cromo em <code>1fr</code>.</p></aside></div></section><section class="bloco" id="pagina"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Página</h2><p class="lead">Uma página do sistema tem quatro partes: o topo fixo com a marca e a navegação em peso, a abertura com título e lead na folha, os blocos de seção e o rodapé. Tudo dentro de <code>.container</code>, que limita a 1240 px e respira com uma calha fluida.</p></div><div class="rolagem"><table class="papeis">
+<thead><tr><th>Token</th><th>Valor</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><code>--max</code></td><td>1240 px</td><td>largura máxima de <code>.container</code></td></tr>
+<tr><td><code>--gutter</code></td><td><code>clamp(20px, 5vw, 96px)</code></td><td>calha lateral: 20 px no celular, 72 a 1440, 96 no teto</td></tr>
+<tr><td><code>--measure</code></td><td>64ch</td><td>largura máxima de prosa (<code>.lead</code>, <code>.corpo</code>, <code>.leitura</code>)</td></tr>
+<tr><td><code>--max-prose</code></td><td>900 px</td><td>largura máxima de um bloco de prosa com figura no book</td></tr>
+<tr><td><code>--s-section</code></td><td><code>clamp(64px, 10vw, 160px)</code></td><td>respiro de <code>section.bloco</code> e de <code>.momento</code>, em cima e embaixo</td></tr>
+</tbody></table></div><div class="anatomia">
+  <div><b><code>.topo</code></b><span>Fixo no alto, 56 px. Marca à esquerda, <code>nav</code> com itens <code>.peso</code> à direita, <code>.meta</code> com a data ou o nome do arquivo (some abaixo de 1200 px). O <code>pagina.js</code> marca o item da seção visível.</span></div>
+  <div><b><code>.abertura</code></b><span><code>h1</code> em display 300 com o núcleo em 800, <code>.lead</code> em 18 px, a margem fixa com o número da página. Padding de 96 px em cima e 64 embaixo.</span></div>
+  <div><b><code>section.bloco</code></b><span>Filete <code>--rule</code> em cima, <code>--s-section</code> de respiro, <code>h2</code> de 28 px. Dentro, a folha com <code>.miolo.pilha-l</code> e <code>.margem.fixa</code>.</span></div>
+  <div><b><code>section.momento</code></b><span>Seção de página inteira com <code>.tema-laranja</code> ou <code>.tema-escuro</code> e o statement. Uma por capítulo, nunca em duas seções seguidas.</span></div>
+  <div><b><code>.rodape</code></b><span>Filete em cima, 13 px em <code>--meta</code>: o nome da peça, o cliente e a data.</span></div>
+</div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-esqueleto">Copiar</button></div><pre><code id="c-esqueleto">&lt;!doctype html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Nome da peça, cliente, mês de 2026&lt;/title&gt;
+  &lt;link rel="stylesheet" href="../tokens/8020.css"&gt;
+  &lt;link rel="stylesheet" href="../assets/regua.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="topo"&gt;&lt;div class="container"&gt;
+    &lt;a class="marca" href="#"&gt;&lt;img src="../assets/logos/logo-8020-branco.svg" alt="80 20"&gt;&lt;span&gt;Nome da peça&lt;/span&gt;&lt;/a&gt;
+    &lt;nav aria-label="Seções"&gt;&lt;a class="peso" data-t="Diagnóstico" href="#diagnostico"&gt;Diagnóstico&lt;/a&gt;&lt;a class="peso" data-t="Plano" href="#plano"&gt;Plano&lt;/a&gt;&lt;/nav&gt;
+    &lt;span class="meta"&gt;julho de 2026&lt;/span&gt;
+  &lt;/div&gt;&lt;/div&gt;
+  &lt;section class="abertura"&gt;&lt;div class="container folha"&gt;
+    &lt;div class="miolo"&gt;&lt;h1&gt;Plano de presença de &lt;strong&gt;marca&lt;/strong&gt; no &lt;em&gt;Cerrado&lt;/em&gt;&lt;/h1&gt;&lt;p class="lead"&gt;Diagnóstico, públicos, mensagem e cronograma de entrada.&lt;/p&gt;&lt;/div&gt;
+    &lt;aside class="margem fixa"&gt;&lt;span class="n"&gt;6 cidades&lt;/span&gt;&lt;p&gt;Doze lojas, quarenta anos, 1.240 entrevistas em junho de 2026.&lt;/p&gt;&lt;/aside&gt;
+  &lt;/div&gt;&lt;/section&gt;
+  &lt;section class="bloco" id="diagnostico"&gt;&lt;div class="container folha"&gt;
+    &lt;div class="miolo pilha-l"&gt;&lt;div class="pilha"&gt;&lt;h2&gt;Onde a marca já é lembrada&lt;/h2&gt;&lt;p class="lead"&gt;Em quatro das seis cidades a marca é a primeira citada.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;aside class="margem fixa"&gt;&lt;span class="n"&gt;71 %&lt;/span&gt;&lt;p&gt;Lembrança espontânea em Rio Verde.&lt;/p&gt;&lt;/aside&gt;
+  &lt;/div&gt;&lt;/section&gt;
+  &lt;footer class="rodape"&gt;&lt;div class="container"&gt;Plano de presença de marca no Cerrado, para a Casa do Campo. Julho de 2026.&lt;/div&gt;&lt;/footer&gt;
+  &lt;script src="../assets/pagina.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">1240 px</span><p>A largura máxima veio da tela de 1280 menos a calha mínima; acima disso a prosa passaria de 64ch e a leitura cai.</p><p>O topo é <code>position: sticky</code>; a navegação some da impressão e abaixo de 700 px, e as seções continuam acessíveis pela rolagem.</p></aside></div></section><section class="bloco" id="espaco"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>A escala de espaço</h2><p class="lead">Base de 4 px, dez passos e uma medida fluida para seção. Três distâncias regem a composição: dentro do grupo, de 8 a 16; entre grupos, de 32 a 64; entre seções, de 96 a 160. Nenhum valor avulso: todo espaço é um token <code>--s-*</code>.</p></div><div class="escala-espaco"><div><code>--s-1</code><div class="b"><i style="width:var(--s-1)"></i><span>4 px</span></div></div><div><code>--s-2</code><div class="b"><i style="width:var(--s-2)"></i><span>8 px</span></div></div><div><code>--s-3</code><div class="b"><i style="width:var(--s-3)"></i><span>12 px</span></div></div><div><code>--s-4</code><div class="b"><i style="width:var(--s-4)"></i><span>16 px</span></div></div><div><code>--s-5</code><div class="b"><i style="width:var(--s-5)"></i><span>24 px</span></div></div><div><code>--s-6</code><div class="b"><i style="width:var(--s-6)"></i><span>32 px</span></div></div><div><code>--s-7</code><div class="b"><i style="width:var(--s-7)"></i><span>48 px</span></div></div><div><code>--s-8</code><div class="b"><i style="width:var(--s-8)"></i><span>64 px</span></div></div><div><code>--s-9</code><div class="b"><i style="width:var(--s-9)"></i><span>96 px</span></div></div><div><code>--s-10</code><div class="b"><i style="width:var(--s-10)"></i><span>128 px</span></div></div><div><code>--s-section</code><div class="b"><i style="width:var(--s-section)"></i><span>64 a 160 px, fluido</span></div></div></div><div class="regras">
+  <div><strong>Dentro do grupo: 8 a 16 px</strong><code>--s-2</code> a <code>--s-4</code>. Rótulo e valor, título e lead, os parágrafos da margem, os itens de uma lista. O que o olho lê como uma coisa só.</div>
+  <div><strong>Entre grupos: 32 a 64 px</strong><code>--s-6</code> a <code>--s-8</code>. Entre um exemplo e o seguinte, entre a figura e a prosa. <code>.pilha</code> usa 24 dentro do grupo; <code>.pilha-l</code> usa 64 entre grupos.</div>
+  <div><strong>Entre seções: 96 a 160 px</strong><code>--s-9</code> a <code>--s-section</code>. <code>section.bloco</code> e <code>.momento</code> usam <code>--s-section</code>, que vale 64 no celular, 10 por cento da largura no meio e 160 no teto.</div>
+  <div><strong>O respiro de baixo</strong>Num bloco que define o próprio respiro (uma figura com legenda, um momento com ação), o espaço de baixo é um passo maior que o de cima: o de cima o olho lê como parte do título; o de baixo, como fecho.</div>
+</div><div class="pilha"><h3><code>.pilha</code> e <code>.pilha-l</code></h3><div class="pilha"><div><div class="antes-agora">
+  <div><span class="rotulo"><code>.pilha</code>, 24 px</span><div class="pilha pilha-demo"><p>Rótulo e valor</p><p>Título e lead</p><p>Os itens de uma lista</p></div></div>
+  <div><span class="rotulo"><code>.pilha-l</code>, 64 px</span><div class="pilha-l pilha-demo"><p>Um grupo de exemplos</p><p>Outro grupo</p><p>O código copiável</p></div></div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-pilhas">Copiar</button></div><pre><code id="c-pilhas">&lt;div class="antes-agora"&gt;
+  &lt;div&gt;&lt;span class="rotulo"&gt;&lt;code&gt;.pilha&lt;/code&gt;, 24 px&lt;/span&gt;&lt;div class="pilha pilha-demo"&gt;&lt;p&gt;Rótulo e valor&lt;/p&gt;&lt;p&gt;Título e lead&lt;/p&gt;&lt;p&gt;Os itens de uma lista&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="rotulo"&gt;&lt;code&gt;.pilha-l&lt;/code&gt;, 64 px&lt;/span&gt;&lt;div class="pilha-l pilha-demo"&gt;&lt;p&gt;Um grupo de exemplos&lt;/p&gt;&lt;p&gt;Outro grupo&lt;/p&gt;&lt;p&gt;O código copiável&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-espaco-css">Copiar</button></div><pre><code id="c-espaco-css">:root {
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+  --s-section: clamp(64px, 10vw, 160px);  /* entre seções */
+}
+.pilha { display: grid; gap: var(--s-5); }
+.pilha-l { display: grid; gap: var(--s-8); }
+section.bloco { padding: var(--s-section) 0; border-top: 1px solid var(--rule); }</code></pre></details></div><aside class="margem fixa"><span class="n">4 px</span><p>Base de 4: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128. A partir do 16 a escala salta, porque espaço pequeno pede passo pequeno e espaço grande pede salto.</p><p>Componente de lista: 12 px. Bloco: 24 a 32. Grupo: 48. Seção: <code>--s-section</code>.</p><p>No slide a zona segura não muda (72 a 120 px de margem) e o espaço interno segue a mesma escala.</p></aside></div></section><section class="bloco" id="quebras"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Pontos de quebra</h2><p class="lead">Três pontos: 600, 900 e 1200 px, sempre por <code>max-width</code>, sempre a partir do maior. Cada camada tira ou reorganiza o que não cabe; nenhum tamanho de fonte muda, salvo o texto de gráfico, que sobe a 15 px no celular. Tabela larga rola dentro de <code>.rolagem</code>; a página nunca rola na horizontal.</p></div><div class="rolagem"><table class="papeis">
+<thead><tr><th>Abaixo de</th><th>Régua (página e componentes)</th><th>Deck e book</th><th>Catálogo</th></tr></thead>
+<tbody>
+<tr><td>1200 px</td><td>some a data ou o arquivo no topo (<code>.topo .meta</code>)</td><td>no visualizador, some o nome da peça</td><td>a área do slide reduz</td></tr>
+<tr><td>900 px</td><td>a folha vira uma coluna e a margem deixa de ser fixa; <code>.form-grade</code>, <code>.antes-agora</code>, <code>.duas</code> e <code>.regras</code> viram uma coluna; <code>.passos</code> vai de seis para três colunas; <code>.multiplos</code> vai para duas; <code>.unidades</code> empilha; a narrativa por rolagem (<code>.scrolly</code>) deixa de fixar a figura e os passos ganham a cor cheia</td><td>no visualizador, somem as teclas da base e as miniaturas ficam em duas colunas; no book, a cabeça do capítulo, <code>.lado</code>, <code>.navega</code>, <code>.ficha</code> e a linha do tempo viram uma coluna, e a trilha some do topo</td><td>o <code>.palco</code>, <code>.tres</code> e <code>.duas-minis</code> viram uma coluna; a paleta vai para três; o especímen empilha rótulo e amostra</td></tr>
+<tr><td>700 px</td><td>some a navegação do topo (<code>.topo nav</code>); <code>.multiplos</code> em duas colunas</td><td></td><td>a área do slide reduz de novo</td></tr>
+<tr><td>600 px</td><td><code>.abas</code> rolam na horizontal; o gráfico para de encolher e rola dentro da caixa</td><td>no book, a tecla some do topo e a lista de partes estreita a coluna do número</td><td>a paleta vai para duas colunas</td></tr>
+</tbody></table></div><p class="corpo">As verificações do sistema rodam em 1440, 900 e 600. Em cada uma, a largura rolável do documento tem de ser igual à da janela, e nenhuma imagem pode faltar.</p></div><aside class="margem fixa"><span class="n">3 pontos</span><p>Nada é escondido por ser pequeno: a navegação que some abaixo de 700 px continua acessível pelas seções; a tabela que não cabe rola dentro do próprio bloco.</p><p>O slide não tem ponto de quebra: é 1280 por 720 sempre, e o visualizador o escala inteiro.</p></aside></div></section><section class="bloco" id="slide"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Os cinco registros do slide</h2><p class="lead">O slide de 1280 por 720 tem quatro registros e uma variante: faixa à esquerda, faixa no topo, quieto, cheio, e a faixa laranja que abre capítulo. A regra que escolhe: evidência é tinta à esquerda; conteúdo largo é tinta no topo; transição e recap são quietos; clímax é laranja; momento (mensagem-mãe, aparte, foto, contracapa) é cheio.</p></div><p class="corpo">Cada slide é um filho direto de <code>.deck</code>. O autor escreve a faixa (<code>.cap</code>, <code>h2</code>, <code>.frase</code>) e o conteúdo; o <code>deck.js</code> escreve o contador, o trilho, a barra vertical e a nota do rodapé a partir da posição do slide. Fora do visualizador, como nestes exemplos, o <code>.pe</code>, o <code>.cromo</code> e o <code>.rodape-slide</code> vêm escritos à mão.</p><div class="duas-minis"><div class="mini"><div class="t"><strong>Faixa à esquerda</strong>, <code>.s-faixa</code>: evidência. Um terço de tinta com capítulo, título, frase central e contador; o gráfico ou a tabela nos dois terços.</div><div class="palco"><div class="deck"><div class="slide s-faixa">
+  <div class="faixa"><div class="cap"><b>Capítulo 2</b> Diagnóstico</div><div><h2>Onde a marca já é lembrada</h2><p class="frase">A lembrança acompanha <strong>a porta,</strong> não a mídia.</p></div><div class="pe"><div class="contador"><b>09</b><span>de 22</span></div><div class="trilho"><span style="width:41%"></span></div></div></div>
+  <div class="conteudo"><div class="grafico"><svg viewBox="0 0 640 250" role="img" aria-label="Lembrança espontânea por cidade: Rio Verde 71%, Jataí 64%, Mineiros 58%, Chapadão 55%, Caiapônia 39%, Montividiu 33%."><title>Lembrança espontânea por cidade</title><line class="eixo" x1="150" y1="6" x2="150" y2="246"/><text x="0" y="26">Rio Verde</text><rect class="d1" x="150" y="12" width="312" height="20"/><text class="valor" x="470" y="26">71%</text><text x="0" y="66">Jataí</text><rect class="d1" x="150" y="52" width="282" height="20"/><text class="valor" x="440" y="66">64%</text><text x="0" y="106">Mineiros</text><rect class="d1" x="150" y="92" width="255" height="20"/><text class="valor" x="413" y="106">58%</text><text x="0" y="146">Chapadão</text><rect class="d1" x="150" y="132" width="242" height="20"/><text class="valor" x="400" y="146">55%</text><text x="0" y="186">Caiapônia</text><rect class="o20" x="150" y="172" width="172" height="20"/><text class="valor" x="330" y="186">39%</text><text x="0" y="226">Montividiu</text><rect class="o20" x="150" y="212" width="145" height="20"/><text class="valor" x="303" y="226">33%</text></svg></div><p class="fonte">Base: 1.240 entrevistas, junho de 2026.</p></div>
+</div></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-slide-s-faixa">Copiar</button></div><pre><code id="c-slide-s-faixa">&lt;div class="deck"&gt;&lt;div class="slide s-faixa"&gt;
+  &lt;div class="faixa"&gt;&lt;div class="cap"&gt;&lt;b&gt;Capítulo 2&lt;/b&gt; Diagnóstico&lt;/div&gt;&lt;div&gt;&lt;h2&gt;Onde a marca já é lembrada&lt;/h2&gt;&lt;p class="frase"&gt;A lembrança acompanha &lt;strong&gt;a porta,&lt;/strong&gt; não a mídia.&lt;/p&gt;&lt;/div&gt;&lt;div class="pe"&gt;&lt;div class="contador"&gt;&lt;b&gt;09&lt;/b&gt;&lt;span&gt;de 22&lt;/span&gt;&lt;/div&gt;&lt;div class="trilho"&gt;&lt;span style="width:41%"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="conteudo"&gt;&lt;div class="grafico"&gt;&lt;svg viewBox="0 0 640 250" role="img" aria-label="Lembrança espontânea por cidade: Rio Verde 71%, Jataí 64%, Mineiros 58%, Chapadão 55%, Caiapônia 39%, Montividiu 33%."&gt;&lt;title&gt;Lembrança espontânea por cidade&lt;/title&gt;&lt;line class="eixo" x1="150" y1="6" x2="150" y2="246"/&gt;&lt;text x="0" y="26"&gt;Rio Verde&lt;/text&gt;&lt;rect class="d1" x="150" y="12" width="312" height="20"/&gt;&lt;text class="valor" x="470" y="26"&gt;71%&lt;/text&gt;&lt;text x="0" y="66"&gt;Jataí&lt;/text&gt;&lt;rect class="d1" x="150" y="52" width="282" height="20"/&gt;&lt;text class="valor" x="440" y="66"&gt;64%&lt;/text&gt;&lt;text x="0" y="106"&gt;Mineiros&lt;/text&gt;&lt;rect class="d1" x="150" y="92" width="255" height="20"/&gt;&lt;text class="valor" x="413" y="106"&gt;58%&lt;/text&gt;&lt;text x="0" y="146"&gt;Chapadão&lt;/text&gt;&lt;rect class="d1" x="150" y="132" width="242" height="20"/&gt;&lt;text class="valor" x="400" y="146"&gt;55%&lt;/text&gt;&lt;text x="0" y="186"&gt;Caiapônia&lt;/text&gt;&lt;rect class="o20" x="150" y="172" width="172" height="20"/&gt;&lt;text class="valor" x="330" y="186"&gt;39%&lt;/text&gt;&lt;text x="0" y="226"&gt;Montividiu&lt;/text&gt;&lt;rect class="o20" x="150" y="212" width="145" height="20"/&gt;&lt;text class="valor" x="303" y="226"&gt;33%&lt;/text&gt;&lt;/svg&gt;&lt;/div&gt;&lt;p class="fonte"&gt;Base: 1.240 entrevistas, junho de 2026.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details></div><div class="mini"><div class="t"><strong>Faixa no topo</strong>, <code>.s-topo</code>: conteúdo largo. 240 px de tinta no alto, 392 px úteis para tabela de até seis colunas, fases ou esquema.</div><div class="palco"><div class="deck"><div class="slide s-topo">
+  <div class="faixa"><div class="cabeca"><div class="cap"><b>Capítulo 3</b> Públicos e plano</div><h2>As fases do plano, de setembro a abril</h2></div><p class="frase">Cada fase começa <strong>quando a anterior funciona,</strong> não quando o calendário manda.</p><div class="pe"><div class="contador"><span>18 de 22</span></div><div class="trilho"><span style="width:82%"></span></div></div></div>
+  <div class="conteudo"><div class="fases"><div class="fase feita"><span class="quando">setembro e outubro</span><b>Pré-assinatura</b>Mapeamento, cadastro unificado, roteiro de visitas.</div><div class="fase atual"><span class="quando">outubro a dezembro</span><b>Mapeamento e visitas</b>Seis redações, os perfis de cidade, a linha de base da medição.</div><div class="fase futura"><span class="quando">dezembro e janeiro</span><b>Lançamento</b>As primeiras pautas e a mensagem única nas seis cidades.</div><div class="fase futura"><span class="quando">janeiro a abril</span><b>Ações contínuas</b>Relacionamento mensal e a primeira medição em março.</div></div><p class="fonte">A medição corre por baixo de tudo a partir de novembro. Datas de referência, versão 2 do plano.</p></div>
+</div></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-slide-s-topo">Copiar</button></div><pre><code id="c-slide-s-topo">&lt;div class="deck"&gt;&lt;div class="slide s-topo"&gt;
+  &lt;div class="faixa"&gt;&lt;div class="cabeca"&gt;&lt;div class="cap"&gt;&lt;b&gt;Capítulo 3&lt;/b&gt; Públicos e plano&lt;/div&gt;&lt;h2&gt;As fases do plano, de setembro a abril&lt;/h2&gt;&lt;/div&gt;&lt;p class="frase"&gt;Cada fase começa &lt;strong&gt;quando a anterior funciona,&lt;/strong&gt; não quando o calendário manda.&lt;/p&gt;&lt;div class="pe"&gt;&lt;div class="contador"&gt;&lt;span&gt;18 de 22&lt;/span&gt;&lt;/div&gt;&lt;div class="trilho"&gt;&lt;span style="width:82%"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="conteudo"&gt;&lt;div class="fases"&gt;&lt;div class="fase feita"&gt;&lt;span class="quando"&gt;setembro e outubro&lt;/span&gt;&lt;b&gt;Pré-assinatura&lt;/b&gt;Mapeamento, cadastro unificado, roteiro de visitas.&lt;/div&gt;&lt;div class="fase atual"&gt;&lt;span class="quando"&gt;outubro a dezembro&lt;/span&gt;&lt;b&gt;Mapeamento e visitas&lt;/b&gt;Seis redações, os perfis de cidade, a linha de base da medição.&lt;/div&gt;&lt;div class="fase futura"&gt;&lt;span class="quando"&gt;dezembro e janeiro&lt;/span&gt;&lt;b&gt;Lançamento&lt;/b&gt;As primeiras pautas e a mensagem única nas seis cidades.&lt;/div&gt;&lt;div class="fase futura"&gt;&lt;span class="quando"&gt;janeiro a abril&lt;/span&gt;&lt;b&gt;Ações contínuas&lt;/b&gt;Relacionamento mensal e a primeira medição em março.&lt;/div&gt;&lt;/div&gt;&lt;p class="fonte"&gt;A medição corre por baixo de tudo a partir de novembro. Datas de referência, versão 2 do plano.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details></div><div class="mini"><div class="t"><strong>Quieto</strong>, <code>.s-quieto</code>: transição e recap. Sem faixa; a margem 80/20 vira o cromo com capítulo, progresso vertical e contador.</div><div class="palco"><div class="deck"><div class="slide s-quieto">
+  <div class="conteudo"><h2>O que aprendemos no capítulo 2</h2><ol class="recap"><li><strong>A lembrança acompanha a porta.</strong> As duas cidades em que a marca é segunda são as duas em que a concorrente tem loja própria.</li><li><strong>Quatro canais fazem 85% dos clientes novos.</strong> Indicação, loja, feira e rádio; o digital, que leva a maior verba, decide 12%.</li><li><strong>Chapadão conhece e não compra.</strong> Vinte e cinco pontos entre lembrar e levar, a maior distância da rede.</li></ol><p class="fonte">Método: pesquisa de lembrança espontânea com 1.240 entrevistas e cadastro de 2.316 clientes novos.</p></div>
+  <div class="cromo"><div class="capitulo">Diagnóstico<small>Fecho do capítulo 2</small></div><div class="vertical" aria-hidden="true"><span style="height:59%"></span></div><div class="contador"><b>13</b>de 22</div></div>
+</div></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-slide-s-quieto">Copiar</button></div><pre><code id="c-slide-s-quieto">&lt;div class="deck"&gt;&lt;div class="slide s-quieto"&gt;
+  &lt;div class="conteudo"&gt;&lt;h2&gt;O que aprendemos no capítulo 2&lt;/h2&gt;&lt;ol class="recap"&gt;&lt;li&gt;&lt;strong&gt;A lembrança acompanha a porta.&lt;/strong&gt; As duas cidades em que a marca é segunda são as duas em que a concorrente tem loja própria.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Quatro canais fazem 85% dos clientes novos.&lt;/strong&gt; Indicação, loja, feira e rádio; o digital, que leva a maior verba, decide 12%.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Chapadão conhece e não compra.&lt;/strong&gt; Vinte e cinco pontos entre lembrar e levar, a maior distância da rede.&lt;/li&gt;&lt;/ol&gt;&lt;p class="fonte"&gt;Método: pesquisa de lembrança espontânea com 1.240 entrevistas e cadastro de 2.316 clientes novos.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="cromo"&gt;&lt;div class="capitulo"&gt;Diagnóstico&lt;small&gt;Fecho do capítulo 2&lt;/small&gt;&lt;/div&gt;&lt;div class="vertical" aria-hidden="true"&gt;&lt;span style="height:59%"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="contador"&gt;&lt;b&gt;13&lt;/b&gt;de 22&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details></div><div class="mini"><div class="t"><strong>Cheio</strong>, <code>.s-cheio</code>: momento. Página inteira em laranja ou escuro para mensagem-mãe, aparte, foto e contracapa; um por capítulo.</div><div class="palco"><div class="deck"><div class="slide s-cheio tema-laranja">
+  <p class="statement">A lembrança acompanha <strong>a porta,</strong> não a mídia.</p>
+  <div class="rodape-slide"><span><b>Capítulo 3</b> Públicos e plano, mensagem-mãe</span><span class="tab">17 de 22</span></div>
+</div></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-slide-s-cheio">Copiar</button></div><pre><code id="c-slide-s-cheio">&lt;div class="deck"&gt;&lt;div class="slide s-cheio tema-laranja"&gt;
+  &lt;p class="statement"&gt;A lembrança acompanha &lt;strong&gt;a porta,&lt;/strong&gt; não a mídia.&lt;/p&gt;
+  &lt;div class="rodape-slide"&gt;&lt;span&gt;&lt;b&gt;Capítulo 3&lt;/b&gt; Públicos e plano, mensagem-mãe&lt;/span&gt;&lt;span class="tab"&gt;17 de 22&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details></div><div class="mini"><div class="t"><strong>Faixa laranja</strong>, <code>.faixa.laranja</code>: clímax e abertura de capítulo. A mesma faixa em laranja, título e frase em branco (a frase sobe para 24 px), o texto pequeno em preto.</div><div class="palco"><div class="deck"><div class="slide s-faixa">
+  <div class="faixa laranja"><div class="cap"><b>Capítulo 2</b> de 3</div><div><h2>Diagnóstico: onde a marca já é lembrada</h2><p class="frase">Seis slides sobre <strong>o que a pesquisa mostrou</strong> em seis cidades.</p></div><div class="pe"><div class="contador"><b>07</b><span>de 22</span></div><div class="trilho"><span style="width:32%"></span></div></div></div>
+  <div class="conteudo separatriz"><div class="separatriz-numeral">2</div><ol class="separatriz-lista"><li><span class="n">08</span><span>Três números da pesquisa</span></li><li><span class="n">09</span><span>Onde a marca já é lembrada</span></li><li><span class="n">10</span><span>De onde vêm os clientes novos</span></li><li><span class="n">11</span><span>Seis cidades em quatro quadrantes</span></li><li><span class="n">12</span><span>A produtora de Chapadão, um aparte</span></li><li><span class="n">13</span><span>O que aprendemos no capítulo 2</span></li></ol></div>
+</div></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-slide-faixalaranja">Copiar</button></div><pre><code id="c-slide-faixalaranja">&lt;div class="deck"&gt;&lt;div class="slide s-faixa"&gt;
+  &lt;div class="faixa laranja"&gt;&lt;div class="cap"&gt;&lt;b&gt;Capítulo 2&lt;/b&gt; de 3&lt;/div&gt;&lt;div&gt;&lt;h2&gt;Diagnóstico: onde a marca já é lembrada&lt;/h2&gt;&lt;p class="frase"&gt;Seis slides sobre &lt;strong&gt;o que a pesquisa mostrou&lt;/strong&gt; em seis cidades.&lt;/p&gt;&lt;/div&gt;&lt;div class="pe"&gt;&lt;div class="contador"&gt;&lt;b&gt;07&lt;/b&gt;&lt;span&gt;de 22&lt;/span&gt;&lt;/div&gt;&lt;div class="trilho"&gt;&lt;span style="width:32%"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="conteudo separatriz"&gt;&lt;div class="separatriz-numeral"&gt;2&lt;/div&gt;&lt;ol class="separatriz-lista"&gt;&lt;li&gt;&lt;span class="n"&gt;08&lt;/span&gt;&lt;span&gt;Três números da pesquisa&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span class="n"&gt;09&lt;/span&gt;&lt;span&gt;Onde a marca já é lembrada&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span class="n"&gt;10&lt;/span&gt;&lt;span&gt;De onde vêm os clientes novos&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span class="n"&gt;11&lt;/span&gt;&lt;span&gt;Seis cidades em quatro quadrantes&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span class="n"&gt;12&lt;/span&gt;&lt;span&gt;A produtora de Chapadão, um aparte&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span class="n"&gt;13&lt;/span&gt;&lt;span&gt;O que aprendemos no capítulo 2&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>As medidas</h3><div class="rolagem"><table class="papeis">
+<thead><tr><th>Registro</th><th>Medida</th><th>Zona de texto</th></tr></thead>
+<tbody>
+<tr><td>Faixa à esquerda</td><td>um terço: <code>grid-template-columns: 1fr 2fr</code>; faixa de 427 px, conteúdo de 853</td><td>685 por 592 px (padding 72, 96, 56 e 72)</td></tr>
+<tr><td>Faixa no topo</td><td>240 px fixos: <code>grid-template-rows: 240px 1fr</code>; conteúdo de 480</td><td>1088 por 392 px úteis (padding 40 em cima, 48 embaixo, 96 dos lados)</td></tr>
+<tr><td>Quieto</td><td><code>4fr 1fr</code>: conteúdo de 1024 px, cromo de 256 com filete à esquerda</td><td>808 por 552 px (padding 96, 96, 72 e 120)</td></tr>
+<tr><td>Cheio</td><td>uma coluna, padding 96, 120 e 72; statement de 64 px em 16ch, 48 sobre foto</td><td>1040 por 552 px, o rodapé do slide na base</td></tr>
+<tr><td>Faixa laranja</td><td>a mesma faixa com <code>--fx-bg: var(--accent)</code>; uma por capítulo, nunca em dois slides seguidos</td><td>a mesma do registro que a recebe</td></tr>
+</tbody></table></div></div><div class="pilha"><h3>Os limites de texto</h3><div class="rolagem"><table class="papeis">
+<thead><tr><th>Texto</th><th>Limite</th></tr></thead>
+<tbody>
+<tr><td>Título da faixa</td><td>48 caracteres, descritivo: diz o que o slide contém, nunca o achado</td></tr>
+<tr><td>Frase central</td><td>110 caracteres, obrigatória; o achado vai nela, com o núcleo em <code>&lt;strong&gt;</code></td></tr>
+<tr><td>Título de slide quieto</td><td>60 caracteres</td></tr>
+<tr><td>Statement</td><td>70 caracteres</td></tr>
+<tr><td>Citação</td><td>120 caracteres</td></tr>
+<tr><td>Item de lista</td><td>título de 50, descrição de 110</td></tr>
+<tr><td>Célula de tabela</td><td>40 caracteres; no topo, até seis colunas e seis linhas a 15 px</td></tr>
+<tr><td>Legenda de foto</td><td>120 caracteres</td></tr>
+<tr><td>Nota do apresentador</td><td>300 caracteres</td></tr>
+<tr><td>Capítulo mais rótulo</td><td>30 caracteres</td></tr>
+</tbody></table></div></div></div><aside class="margem fixa"><span class="n">1280 × 720</span><p>Nada sai dos 1280 por 720. A verificação de cada deck mede caixa fora do slide, texto sobre texto e a menor fonte efetiva, que tem de ser 14 px ou mais.</p><p>A faixa sempre leva <code>h2</code> e <code>.frase</code>: o título é descritivo e a frase carrega o achado.</p><p>O registro cheio com tema é um por capítulo; a faixa laranja de separatriz, uma por capítulo; nunca dois momentos em slides seguidos.</p></aside></div></section><section class="bloco" id="impressao"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Impressão</h2><p class="lead">O mesmo arquivo imprime. O deck define <code>@page</code> de 1280 por 720 sem margem e um slide por página; o book quebra a página antes de cada capítulo e mantém a folha em 4 : 1, com a margem como coluna de 20 por cento; o cromo (topo, navegação, teclas, confirmação) some. O laranja e o chumbo imprimem, porque são identidade, não decoração.</p></div><div class="regras">
+  <div><strong>Deck</strong><code>@page { size: 1280px 720px; margin: 0 }</code>; cada <code>.slide</code> com <code>break-after: page</code>; moldura, miniaturas, atalhos, visão do apresentador e notas fora; animação e transição desligadas.</div>
+  <div><strong>Book</strong><code>.capitulo { break-before: page }</code>; a folha continua em <code>4fr 1fr</code>; as notas da margem ficam estáticas ao lado do parágrafo; o aparecimento (<code>.reveal</code>) termina antes de imprimir.</div>
+  <div><strong>Página</strong><code>.margem.fixa</code> e <code>.scrolly .fixo</code> viram estáticos; <code>.toast</code>, <code>.topo nav</code> e <code>.controle</code> somem; o que era interação vira o estado final.</div>
+  <div><strong>Dado</strong>O laranja do dado vira hachura (<code>#hachura-laranja</code>) para a cópia em preto e branco não perder o 20; a linha <code>o20</code> continua laranja; <code>print-color-adjust: exact</code> segura o laranja e o chumbo dos fundos.</div>
+</div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-impressao-css">Copiar</button></div><pre><code id="c-impressao-css">@media print {
+  @page { size: 1280px 720px; margin: 0; }
+  html, body, html.js body.visor { height: auto; overflow: visible; background: #fff; }
+  .cromo-topo, .cromo-base, .miniaturas, .atalhos, .progresso-deck, .mesa { display: none !important; }
+  .moldura { position: static; display: block; }
+  .palco-vivo { position: static; overflow: visible; }
+  html.js .palco-vivo .deck, .deck { position: static; transform: none; width: var(--sl-w); height: auto; background: none; }
+  html.js .deck .slide, .deck .slide { position: relative; inset: auto; display: grid; width: var(--sl-w); height: var(--sl-h); page-break-after: always; break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .deck .slide:last-child { page-break-after: auto; break-after: auto; }
+  .slide .notas { display: none; }
+  .slide *, .slide *::before, .slide *::after { animation: none !important; transition: none !important; }
+}</code></pre></details></div><aside class="margem fixa"><span class="n">20 %</span><p>Na impressão do slide quieto a margem fica com capítulo e número, sem as teclas. No book, a coluna de 20 por cento segue com as notas.</p><p>O PDF sai do próprio arquivo pelo Chrome sem cabeçalho nem rodapé; não existe versão de impressão separada.</p></aside></div></section>
+<footer class="rodape"><div class="container">8020-DS, candidato 4.0. Patterns, rodada 7, 2026-09-07.</div></footer>
+<script src="../assets/pagina.js"></script>
+</body>
+</html>

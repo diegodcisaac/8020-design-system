@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagramas, patterns do 8020-DS 4.0</title>
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="../assets/deck.css">
+<link rel="stylesheet" href="_catalogo.css">
+<style>
+/* os dois diagramas de 1088 px ocupam a folha inteira: na coluna de quatro quintos o texto de 14 px
+   deles cairia abaixo do piso da página; na folha inteira rendem quase 1:1, como no registro topo do slide */
+.folha > .largo { grid-column: 1 / -1; }
+/* nessas duas seções a margem é .aberta, não .fixa: a margem grudada deslizaria sobre a linha inteira do diagrama */
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="hachura-laranja" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fa4616"/><line x1="0" y1="0" x2="0" y2="6" stroke="#1a140f" stroke-width="1.2"/></pattern></defs></svg>
+<div class="topo"><div class="container"><a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a><nav aria-label="Seções"><a class="peso" data-t="Regras" href="#regras">Regras</a><a class="peso" data-t="Fluxo" href="#fluxo">Fluxo</a><a class="peso" data-t="Atores" href="#atores">Atores</a><a class="peso" data-t="Esquema" href="#esquema">Esquema</a><a class="peso" data-t="Matriz" href="#matriz">Matriz</a><a class="peso" data-t="Rede" href="#rede">Rede</a><a class="peso" data-t="Marcador" href="#marcador">Marcador</a></nav><span class="meta">diagramas.html</span></div></div>
+<section class="abertura"><div class="container folha"><div class="miolo"><h1>Diagramas: <strong>ângulo reto,</strong> quadrado de 8 px.</h1><p class="lead">Todo diagrama do sistema é SVG real, desenhado com a gramática do dado: caixa de contorno em tinta, conector em segmento reto, seta por marcador, o quadrado de 8 px como nó e o laranja só onde há desvio ou caminho. Os quatro abaixo vêm do deck padrão e do deck vivo; abra o código, copie e troque o texto.</p></div><aside class="margem fixa"><span class="n">8 px</span><p>O nó de todo diagrama é o quadrado de 8 px, o único ícone do sistema. Em tinta, em <code>dado-3</code>, em contorno ou em laranja, conforme o papel do ator.</p><p>Os SVGs foram desenhados para o conteúdo do slide (685 ou 1088 px de largura), onde rendem 1:1. Aqui se ajustam à coluna; os dois largos ocupam a folha inteira.</p><p>Fonte de cada figura logo abaixo dela. Dado fictício do universo de exemplo.</p></aside></div></section>
+<section class="bloco" id="regras"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>As regras</h2><p class="lead">Oito regras, as mesmas para fluxo, mapa de atores, esquema e matriz. O diagrama explica uma relação; o dado prova um número. Os dois dividem a rampa, o filete e o laranja.</p></div><div class="regras">
+<div><strong>Conector reto.</strong> Segmento reto com dobra em ângulo reto, em <code>line</code> ou <code>polyline</code>. Nunca curva, nunca diagonal, nunca um caminho que passe por cima de caixa.</div>
+<div><strong>Seta por marcador.</strong> Um <code>marker</code> em <code>defs</code>, com <code>orient="auto"</code> e <code>refX</code> na ponta; a linha recebe <code>marker-end</code>. Nunca um triângulo desenhado à mão no fim da linha.</div>
+<div><strong>O nó é o quadrado.</strong> Um <code>rect</code> de 8 por 8 px: em tinta para quem decide, em <code>dado-3</code> para quem influencia, em contorno para quem observa, em laranja para o que o plano ativa. Nunca círculo.</div>
+<div><strong>Caixa de contorno.</strong> <code>rect</code> com traço de 1 px em tinta e sem preenchimento. A caixa cheia, em tinta com texto em papel, é o resultado: uma por diagrama.</div>
+<div><strong>Laranja é desvio ou caminho.</strong> A nota que volta, o acordo que sustenta, o ator que começa. Nunca decoração, nunca dois usos no mesmo diagrama.</div>
+<div><strong>Texto em Montserrat, pelo CSS.</strong> <code>text</code> herda a fonte de <code>.grafico text</code>; o tamanho vai inline. Nunca cruza traço nem sai da caixa do próprio SVG: 12 px de folga da borda da caixa, e a linha termina 2 px antes da caixa seguinte.</div>
+<div><strong>Grade só onde há tique.</strong> Diagrama não tem grade de fundo: anel, caixa e conector são as únicas linhas. Eixo e mediana só na matriz, que é dado.</div>
+<div><strong>Acessível.</strong> <code>role="img"</code>, <code>aria-label</code> com o que o diagrama diz (não o que ele é) e <code>title</code> como primeiro filho do SVG. Decorativo leva <code>aria-hidden="true"</code>.</div>
+</div></div><aside class="margem fixa"><span class="n">1 px</span><p>O traço da caixa e do conector, em tinta. O anel externo do mapa de atores usa <code>rule-strong</code>, para o de dentro pesar mais.</p><p>Texto contra traço é um teste do verificador de slide desde a auditoria do deck vivo: seis diagramas tinham rótulo cruzando borda e a captura de tela não mostrava.</p></aside></div></section>
+<section class="bloco" id="fluxo"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Fluxo com caixas</h2><p class="lead">Cinco caixas de 196 por 76 px, conectores retos com seta e o dia do passo abaixo de cada conector. A caixa cheia é o resultado; o laranja marca o único desvio, a nota que volta para ajuste, com a dobra em ângulo reto por cima das caixas.</p></div></div><aside class="margem aberta"><span class="n">196 px</span><p>A largura da caixa, com folga interna de 12 px: "A agência escreve" a 17 px cabe com 20 px de sobra. Título em 600, subtítulo em <code>muted</code> a 15 px.</p><p>No slide, este fluxo pede o registro topo: 1088 px de largura útil. No deck padrão é o tipo 19.</p></aside><div class="largo pilha"><div class="grafico fluxo"><svg viewBox="0 0 1088 300" role="img" aria-label="Fluxo: a loja conta o fato da semana, a agência escreve a nota, a redação recebe, publica, e a loja responde com o link no grupo. Uma em quatro notas volta para ajuste."><title>Da loja à notícia</title>
+<defs><marker id="seta-fluxo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker><marker id="seta-laranja" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker></defs>
+<rect x="0" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/><text x="12" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)">A loja conta</text><text x="12" y="166" style="font-size:15px;fill:var(--muted)">o fato da semana</text>
+<rect x="223" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/><text x="235" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)">A agência escreve</text><text x="235" y="166" style="font-size:15px;fill:var(--muted)">nota de dez linhas</text>
+<rect x="446" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/><text x="458" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)">A redação recebe</text><text x="458" y="166" style="font-size:15px;fill:var(--muted)">um veículo por cidade</text>
+<rect x="669" y="112" width="196" height="76" fill="var(--ink)"/><text x="681" y="142" style="font-size:17px;font-weight:600;fill:var(--paper)">Publica</text><text x="681" y="166" style="font-size:15px;fill:rgba(255,255,255,.7)">notícia com link</text>
+<rect x="892" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/><text x="904" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)">A loja responde</text><text x="904" y="166" style="font-size:15px;fill:var(--muted)">o link no grupo</text>
+<line x1="196" y1="150" x2="221" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/><text x="209.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)">segunda</text>
+<line x1="419" y1="150" x2="444" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/><text x="432.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)">terça</text>
+<line x1="642" y1="150" x2="667" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/><text x="655.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)">quarta</text>
+<line x1="865" y1="150" x2="890" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/><text x="878.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)">sexta</text>
+<polyline points="544,112 544,60 321,60 321,110" fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#seta-laranja)"/><text x="432.5" y="52" text-anchor="middle" style="font-size:14px;fill:var(--ink);font-weight:500">pede ajuste, uma em quatro</text>
+<text x="0" y="262" style="font-size:14px;fill:var(--meta)">Combinado com os seis gerentes em agosto. Uma semana por pauta; o ajuste volta no mesmo dia.</text>
+</svg></div>
+<p class="fonte">Combinado com os seis gerentes em agosto de 2026. Uma semana por pauta; o ajuste volta no mesmo dia.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-fluxo">Copiar</button></div><pre><code id="c-fluxo">&lt;svg viewBox="0 0 1088 300" role="img" aria-label="Fluxo: a loja conta o fato da semana, a agência escreve a nota, a redação recebe, publica, e a loja responde com o link no grupo. Uma em quatro notas volta para ajuste."&gt;&lt;title&gt;Da loja à notícia&lt;/title&gt;
+&lt;defs&gt;&lt;marker id="seta-fluxo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"&gt;&lt;path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/&gt;&lt;/marker&gt;&lt;marker id="seta-laranja" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"&gt;&lt;path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/&gt;&lt;/marker&gt;&lt;/defs&gt;
+&lt;rect x="0" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="12" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;A loja conta&lt;/text&gt;
+&lt;text x="12" y="166" style="font-size:15px;fill:var(--muted)"&gt;o fato da semana&lt;/text&gt;
+&lt;rect x="223" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="235" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;A agência escreve&lt;/text&gt;
+&lt;text x="235" y="166" style="font-size:15px;fill:var(--muted)"&gt;nota de dez linhas&lt;/text&gt;
+&lt;rect x="446" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="458" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;A redação recebe&lt;/text&gt;
+&lt;text x="458" y="166" style="font-size:15px;fill:var(--muted)"&gt;um veículo por cidade&lt;/text&gt;
+&lt;rect x="669" y="112" width="196" height="76" fill="var(--ink)"/&gt;
+&lt;text x="681" y="142" style="font-size:17px;font-weight:600;fill:var(--paper)"&gt;Publica&lt;/text&gt;
+&lt;text x="681" y="166" style="font-size:15px;fill:rgba(255,255,255,.7)"&gt;notícia com link&lt;/text&gt;
+&lt;rect x="892" y="112" width="196" height="76" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="904" y="142" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;A loja responde&lt;/text&gt;
+&lt;text x="904" y="166" style="font-size:15px;fill:var(--muted)"&gt;o link no grupo&lt;/text&gt;
+&lt;line x1="196" y1="150" x2="221" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/&gt;
+&lt;text x="209.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)"&gt;segunda&lt;/text&gt;
+&lt;line x1="419" y1="150" x2="444" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/&gt;
+&lt;text x="432.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)"&gt;terça&lt;/text&gt;
+&lt;line x1="642" y1="150" x2="667" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/&gt;
+&lt;text x="655.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)"&gt;quarta&lt;/text&gt;
+&lt;line x1="865" y1="150" x2="890" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/&gt;
+&lt;text x="878.5" y="206" text-anchor="middle" style="font-size:14px;fill:var(--meta)"&gt;sexta&lt;/text&gt;
+&lt;polyline points="544,112 544,60 321,60 321,110" fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#seta-laranja)"/&gt;
+&lt;text x="432.5" y="52" text-anchor="middle" style="font-size:14px;fill:var(--ink);font-weight:500"&gt;pede ajuste, uma em quatro&lt;/text&gt;
+&lt;text x="0" y="262" style="font-size:14px;fill:var(--meta)"&gt;Combinado com os seis gerentes em agosto. Uma semana por pauta; o ajuste volta no mesmo dia.&lt;/text&gt;
+&lt;/svg&gt;</code></pre></details></div></div></section>
+<section class="bloco" id="atores"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Mapa de atores em anéis</h2><p class="lead">Três anéis retangulares por proximidade da decisão: decide, influencia, observa. O centro é a caixa cheia; cada ator é um quadrado com rótulo; o quadrado laranja marca o ator que o plano ativa primeiro.</p></div><div class="grafico atores-mapa"><svg viewBox="0 0 640 430" role="img" aria-label="Mapa de atores em três anéis em volta da loja. Decide: vendedora, gerente, produtor, técnico de campo. Influencia: rádio da manhã, feira regional, perfis de cidade, sindicato rural. Observa: concorrente, portal e jornal, prefeitura."><title>Mapa de atores em volta da loja</title>
+<rect x="8" y="8" width="624" height="414" fill="none" stroke="var(--rule-strong)"/><text x="20" y="30" class="tique">observa</text>
+<rect x="100" y="72" width="440" height="286" fill="none" stroke="var(--rule-strong)"/><text x="112" y="94" class="tique">influencia</text>
+<rect x="148" y="136" width="344" height="158" fill="none" stroke="var(--ink)"/><text x="160" y="158" class="tique">decide</text>
+<rect x="280" y="188" width="80" height="54" fill="var(--ink)"/><text x="320" y="220" text-anchor="middle" style="fill:var(--paper);font-weight:600;font-size:15px">A loja</text>
+<rect x="160" y="172" width="8" height="8" fill="var(--ink)"/><text x="174" y="180" class="rotulo">Vendedora</text>
+<rect x="472" y="172" width="8" height="8" fill="var(--ink)"/><text x="466" y="180" class="rotulo" text-anchor="end">Produtor</text>
+<rect x="160" y="272" width="8" height="8" fill="var(--ink)"/><text x="174" y="280" class="rotulo">Gerente da loja</text>
+<rect x="472" y="272" width="8" height="8" fill="var(--ink)"/><text x="466" y="280" class="rotulo" text-anchor="end">Técnico de campo</text>
+<rect x="112" y="114" width="8" height="8" fill="var(--dado-3)"/><text x="126" y="122" class="rotulo">Rádio da manhã</text>
+<rect x="520" y="114" width="8" height="8" fill="var(--dado-3)"/><text x="514" y="122" class="rotulo" text-anchor="end">Feira regional</text>
+<rect x="112" y="322" width="8" height="8" fill="var(--accent)"/><text x="126" y="330" class="rotulo">Perfis de cidade</text>
+<rect x="520" y="322" width="8" height="8" fill="var(--dado-3)"/><text x="514" y="330" class="rotulo" text-anchor="end">Sindicato rural</text>
+<rect x="20" y="394" width="8" height="8" fill="none" stroke="var(--ink)"/><text x="34" y="402" class="rotulo">Portal e jornal</text>
+<rect x="612" y="394" width="8" height="8" fill="none" stroke="var(--ink)"/><text x="606" y="402" class="rotulo" text-anchor="end">Prefeitura</text>
+<rect x="612" y="46" width="8" height="8" fill="none" stroke="var(--ink)"/><text x="606" y="54" class="rotulo" text-anchor="end">Concorrente</text>
+</svg></div>
+<p class="fonte">Anéis por proximidade da decisão de compra. O quadrado laranja marca o ator que o plano ativa primeiro.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-atores">Copiar</button></div><pre><code id="c-atores">&lt;svg viewBox="0 0 640 430" role="img" aria-label="Mapa de atores em três anéis em volta da loja. Decide: vendedora, gerente, produtor, técnico de campo. Influencia: rádio da manhã, feira regional, perfis de cidade, sindicato rural. Observa: concorrente, portal e jornal, prefeitura."&gt;&lt;title&gt;Mapa de atores em volta da loja&lt;/title&gt;
+&lt;rect x="8" y="8" width="624" height="414" fill="none" stroke="var(--rule-strong)"/&gt;
+&lt;text x="20" y="30" class="tique"&gt;observa&lt;/text&gt;
+&lt;rect x="100" y="72" width="440" height="286" fill="none" stroke="var(--rule-strong)"/&gt;
+&lt;text x="112" y="94" class="tique"&gt;influencia&lt;/text&gt;
+&lt;rect x="148" y="136" width="344" height="158" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="160" y="158" class="tique"&gt;decide&lt;/text&gt;
+&lt;rect x="280" y="188" width="80" height="54" fill="var(--ink)"/&gt;
+&lt;text x="320" y="220" text-anchor="middle" style="fill:var(--paper);font-weight:600;font-size:15px"&gt;A loja&lt;/text&gt;
+&lt;rect x="160" y="172" width="8" height="8" fill="var(--ink)"/&gt;
+&lt;text x="174" y="180" class="rotulo"&gt;Vendedora&lt;/text&gt;
+&lt;rect x="472" y="172" width="8" height="8" fill="var(--ink)"/&gt;
+&lt;text x="466" y="180" class="rotulo" text-anchor="end"&gt;Produtor&lt;/text&gt;
+&lt;rect x="160" y="272" width="8" height="8" fill="var(--ink)"/&gt;
+&lt;text x="174" y="280" class="rotulo"&gt;Gerente da loja&lt;/text&gt;
+&lt;rect x="472" y="272" width="8" height="8" fill="var(--ink)"/&gt;
+&lt;text x="466" y="280" class="rotulo" text-anchor="end"&gt;Técnico de campo&lt;/text&gt;
+&lt;rect x="112" y="114" width="8" height="8" fill="var(--dado-3)"/&gt;
+&lt;text x="126" y="122" class="rotulo"&gt;Rádio da manhã&lt;/text&gt;
+&lt;rect x="520" y="114" width="8" height="8" fill="var(--dado-3)"/&gt;
+&lt;text x="514" y="122" class="rotulo" text-anchor="end"&gt;Feira regional&lt;/text&gt;
+&lt;rect x="112" y="322" width="8" height="8" fill="var(--accent)"/&gt;
+&lt;text x="126" y="330" class="rotulo"&gt;Perfis de cidade&lt;/text&gt;
+&lt;rect x="520" y="322" width="8" height="8" fill="var(--dado-3)"/&gt;
+&lt;text x="514" y="330" class="rotulo" text-anchor="end"&gt;Sindicato rural&lt;/text&gt;
+&lt;rect x="20" y="394" width="8" height="8" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="34" y="402" class="rotulo"&gt;Portal e jornal&lt;/text&gt;
+&lt;rect x="612" y="394" width="8" height="8" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="606" y="402" class="rotulo" text-anchor="end"&gt;Prefeitura&lt;/text&gt;
+&lt;rect x="612" y="46" width="8" height="8" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="606" y="54" class="rotulo" text-anchor="end"&gt;Concorrente&lt;/text&gt;
+&lt;/svg&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">64 px</span><p>A distância entre os anéis, para o rótulo de um anel nunca tocar a borda do outro. O anel de dentro tem 344 px de largura por causa de "Técnico de campo".</p><p>Rótulo à direita do quadrado na coluna da esquerda; à esquerda do quadrado, com <code>text-anchor="end"</code>, na coluna da direita.</p></aside></div></section>
+<section class="bloco" id="esquema"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Esquema de fechamento</h2><p class="lead">A tese no alto em caixa cheia, três desdobramentos em caixas de contorno, o acordo na base com o traço laranja. Conectores retos com a dobra em ângulo reto e o verbo da ligação anotado em meta.</p></div></div><aside class="margem aberta"><span class="n">340 px</span><p>A largura de cada desdobramento, com o texto encurtado até caber em uma linha. Três linhas de texto por caixa, no máximo: título a 17 px em 600 e duas de 16.</p><p>O acordo é a única caixa com traço laranja: é o caminho que sustenta o plano. No deck padrão é o tipo 27.</p></aside><div class="largo pilha"><div class="grafico esquema"><svg viewBox="0 0 1088 380" role="img" aria-label="Esquema: a tese no topo, três desdobramentos sob ela e o acordo entre as partes na base, ligados por conectores retos."><title>O plano em uma página</title><rect x="244" y="10" width="600" height="64" fill="var(--ink)"/><text x="544" y="49" text-anchor="middle" style="fill:var(--paper);font-size:22px;font-weight:600">A lembrança acompanha a porta, não a mídia</text><line x1="544" y1="74" x2="544" y2="110" stroke="var(--rule-strong)"/><line x1="170" y1="110" x2="918" y2="110" stroke="var(--rule-strong)"/><line x1="170" y1="110" x2="170" y2="140" stroke="var(--rule-strong)"/><line x1="544" y1="110" x2="544" y2="140" stroke="var(--rule-strong)"/><line x1="918" y1="110" x2="918" y2="140" stroke="var(--rule-strong)"/><rect x="0" y="140" width="340" height="110" fill="none" stroke="var(--ink)"/><text x="20" y="172" style="font-size:17px;font-weight:600;fill:var(--ink)">Uma mensagem, seis cidades</text><text x="20" y="200" style="font-size:16px">Adaptada por loja, não reescrita.</text><text x="20" y="224" style="font-size:16px">Calendário único desde dezembro.</text><rect x="374" y="140" width="340" height="110" fill="none" stroke="var(--ink)"/><text x="394" y="172" style="font-size:17px;font-weight:600;fill:var(--ink)">Presença onde a porta está</text><text x="394" y="200" style="font-size:16px">Imprensa e perfis, loja a loja.</text><text x="394" y="224" style="font-size:16px">Feira e rádio antes do digital.</text><rect x="748" y="140" width="340" height="110" fill="none" stroke="var(--ink)"/><text x="768" y="172" style="font-size:17px;font-weight:600;fill:var(--ink)">Medir lembrança, não só venda</text><text x="768" y="200" style="font-size:16px">Linha de base em novembro.</text><text x="768" y="224" style="font-size:16px">Pesquisa duas vezes por ano.</text><line x1="170" y1="250" x2="170" y2="290" stroke="var(--rule-strong)"/><line x1="544" y1="250" x2="544" y2="290" stroke="var(--rule-strong)"/><line x1="918" y1="250" x2="918" y2="290" stroke="var(--rule-strong)"/><line x1="170" y1="290" x2="918" y2="290" stroke="var(--rule-strong)"/><line x1="544" y1="290" x2="544" y2="316" stroke="var(--rule-strong)"/><rect x="0" y="316" width="1088" height="54" fill="none" stroke="var(--accent)"/><text x="544" y="350" text-anchor="middle" style="font-size:17px;font-weight:600;fill:var(--ink)">Acordo: a rede abre o cadastro e a agenda dos gerentes; a agência entrega pauta semanal e medição semestral</text><text x="600" y="106" style="font-size:14px;fill:var(--meta)">desdobra em</text><text x="600" y="286" style="font-size:14px;fill:var(--meta)">sustentado por</text></svg></div>
+<p class="fonte">A tese e os três acordos do plano de presença de marca, versão 2, agosto de 2026.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-esquema">Copiar</button></div><pre><code id="c-esquema">&lt;svg viewBox="0 0 1088 380" role="img" aria-label="Esquema: a tese no topo, três desdobramentos sob ela e o acordo entre as partes na base, ligados por conectores retos."&gt;&lt;title&gt;O plano em uma página&lt;/title&gt;
+&lt;rect x="244" y="10" width="600" height="64" fill="var(--ink)"/&gt;
+&lt;text x="544" y="49" text-anchor="middle" style="fill:var(--paper);font-size:22px;font-weight:600"&gt;A lembrança acompanha a porta, não a mídia&lt;/text&gt;
+&lt;line x1="544" y1="74" x2="544" y2="110" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="170" y1="110" x2="918" y2="110" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="170" y1="110" x2="170" y2="140" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="544" y1="110" x2="544" y2="140" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="918" y1="110" x2="918" y2="140" stroke="var(--rule-strong)"/&gt;
+&lt;rect x="0" y="140" width="340" height="110" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="20" y="172" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;Uma mensagem, seis cidades&lt;/text&gt;
+&lt;text x="20" y="200" style="font-size:16px"&gt;Adaptada por loja, não reescrita.&lt;/text&gt;
+&lt;text x="20" y="224" style="font-size:16px"&gt;Calendário único desde dezembro.&lt;/text&gt;
+&lt;rect x="374" y="140" width="340" height="110" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="394" y="172" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;Presença onde a porta está&lt;/text&gt;
+&lt;text x="394" y="200" style="font-size:16px"&gt;Imprensa e perfis, loja a loja.&lt;/text&gt;
+&lt;text x="394" y="224" style="font-size:16px"&gt;Feira e rádio antes do digital.&lt;/text&gt;
+&lt;rect x="748" y="140" width="340" height="110" fill="none" stroke="var(--ink)"/&gt;
+&lt;text x="768" y="172" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;Medir lembrança, não só venda&lt;/text&gt;
+&lt;text x="768" y="200" style="font-size:16px"&gt;Linha de base em novembro.&lt;/text&gt;
+&lt;text x="768" y="224" style="font-size:16px"&gt;Pesquisa duas vezes por ano.&lt;/text&gt;
+&lt;line x1="170" y1="250" x2="170" y2="290" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="544" y1="250" x2="544" y2="290" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="918" y1="250" x2="918" y2="290" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="170" y1="290" x2="918" y2="290" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="544" y1="290" x2="544" y2="316" stroke="var(--rule-strong)"/&gt;
+&lt;rect x="0" y="316" width="1088" height="54" fill="none" stroke="var(--accent)"/&gt;
+&lt;text x="544" y="350" text-anchor="middle" style="font-size:17px;font-weight:600;fill:var(--ink)"&gt;Acordo: a rede abre o cadastro e a agenda dos gerentes; a agência entrega pauta semanal e medição semestral&lt;/text&gt;
+&lt;text x="600" y="106" style="font-size:14px;fill:var(--meta)"&gt;desdobra em&lt;/text&gt;
+&lt;text x="600" y="286" style="font-size:14px;fill:var(--meta)"&gt;sustentado por&lt;/text&gt;&lt;/svg&gt;</code></pre></details></div></div></section>
+<section class="bloco" id="matriz"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Matriz dois por dois</h2><p class="lead">Dois eixos em filete, os cortes nas medianas em <code>rule-strong</code>, os quadrantes nomeados nos cantos em tique, um ponto por caso com o rótulo ao lado. O laranja é o único caso do quadrante que importa.</p></div><div class="grafico matriz"><svg viewBox="-12 0 668 430" role="img" aria-label="Matriz de lembrança e compra por cidade: Rio Verde, Jataí e Mineiros lembram e compram; Chapadão lembra e não compra; Caiapônia e Montividiu nem lembram nem compram."><title>Lembrança e compra por cidade</title>
+<line class="eixo" x1="114" y1="380" x2="600" y2="380"/><line class="eixo" x1="114" y1="20" x2="114" y2="380"/>
+<line x1="418" y1="20" x2="418" y2="380" stroke="var(--rule-strong)"/><line x1="114" y1="182" x2="600" y2="182" stroke="var(--rule-strong)"/>
+<text x="428" y="38" class="tique">lembra e compra</text><text x="428" y="372" class="tique">lembra e não compra</text><text x="124" y="372" class="tique">nem lembra nem compra</text><text x="124" y="38" class="tique">compra sem lembrar</text>
+<text x="418" y="402" class="tique" text-anchor="middle">50% de lembrança</text><text x="108" y="186" class="tique" text-anchor="end">33% de compra</text><text x="600" y="424" class="tique" text-anchor="end">lembrança espontânea</text><text x="114" y="14" class="tique">compra em 12 meses</text>
+<circle cx="545.5" cy="92" r="6" fill="var(--dado-1)" stroke="var(--paper)" stroke-width="2"/><text x="557.5" y="96" class="valor">Rio Verde</text>
+<circle cx="503" cy="134" r="6" fill="var(--dado-1)" stroke="var(--paper)" stroke-width="2"/><text x="515" y="138" class="valor">Jataí</text>
+<circle cx="466" cy="170" r="6" fill="var(--dado-1)" stroke="var(--paper)" stroke-width="2"/><text x="478" y="166" class="valor">Mineiros</text>
+<circle cx="448" cy="200" r="7" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/><text x="461" y="212" class="valor">Chapadão</text>
+<circle cx="351" cy="272" r="6" fill="var(--dado-3)" stroke="var(--paper)" stroke-width="2"/><text x="339" y="276" class="valor" text-anchor="end">Caiapônia</text>
+<circle cx="314.5" cy="308" r="6" fill="var(--dado-3)" stroke="var(--paper)" stroke-width="2"/><text x="302.5" y="312" class="valor" text-anchor="end">Montividiu</text>
+</svg></div>
+<p class="fonte">Pesquisa de junho de 2026. Cortes em 50% de lembrança e 33% de compra, as medianas das seis cidades.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-matriz">Copiar</button></div><pre><code id="c-matriz">&lt;svg viewBox="-12 0 668 430" role="img" aria-label="Matriz de lembrança e compra por cidade: Rio Verde, Jataí e Mineiros lembram e compram; Chapadão lembra e não compra; Caiapônia e Montividiu nem lembram nem compram."&gt;&lt;title&gt;Lembrança e compra por cidade&lt;/title&gt;
+&lt;line class="eixo" x1="114" y1="380" x2="600" y2="380"/&gt;
+&lt;line class="eixo" x1="114" y1="20" x2="114" y2="380"/&gt;
+&lt;line x1="418" y1="20" x2="418" y2="380" stroke="var(--rule-strong)"/&gt;
+&lt;line x1="114" y1="182" x2="600" y2="182" stroke="var(--rule-strong)"/&gt;
+&lt;text x="428" y="38" class="tique"&gt;lembra e compra&lt;/text&gt;
+&lt;text x="428" y="372" class="tique"&gt;lembra e não compra&lt;/text&gt;
+&lt;text x="124" y="372" class="tique"&gt;nem lembra nem compra&lt;/text&gt;
+&lt;text x="124" y="38" class="tique"&gt;compra sem lembrar&lt;/text&gt;
+&lt;text x="418" y="402" class="tique" text-anchor="middle"&gt;50% de lembrança&lt;/text&gt;
+&lt;text x="108" y="186" class="tique" text-anchor="end"&gt;33% de compra&lt;/text&gt;
+&lt;text x="600" y="424" class="tique" text-anchor="end"&gt;lembrança espontânea&lt;/text&gt;
+&lt;text x="114" y="14" class="tique"&gt;compra em 12 meses&lt;/text&gt;
+&lt;circle cx="545.5" cy="92" r="6" fill="var(--dado-1)" stroke="var(--paper)" stroke-width="2"/&gt;
+&lt;text x="557.5" y="96" class="valor"&gt;Rio Verde&lt;/text&gt;
+&lt;circle cx="503" cy="134" r="6" fill="var(--dado-1)" stroke="var(--paper)" stroke-width="2"/&gt;
+&lt;text x="515" y="138" class="valor"&gt;Jataí&lt;/text&gt;
+&lt;circle cx="466" cy="170" r="6" fill="var(--dado-1)" stroke="var(--paper)" stroke-width="2"/&gt;
+&lt;text x="478" y="166" class="valor"&gt;Mineiros&lt;/text&gt;
+&lt;circle cx="448" cy="200" r="7" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/&gt;
+&lt;text x="461" y="212" class="valor"&gt;Chapadão&lt;/text&gt;
+&lt;circle cx="351" cy="272" r="6" fill="var(--dado-3)" stroke="var(--paper)" stroke-width="2"/&gt;
+&lt;text x="339" y="276" class="valor" text-anchor="end"&gt;Caiapônia&lt;/text&gt;
+&lt;circle cx="314.5" cy="308" r="6" fill="var(--dado-3)" stroke="var(--paper)" stroke-width="2"/&gt;
+&lt;text x="302.5" y="312" class="valor" text-anchor="end"&gt;Montividiu&lt;/text&gt;
+&lt;/svg&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">2 medianas</span><p>Os cortes são as medianas das seis cidades (50% de lembrança, 33% de compra), não números redondos. A fonte diz isso.</p><p>Rótulo à direita do ponto na metade direita, à esquerda na metade esquerda: nunca cruza a mediana. O <code>viewBox</code> começa em -12 para o rótulo do eixo caber.</p></aside></div></section>
+<section class="bloco" id="rede"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Rede bipartida e fluxo com volume</h2><p class="lead">Os dois diagramas de dado, a rede que acende as arestas do nó em foco e o fluxo cuja banda tem a largura do volume, vivem no catálogo de dado, com o livro-razão e a leitura em palavras.</p></div><ol class="lista-razao compacta">
+<li><span class="n">1</span><div><b><a href="dado.html#p-rede">Rede bipartida</a></b><span>Treze canais em três camadas de um lado, quatro públicos do outro, arestas retas; o nó em foco acende as arestas dele e o caminho laranja é o que o plano ativa primeiro.</span></div></li>
+<li><span class="n">2</span><div><b><a href="dado.html#p-fluxo">Fluxo com volume</a></b><span>A banda tem a largura do volume que carrega; a banda laranja é o 20. Leitura em palavras ao passar o ponteiro, livro-razão embaixo.</span></div></li>
+</ol></div><aside class="margem fixa"><span class="n">2 formas</span><p>Rede e fluxo com volume são dado, não esquema: o valor dirige a largura e a interação vem do <code>dado.js</code>.</p><p>As mesmas regras valem: aresta reta, nó quadrado, o 20 em laranja.</p></aside></div></section>
+<section class="bloco" id="marcador"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>O marcador</h2><p class="lead">A seta de todo conector é um <code>marker</code> escrito uma vez em <code>defs</code> e chamado por <code>marker-end</code>. Dois por diagrama, no máximo: o de tinta e o laranja.</p></div><div class="grafico"><svg viewBox="0 0 640 96" role="img" aria-label="Dois conectores de exemplo: um segmento reto em tinta com a seta na ponta e um segmento com dobra em ângulo reto, em laranja, com a seta apontando para baixo."><title>O conector reto e o conector com dobra</title>
+<defs><marker id="seta-demo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker><marker id="seta-demo-laranja" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker></defs>
+<rect x="0" y="24" width="120" height="48" fill="none" stroke="var(--ink)"/><text x="12" y="53" style="font-size:15px;font-weight:600;fill:var(--ink)">Origem</text>
+<rect x="240" y="24" width="120" height="48" fill="var(--ink)"/><text x="252" y="53" style="font-size:15px;font-weight:600;fill:var(--paper)">Resultado</text>
+<line x1="120" y1="48" x2="238" y2="48" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-demo)"/>
+<text x="179" y="40" text-anchor="middle" class="tique">segue</text>
+<rect x="520" y="24" width="120" height="48" fill="none" stroke="var(--ink)"/><text x="532" y="53" style="font-size:15px;font-weight:600;fill:var(--ink)">Ajuste</text>
+<polyline points="360,48 440,48 440,88 520,88" fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#seta-demo-laranja)"/>
+<text x="480" y="80" text-anchor="middle" class="tique">volta</text>
+</svg></div>
+<div class="anatomia">
+<div><b>id</b><span>O nome que a linha chama em <code>marker-end="url(#seta-fluxo)"</code>. Único na página: dois diagramas na mesma página não podem repetir o <code>id</code>; renomeie (<code>seta-fluxo-2</code>).</span></div>
+<div><b>viewBox</b><span><code>0 0 10 10</code>: o espaço do desenho da ponta, independente do tamanho final.</span></div>
+<div><b>refX e refY</b><span><code>9</code> e <code>5</code>: o ponto do desenho que assenta no fim da linha, a ponta no meio da altura. Sem isso a seta passa do fim da linha e entra na caixa.</span></div>
+<div><b>markerWidth e markerHeight</b><span><code>8</code>: o tamanho da ponta, em múltiplos da espessura do traço (o padrão de <code>markerUnits</code>). Com traço de 1,5 px, a ponta tem 12 px.</span></div>
+<div><b>orient</b><span><code>auto</code>: a ponta gira com a direção do último segmento. Numa polilinha com dobra, aponta na direção do trecho final.</span></div>
+<div><b>path</b><span><code>M0,0 L10,5 L0,10 z</code>: o triângulo cheio, com <code>fill</code> em tinta ou em laranja. Sem traço, para a ponta ter a mesma cor da linha.</span></div>
+<div><b>marker-end</b><span>Na <code>line</code> ou na <code>polyline</code>. O fim da linha fica 2 px antes da borda da caixa, para a ponta não cruzar o traço.</span></div>
+</div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-marcador">Copiar</button></div><pre><code id="c-marcador">&lt;defs&gt;
+  &lt;marker id="seta-fluxo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"&gt;
+    &lt;path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/&gt;
+  &lt;/marker&gt;
+  &lt;marker id="seta-laranja" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"&gt;
+    &lt;path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/&gt;
+  &lt;/marker&gt;
+&lt;/defs&gt;
+
+&lt;line x1="196" y1="150" x2="221" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#seta-fluxo)"/&gt;
+&lt;polyline points="544,112 544,60 321,60 321,110" fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#seta-laranja)"/&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">2 marcadores</span><p>Um em tinta e um em laranja, por diagrama. O <code>id</code> tem de ser único na página.</p><p>A ponta cresce com a espessura do traço. Conector de diagrama tem 1,5 px; eixo de gráfico tem 1 e não leva seta.</p></aside></div></section>
+<footer class="rodape"><div class="container">8020-DS, candidato 4.0. Patterns, rodada 7, 2026-09-07.</div></footer>
+<script src="../assets/pagina.js"></script>
+</body>
+</html>

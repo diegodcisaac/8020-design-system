@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parte 3, Mensagem, canais e cronograma. Plano de presença de marca no Cerrado</title>
+<meta name="description" content="Parte 3 do exemplo fictício de book do 8020-DS 4.0: a mensagem-mãe, os veículos das seis cidades, o fluxo da pauta semanal, as fases, o orçamento e as metas.">
+<link rel="stylesheet" href="../../../../tokens/8020.css">
+<link rel="stylesheet" href="../../../../assets/regua.css">
+<link rel="stylesheet" href="../../../../assets/book.css">
+<style>
+  /* Ajustes locais só desta parte, consumindo papéis semânticos. */
+
+  /* O diagrama de fluxo da pauta: caixas em ângulo reto, seta por marcador. A camada tem a gramática
+     de gráfico, não os tamanhos de texto de um diagrama de caixas; ficam aqui. */
+  .fluxo text.t { font-size: 16px; font-weight: var(--w-rotulo); fill: var(--ink); }
+  .fluxo text.s { font-size: 14px; fill: var(--muted); }
+  .fluxo text.dia { font-size: 14px; fill: var(--meta); }
+  .fluxo text.claro { fill: var(--paper); }
+  .fluxo text.claro-s { fill: var(--paper); opacity: .75; }
+  .fluxo .caixa { fill: none; stroke: var(--ink); stroke-width: 1; }
+  .fluxo .caixa.cheia { fill: var(--ink); }
+  .fluxo .liga { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+  .fluxo .liga.volta { stroke: var(--accent); }
+
+  /* Texto de SVG entre 600 e 699 px de largura: a camada só sobe a fonte do gráfico até 599 px,
+     e nessa faixa o viewBox de 640 encolhe o texto abaixo de 11,5 px. */
+</style>
+</head>
+<body class="book" data-book="book-casa-do-campo" data-hub="../index.html">
+
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+<div class="progresso-leitura" id="progresso" aria-hidden="true"></div>
+
+<header class="topo">
+  <div class="container">
+    <a class="marca" href="../index.html"><img src="../../../../assets/logos/logo-8020-branco.svg" alt="80 20"><span>Casa do Campo</span></a>
+    <div class="trilha" aria-label="Onde você está"><span>Plano de presença</span><span class="sep">/</span><span>Parte 3, Mensagem, canais e cronograma</span><span class="sep">/</span><span class="atual" id="trilha-atual">A mensagem que cabe na porta do armazém</span></div>
+    <div class="direita"><button class="quieta" type="button" id="abrir-atalhos">Atalhos <kbd>?</kbd></button></div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ================================================================ abertura da parte -->
+<section class="abre-parte" id="parte-3">
+  <div class="container folha">
+    <div class="miolo">
+      <div class="numeral">3</div>
+      <h1>Mensagem, canais e cronograma</h1>
+      <p class="frase">Uma frase para seis cidades, <strong>dezoito veículos</strong> e quatro fases até abril.</p>
+    </div>
+    <aside class="margem fixa">
+      <span class="n">13 min</span>
+      <p>A mensagem que cabe na porta do armazém, 6 min. Cronograma de entrada, 7 min.</p>
+      <p>Base: plano de canais, versão 2, e o orçamento de referência, julho de 2026.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ================================================================ capítulo 1 -->
+<article class="capitulo" id="cap-1" data-titulo="A mensagem que cabe na porta do armazém">
+  <div class="container">
+    <div class="cabeca"><div><p class="cap-meta"><b>Capítulo 1</b> de 2 · 6 min</p><h2>A mensagem que cabe na porta do armazém</h2></div><aside class="margem"><p><b>O que o capítulo prova:</b> uma frase vale para as seis cidades quando cada loja adapta o exemplo, e chega à cidade por um fluxo que a redação pequena consegue publicar.</p></aside></div>
+    <div class="folha com-notas">
+      <div class="miolo pilha-l">
+        <div class="prosa">
+          <p>A mensagem do plano cabe em uma frase: a lembrança acompanha a porta, não a mídia.<a class="chamada" href="#n1" id="r1">1</a> Ela nasceu do diagnóstico e vale para as seis cidades. O que muda de uma loja para outra é o exemplo: em Rio Verde, os quarenta anos da loja do centro; em Jataí, a loja nova e os empregos; em Caiapônia, a volta da marca à cidade.</p>
+          <p>Cada gerente recebe a frase e um caderno de exemplos da própria cidade.<a class="chamada" href="#n2" id="r2">2</a> Ele adapta o exemplo e não a frase. É a regra que impede seis mensagens diferentes, como acontece hoje, e ao mesmo tempo evita a frase de rede que não fala com ninguém.</p>
+          <p class="statement-inline">Uma frase para seis cidades; <strong>o exemplo é de cada loja.</strong></p>
+          <p>A frase chega à cidade por três caminhos: o balcão, a rádio da manhã e a imprensa local. O balcão já existe. A rádio e a imprensa pedem um fluxo, porque a redação de cidade pequena publica o que recebe pronto e no dia certo.<a class="chamada" href="#n3" id="r3">3</a> O fluxo começa na loja, passa pela agência e volta para a loja com o link, em uma semana.</p>
+        </div>
+        <div class="figura">
+          <div class="cabeca"><h3>Da loja à notícia, e de volta</h3><p class="sub">O fluxo da pauta semanal, de segunda a sexta</p></div>
+          <div class="grafico fluxo">
+            <svg viewBox="0 0 640 460" role="img" aria-label="Fluxo da pauta semanal: a loja conta o fato da semana na segunda, a agência escreve a nota na terça, a redação recebe na quarta, publica até sexta, e a loja responde com o link no grupo na sexta. Uma em quatro notas volta da redação para ajuste."><title>Da loja à notícia</title>
+              <defs><marker id="seta-fluxo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker><marker id="seta-volta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker></defs>
+              <text class="dia" x="0" y="45">segunda</text><rect class="caixa" x="100" y="10" width="340" height="60"/><text class="t" x="116" y="36">A loja conta</text><text class="s" x="116" y="58">o fato da semana: safra, cliente, evento</text>
+              <line class="liga" x1="270" y1="70" x2="270" y2="98" marker-end="url(#seta-fluxo)"/>
+              <text class="dia" x="0" y="135">terça</text><rect class="caixa" x="100" y="100" width="340" height="60"/><text class="t" x="116" y="126">A agência escreve</text><text class="s" x="116" y="148">nota de dez linhas com dado, nome e foto</text>
+              <line class="liga" x1="270" y1="160" x2="270" y2="188" marker-end="url(#seta-fluxo)"/>
+              <text class="dia" x="0" y="225">quarta</text><rect class="caixa" x="100" y="190" width="340" height="60"/><text class="t" x="116" y="216">A redação recebe</text><text class="s" x="116" y="238">um veículo por cidade, combinado na visita</text>
+              <line class="liga" x1="270" y1="250" x2="270" y2="278" marker-end="url(#seta-fluxo)"/>
+              <text class="dia" x="0" y="315">até sexta</text><rect class="caixa cheia" x="100" y="280" width="340" height="60"/><text class="t claro" x="116" y="306">Publica</text><text class="s claro-s" x="116" y="328">notícia com link</text>
+              <line class="liga" x1="270" y1="340" x2="270" y2="368" marker-end="url(#seta-fluxo)"/>
+              <text class="dia" x="0" y="405">sexta</text><rect class="caixa" x="100" y="370" width="340" height="60"/><text class="t" x="116" y="396">A loja responde</text><text class="s" x="116" y="418">entrevista se pedirem; o link volta ao grupo</text>
+              <polyline class="liga volta" points="440,220 500,220 500,130 444,130" marker-end="url(#seta-volta)"/>
+              <text class="s" x="512" y="170" style="fill:var(--ink)">pede ajuste,</text><text class="s" x="512" y="188" style="fill:var(--ink)">uma em quatro</text>
+            </svg>
+          </div>
+          <p class="leitura"><strong>Uma pauta por semana, um veículo por cidade.</strong> A nota sai da loja na segunda e o link volta para o grupo na sexta; uma em quatro volta da redação para ajuste, no mesmo dia.</p>
+          <details class="razao"><summary>Os cinco passos em tabela</summary><table class="tabela"><thead><tr><th>Dia</th><th>Quem</th><th>O quê</th></tr></thead><tbody><tr><td>Segunda</td><td>O gerente da loja</td><td>Manda o fato da semana pelo grupo: safra, cliente, evento</td></tr><tr><td>Terça</td><td>A agência</td><td>Escreve a nota de dez linhas com dado, nome e foto</td></tr><tr><td>Quarta</td><td>A redação</td><td>Recebe a nota; uma em quatro volta para ajuste no mesmo dia</td></tr><tr class="o20"><td>Até sexta</td><td>O veículo</td><td>Publica a notícia com link</td></tr><tr><td>Sexta</td><td>O gerente da loja</td><td>Dá entrevista se pedirem; o link volta para o grupo</td></tr></tbody></table></details>
+          <p class="fonte">Fluxo proposto na versão 2 do plano; será combinado com os seis gerentes na primeira fase. Uma semana por pauta.</p>
+        </div>
+        <div class="prosa">
+          <p>São dezoito veículos nas seis cidades, entre portais, jornais, rádios e televisão regional. Seis deles decidem o que a região lê e ouve, e são esses seis que recebem a visita do gerente com a agência nas cinco primeiras semanas.<a class="chamada" href="#n4" id="r4">4</a> Os outros doze recebem a nota semanal e o convite para a feira.</p>
+        </div>
+        <div class="figura">
+          <div class="cabeca"><h3>Veículos das seis cidades</h3><p class="sub">Dezoito veículos; em destaque, os seis que decidem e recebem visita</p></div>
+          <div class="rolagem"><table class="tabela"><thead><tr><th>Cidade</th><th>Veículo</th><th>Tipo</th><th>No plano</th></tr></thead><tbody>
+            <tr class="o20"><td>Rio Verde</td><td>Portal Sudoeste</td><td>Portal</td><td>Visita na semana 1, com a rádio Cidade: quarenta anos de porta aberta</td></tr>
+            <tr><td>Rio Verde</td><td>Rádio Cidade</td><td>Rádio</td><td>Recebe a visita da semana 1 junto com o portal</td></tr>
+            <tr><td>Rio Verde</td><td>Telejornal da noite</td><td>Televisão</td><td>Nota semanal e convite para a feira</td></tr>
+            <tr><td>Rio Verde e região</td><td>TV Sudoeste, afiliada</td><td>Televisão</td><td>Ver Chapadão: a visita é sobre a feira de novembro</td></tr>
+            <tr class="o20"><td>Jataí</td><td>Jornal do Sudoeste</td><td>Jornal</td><td>Visita na semana 2: a loja nova e os empregos</td></tr>
+            <tr><td>Jataí</td><td>Jataí AM</td><td>Rádio</td><td>Nota semanal e convite para a feira</td></tr>
+            <tr><td>Jataí</td><td>TV Jataí, retransmissora</td><td>Televisão</td><td>Nota semanal</td></tr>
+            <tr class="o20"><td>Mineiros</td><td>Mineiros FM</td><td>Rádio</td><td>Visita na semana 2: calendário de plantio</td></tr>
+            <tr><td>Mineiros</td><td>Folha de Mineiros</td><td>Jornal</td><td>Nota semanal e convite para a feira</td></tr>
+            <tr class="o20"><td>Chapadão</td><td>TV Sudoeste, afiliada</td><td>Televisão</td><td>Visita na semana 3: a feira de novembro</td></tr>
+            <tr><td>Chapadão</td><td>Chapadão Notícias</td><td>Portal</td><td>Nota semanal e convite para a feira</td></tr>
+            <tr><td>Chapadão</td><td>Chapadão FM</td><td>Rádio</td><td>Nota semanal</td></tr>
+            <tr class="o20"><td>Caiapônia</td><td>Rádio Caiapó</td><td>Rádio</td><td>Visita na semana 4: por que a marca voltou à cidade</td></tr>
+            <tr><td>Caiapônia</td><td>Caiapônia em Dia</td><td>Portal</td><td>Nota semanal</td></tr>
+            <tr class="o20"><td>Montividiu</td><td>Portal Montividiu Hoje</td><td>Portal</td><td>Visita na semana 5: a safra e o crédito</td></tr>
+            <tr><td>Montividiu</td><td>Montividiu FM</td><td>Rádio</td><td>Nota semanal</td></tr>
+            <tr><td>Regional</td><td>Programa Terra Boa</td><td>Televisão</td><td>Convite para a abertura de safra</td></tr>
+            <tr><td>Regional</td><td>Jornal do Campo</td><td>Televisão</td><td>Convite para a abertura de safra</td></tr>
+            <tr><td>Regional</td><td>Minuto Rural</td><td>Televisão</td><td>Nota semanal</td></tr>
+          </tbody></table></div>
+          <p class="fonte">Mapeamento preliminar dos veículos, julho de 2026; a lista fecha na primeira fase do plano. A TV Sudoeste aparece duas vezes porque cobre Rio Verde e Chapadão; conta uma vez nos dezoito.</p>
+        </div>
+      </div>
+      <aside class="margem">
+        <div class="nota-m" id="n1" data-ref="r1"><b>1</b>Mensagem-mãe: a frase que resume o plano e da qual toda peça deriva. Vem do diagnóstico: a marca é primeira em quatro cidades, e nas duas em que é segunda a concorrente tem loja própria.</div>
+        <div class="nota-m" id="n2" data-ref="r2"><b>2</b>O caderno de exemplos é montado com o gerente na visita da primeira fase e revisto a cada safra.</div>
+        <div class="nota-m" id="n3" data-ref="r3"><b>3</b>Conversa com as seis redações em julho de 2026: nenhuma tem repórter dedicado ao comércio; todas publicam nota pronta com foto no mesmo dia.</div>
+        <div class="nota-m" id="n4" data-ref="r4"><b>4</b>Os seis foram escolhidos por audiência medida ou, onde não há medição, por serem o único veículo da cidade com redação própria.</div>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<!-- ================================================================ capítulo 2 -->
+<article class="capitulo" id="cap-2" data-titulo="Cronograma de entrada">
+  <div class="container">
+    <div class="cabeca"><div><p class="cap-meta"><b>Capítulo 2</b> de 2 · 7 min</p><h2>Cronograma de entrada</h2></div><aside class="margem"><p><b>O que o capítulo prova:</b> quatro fases, R$ 546 mil e três metas cabem entre setembro e abril, e cada fase começa quando a anterior funciona.</p></aside></div>
+    <div class="folha com-notas">
+      <div class="miolo pilha-l">
+        <div class="prosa">
+          <p>O plano entra em quatro fases, de setembro a abril. Cada fase começa quando a anterior funciona, não quando o calendário manda.<a class="chamada" href="#n5" id="r5">1</a> A primeira, antes da assinatura, é a que já pode começar: mapeamento dos veículos, cadastro unificado das doze lojas e o roteiro das visitas.</p>
+          <p>A medição corre por baixo de tudo. A linha de base é tirada em novembro, com o cadastro unificado, e a primeira leitura vem em março.<a class="chamada" href="#n6" id="r6">2</a> Sem a linha de base, nenhuma meta de junho de 2027 pode ser cobrada.</p>
+        </div>
+        <ol class="linha-tempo">
+          <li class="agora"><span class="quando">setembro e outubro</span><div><b>Pré-assinatura</b>Mapeamento dos veículos, cadastro unificado das doze lojas, roteiro das seis visitas.</div></li>
+          <li><span class="quando">outubro a dezembro</span><div><b>Mapeamento e visitas</b>As seis redações, os perfis de cidade, a linha de base da medição em novembro.</div></li>
+          <li><span class="quando">dezembro e janeiro</span><div><b>Lançamento</b>As primeiras pautas semanais e a mensagem única nas seis cidades.</div></li>
+          <li><span class="quando">janeiro a abril</span><div><b>Ações contínuas</b>Relacionamento mensal com os veículos, as três feiras regionais e a primeira medição em março.</div></li>
+        </ol>
+        <div class="prosa">
+          <p>O orçamento de setembro a abril soma R$ 546 mil, sem impostos.<a class="chamada" href="#n7" id="r7">3</a> A feira é a maior frente, com 27%; o digital fica com 15%, e não com os 62% de 2025. O que sai do digital paga a presença nas três feiras regionais, a rádio da manhã nas seis cidades e as visitas às redações.</p>
+        </div>
+        <div class="figura">
+          <div class="cabeca"><h3>Orçamento de setembro a abril</h3><p class="sub">Por frente, em R$ mil, com a parte de cada uma no total</p></div>
+          <div class="rolagem"><table class="tabela"><thead><tr><th>Frente</th><th class="num">set a dez</th><th class="num">jan a abr</th><th class="num">Total</th><th></th><th class="num">Parte</th></tr></thead><tbody>
+            <tr class="o20" data-leitura="<span class='quadrado'></span><strong>Feiras regionais: R$ 150 mil,</strong> 27% da verba. Três feiras, o dia em que a cidade inteira passa pela porta."><td>Feiras regionais</td><td class="num">90</td><td class="num">60</td><td class="num">150</td><td><svg class="ib" viewBox="0 0 100 8" width="120" height="8" aria-hidden="true"><rect class="o20" width="100" height="8"/></svg></td><td class="num">27%</td></tr>
+            <tr data-leitura="<strong>Imprensa e visitas às redações: R$ 112 mil,</strong> 21% da verba. As seis visitas e a pauta semanal."><td>Imprensa e visitas às redações</td><td class="num">48</td><td class="num">64</td><td class="num">112</td><td><svg class="ib" viewBox="0 0 100 8" width="120" height="8" aria-hidden="true"><rect class="d1" width="74.7" height="8"/></svg></td><td class="num">21%</td></tr>
+            <tr data-leitura="<strong>Rádio da manhã nas seis cidades: R$ 84 mil,</strong> 15% da verba."><td>Rádio da manhã, seis cidades</td><td class="num">36</td><td class="num">48</td><td class="num">84</td><td><svg class="ib" viewBox="0 0 100 8" width="120" height="8" aria-hidden="true"><rect class="d1" width="56" height="8"/></svg></td><td class="num">15%</td></tr>
+            <tr data-leitura="<strong>Digital: R$ 80 mil,</strong> 15% da verba. Em 2025 levou 62%."><td>Digital</td><td class="num">40</td><td class="num">40</td><td class="num">80</td><td><svg class="ib" viewBox="0 0 100 8" width="120" height="8" aria-hidden="true"><rect class="d1" width="53.3" height="8"/></svg></td><td class="num">15%</td></tr>
+            <tr data-leitura="<strong>Medição, duas pesquisas: R$ 60 mil,</strong> 11% da verba. A linha de base em novembro e a leitura de março."><td>Medição, duas pesquisas</td><td class="num">30</td><td class="num">30</td><td class="num">60</td><td><svg class="ib" viewBox="0 0 100 8" width="120" height="8" aria-hidden="true"><rect class="d1" width="40" height="8"/></svg></td><td class="num">11%</td></tr>
+            <tr data-leitura="<strong>Perfis de cidade: R$ 60 mil,</strong> 11% da verba. Convites e produção, sem contrato."><td>Perfis de cidade</td><td class="num">24</td><td class="num">36</td><td class="num">60</td><td><svg class="ib" viewBox="0 0 100 8" width="120" height="8" aria-hidden="true"><rect class="d1" width="40" height="8"/></svg></td><td class="num">11%</td></tr>
+            <tr class="total"><td>Total, em R$ mil</td><td class="num">268</td><td class="num">278</td><td class="num">546</td><td></td><td class="num">100%</td></tr>
+          </tbody></table></div>
+          <p class="leitura"><span class="quadrado"></span><strong>R$ 546 mil de setembro a abril.</strong> A feira é a maior frente, com 27%; o digital fica com 15%, não com 62%.</p>
+          <p class="fonte">Valores de referência da versão 2 do plano, sem impostos. A barra em cada linha compara a frente com a maior delas.</p>
+        </div>
+        <div class="prosa">
+          <p>São três metas para junho de 2027, medidas duas vezes por ano pela mesma pesquisa. Os três números de hoje vêm do diagnóstico de junho de 2026; as metas foram acordadas com a diretoria.</p>
+        </div>
+        <div class="pilha">
+          <p class="numero-em-linha"><strong>53%</strong> de lembrança média nas seis cidades hoje; meta de <strong>60%</strong>. <svg viewBox="0 0 96 26" aria-hidden="true"><line x1="0" y1="16" x2="96" y2="16" stroke="var(--rule-strong)"/><rect x="0" y="14" width="51" height="4" fill="var(--dado-1)"/><rect x="56" y="8" width="4" height="16" fill="var(--accent)"/></svg></p>
+          <p class="numero-em-linha"><strong>31%</strong> compraram nos últimos doze meses; meta de <strong>38%</strong>. <svg viewBox="0 0 96 26" aria-hidden="true"><line x1="0" y1="16" x2="96" y2="16" stroke="var(--rule-strong)"/><rect x="0" y="14" width="30" height="4" fill="var(--dado-1)"/><rect x="34.5" y="8" width="4" height="16" fill="var(--accent)"/></svg></p>
+          <p class="numero-em-linha">Saldo de recomendação de <strong>+19</strong>; meta de <strong>+30</strong>. <svg viewBox="0 0 96 26" aria-hidden="true"><line x1="0" y1="16" x2="96" y2="16" stroke="var(--rule-strong)"/><rect x="0" y="14" width="30" height="4" fill="var(--dado-1)"/><rect x="46" y="8" width="4" height="16" fill="var(--accent)"/></svg></p>
+          <p class="fonte">Lembrança espontânea (primeira marca citada), compra nos últimos doze meses e promotores menos detratores, médias das seis cidades. O traço em laranja marca a meta; a escala vai de zero a 100% nas duas primeiras e de zero a +60 na terceira. Linha de base em novembro de 2026; primeira medição em março de 2027.</p>
+        </div>
+        <div class="prosa">
+          <p>Cinco entregas começam nas duas primeiras semanas depois da assinatura. Nenhuma depende de verba de mídia; as cinco dependem de agenda, da diretoria e dos gerentes.</p>
+        </div>
+        <div class="figura">
+          <div class="cabeca"><h3>O que começa assim que o plano for aprovado</h3><p class="sub">Cinco entregas nas duas primeiras semanas</p></div>
+          <div class="rolagem"><table class="tabela"><thead><tr><th>O quê</th><th>Quem</th><th class="num">Quando</th></tr></thead><tbody><tr><td>Cadastro unificado das doze lojas</td><td>TI da rede, com a agência</td><td class="num">semana 1</td></tr><tr><td>Roteiro das seis visitas às redações</td><td>Agência</td><td class="num">semana 1</td></tr><tr><td>Grupo dos gerentes e o fluxo da pauta semanal</td><td>Diretoria e agência</td><td class="num">semana 1</td></tr><tr><td>Pauta para os perfis de cidade</td><td>Agência</td><td class="num">semana 2</td></tr><tr><td>Linha de base da medição</td><td>Instituto de pesquisa</td><td class="num">semana 2</td></tr></tbody></table></div>
+          <p class="fonte">As datas contam a partir da assinatura.</p>
+        </div>
+      </div>
+      <aside class="margem">
+        <div class="nota-m" id="n5" data-ref="r5"><b>1</b>Datas de referência da versão 2 do plano. A passagem de uma fase à outra depende de três sinais: as seis redações visitadas, o cadastro no ar e a linha de base tirada.</div>
+        <div class="nota-m" id="n6" data-ref="r6"><b>2</b>Linha de base: a primeira medição com o método que vai se repetir. A pesquisa de junho de 2026 serve de diagnóstico, não de linha de base, porque o cadastro ainda não era único.</div>
+        <div class="nota-m" id="n7" data-ref="r7"><b>3</b>Valores em R$ mil, sem impostos. O total de 2025 não entra na comparação porque a rede não tinha verba comum; os 62% são a soma do que as doze lojas gastaram, cada uma por conta própria.</div>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<!-- ================================================================ momento: a mensagem-mãe da parte -->
+<section class="momento tema-laranja">
+  <div class="container folha">
+    <div class="miolo"><p class="statement">Cada real que sai do digital para o balcão paga a lembrança <strong>onde ela nasce.</strong></p></div>
+    <aside class="margem fixa"><span class="n">Mensagem-mãe</span><p>A frase que resume o cronograma e o orçamento: o dinheiro segue a lembrança, e a lembrança nasce na porta.</p></aside>
+  </div>
+</section>
+
+<!-- ================================================================ recap e navegação -->
+<section class="capitulo" id="recap" data-titulo="O que a parte 3 mostrou">
+  <div class="container folha">
+    <div class="miolo">
+      <h2>O que a parte 3 mostrou</h2>
+      <ol class="recap" style="margin-top:var(--s-5)">
+        <li><strong>A mensagem é uma só, adaptada por loja.</strong> "A lembrança acompanha a porta, não a mídia" vale para as seis cidades; cada gerente ajusta o exemplo, não a frase.</li>
+        <li><strong>Dezoito veículos, seis que decidem.</strong> Os seis recebem a visita do gerente com a agência nas cinco primeiras semanas; os doze recebem a nota semanal, que sai da loja na segunda e volta com o link na sexta.</li>
+        <li><strong>R$ 546 mil em quatro fases, com o digital em 15%.</strong> A feira é a maior frente; a linha de base é tirada em novembro e as três metas de junho de 2027 são medidas pela mesma pesquisa.</li>
+      </ol>
+      <p class="fonte" style="margin-top:var(--s-4)">Método: plano de canais, versão 2, e o orçamento de referência acordado com a diretoria, julho de 2026.</p>
+      <nav class="navega" aria-label="Partes"><a href="parte-2.html"><span class="rot">Anterior: parte 2, 19 min</span><span class="tit">Diagnóstico: onde a marca já é lembrada</span></a><a class="prox" href="../index.html"><span class="rot">Fim do plano</span><span class="tit">Voltar ao início</span></a></nav>
+    </div>
+    <aside class="margem fixa"><span class="n">13 min</span><p>O que fica combinado: a frase, os canais e as datas de referência. A primeira medição é em março de 2027.</p></aside>
+  </div>
+</section>
+
+</main>
+
+<div class="atalhos" id="atalhos" hidden role="dialog" aria-modal="true" aria-label="Atalhos de teclado">
+  <div class="caixa">
+    <h2>Atalhos</h2>
+    <dl><dt><kbd>j</kbd></dt><dd>Próximo capítulo</dd><dt><kbd>k</kbd></dt><dd>Capítulo anterior</dd><dt><kbd>h</kbd></dt><dd>Voltar ao início</dd><dt><kbd>?</kbd></dt><dd>Abrir e fechar esta lista</dd><dt><kbd>Esc</kbd></dt><dd>Fechar</dd></dl>
+    <div class="acoes"><button class="filete" type="button" id="fechar-atalhos">Fechar</button></div>
+  </div>
+</div>
+
+<footer class="rodape"><div class="container">Plano de presença de marca no Cerrado, para a Casa do Campo. Julho de 2026. Exemplo fictício do book padrão do 8020-DS 4.0; imagens ilustrativas geradas.</div></footer>
+
+<script src="../../../../assets/book.js"></script>
+<script src="../../../../assets/dado.js"></script>
+</body>
+</html>

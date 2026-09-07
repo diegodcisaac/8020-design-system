@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O que o sistema recusa, patterns do 8020-DS 4.0</title>
+<meta name="description" content="Os 17 antipadrões do 8020-DS 4.0, errado ao lado de certo, cada um com a regra que o proíbe e a checagem do verificador que o cobra.">
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="_catalogo.css">
+<style>
+  /* só desta página: as demonstrações do que o sistema recusa */
+  .par { border-top: 1px solid var(--ink); padding-top: var(--s-5); }
+  .par .porque { font-size: var(--t-body); color: var(--ink-body); max-width: var(--measure); }
+  .par .cobra { font-size: var(--t-small); color: var(--meta); }
+  .par .cobra code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--ink); }
+  .antes-agora .nota { font-size: var(--t-small); color: var(--muted); }
+  .nota-inline { font-size: var(--t-small); color: var(--muted); }
+  .d-codigo { margin: 0; background: var(--surface-2); padding: var(--s-4); overflow-x: auto; }
+  .d-codigo code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; line-height: 1.7; white-space: pre; }
+
+  /* antipadrão: as reproduções fiéis do que a 4.0 recusa. Nada aqui é do sistema. */
+  .d-cartao-velho { border: 1px solid rgba(26,20,15,.18); border-radius: 12px; box-shadow: 0 2px 10px rgba(26,20,15,.14); padding: var(--s-5); display: grid; gap: 6px; background: var(--surface); }
+  .d-cartao-novo { border-top: 1px solid var(--ink); padding-top: var(--s-4); display: grid; gap: 6px; }
+  .d-cartao-velho b, .d-cartao-novo b { color: var(--ink); font-weight: var(--w-rotulo); }
+  .d-cartao-velho span, .d-cartao-novo span { font-size: var(--t-small); color: var(--muted); }
+  .d-grad-velho { background: linear-gradient(135deg, #fa4616, #15110d); color: #fff; padding: var(--s-6) var(--s-5); }
+  .d-grad-novo { background: var(--8020-laranja); color: #fff; padding: var(--s-6) var(--s-5); }
+  .d-grad-velho b, .d-grad-novo b { font-size: var(--t-h3); font-weight: var(--w-titulo); }
+  .d-olho-velho { font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: var(--meta); font-weight: var(--w-rotulo); }
+  .d-rotulo { font-size: 13px; font-weight: var(--w-rotulo); color: var(--muted); }
+  .d-h2 { font-size: var(--t-h2); font-weight: var(--w-titulo); color: var(--ink); line-height: var(--lh-title); }
+  .d-estado-velho, .d-estado-novo { display: flex; align-items: center; gap: 10px; font-size: var(--t-body); color: var(--ink); }
+  .d-estado-velho .p { width: 10px; height: 10px; border-radius: 50%; background: #2f855a; }
+  .d-barra-velha { background: var(--surface-2); height: 20px; }
+  .d-barra-velha span { display: block; height: 100%; background: var(--ink); }
+  .d-tooltip { display: inline-block; background: var(--floor); color: var(--floor-ink); padding: 6px 10px; font-size: var(--t-small); }
+  .d-tooltip b { font-variant-numeric: tabular-nums; }
+  .d-faixa { background: var(--surface-2); padding: var(--s-5); display: grid; gap: 8px; }
+  .d-cap { font-size: var(--t-small); color: var(--muted); }
+  .d-cap b { color: var(--ink); font-weight: var(--w-rotulo); }
+  .d-h2-faixa { font-size: 24px; font-weight: var(--w-titulo); color: var(--ink); line-height: var(--lh-title); }
+  .d-frase { font-size: var(--t-body); color: var(--ink-body); }
+  .d-num-velho { display: grid; gap: 2px; }
+  .d-num-velho b { font-size: 56px; font-weight: var(--w-fino); color: var(--ink); line-height: 1; }
+  .d-num-velho span { font-size: var(--t-small); color: rgba(26,20,15,.42); }
+  .d-momentos { display: flex; gap: 4px; }
+  .d-momentos span { flex: 1; height: 52px; display: grid; place-items: center; font-size: var(--t-small); }
+  .d-momentos .m-laranja { background: var(--8020-laranja); color: #fff; }
+  .d-momentos .m-escuro { background: var(--8020-noite); color: #fff; }
+  .d-momentos .m-papel { background: var(--surface-2); color: var(--muted); }
+  .d-prosa { font-size: var(--t-leitura); line-height: var(--lh-leitura); color: var(--ink-body); max-width: 46ch; }
+  .d-img-velha, .d-img-nova { height: 132px; display: grid; align-items: end; padding: var(--s-4); background: var(--8020-tinta-2); position: relative; overflow: hidden; }
+  .d-img-velha { border-radius: 12px; border: 1px solid var(--rule-strong); }
+  .d-img-velha span { background: rgba(255,255,255,.86); color: var(--ink); padding: 6px 10px; font-size: var(--t-small); justify-self: start; }
+  .d-img-nova::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 62%; background: linear-gradient(to top, rgba(18,14,11,.92), rgba(18,14,11,0)); }
+  .d-img-nova span { position: relative; color: #fff; font-size: var(--t-small); }
+  /* fim do antipadrão */
+</style>
+</head>
+<body>
+
+<div class="topo"><div class="container">
+  <a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a>
+  <nav aria-label="Seções"><a class="peso" data-t="Superfície" href="#superficie">Superfície</a><a class="peso" data-t="Dado" href="#dado">Dado</a><a class="peso" data-t="Narrativa e texto" href="#narrativa">Narrativa e texto</a><a class="peso" data-t="Imagem" href="#imagem">Imagem</a></nav>
+  <span class="meta">proibido.html</span>
+</div></div>
+
+<main>
+
+<section class="abertura">
+  <div class="container folha">
+    <div class="miolo">
+      <h1>O que o sistema <strong>recusa</strong>, e o que ele põe no lugar.</h1>
+      <p class="lead">Cada par mostra a forma que a 4.0 não aceita ao lado da que ela usa, com a regra que a proíbe e a checagem do verificador que a cobra. A coluna da esquerda é reprodução fiel: o cartão tem sombra de verdade, o gradiente é gradiente, a barra é uma caixa esticada. É a única página do catálogo onde isso aparece.</p>
+    </div>
+    <aside class="margem fixa">
+      <span class="n">17</span>
+      <p>Pares. Todos saem de erro que já apareceu em peça, não de hipótese.</p>
+      <p><span class="quadrado"></span>O código ao pé de cada par é o da checagem em <code>verificar.py</code>. Rodar o verificador na peça encontra o mesmo problema sem ninguém precisar lembrar da página.</p>
+    </aside>
+  </div>
+</section>
+
+
+<section class="bloco" id="superficie">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Superfície</h2><p class="lead">O que a versão 3 usava para separar, destacar e enquadrar, e o que a 4.0 usa no lugar.</p></div>
+      <div class="pilha par">
+  <div class="pilha"><h3>Cartão com borda, raio e sombra</h3><p class="porque">A moldura que separa por si só é a marca de interface gerada. Na 4.0 o separador é o filete de 1 px, e cartão só existe para coleção de itens iguais.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-cartao-velho"><b>Lembrança espontânea</b><span>Primeira marca citada em seis cidades do sudoeste goiano.</span></div><p class="nota">Borda, raio de 12 px e sombra: três recursos para dizer o que o espaço já dizia.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="d-cartao-novo"><b>Lembrança espontânea</b><span>Primeira marca citada em seis cidades do sudoeste goiano.</span></div><p class="nota">Um filete no alto, raio zero, sem sombra. A profundidade vem da tinta.</p></div>
+  </div>
+  <p class="cobra">regra 8b e 31 · <code>raio</code> <code>sombra</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Gradiente como superfície</h3><p class="porque">A versão 3 tinha o gradiente de marca como superfície de destaque. A 4.0 tirou: a superfície é chapada, e as únicas rampas contínuas que restam são funcionais (o véu sobre a foto e a hachura de impressão).</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-grad-velho"><b>Destaque</b></div><p class="nota">Rampa de laranja a chumbo sob o texto: a leitura muda de contraste no meio da frase.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="d-grad-novo"><b>Destaque</b></div><p class="nota">Chapado. O momento laranja inteiro, ou nada.</p></div>
+  </div>
+  <p class="cobra">regra 4 · <code>gradiente</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Olho de seção em caixa alta</h3><p class="porque">O olho em caixa alta com espacejamento largo era o andaime mais reconhecível da geração automática, e não carregava informação: repetia o que o título já dizia.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-olho-velho">02 · Diagnóstico</p><p class="d-h2">Onde a marca já é lembrada</p><p class="nota">Numeral, ponto no meio e caixa alta, acima de todo título.</p></div>
+    <div><span class="rotulo">Dentro</span><p class="d-rotulo">Capítulo 2</p><p class="d-h2">Onde a marca já é lembrada</p><p class="nota">Rótulo em caixa baixa, 13 px, peso 600, uma vez por capítulo.</p></div>
+  </div>
+  <p class="cobra">regra 31 · <code>raio</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Estado dito só pela cor</h3><p class="porque">Quem não distingue as cores fica sem a informação, e a cor sozinha some na impressão. Estado vem com forma, com peso ou com a palavra.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-estado-velho"><span class="p"></span> Enviando</div><p class="nota">Um ponto colorido, e a palavra que não muda.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="d-estado-novo"><span class="quadrado"></span> Enviando desde 14:32</div><p class="nota">O quadrado de 8 px mais a palavra que diz onde a ação está.</p></div>
+  </div>
+  <p class="cobra">regra 31 · <code>raio</code></p>
+</div>
+    </div>
+    <aside class="margem fixa"><span class="n">4</span><p>pares nesta seção.</p></aside>
+  </div>
+</section>
+
+<section class="bloco" id="dado">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Dado</h2><p class="lead">As seis recusas do dado. Cada uma delas o verificador cobra sozinho.</p></div>
+      <div class="pilha par">
+  <div class="pilha"><h3>Barra feita com <code>div</code> e largura em porcentagem</h3><p class="porque">Não é gráfico: é uma caixa esticada. Não imprime certo, não tem eixo, não aceita rótulo direto e nada nela é medida.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-barra-velha"><span style="width:71%"></span></div><p class="nota">Uma <code>div</code> com <code>width: 71%</code>. O 71 não existe em lugar nenhum do desenho.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="grafico compacto"><svg viewBox="0 0 320 40" role="img" aria-label="Lembrança espontânea em Rio Verde: 71 por cento."><title>Lembrança em Rio Verde</title><line class="eixo" x1="0" y1="4" x2="0" y2="36"/><rect class="d1" x="0" y="10" width="213" height="20"/><text class="valor" x="221" y="24">71%</text></svg></div><p class="nota">SVG real, com eixo, valor escrito na marca, papel e rótulo.</p></div>
+  </div>
+  <p class="cobra">regra 8 e 10 · <code>barra-em-div</code> <code>dado-sem-papel</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Cor como variável de categoria</h3><p class="porque">Duas cores para dizer duas categorias gasta o único acento da página e some para quem não as distingue. A cor diz uma coisa só: o que é o 20.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="grafico compacto"><svg viewBox="0 0 320 92" role="img" aria-label="Exemplo fora do sistema: duas séries em cores diferentes."><title>Duas cores para duas séries</title><rect x="0" y="8" width="200" height="18" fill="#2b6cb0"/><rect x="0" y="34" width="150" height="18" fill="#2f855a"/><rect x="0" y="60" width="110" height="18" fill="#b7791f"/></svg></div><p class="nota">Três cores fora da paleta, e nenhuma delas informa.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="grafico compacto"><svg viewBox="0 0 320 92" role="img" aria-label="Clientes novos por canal: indicação 200, loja 150, rádio 110. Indicação é o vinte." data-x="1"><title>Clientes novos por canal</title><rect class="o20" x="0" y="8" width="200" height="18"/><rect class="d3" x="0" y="34" width="150" height="18"/><rect class="d4" x="0" y="60" width="110" height="18"/></svg></div><p class="nota">Uma tonalidade em degraus, e o laranja no único elemento que a leitura nomeia.</p></div>
+  </div>
+  <p class="cobra">regra 6 · <code>cor-fora-da-paleta</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Dica flutuante no lugar da leitura</h3><p class="porque">A página tem de informar parada. Quem imprime, quem lê no celular e quem passa os olhos nunca chega ao ponteiro, e o gráfico fica mudo.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-tooltip">Rio Verde <b>71%</b></p><p class="nota-inline">Aparece só sob o ponteiro.</p><p class="nota">O número existe, mas só para quem tem mouse e paciência.</p></div>
+    <div><span class="rotulo">Dentro</span><p class="leitura">Rio Verde lembra a marca em <strong>71%</strong> das entrevistas, a maior das seis cidades.</p><details class="razao"><summary>Ver os números</summary><p class="fonte">1.240 entrevistas, junho de 2026.</p></details><p class="nota">A leitura em palavras visível, e o livro-razão logo abaixo.</p></div>
+  </div>
+  <p class="cobra">regra 42 · <code>dado-sem-leitura</code> <code>dado-sem-razao</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Pizza, rosca e eixo duplo</h3><p class="porque">O olho compara comprimento bem e ângulo mal. Parte do todo é barra de 100 por cento ou as unidades 80/20; duas medidas de escala diferente viram dois gráficos.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="grafico compacto"><svg viewBox="0 0 120 120" role="img" aria-label="Exemplo fora do sistema: gráfico de pizza."><title>Pizza, fora do sistema</title><circle cx="60" cy="60" r="52" fill="var(--dado-3)"/><path d="M60 60 L60 8 A52 52 0 0 1 104 86 Z" fill="var(--dado-1)"/></svg></div><p class="nota">Dois ângulos para comparar, e nenhum rótulo cabe dentro.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="grafico compacto"><svg viewBox="0 0 320 64" role="img" aria-label="Do total, 62 por cento vem de quatro canais e 38 por cento do resto."><title>Parte do todo em barra de 100 por cento</title><rect class="d1" x="0" y="8" width="198" height="22"/><rect class="d4" x="200" y="8" width="120" height="22"/><text class="tique" x="0" y="50">quatro canais, 62%</text><text class="tique" x="320" y="50" text-anchor="end">resto, 38%</text></svg></div><p class="nota">Uma barra, dois comprimentos, os dois rótulos ao lado.</p></div>
+  </div>
+  <p class="cobra">regra 6 · <code>cor-fora-da-paleta</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Cor de texto em SVG pelo atributo <code>fill</code></h3><p class="porque">Atributo de apresentação perde para regra de classe. Dentro de um momento, a camada troca a tinta e o texto some sobre a própria caixa.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><pre class="d-codigo"><code>&lt;text x="10" y="20" fill="#1a140f"&gt;71%&lt;/text&gt;</code></pre><p class="nota">Some no momento escuro e no laranja.</p></div>
+    <div><span class="rotulo">Dentro</span><pre class="d-codigo"><code>&lt;text class="valor" x="10" y="20"&gt;71%&lt;/text&gt;</code></pre><p class="nota">A classe da régua, que acompanha o momento.</p></div>
+  </div>
+  <p class="cobra">regra 8c · <code>svg-fill-em-texto</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Seta desenhada à mão</h3><p class="porque">O triângulo posto na ponta não acompanha a curva nem a espessura do traço, e desalinha quando o diagrama muda.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><pre class="d-codigo"><code>&lt;line x1="0" y1="8" x2="90" y2="8"/&gt;
+&lt;polygon points="90,3 100,8 90,13"/&gt;</code></pre><p class="nota">Dois desenhos que precisam concordar à mão.</p></div>
+    <div><span class="rotulo">Dentro</span><pre class="d-codigo"><code>&lt;defs&gt;&lt;marker id="seta" orient="auto-start-reverse"&gt;…&lt;/marker&gt;&lt;/defs&gt;
+&lt;line x1="0" y1="8" x2="100" y2="8" marker-end="url(#seta)"/&gt;</code></pre><p class="nota">Um marcador em <code>defs</code>, que segue o traço.</p></div>
+  </div>
+  <p class="cobra">regra 9 · <code>seta-sem-marcador</code></p>
+</div>
+    </div>
+    <aside class="margem fixa"><span class="n">6</span><p>pares nesta seção.</p></aside>
+  </div>
+</section>
+
+<section class="bloco" id="narrativa">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Narrativa e texto</h2><p class="lead">Onde mora o achado, o que o título faz, e as regras editoriais que a peça não negocia.</p></div>
+      <div class="pilha par">
+  <div class="pilha"><h3>O achado no título</h3><p class="porque">O título diz do que o slide trata; o achado é a tese, e tese vive na frase central, onde tem espaço para o núcleo em negrito e para a ressalva.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-faixa"><p class="d-cap"><b>Capítulo 2</b> Diagnóstico</p><p class="d-h2-faixa">A lembrança cresceu 24 pontos em Jataí desde 2023</p></div><p class="nota">O título carrega o número, e o slide fica sem frase.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="d-faixa"><p class="d-cap"><b>Capítulo 2</b> Diagnóstico</p><p class="d-h2-faixa">De onde vêm os clientes novos</p><p class="d-frase">Quatro canais trazem <strong>85% dos clientes novos,</strong> e nenhum leva a maior verba.</p></div><p class="nota">Título descritivo, achado na frase, com o núcleo marcado.</p></div>
+  </div>
+  <p class="cobra">regra 21 e 38 · <code>titulo-com-achado</code> <code>faixa-sem-frase</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Título que inventaria</h3><p class="porque">Contar os itens não informa nada: o leitor conta sozinho quando chegar. O título afirma o aprendizado.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-h2">Os seis segmentos</p><p class="d-h2">As quatro fases do plano</p><p class="nota">Duas contagens e nenhuma tese.</p></div>
+    <div><span class="rotulo">Dentro</span><p class="d-h2">Onde a marca já é lembrada</p><p class="d-h2">O que começa assim que o plano for aprovado</p><p class="nota">O assunto, direto, sem o número na frente.</p></div>
+  </div>
+  <p class="cobra">regra 21 · <code>titulo-com-contagem</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Número grande sozinho</h3><p class="porque">O número sem a frase que o nomeia vira ornamento. Ao lado dele, o que se mede e por que importa.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-num-velho"><b>71%</b><span>lembrança</span></div><p class="nota">Um rótulo de uma palavra em cinza claro, que não diz o que muda.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="numeros"><p><strong>71%</strong> de lembrança espontânea em Rio Verde, a maior das seis cidades e 19 pontos acima de 2020.</p></div><p class="nota">O número dentro da frase, com a comparação que o torna útil.</p></div>
+  </div>
+  <p class="cobra">regra 14 · <code>numero-sem-frase</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Dois momentos colados</h3><p class="porque">O momento vale porque é raro. Dois seguidos viram fundo, e o teto de um por capítulo existe para proteger o impacto do próximo.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-momentos"><span class="m-laranja">laranja</span><span class="m-escuro">escuro</span></div><p class="nota">Página inteira em laranja e, no slide seguinte, página inteira em escuro.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="d-momentos"><span class="m-laranja">laranja</span><span class="m-papel">papel</span><span class="m-papel">papel</span></div><p class="nota">Um momento, e o papel de volta antes do próximo.</p></div>
+  </div>
+  <p class="cobra">regra 6a · <code>momentos-seguidos</code> <code>momento-repetido-no-capitulo</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Travessão na prosa</h3><p class="porque">O travessão é o aparte de quem não decidiu a hierarquia da frase. Dois-pontos, vírgula, parênteses ou ponto resolvem todos os casos.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-prosa">A marca é lembrada — mas não é comprada — nas duas cidades com concorrente na porta.</p><p class="nota">Dois travessões numa frase de vinte palavras.</p></div>
+    <div><span class="rotulo">Dentro</span><p class="d-prosa">A marca é lembrada, e não comprada, nas duas cidades com concorrente na porta.</p><p class="nota">Vírgulas, e a frase ganha ritmo em vez de perder.</p></div>
+  </div>
+  <p class="cobra">regra 19 · <code>travessao</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Autorreferência ao documento</h3><p class="porque">O leitor sabe o que está lendo. O texto lidera pelo assunto, não pelo veículo, e não promete o que vem depois.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-prosa">Neste documento, vamos apresentar o diagnóstico. Como veremos adiante, os quatro canais respondem pela maior parte.</p><p class="nota">Duas frases sobre a peça, nenhuma sobre o assunto.</p></div>
+    <div><span class="rotulo">Dentro</span><p class="d-prosa">Quatro canais respondem por 85% dos clientes novos, e nenhum deles leva a maior verba hoje.</p><p class="nota">O assunto na primeira palavra.</p></div>
+  </div>
+  <p class="cobra">regra 22 · <code>autorreferencia</code></p>
+</div>
+    </div>
+    <aside class="margem fixa"><span class="n">6</span><p>pares nesta seção.</p></aside>
+  </div>
+</section>
+
+<section class="bloco" id="imagem">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Imagem</h2><p class="lead">A política em um par.</p></div>
+      <div class="pilha par">
+  <div class="pilha"><h3>Imagem com raio, borda e máscara</h3><p class="porque">A imagem é reta, sem raio e sem borda. Quando o texto entra por cima, o véu na base resolve a legibilidade; a caixa em volta do texto, não.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><div class="d-img-velha"><span>Texto sobre foto, dentro de caixa</span></div><p class="nota">Raio de 12 px, borda fina e o texto numa caixa translúcida.</p></div>
+    <div><span class="rotulo">Dentro</span><div class="d-img-nova"><span>Texto sobre foto, com véu na base</span></div><p class="nota">Retângulo reto e véu de chumbo, com o texto direto sobre a foto.</p></div>
+  </div>
+  <p class="cobra">regra 31 · <code>raio</code></p>
+</div>
+    </div>
+    <aside class="margem fixa"><span class="n">1</span><p>par nesta seção.</p></aside>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="rodape"><div class="container">8020-DS 4.0. Antipadrões, rodada 8. 80 20 Marketing, São Paulo, Campo Grande e Cuiabá.</div></footer>
+<script src="../assets/pagina.js"></script>
+</body>
+</html>

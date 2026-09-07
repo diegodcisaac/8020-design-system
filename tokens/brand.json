@@ -1,0 +1,1200 @@
+{
+  "system": "8020-DS",
+  "version": "4.0",
+  "candidato": true,
+  "gerado_por": "tokens/gerar-brand.py a partir de tokens/8020.css",
+  "data": "2026-09-07",
+  "primitivos": {
+    "cores": {
+      "8020-laranja": "#fa4616",
+      "8020-laranja-d": "#d63a10",
+      "8020-branco": "#ffffff",
+      "8020-preto": "#0a0a0a",
+      "8020-chumbo": "#15110d",
+      "8020-chumbo-2": "#1d1611",
+      "8020-papel": "#faf7f2",
+      "8020-areia": "#f3ede4",
+      "8020-tinta": "#1a140f",
+      "8020-tinta-2": "#2a201a",
+      "8020-noite": "#120e0b"
+    },
+    "fonte": {
+      "familia": "Montserrat",
+      "variavel": true,
+      "licenca": "OFL",
+      "servida_de": "assets/fonts/",
+      "pesos": {
+        "fino": 300,
+        "corpo": 400,
+        "medio": 500,
+        "rotulo": 600,
+        "titulo": 700,
+        "display": 800
+      }
+    },
+    "escala_tipo": {
+      "t-micro": "11.5px",
+      "t-small": "13px",
+      "t-body": "15px",
+      "t-leitura": "17px",
+      "t-lead": "18px",
+      "t-h3": "22px",
+      "t-h2": "28px",
+      "t-title": "36px",
+      "t-statement": "48px",
+      "t-display": "clamp(56px, 7vw, 96px)",
+      "t-numeral": "clamp(120px, 20vw, 280px)"
+    },
+    "entrelinha": {
+      "lh-tight": "1.05",
+      "lh-title": "1.15",
+      "lh-body": "1.6",
+      "lh-leitura": "1.65"
+    },
+    "escala_espaco": {
+      "s-1": "4px",
+      "s-2": "8px",
+      "s-3": "12px",
+      "s-4": "16px",
+      "s-5": "24px",
+      "s-6": "32px",
+      "s-7": "48px",
+      "s-8": "64px",
+      "s-9": "96px",
+      "s-10": "128px",
+      "s-section": "clamp(64px, 10vw, 160px)"
+    },
+    "medidas": {
+      "measure": "64ch",
+      "max": "1240px",
+      "max-prose": "900px",
+      "gutter": "clamp(20px, 5vw, 96px)",
+      "sl-w": "1280px",
+      "sl-h": "720px"
+    },
+    "forma": {
+      "r-0": "0",
+      "r-media": "6px",
+      "registro": "4px"
+    },
+    "movimento": {
+      "ease-out": "cubic-bezier(.22, 1, .36, 1)",
+      "dur-fast": "120ms",
+      "dur": "260ms",
+      "dur-slow": "480ms"
+    }
+  },
+  "semanticos": {
+    "papel": {
+      "paper": {
+        "valor": "#faf7f2",
+        "composto_sobre_papel": "#faf7f2"
+      },
+      "surface": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "surface-2": {
+        "valor": "#f3ede4",
+        "composto_sobre_papel": "#f3ede4"
+      },
+      "ink": {
+        "valor": "#1a140f",
+        "composto_sobre_papel": "#1a140f"
+      },
+      "ink-body": {
+        "valor": "#2a201a",
+        "composto_sobre_papel": "#2a201a"
+      },
+      "ink-soft": {
+        "valor": "rgba(26, 20, 15, .72)",
+        "composto_sobre_papel": "#59544f"
+      },
+      "muted": {
+        "valor": "rgba(26, 20, 15, .66)",
+        "composto_sobre_papel": "#66615c"
+      },
+      "meta": {
+        "valor": "rgba(26, 20, 15, .60)",
+        "composto_sobre_papel": "#746f6a"
+      },
+      "rule": {
+        "valor": "rgba(26, 20, 15, .14)",
+        "composto_sobre_papel": "#dbd7d2"
+      },
+      "rule-strong": {
+        "valor": "rgba(26, 20, 15, .50)",
+        "composto_sobre_papel": "#8a8680"
+      },
+      "hairline": {
+        "valor": "rgba(26, 20, 15, .07)",
+        "composto_sobre_papel": "#eae7e2"
+      },
+      "accent": {
+        "valor": "#fa4616",
+        "composto_sobre_papel": "#fa4616"
+      },
+      "accent-ink": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "floor": {
+        "valor": "#15110d",
+        "composto_sobre_papel": "#15110d"
+      },
+      "floor-ink": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "focus": {
+        "valor": "#1a140f",
+        "composto_sobre_papel": "#1a140f"
+      },
+      "negative": {
+        "valor": "#1a140f",
+        "composto_sobre_papel": "#1a140f"
+      },
+      "dado-1": {
+        "valor": "#1a140f",
+        "composto_sobre_papel": "#1a140f"
+      },
+      "dado-2": {
+        "valor": "rgba(26, 20, 15, .64)",
+        "composto_sobre_papel": "#6b6661"
+      },
+      "dado-3": {
+        "valor": "rgba(26, 20, 15, .40)",
+        "composto_sobre_papel": "#a09c97"
+      },
+      "dado-4": {
+        "valor": "rgba(26, 20, 15, .20)",
+        "composto_sobre_papel": "#cdcac5"
+      },
+      "dado-0": {
+        "valor": "#f3ede4",
+        "composto_sobre_papel": "#f3ede4"
+      }
+    },
+    "laranja": {
+      "paper": {
+        "valor": "#fa4616",
+        "composto_sobre_papel": "#fa4616"
+      },
+      "surface": {
+        "valor": "#d63a10",
+        "composto_sobre_papel": "#d63a10"
+      },
+      "surface-2": {
+        "valor": "#d63a10",
+        "composto_sobre_papel": "#d63a10"
+      },
+      "ink": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "ink-body": {
+        "valor": "rgba(10, 10, 10, .88)",
+        "composto_sobre_papel": "#27110b"
+      },
+      "ink-soft": {
+        "valor": "rgba(10, 10, 10, .84)",
+        "composto_sobre_papel": "#30140c"
+      },
+      "muted": {
+        "valor": "rgba(10, 10, 10, .84)",
+        "composto_sobre_papel": "#30140c"
+      },
+      "meta": {
+        "valor": "rgba(10, 10, 10, .80)",
+        "composto_sobre_papel": "#3a160c"
+      },
+      "rule": {
+        "valor": "rgba(10, 10, 10, .30)",
+        "composto_sobre_papel": "#b23412"
+      },
+      "rule-strong": {
+        "valor": "rgba(10, 10, 10, .55)",
+        "composto_sobre_papel": "#76250f"
+      },
+      "hairline": {
+        "valor": "rgba(10, 10, 10, .14)",
+        "composto_sobre_papel": "#d83e14"
+      },
+      "accent": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "accent-ink": {
+        "valor": "#0a0a0a",
+        "composto_sobre_papel": "#0a0a0a"
+      },
+      "floor": {
+        "valor": "#15110d",
+        "composto_sobre_papel": "#15110d"
+      },
+      "floor-ink": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "focus": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "negative": {
+        "valor": "#0a0a0a",
+        "composto_sobre_papel": "#0a0a0a"
+      },
+      "dado-1": {
+        "valor": "#0a0a0a",
+        "composto_sobre_papel": "#0a0a0a"
+      },
+      "dado-2": {
+        "valor": "rgba(10, 10, 10, .64)",
+        "composto_sobre_papel": "#60200e"
+      },
+      "dado-3": {
+        "valor": "rgba(10, 10, 10, .40)",
+        "composto_sobre_papel": "#9a2e11"
+      },
+      "dado-4": {
+        "valor": "rgba(10, 10, 10, .20)",
+        "composto_sobre_papel": "#ca3a14"
+      },
+      "dado-0": {
+        "valor": "rgba(255, 255, 255, .22)",
+        "composto_sobre_papel": "#fb6f49"
+      }
+    },
+    "escuro": {
+      "paper": {
+        "valor": "#120e0b",
+        "composto_sobre_papel": "#120e0b"
+      },
+      "surface": {
+        "valor": "#1d1611",
+        "composto_sobre_papel": "#1d1611"
+      },
+      "surface-2": {
+        "valor": "#1d1611",
+        "composto_sobre_papel": "#1d1611"
+      },
+      "ink": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "ink-body": {
+        "valor": "rgba(255, 255, 255, .86)",
+        "composto_sobre_papel": "#dedddd"
+      },
+      "ink-soft": {
+        "valor": "rgba(255, 255, 255, .74)",
+        "composto_sobre_papel": "#c1c0c0"
+      },
+      "muted": {
+        "valor": "rgba(255, 255, 255, .66)",
+        "composto_sobre_papel": "#aeadac"
+      },
+      "meta": {
+        "valor": "rgba(255, 255, 255, .52)",
+        "composto_sobre_papel": "#8d8b8a"
+      },
+      "rule": {
+        "valor": "rgba(255, 255, 255, .18)",
+        "composto_sobre_papel": "#3d3937"
+      },
+      "rule-strong": {
+        "valor": "rgba(255, 255, 255, .42)",
+        "composto_sobre_papel": "#767371"
+      },
+      "hairline": {
+        "valor": "rgba(255, 255, 255, .09)",
+        "composto_sobre_papel": "#272421"
+      },
+      "accent": {
+        "valor": "#fa4616",
+        "composto_sobre_papel": "#fa4616"
+      },
+      "accent-ink": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "floor": {
+        "valor": "#15110d",
+        "composto_sobre_papel": "#15110d"
+      },
+      "floor-ink": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "focus": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "negative": {
+        "valor": "rgba(255, 255, 255, .5)",
+        "composto_sobre_papel": "#888685"
+      },
+      "dado-1": {
+        "valor": "#ffffff",
+        "composto_sobre_papel": "#ffffff"
+      },
+      "dado-2": {
+        "valor": "rgba(255, 255, 255, .64)",
+        "composto_sobre_papel": "#aaa8a7"
+      },
+      "dado-3": {
+        "valor": "rgba(255, 255, 255, .40)",
+        "composto_sobre_papel": "#716e6d"
+      },
+      "dado-4": {
+        "valor": "rgba(255, 255, 255, .20)",
+        "composto_sobre_papel": "#413e3c"
+      },
+      "dado-0": {
+        "valor": "#1d1611",
+        "composto_sobre_papel": "#1d1611"
+      }
+    }
+  },
+  "componentes": {
+    "filete": [
+      "ink",
+      "rule-strong",
+      "accent",
+      "meta"
+    ],
+    "tinta": [
+      "ink",
+      "paper",
+      "accent (momento laranja: branco)"
+    ],
+    "quieta": [
+      "muted",
+      "ink"
+    ],
+    "peso": [
+      "ink-soft",
+      "ink",
+      "meta"
+    ],
+    "campo": [
+      "ink",
+      "rule-strong",
+      "accent (cursor e erro)",
+      "meta"
+    ],
+    "marca-opcao": [
+      "ink",
+      "rule"
+    ],
+    "segmentos": [
+      "ink",
+      "paper",
+      "surface-2"
+    ],
+    "interruptor": [
+      "ink",
+      "paper",
+      "muted",
+      "rule-strong"
+    ],
+    "aviso": [
+      "ink",
+      "rule",
+      "accent (atenção)"
+    ],
+    "progresso": [
+      "rule-strong",
+      "ink"
+    ],
+    "tabela": [
+      "ink",
+      "muted",
+      "rule",
+      "surface-2",
+      "ink-body"
+    ],
+    "estado": [
+      "ink",
+      "accent",
+      "rule-strong"
+    ],
+    "faixa": [
+      "ink (fundo)",
+      "accent (fundo, abertura de capítulo)",
+      "branco",
+      "preto (texto pequeno no laranja)"
+    ],
+    "cromo do slide quieto": [
+      "rule",
+      "rule-strong",
+      "ink",
+      "muted"
+    ],
+    "moldura do visualizador": [
+      "8020-chumbo",
+      "branco",
+      "accent (miniatura atual)"
+    ],
+    "grafico": [
+      "dado-1 a dado-4",
+      "dado-0",
+      "accent (o 20)",
+      "rule-strong (eixo)",
+      "hairline (grade)",
+      "ink",
+      "ink-body",
+      "meta"
+    ],
+    "mapa": [
+      "dado-1 a dado-4",
+      "dado-0",
+      "accent",
+      "paper (traço entre municípios)",
+      "ink (guia e alfinete)"
+    ],
+    "margem viva": [
+      "ink (filete e numeral)",
+      "muted",
+      "accent (quadrado)"
+    ]
+  },
+  "dado": {
+    "regra": "uma tonalidade, a tinta do contexto, em quatro degraus (100, 64, 40 e 20 %); até três séries usam 100, 55 e 25 %; a partir da quinta série, pequenos múltiplos ou 'outros'. O laranja é o 20: um elemento por gráfico, o que a leitura em palavras nomeia. Degrau abaixo de 3:1 contra o chão exige rótulo direto na marca ou livro-razão. No momento laranja a rampa é de preto e o 20 é branco. Na impressão o laranja vira hachura.",
+    "rampas": {
+      "papel": {
+        "degraus": [
+          "#1a140f",
+          "#6b6661",
+          "#a09c97",
+          "#cdcac5"
+        ],
+        "contraste_com_o_chao": [
+          17.07,
+          5.34,
+          2.55,
+          1.53
+        ],
+        "separacao_oklab_adjacente": [
+          31.5,
+          18.3,
+          14.4
+        ],
+        "separacao_para_o_20": [
+          50.3,
+          25.7,
+          22.0,
+          28.6
+        ],
+        "o20": "#fa4616"
+      },
+      "laranja": {
+        "degraus": [
+          "#0a0a0a",
+          "#60200e",
+          "#9a2e11",
+          "#ca3a14"
+        ],
+        "contraste_com_o_chao": [
+          5.61,
+          3.48,
+          2.15,
+          1.44
+        ],
+        "separacao_oklab_adjacente": [
+          21.8,
+          13.3,
+          10.4
+        ],
+        "separacao_para_o_20": [
+          85.5,
+          66.8,
+          55.8,
+          47.8
+        ],
+        "o20": "#ffffff"
+      },
+      "escuro": {
+        "degraus": [
+          "#ffffff",
+          "#aaa8a7",
+          "#716e6d",
+          "#413e3c"
+        ],
+        "contraste_com_o_chao": [
+          19.21,
+          8.12,
+          3.81,
+          1.82
+        ],
+        "separacao_oklab_adjacente": [
+          26.7,
+          19.2,
+          17.4
+        ],
+        "separacao_para_o_20": [
+          41.2,
+          23.5,
+          24.6,
+          35.9
+        ],
+        "o20": "#fa4616"
+      }
+    },
+    "tres_series": [
+      "100%",
+      "55%",
+      "25%"
+    ],
+    "quatro_series": [
+      "100%",
+      "64%",
+      "40%",
+      "20%"
+    ],
+    "marcas": {
+      "barra": "até 24 px, reta, 2 px de papel entre segmentos",
+      "linha": "2 px",
+      "ponto": "8 px com anel de papel de 2 px",
+      "no_de_rede": "quadrado de 8 px",
+      "banda_de_fluxo": "reta, 1 px de papel entre bandas"
+    },
+    "proibido": [
+      "pizza e rosca",
+      "eixo duplo",
+      "radar",
+      "gradiente em dado",
+      "laranja como série",
+      "tooltip flutuante (a leitura em palavras substitui)",
+      "legenda em caixa (rótulo direto)"
+    ]
+  },
+  "contrast_matrix": [
+    {
+      "momento": "papel",
+      "fg": "ink",
+      "bg": "paper",
+      "fg_hex": "#1a140f",
+      "bg_hex": "#faf7f2",
+      "ratio": 17.07,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink-body",
+      "bg": "paper",
+      "fg_hex": "#2a201a",
+      "bg_hex": "#faf7f2",
+      "ratio": 14.89,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink-soft",
+      "bg": "paper",
+      "fg_hex": "#59544f",
+      "bg_hex": "#faf7f2",
+      "ratio": 7.05,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "muted",
+      "bg": "paper",
+      "fg_hex": "#66615c",
+      "bg_hex": "#faf7f2",
+      "ratio": 5.72,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "papel",
+      "fg": "meta",
+      "bg": "paper",
+      "fg_hex": "#746f6a",
+      "bg_hex": "#faf7f2",
+      "ratio": 4.67,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "papel",
+      "fg": "accent",
+      "bg": "paper",
+      "fg_hex": "#fa4616",
+      "bg_hex": "#faf7f2",
+      "ratio": 3.3,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink",
+      "bg": "surface",
+      "fg_hex": "#1a140f",
+      "bg_hex": "#ffffff",
+      "ratio": 18.25,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink-body",
+      "bg": "surface",
+      "fg_hex": "#2a201a",
+      "bg_hex": "#ffffff",
+      "ratio": 15.91,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink-soft",
+      "bg": "surface",
+      "fg_hex": "#5a5652",
+      "bg_hex": "#ffffff",
+      "ratio": 7.28,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "muted",
+      "bg": "surface",
+      "fg_hex": "#686461",
+      "bg_hex": "#ffffff",
+      "ratio": 5.87,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "papel",
+      "fg": "meta",
+      "bg": "surface",
+      "fg_hex": "#76726f",
+      "bg_hex": "#ffffff",
+      "ratio": 4.77,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "papel",
+      "fg": "accent",
+      "bg": "surface",
+      "fg_hex": "#fa4616",
+      "bg_hex": "#ffffff",
+      "ratio": 3.53,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink",
+      "bg": "surface-2",
+      "fg_hex": "#1a140f",
+      "bg_hex": "#f3ede4",
+      "ratio": 15.68,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink-body",
+      "bg": "surface-2",
+      "fg_hex": "#2a201a",
+      "bg_hex": "#f3ede4",
+      "ratio": 13.67,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "ink-soft",
+      "bg": "surface-2",
+      "fg_hex": "#57514b",
+      "bg_hex": "#f3ede4",
+      "ratio": 6.75,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "papel",
+      "fg": "muted",
+      "bg": "surface-2",
+      "fg_hex": "#645e57",
+      "bg_hex": "#f3ede4",
+      "ratio": 5.52,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "papel",
+      "fg": "meta",
+      "bg": "surface-2",
+      "fg_hex": "#716b64",
+      "bg_hex": "#f3ede4",
+      "ratio": 4.53,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "papel",
+      "fg": "accent",
+      "bg": "surface-2",
+      "fg_hex": "#fa4616",
+      "bg_hex": "#f3ede4",
+      "ratio": 3.03,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "papel",
+      "fg": "accent-ink",
+      "bg": "accent",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#fa4616",
+      "ratio": 3.53,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "papel",
+      "fg": "floor-ink",
+      "bg": "floor",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#15110d",
+      "ratio": 18.79,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "papel",
+      "fg": "paper",
+      "bg": "ink",
+      "fg_hex": "#faf7f2",
+      "bg_hex": "#1a140f",
+      "ratio": 17.07,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink",
+      "bg": "paper",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#fa4616",
+      "ratio": 3.53,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink-body",
+      "bg": "paper",
+      "fg_hex": "#27110b",
+      "bg_hex": "#fa4616",
+      "ratio": 5.08,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink-soft",
+      "bg": "paper",
+      "fg_hex": "#30140c",
+      "bg_hex": "#fa4616",
+      "ratio": 4.84,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "laranja",
+      "fg": "muted",
+      "bg": "paper",
+      "fg_hex": "#30140c",
+      "bg_hex": "#fa4616",
+      "ratio": 4.84,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "laranja",
+      "fg": "meta",
+      "bg": "paper",
+      "fg_hex": "#3a160c",
+      "bg_hex": "#fa4616",
+      "ratio": 4.58,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink",
+      "bg": "surface",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#d63a10",
+      "ratio": 4.7,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink-body",
+      "bg": "surface",
+      "fg_hex": "#22100b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.9,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink-soft",
+      "bg": "surface",
+      "fg_hex": "#2b120b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.76,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "muted",
+      "bg": "surface",
+      "fg_hex": "#2b120b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.76,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "meta",
+      "bg": "surface",
+      "fg_hex": "#33140b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.6,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink",
+      "bg": "surface-2",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#d63a10",
+      "ratio": 4.7,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink-body",
+      "bg": "surface-2",
+      "fg_hex": "#22100b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.9,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "ink-soft",
+      "bg": "surface-2",
+      "fg_hex": "#2b120b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.76,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "muted",
+      "bg": "surface-2",
+      "fg_hex": "#2b120b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.76,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "laranja",
+      "fg": "meta",
+      "bg": "surface-2",
+      "fg_hex": "#33140b",
+      "bg_hex": "#d63a10",
+      "ratio": 3.6,
+      "nivel": "AA-grande",
+      "uso": "só texto de 24 px, ou 19 px em peso 700 ou mais"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink",
+      "bg": "paper",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#120e0b",
+      "ratio": 19.21,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink-body",
+      "bg": "paper",
+      "fg_hex": "#dedddd",
+      "bg_hex": "#120e0b",
+      "ratio": 14.19,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink-soft",
+      "bg": "paper",
+      "fg_hex": "#c1c0c0",
+      "bg_hex": "#120e0b",
+      "ratio": 10.61,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "muted",
+      "bg": "paper",
+      "fg_hex": "#aeadac",
+      "bg_hex": "#120e0b",
+      "ratio": 8.59,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "meta",
+      "bg": "paper",
+      "fg_hex": "#8d8b8a",
+      "bg_hex": "#120e0b",
+      "ratio": 5.68,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink",
+      "bg": "surface",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#1d1611",
+      "ratio": 17.87,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink-body",
+      "bg": "surface",
+      "fg_hex": "#dfdede",
+      "bg_hex": "#1d1611",
+      "ratio": 13.35,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink-soft",
+      "bg": "surface",
+      "fg_hex": "#c4c2c1",
+      "bg_hex": "#1d1611",
+      "ratio": 10.11,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "muted",
+      "bg": "surface",
+      "fg_hex": "#b2b0ae",
+      "bg_hex": "#1d1611",
+      "ratio": 8.26,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "meta",
+      "bg": "surface",
+      "fg_hex": "#938f8d",
+      "bg_hex": "#1d1611",
+      "ratio": 5.58,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink",
+      "bg": "surface-2",
+      "fg_hex": "#ffffff",
+      "bg_hex": "#1d1611",
+      "ratio": 17.87,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink-body",
+      "bg": "surface-2",
+      "fg_hex": "#dfdede",
+      "bg_hex": "#1d1611",
+      "ratio": 13.35,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "ink-soft",
+      "bg": "surface-2",
+      "fg_hex": "#c4c2c1",
+      "bg_hex": "#1d1611",
+      "ratio": 10.11,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "muted",
+      "bg": "surface-2",
+      "fg_hex": "#b2b0ae",
+      "bg_hex": "#1d1611",
+      "ratio": 8.26,
+      "nivel": "AAA",
+      "uso": "qualquer texto"
+    },
+    {
+      "momento": "escuro",
+      "fg": "meta",
+      "bg": "surface-2",
+      "fg_hex": "#938f8d",
+      "bg_hex": "#1d1611",
+      "ratio": 5.58,
+      "nivel": "AA",
+      "uso": "qualquer texto a partir de 11,5 px"
+    }
+  ],
+  "forbidden_pairs": [
+    {
+      "fg": "branco",
+      "bg": "laranja",
+      "context": "texto abaixo de 24 px (ou 19 px em 700)",
+      "motivo": "3,5:1: só passa como texto grande"
+    },
+    {
+      "fg": "laranja",
+      "bg": "papel",
+      "context": "texto abaixo de 24 px",
+      "motivo": "3,3:1: o laranja é acento de título, momento, ação e estado, nunca corpo"
+    },
+    {
+      "fg": "qualquer cor fora dos seis primitivos",
+      "bg": "qualquer",
+      "motivo": "a paleta é fechada"
+    },
+    {
+      "fg": "laranja",
+      "bg": "laranja",
+      "motivo": "sem contraste; dentro do momento laranja o acento é o branco"
+    }
+  ],
+  "hard_rules": [
+    {
+      "id": "paleta-fechada",
+      "regra": "só os seis primitivos e os papéis derivados deles",
+      "check": "nenhuma cor fora de --8020-* no CSS e no SVG"
+    },
+    {
+      "id": "papel-substrato",
+      "regra": "o papel é o fundo de toda peça; laranja e escuro entram como momento",
+      "check": "--paper da base é #faf7f2"
+    },
+    {
+      "id": "raio-zero",
+      "regra": "0 em bloco, tabela, controle e foto de slide; 6 só em mídia de book",
+      "check": "border-radius fora de --r-media só na moldura do visualizador"
+    },
+    {
+      "id": "sem-sombra",
+      "regra": "nada de box-shadow nem drop-shadow; profundidade vem de cor e filete",
+      "check": "nenhum box-shadow"
+    },
+    {
+      "id": "sem-moldura",
+      "regra": "sem barra lateral colorida, sem caixa de ícone, sem pílula de conteúdo, sem hover que desloca; cartão só para coleção, sem borda",
+      "check": "nenhum border-left colorido, nenhum translateY em hover"
+    },
+    {
+      "id": "filete-vivo",
+      "regra": "todo controle textual mora sobre uma linha que conta o estado; estado nunca é só cor",
+      "check": "todo .filete, .tinta, .campo tem os estados escritos"
+    },
+    {
+      "id": "peso-como-estado",
+      "regra": "navegação, aba e sumário mudam de peso, não de cor; largura reservada no peso máximo",
+      "check": ".peso com data-t"
+    },
+    {
+      "id": "um-icone",
+      "regra": "o quadrado de 8 px é o único ícone: tinta, laranja, contorno, meta",
+      "check": "nenhuma biblioteca de ícones"
+    },
+    {
+      "id": "acento-escasso",
+      "regra": "no máximo três momentos de acento por página ou slide; o laranja funcional (erro, atenção, passo atual, cursor, o 20 do dado) é tabelado e não conta",
+      "check": "contagem por página"
+    },
+    {
+      "id": "faixa",
+      "regra": "no deck, a faixa carrega capítulo, título descritivo, frase central e contador; a frase é obrigatória e o título nunca carrega o achado",
+      "check": "toda .faixa tem h2 e .frase"
+    },
+    {
+      "id": "faixa-laranja",
+      "regra": "uma por capítulo, nunca em dois slides seguidos; o texto pequeno da faixa laranja é preto",
+      "check": "verificador"
+    },
+    {
+      "id": "svg-real",
+      "regra": "gráfico e diagrama em SVG real com role=img, aria-label, title e livro-razão; decorativo com aria-hidden",
+      "check": "nenhuma barra em div com width em porcentagem"
+    },
+    {
+      "id": "angulo-reto",
+      "regra": "conector de diagrama em segmento reto com dobra em ângulo reto, seta por marker",
+      "check": "nenhum C, Q ou S em path de conector"
+    },
+    {
+      "id": "piso-de-fonte",
+      "regra": "11,5 px na página, 14 px efetivos no slide; --meta é a cor mais clara permitida para texto",
+      "check": "medir-deck.js"
+    },
+    {
+      "id": "foco-visivel",
+      "regra": "anel de 2 px em --focus com 2 px de afastamento em tudo que recebe teclado",
+      "check": ":focus-visible nunca removido"
+    },
+    {
+      "id": "movimento",
+      "regra": "só transform e opacidade em página; a transição de dado move a marca em 480 ms; tudo desliga com prefers-reduced-motion e na impressão",
+      "check": "@media reduce presente"
+    },
+    {
+      "id": "montserrat",
+      "regra": "só Montserrat, servida localmente",
+      "check": "font-family resolve para Montserrat"
+    },
+    {
+      "id": "logo-intacta",
+      "regra": "logo 80 20 nunca recolorida: branca nos momentos e na moldura, invertida para escura sobre o papel",
+      "check": "--logo-invert"
+    }
+  ]
+}

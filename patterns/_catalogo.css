@@ -1,0 +1,147 @@
+/* ============================================================
+   8020-DS 4.0, patterns/_catalogo.css
+   O cromo das páginas do catálogo: o palco de slide em miniatura, o
+   código copiável, a matriz de estados, a tabela de papéis, o antes e
+   agora. Não faz parte da peça entregue ao cliente; é a moldura de
+   referência do próprio sistema. Depende de regua.css.
+   ============================================================ */
+
+/* lista de padrões: um por bloco, filete de abertura em tinta */
+.padroes { display: grid; gap: var(--s-8); }
+.titulo-formas { margin-bottom: var(--s-7); max-width: var(--max-prose); }
+.padrao { border-top: 1px solid var(--ink); padding-top: var(--s-4); display: grid; gap: var(--s-4); scroll-margin-top: 72px; }
+.padrao h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); }
+.padrao p.quando { font-size: var(--t-small); color: var(--muted); max-width: var(--measure); }
+.padrao p.quando b { color: var(--ink); }
+
+/* código copiável */
+details.codigo { border-top: 1px solid var(--rule); }
+details.codigo summary { cursor: pointer; font-size: var(--t-small); font-weight: var(--w-medio); color: var(--ink); list-style: none; display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+details.codigo summary::-webkit-details-marker { display: none; }
+details.codigo summary::before { content: ""; width: 8px; height: 8px; border: 1px solid var(--ink); }
+details.codigo[open] summary::before { background: var(--ink); }
+details.codigo pre, pre.codigo { margin: 0; max-height: 360px; overflow: auto; background: var(--surface-2); padding: var(--s-4); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; color: var(--ink-body); }
+details.codigo .acoes { padding: 4px 0 8px; }
+.tema-escuro details.codigo pre { background: var(--surface); }
+
+/* o palco: um slide de 1280 por 720 reduzido por zoom, com o cromo do slide, sem a moldura.
+   O --zoom vive no invólucro (.padrao, .mini), nunca no próprio .palco, para os pontos de quebra dos pares e trios valerem. */
+.palco { width: 1280px; height: 720px; zoom: var(--zoom, .5); border: 1px solid var(--rule-strong); background: var(--paper); overflow: hidden; }
+.padrao { --zoom: .5; }
+.palco .slide { display: grid; }
+.tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); }
+.tres .mini { --zoom: .2; display: grid; gap: var(--s-3); cursor: default; color: inherit; }
+.tres .mini .t { font-size: var(--t-small); color: var(--muted); }
+.tres .mini .t strong { color: var(--ink); }
+.duas-minis { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+.duas-minis .mini { --zoom: .31; display: grid; gap: var(--s-3); cursor: default; color: inherit; }
+.duas-minis .mini .t { font-size: var(--t-small); color: var(--muted); }
+.ficha-tipo { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-4); }
+.ficha-tipo .t { font-size: var(--t-small); color: var(--muted); }
+.ficha-tipo .t strong { color: var(--ink); }
+
+/* a matriz de estados por componente */
+.matriz { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+.matriz th { text-align: left; font-weight: var(--w-rotulo); color: var(--muted); font-size: var(--t-micro); letter-spacing: .04em; text-transform: uppercase; padding: 0 var(--s-4) var(--s-3) 0; border-bottom: 1px solid var(--ink); white-space: nowrap; }
+.matriz td { padding: var(--s-5) var(--s-4) var(--s-5) 0; border-bottom: 1px solid var(--rule); vertical-align: middle; white-space: nowrap; }
+.matriz td:first-child { color: var(--ink); font-weight: var(--w-rotulo); width: 14ch; white-space: normal; }
+.matriz td:first-child small { display: block; font-weight: var(--w-corpo); color: var(--meta); font-size: var(--t-micro); }
+.matriz .vazio { color: var(--meta); font-weight: var(--w-fino); }
+.matriz-larga { margin-top: var(--s-7); }
+
+/* tabela de papéis e amostras de cor */
+.papeis { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+.papeis th { text-align: left; font-weight: var(--w-rotulo); color: var(--muted); padding: 0 var(--s-4) var(--s-3) 0; border-bottom: 1px solid var(--ink); }
+.papeis td { padding: var(--s-3) var(--s-4) var(--s-3) 0; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink-body); }
+.papeis td:first-child { font-weight: var(--w-rotulo); color: var(--ink); white-space: nowrap; }
+.papeis td code, .papeis th code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--ink); }
+.amostra { display: inline-block; width: 12px; height: 12px; vertical-align: -1px; margin-right: 6px; border: 1px solid var(--rule); }
+.amostra.grande { width: 100%; height: 64px; display: block; margin: 0; }
+.paleta { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-4); }
+.paleta div { display: grid; gap: 6px; font-size: var(--t-small); color: var(--muted); }
+.paleta b { color: var(--ink); }
+.paleta code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; }
+
+/* especímen de tipo: cada papel no tamanho real */
+.especimen { display: grid; gap: 0; }
+.especimen > div { display: grid; grid-template-columns: 14ch 1fr; gap: var(--s-5); align-items: baseline; padding: var(--s-4) 0; border-top: 1px solid var(--rule); }
+.especimen > div:last-child { border-bottom: 1px solid var(--rule); }
+.especimen .tag { font-size: var(--t-small); color: var(--muted); }
+.especimen .tag b { display: block; color: var(--ink); font-weight: var(--w-rotulo); }
+.especimen .tag code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; }
+.especimen .amostra-tipo { color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+
+/* escala de espaço: barras na medida real */
+.escala-espaco { display: grid; gap: var(--s-2); }
+.escala-espaco div { display: grid; grid-template-columns: 8ch 1fr; gap: var(--s-4); align-items: center; font-size: var(--t-small); color: var(--muted); }
+.escala-espaco i { display: block; height: 12px; background: var(--ink); }
+.escala-espaco code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--ink); }
+
+/* antes e agora, demonstrações */
+.antes-agora { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+/* a régua já colapsa abaixo de 700; esta folha vem depois dela e precisa repetir */
+@media (max-width: 699px) { .antes-agora { grid-template-columns: 1fr; } }
+.antes-agora > div { display: grid; gap: var(--s-4); align-content: start; }
+.antes-agora .rotulo { margin: 0; }
+.linha-demo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-5); }
+.antigo { font: inherit; font-weight: var(--w-rotulo); font-size: var(--t-small); background: var(--ink); color: var(--paper); border: 1px solid var(--ink); border-radius: 4px; padding: 10px 18px; cursor: pointer; }
+.antigo.desab { opacity: .4; }
+.antigo-campo { font: inherit; font-size: var(--t-body); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 8px 12px; background: var(--surface); color: var(--ink); width: 100%; }
+
+/* validador de paleta */
+.validador { display: grid; gap: var(--s-5); }
+.validador table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+.validador th { text-align: left; font-weight: var(--w-rotulo); color: var(--muted); padding: 0 var(--s-4) var(--s-3) 0; border-bottom: 1px solid var(--ink); }
+.validador td { padding: var(--s-3) var(--s-4) var(--s-3) 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-variant-numeric: tabular-nums; }
+.validador td.num { text-align: right; }
+.validador .sw { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 8px; border: 1px solid var(--rule); }
+.validador .ok { color: var(--ink); font-weight: var(--w-rotulo); } .validador .baixo { color: var(--accent); font-weight: var(--w-rotulo); }
+
+/* o índice: lista com filete, sem olho numerado */
+.indice { display: grid; gap: var(--s-7); }
+.indice .grupo { border-top: 1px solid var(--ink); padding-top: var(--s-3); display: grid; grid-template-columns: 22ch 1fr; gap: var(--s-6); }
+.indice .grupo h2, .indice .grupo h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); }
+.indice .grupo .sub { font-size: var(--t-small); color: var(--muted); margin-top: 6px; max-width: 24ch; }
+.indice ol { list-style: none; margin: 0; padding: 0; }
+.indice li { display: grid; grid-template-columns: 1fr auto; gap: var(--s-4); align-items: baseline; padding: 10px 0; border-top: 1px solid var(--rule); }
+.indice li:first-child { border-top: 0; padding-top: 0; }
+.indice li a { text-decoration: none; font-weight: var(--w-rotulo); color: var(--ink); }
+.indice li a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.indice li .d { font-size: var(--t-small); color: var(--ink-body); display: block; font-weight: var(--w-corpo); margin-top: 2px; }
+.indice li .arq { font-size: var(--t-micro); color: var(--meta); font-family: ui-monospace, "SF Mono", Menlo, monospace; white-space: nowrap; }
+.indice li.pendente a { color: var(--muted); pointer-events: none; }
+
+/* imagens: cenas, formatos, prompt */
+.formatos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6); align-items: end; }
+.formato { display: grid; gap: 8px; }
+.formato .caixa { background: var(--surface-2); border: 1px solid var(--rule-strong); width: 100%; }
+.formato .caixa.r169 { aspect-ratio: 16 / 9; } .formato .caixa.r45 { aspect-ratio: 4 / 5; max-width: 60%; } .formato .caixa.r11 { aspect-ratio: 1 / 1; max-width: 50%; } .formato .caixa.r32 { aspect-ratio: 3 / 2; }
+.formato b { font-size: var(--t-small); color: var(--ink); font-weight: var(--w-rotulo); }
+.formato span { font-size: var(--t-micro); color: var(--meta); }
+pre.prompt { margin: 0; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; line-height: 1.6; color: var(--ink-body); background: var(--surface-2); padding: var(--s-4) var(--s-5); white-space: pre-wrap; word-break: break-word; }
+pre.prompt b { color: var(--ink); font-weight: var(--w-rotulo); }
+pre.prompt .laranja { color: var(--accent); font-weight: var(--w-rotulo); }
+.anatomia { display: grid; gap: 2px; }
+.anatomia div { display: grid; grid-template-columns: 14ch 1fr; gap: var(--s-4); padding: 10px 0; border-top: 1px solid var(--rule); font-size: var(--t-small); }
+.anatomia b { color: var(--ink); font-weight: var(--w-rotulo); }
+.anatomia code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--ink-body); }
+.cena { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: start; }
+.cena .cand { position: relative; }
+.cena .cand img { width: 100%; }
+.cena .cand .rot { position: absolute; left: 12px; top: 12px; font-size: var(--t-micro); font-weight: var(--w-rotulo); color: var(--ink); background: var(--paper); padding: 3px 8px; }
+.cena .cand.escolhida .rot::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--accent); margin-right: 6px; }
+.cena .cand.descartada img { opacity: .55; }
+.cena-cab { display: grid; grid-template-columns: 1fr auto; gap: var(--s-5); align-items: baseline; }
+.cena-cab .arq { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--meta); }
+.cena-texto { font-size: var(--t-small); color: var(--muted); line-height: 1.55; max-width: var(--measure); }
+.cena-texto b { color: var(--ink); font-weight: var(--w-rotulo); }
+.retratos .cena { grid-template-columns: repeat(2, minmax(0, 220px)); }
+
+@media (max-width: 1199px) { .padrao { --zoom: .42; } .duas-minis .mini { --zoom: .26; } .tres .mini { --zoom: .16; } }
+@media (max-width: 899px) {
+  .padrao { --zoom: .3; } .tres { grid-template-columns: 1fr; } .tres .mini { --zoom: .5; } .duas-minis { grid-template-columns: 1fr; } .duas-minis .mini { --zoom: .5; }
+  .indice .grupo { grid-template-columns: 1fr; } .paleta { grid-template-columns: repeat(3, minmax(0, 1fr)); } .formatos { grid-template-columns: 1fr 1fr; } .cena { grid-template-columns: 1fr; } .retratos .cena { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .especimen > div { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (max-width: 699px) { .padrao { --zoom: .4; } .tres .mini { --zoom: .4; } .duas-minis .mini { --zoom: .4; } }
+@media (max-width: 599px) { .padrao { --zoom: .26; } .tres .mini { --zoom: .26; } .duas-minis .mini { --zoom: .26; } .paleta { grid-template-columns: 1fr 1fr; } }

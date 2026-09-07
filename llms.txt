@@ -1,0 +1,91 @@
+# 8020-DS 4.0
+
+> Sistema de design da 80 20 Marketing para peças de comunicação em HTML puro
+> (books e decks). Papel claro, tinta em chumbo quente, o laranja como momento,
+> Montserrat única, paleta fechada, ângulo reto, sem sombra e sem gradiente.
+> Zero build, zero dependência, zero chamada externa.
+> Para montar uma peça, leia nesta ordem. O mapa do repositório está no
+> [README.md](README.md); a licença, em [LICENSE](LICENSE): o código é MIT,
+> a identidade da 80 20 não.
+
+## 1. Regras (obrigatório)
+
+- [RULES.md](RULES.md): as regras de 1 a 50, agrupadas em marca, construção,
+  facilitação, editorial, didática, Régua 80/20, deck, dado e verificação. Em conflito com
+  qualquer vontade pontual, a regra vence. A tabela do fim liga cada checagem
+  do verificador à regra que ela cobra.
+- [MIGRACAO.md](MIGRACAO.md): o que muda da versão 3 para a 4, o que se converte
+  por regra e o que exige decisão. Leia antes de converter uma peça antiga.
+
+## 2. Escolha do formato
+
+- [GUIA.md](GUIA.md): as duas perguntas que levam ao formato e ao template, o
+  fluxo da pasta copiada até a peça entregue, a receita de cada tipo de slide e
+  de cada seção de book. Comece por ele.
+
+## 3. Camadas, nesta ordem de dependência
+
+- [tokens/8020.css](tokens/8020.css): primitivos, papéis semânticos, escala de
+  tipo, escala de espaço, forma, movimento, a rampa de dado e os dois momentos.
+- [tokens/brand.json](tokens/brand.json): o mesmo em três camadas legíveis por
+  máquina, com a matriz de contraste medida par a par. Gerado por `gerar-brand.py`.
+- [assets/regua.css](assets/regua.css): a Régua 80/20. Grade quatro para um,
+  página, controles com estados, tabela, listas, número em linha, livro-razão e
+  a gramática de dado. Layouts consomem só papéis, nunca a cor crua.
+- [assets/deck.css](assets/deck.css) e [assets/deck.js](assets/deck.js): os cinco
+  registros de slide, o visualizador, as miniaturas, a visão do apresentador e a
+  impressão. O script escreve o cromo; o autor escreve só os slides.
+- [assets/book.css](assets/book.css) e [assets/book.js](assets/book.js): o hub, a
+  margem viva, as notas alinhadas ao parágrafo, o scrollytelling por `data-estado`
+  e o "continuar de onde parou".
+- [assets/dado.js](assets/dado.js): a leitura em palavras, a transição entre
+  estados e a hachura de impressão. [assets/pagina.js](assets/pagina.js): topo,
+  abas, copiar e aviso.
+
+## 4. Template da peça (escolher um e ler o contrato)
+
+- [templates/deck/padrao/CONTRATO.md](templates/deck/padrao/CONTRATO.md):
+  deck denso, didático, sequencial, 22 slides no contrato. Esqueleto:
+  templates/deck/padrao/deck.html
+- [templates/deck/editorial/CONTRATO.md](templates/deck/editorial/CONTRATO.md):
+  deck de respiro, imagem e statement, 17 slides. Esqueleto:
+  templates/deck/editorial/deck.html
+- [templates/book/padrao/CONTRATO.md](templates/book/padrao/CONTRATO.md):
+  longform com hub e três partes. Esqueleto: templates/book/padrao/index.html
+
+## 5. Catálogo (consultar conforme a peça pede)
+
+- [patterns/tipografia.html](patterns/tipografia.html): escala, pesos, a assinatura em itálico
+- [patterns/cores.html](patterns/cores.html): papéis, momentos, os quatro papéis do laranja, contraste ao vivo
+- [patterns/layouts.html](patterns/layouts.html): grade, espaço, pontos de quebra, os cinco registros
+- [patterns/estados.html](patterns/estados.html): filete vivo, ações, campos, seleção, navegação, retorno
+- [patterns/proibido.html](patterns/proibido.html): o que o sistema recusa, errado ao lado de certo, com a regra e a checagem de cada par
+- [patterns/dado.html](patterns/dado.html): vinte formas em SVG, as dezoito regras, o validador de paleta
+- [patterns/diagramas.html](patterns/diagramas.html): fluxo, mapa de atores, esquema, matriz
+- [patterns/imagens.html](patterns/imagens.html): política, formatos, prompt base, as onze cenas
+- [patterns/deck.html](patterns/deck.html): registros, tipos de slide, visualizador, limites
+- [patterns/book.html](patterns/book.html): hub, margem viva, scrollytelling, fichas, recap
+
+## 6. Verificação (obrigatória antes de entregar)
+
+- [verificar.py](verificar.py): lê o HTML e aponta o que a regra proíbe, por
+  slide ou por seção. `python3 verificar.py peca.html`. Sai com código 1 quando
+  houver erro; `--regras` lista as checagens, `--json` devolve legível por máquina.
+- [verificar-geometria.js](verificar-geometria.js): o que só a renderização
+  mostra. Caixa fora do slide, texto sobre texto, rótulo cruzando traço em SVG,
+  fonte mínima efetiva e rolagem horizontal na página. Roda no Playwright, com
+  `__URL__` e `__DIR__` trocados. Zero erro nas duas passadas é a condição de saída.
+- [exemplo-com-defeito.html](exemplo-com-defeito.html): o teste de regressão do
+  verificador. Quatro slides escritos para reprovar, que disparam 35 das 48
+  checagens. Se ele parar de reprovar, o verificador quebrou.
+- Bloco que mostra de propósito o que o sistema recusa se declara com
+  `data-antipadrao`, e no CSS entre `/* antipadrão: */` e `/* fim do antipadrão */`.
+  As duas passadas ignoram o que está declarado (regra 50a).
+
+## 7. Voz
+
+O que muda na 4.0 é a forma, não a voz. Ler antes de escrever qualquer texto visível.
+
+- [voice/plataforma.md](voice/plataforma.md): o nome, a filosofia, o que a casa faz
+- [voice/tom-de-voz.md](voice/tom-de-voz.md): o contrato de tom, a clareza radical, a densidade
+- [voice/vocabulario.md](voice/vocabulario.md): evitar e usar, item a item

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tipografia, patterns do 8020-DS 4.0</title>
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="_catalogo.css">
+<style>
+/* Local desta página: só o que a camada não tem, sempre por papel semântico e token.
+   .pesos: a mesma palavra nos seis pesos. .e-*: cada papel da escala no tamanho real,
+   fora de h1 a h3 para não quebrar a ordem dos títulos. .olho-antigo: o que saiu do sistema. */
+.pesos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-4); }
+.pesos > div { display: grid; gap: var(--s-2); border-top: 1px solid var(--rule); padding-top: var(--s-3); min-width: 0; }
+.pesos .p { font-size: clamp(24px, 2.4vw, 34px); line-height: 1; color: var(--ink); letter-spacing: -.02em; }
+.pesos .t { font-size: var(--t-small); color: var(--muted); }
+.pesos .t b { display: block; color: var(--ink); }
+.w300 { font-weight: var(--w-fino); } .w400 { font-weight: var(--w-corpo); } .w500 { font-weight: var(--w-medio); }
+.w600 { font-weight: var(--w-rotulo); } .w700 { font-weight: var(--w-titulo); } .w800 { font-weight: var(--w-display); }
+.e-micro { font-size: var(--t-micro); line-height: 1.4; letter-spacing: .02em; color: var(--meta); }
+.e-small { font-size: var(--t-small); line-height: 1.5; letter-spacing: .01em; color: var(--muted); }
+.e-body { font-size: var(--t-body); line-height: var(--lh-body); color: var(--ink-body); }
+.e-leitura { font-size: var(--t-leitura); line-height: var(--lh-leitura); color: var(--ink-body); }
+.e-lead { font-size: var(--t-lead); line-height: 1.5; color: var(--ink-soft); }
+.e-h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); letter-spacing: -.01em; line-height: 1.25; }
+.e-h2 { font-size: var(--t-h2); font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: var(--lh-title); }
+.e-title { font-size: var(--t-title); font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.12; }
+.e-title em { font-style: italic; font-weight: calc(var(--w-titulo) + 100); font-size: 1.06em; line-height: 1; }
+.e-statement { font-size: var(--t-statement); font-weight: var(--w-fino); letter-spacing: -.03em; line-height: var(--lh-tight); }
+.e-statement strong { font-weight: var(--w-display); }
+.e-display { font-size: var(--t-display); font-weight: var(--w-fino); letter-spacing: -.03em; line-height: 1.02; }
+.e-display strong { font-weight: var(--w-display); }
+.e-numeral { font-size: var(--t-numeral); font-weight: var(--w-fino); letter-spacing: -.05em; line-height: 1; }
+.e-frase { font-size: var(--t-h3); font-weight: var(--w-fino); line-height: 1.35; max-width: 22ch; color: var(--ink); }
+.e-frase strong { font-weight: var(--w-titulo); }
+.e-num { font-size: var(--t-h2); font-weight: var(--w-fino); line-height: 1.3; color: var(--ink); display: grid; justify-items: end; max-width: 8ch; }
+.proporcional { font-variant-numeric: proportional-nums; }
+.balance { text-wrap: balance; } .sem-balance { text-wrap: wrap; }
+.e-leitura-book { font-size: var(--t-leitura); line-height: var(--lh-leitura); max-width: var(--measure); color: var(--ink-body); text-wrap: pretty; }
+.olho-antigo { font-size: var(--t-micro); font-weight: var(--w-rotulo); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.medida-demo { max-width: 30ch; }
+@media (max-width: 899px) { .pesos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .pesos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+</head>
+<body>
+<div class="topo"><div class="container"><a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a><nav aria-label="Seções da página"><a class="peso" data-t="Família" href="#familia">Família</a><a class="peso" data-t="Escala" href="#escala">Escala</a><a class="peso" data-t="Assinatura" href="#assinatura">Assinatura</a><a class="peso" data-t="Rótulo" href="#rotulo">Rótulo</a><a class="peso" data-t="Numerais" href="#numerais">Numerais</a><a class="peso" data-t="Medida" href="#medida">Medida</a><a class="peso" data-t="Slide" href="#slide">Slide</a></nav><span class="meta">tipografia.html</span></div></div>
+<section class="abertura"><div class="container folha"><div class="miolo"><h1>Tipografia: <strong>uma família</strong>, seis pesos e uma escala com salto.</h1><p class="lead">A Montserrat variável faz todo o texto do sistema, do rodapé do slide ao numeral de capítulo. A hierarquia vem de três coisas: tamanho com salto, peso com contraste e cor em dois níveis. Cada papel tem tamanho, entrelinha, espacejamento e peso definidos no <code>8020.css</code>; o especímen mostra cada um no tamanho real.</p></div><aside class="margem fixa"><span class="n">1 família</span><p>Montserrat variável, pesos de 100 a 900 num arquivo só para o romano e outro para o itálico, servida de <code>assets/fonts/</code> sob licença OFL. Nenhuma outra família entra na peça.</p><p>Seis pesos com papel fixo. O contraste que faz hierarquia é 300 contra 700, não 600 contra 700.</p></aside></div></section><section class="bloco" id="familia"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>A família</h2><p class="lead">Montserrat variável, um arquivo para o romano e um para o itálico, com todos os pesos de 100 a 900. O sistema usa seis, e cada um tem um papel: quem lê reconhece a função pelo peso antes de ler a palavra.</p></div><div class="pilha"><div><div class="pesos">
+  <div><span class="p w300">Marca</span><span class="t"><b>300, fino</b>display, numeral e statement</span></div>
+  <div><span class="p w400">Marca</span><span class="t"><b>400, corpo</b>prosa, lead e ajuda</span></div>
+  <div><span class="p w500">Marca</span><span class="t"><b>500, médio</b>item de navegação e ação secundária</span></div>
+  <div><span class="p w600">Marca</span><span class="t"><b>600, rótulo</b>rótulo, nome, ação primária e subtítulo</span></div>
+  <div><span class="p w700">Marca</span><span class="t"><b>700, título</b>título de seção e de slide, o atual na navegação</span></div>
+  <div><span class="p w800">Marca</span><span class="t"><b>800, display</b>capa e o núcleo do statement</span></div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-pesos">Copiar</button></div><pre><code id="c-pesos">&lt;div class="pesos"&gt;
+  &lt;div&gt;&lt;span class="p w300"&gt;Marca&lt;/span&gt;&lt;span class="t"&gt;&lt;b&gt;300, fino&lt;/b&gt;display, numeral e statement&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="p w400"&gt;Marca&lt;/span&gt;&lt;span class="t"&gt;&lt;b&gt;400, corpo&lt;/b&gt;prosa, lead e ajuda&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="p w500"&gt;Marca&lt;/span&gt;&lt;span class="t"&gt;&lt;b&gt;500, médio&lt;/b&gt;item de navegação e ação secundária&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="p w600"&gt;Marca&lt;/span&gt;&lt;span class="t"&gt;&lt;b&gt;600, rótulo&lt;/b&gt;rótulo, nome, ação primária e subtítulo&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="p w700"&gt;Marca&lt;/span&gt;&lt;span class="t"&gt;&lt;b&gt;700, título&lt;/b&gt;título de seção e de slide, o atual na navegação&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="p w800"&gt;Marca&lt;/span&gt;&lt;span class="t"&gt;&lt;b&gt;800, display&lt;/b&gt;capa e o núcleo do statement&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div><p class="corpo">O peso vem de um token: <code>--w-fino</code>, <code>--w-corpo</code>, <code>--w-medio</code>, <code>--w-rotulo</code>, <code>--w-titulo</code> e <code>--w-display</code>. Escrever <code>font-weight: 600</code> funciona, mas some a razão da escolha; escrever <code>var(--w-rotulo)</code> diz o que aquele texto é.</p><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-pesos-css">Copiar</button></div><pre><code id="c-pesos-css">@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-variable.ttf") format("truetype");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Italic-variable.ttf") format("truetype");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+:root {
+  --font: "Montserrat", system-ui, sans-serif;
+  --w-fino: 300; --w-corpo: 400; --w-medio: 500; --w-rotulo: 600; --w-titulo: 700; --w-display: 800;
+}</code></pre></details></div><aside class="margem fixa"><span class="n">300 e 700</span><p>O par que faz a hierarquia de página é 300 contra 700. Peso 600 ao lado de 700 fica achatado; o olho não separa.</p><p>O 800 é raro: capa, hero e o núcleo do statement. O 900 só existe no itálico da assinatura.</p><p>O itálico vem do segundo arquivo da fonte. O sistema nunca sintetiza itálico nem negrito.</p></aside></div></section><section class="bloco" id="escala"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>A escala com salto</h2><p class="lead">Onze tamanhos, e entre cada dois vizinhos um salto que a leitura sente. Razão de 1,25 no corpo e de 1,333 no display, teto de 96 px, piso de 11,5 px. Sem tamanho avulso: todo texto usa um token <code>--t-*</code>.</p></div><div class="rolagem"><table class="papeis">
+<thead><tr><th>Token</th><th>Tamanho</th><th>Entrelinha</th><th>Espacejamento</th><th>Peso</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td><code>--t-micro</code></td><td>11,5 px</td><td>1,4</td><td>0,02em</td><td>400 e 600</td><td>rodapé de slide, legenda de eixo, ajuda de campo; o mínimo do sistema</td></tr>
+<tr><td><code>--t-small</code></td><td>13 px</td><td>1,5</td><td>0,01em</td><td>400 e 600</td><td>meta, fonte, nota, rótulo, tabela densa, item de navegação</td></tr>
+<tr><td><code>--t-body</code></td><td>15 px</td><td>1,6</td><td>0</td><td>400</td><td>corpo de página; medida de 64ch</td></tr>
+<tr><td><code>--t-leitura</code></td><td>17 px</td><td>1,65</td><td>0</td><td>400</td><td>prosa de book</td></tr>
+<tr><td><code>--t-lead</code></td><td>18 px</td><td>1,5</td><td>0</td><td>400</td><td>abertura de seção, em <code>--ink-soft</code></td></tr>
+<tr><td><code>--t-h3</code></td><td>22 px</td><td>1,25</td><td>-0,01em</td><td>600</td><td>subtítulo, nome de componente, o número da margem (em 300)</td></tr>
+<tr><td><code>--t-h2</code></td><td>28 px</td><td>1,15</td><td>-0,02em</td><td>700</td><td>título de seção</td></tr>
+<tr><td><code>--t-title</code></td><td>36 px</td><td>1,12</td><td>-0,02em</td><td>700</td><td>título de página, separatriz, faixa do slide</td></tr>
+<tr><td><code>--t-statement</code></td><td>48 px</td><td>1,05</td><td>-0,03em</td><td>300, núcleo em 800</td><td>statement em linha, citação</td></tr>
+<tr><td><code>--t-display</code></td><td>56 a 96 px<br><code>clamp(56px, 7vw, 96px)</code></td><td>1,02</td><td>-0,03em</td><td>300, núcleo em 800</td><td>capa, hero; 96 é o teto</td></tr>
+<tr><td><code>--t-numeral</code></td><td>120 a 280 px<br><code>clamp(120px, 20vw, 280px)</code></td><td>1</td><td>-0,05em</td><td>300</td><td>numeral de capítulo, em tinta, nunca em laranja</td></tr>
+</tbody></table></div><p class="corpo">As entrelinhas também são tokens: <code>--lh-tight</code> 1,05, <code>--lh-title</code> 1,15, <code>--lh-body</code> 1,6 e <code>--lh-leitura</code> 1,65. A entrelinha cai quando o tamanho sobe, porque texto grande já tem ar entre as linhas.</p><div class="pilha"><h3>Especímen</h3><div class="especimen">
+  <div><span class="tag"><b>micro</b><code>--t-micro</code> 11,5 px</span><p class="amostra-tipo e-micro">Fonte: pesquisa de junho de 2026, 1.240 entrevistas em seis cidades.</p></div>
+  <div><span class="tag"><b>small</b><code>--t-small</code> 13 px</span><p class="amostra-tipo e-small">Pesquisa de junho de 2026, 1.240 entrevistas. Lembrança espontânea da primeira marca citada.</p></div>
+  <div><span class="tag"><b>body</b><code>--t-body</code> 15 px</span><p class="amostra-tipo e-body">A Casa do Campo tem doze lojas em seis cidades e quarenta anos de porta aberta. É lembrada onde está há mais tempo e desconhecida a cinquenta quilômetros de qualquer loja.</p></div>
+  <div><span class="tag"><b>leitura</b><code>--t-leitura</code> 17 px</span><p class="amostra-tipo e-leitura">A comunicação até hoje foi feita loja a loja: a rádio local, o patrocínio da festa, o cartaz na feira. Nada disso está errado. O que falta é o sistema.</p></div>
+  <div><span class="tag"><b>lead</b><code>--t-lead</code> 18 px</span><p class="amostra-tipo e-lead">Uma rede conhecida na praça, sem sistema próprio de presença.</p></div>
+  <div><span class="tag"><b>h3</b><code>--t-h3</code> 22 px</span><p class="amostra-tipo e-h3">Onde a marca já é lembrada</p></div>
+  <div><span class="tag"><b>h2</b><code>--t-h2</code> 28 px</span><p class="amostra-tipo e-h2">Diagnóstico: onde a marca já é lembrada</p></div>
+  <div><span class="tag"><b>title</b><code>--t-title</code> 36 px</span><p class="amostra-tipo e-title">Plano de presença de marca no Cerrado</p></div>
+  <div><span class="tag"><b>statement</b><code>--t-statement</code> 48 px</span><p class="amostra-tipo e-statement">A lembrança acompanha <strong>a porta,</strong> não a mídia.</p></div>
+  <div><span class="tag"><b>display</b><code>--t-display</code> 56 a 96 px</span><p class="amostra-tipo e-display">Presença de <strong>marca</strong></p></div>
+  <div><span class="tag"><b>numeral</b><code>--t-numeral</code> 120 a 280 px</span><p class="amostra-tipo e-numeral">02</p></div>
+</div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-escala-css">Copiar</button></div><pre><code id="c-escala-css">:root {
+  --t-micro: 11.5px;     /* rodapé de slide, legenda de eixo: o mínimo do sistema */
+  --t-small: 13px;       /* meta, fonte, tabela densa */
+  --t-body: 15px;        /* corpo */
+  --t-leitura: 17px;     /* prosa de book */
+  --t-lead: 18px;        /* abertura de seção */
+  --t-h3: 22px;          /* subtítulo, nome de componente */
+  --t-h2: 28px;          /* título de seção */
+  --t-title: 36px;       /* título de página, separatriz, faixa do slide */
+  --t-statement: 48px;   /* statement, citação */
+  --t-display: clamp(56px, 7vw, 96px);        /* capa, hero; 96 é o teto */
+  --t-numeral: clamp(120px, 20vw, 280px);     /* numeral de capítulo, peso 300, em tinta */
+  --lh-tight: 1.05; --lh-title: 1.15; --lh-body: 1.6; --lh-leitura: 1.65;
+}</code></pre></details></div><aside class="margem fixa"><span class="n">11,5 a 96 px</span><p>O micro de 11,5 px é o piso: abaixo disso o PDF já falhou. O display de 96 px é o teto: acima disso a tela de 1280 não comporta sem gritar.</p><p>Espacejamento negativo só a partir de 22 px e nunca além de -0,035em em texto. O numeral é a exceção, a -0,05em, porque dois dígitos soltos pedem.</p><p>O display e o numeral são fluidos (<code>clamp</code>); o resto é fixo, para o slide e o PDF não mudarem de tamanho conforme a janela.</p></aside></div></section><section class="bloco" id="assinatura"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>A assinatura</h2><p class="lead">Dois gestos marcam a voz da casa no texto. No título de capa e de hero, o último termo vai em <code>&lt;em&gt;</code>: itálico, um peso acima, 6 por cento maior. Na frase central e no statement, o núcleo vai em <code>&lt;strong&gt;</code>: o resto fica em 300 e o núcleo sobe para 700 ou 800.</p></div><div class="pilha"><h3>O último termo em itálico</h3><p class="corpo">Título de capa de deck (36 px, 700; o <code>&lt;em&gt;</code> em 800) e hero de página (display em 300 com o núcleo em 800; o <code>&lt;em&gt;</code> em 900). A regra vive no <code>8020.css</code> para <code>h1 &gt; em</code> e para a classe <code>.assinatura</code>; no deck, <code>.faixa h2 em</code> faz o mesmo.</p><div class="pilha"><div><div class="pilha-l"><p class="e-title">Plano de presença de marca no <em>Cerrado</em></p><p class="e-display assinatura">Presença de <strong>marca</strong> no <em>Cerrado</em></p></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-assinatura-em">Copiar</button></div><pre><code id="c-assinatura-em">&lt;p class="e-title"&gt;Plano de presença de marca no &lt;em&gt;Cerrado&lt;/em&gt;&lt;/p&gt;
+&lt;p class="e-display assinatura"&gt;Presença de &lt;strong&gt;marca&lt;/strong&gt; no &lt;em&gt;Cerrado&lt;/em&gt;&lt;/p&gt;</code></pre></details></div></div><div class="pilha"><h3>O núcleo em negrito</h3><p class="corpo">Na frase central do slide e no statement, o peso é a assinatura: 300 na frase inteira, o núcleo em 700 (frase) ou 800 (statement). Sem itálico.</p><div class="pilha"><div><div class="pilha-l"><p class="statement-inline" style="margin:0">A lembrança acompanha <strong>a porta,</strong> não a mídia.</p><p class="e-frase">Quatro canais respondem por <strong>85 % dos clientes novos.</strong></p></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-assinatura-strong">Copiar</button></div><pre><code id="c-assinatura-strong">&lt;p class="statement-inline"&gt;A lembrança acompanha &lt;strong&gt;a porta,&lt;/strong&gt; não a mídia.&lt;/p&gt;
+&lt;p class="e-frase"&gt;Quatro canais respondem por &lt;strong&gt;85 % dos clientes novos.&lt;/strong&gt;&lt;/p&gt;</code></pre></details></div></div><div class="pilha"><h3>O que não fazer</h3><div class="antes-agora"><div><span class="rotulo">Assim não</span><p class="e-title">Plano de <em>presença</em> de marca no <em>Cerrado</em></p><p class="nota">Dois <code>&lt;em&gt;</code> na mesma linha: a assinatura vira ruído.</p><p class="e-title">Plano de presença de marca <em>no</em> Cerrado</p><p class="nota"><code>&lt;em&gt;</code> numa preposição: o salto cai em quem não carrega sentido.</p><p class="e-frase"><strong>Quatro canais respondem por 85 % dos clientes novos.</strong></p><p class="nota">A frase inteira em negrito: nada salta.</p></div><div><span class="rotulo">Assim</span><p class="e-title">Plano de presença de marca no <em>Cerrado</em></p><p class="nota">Um <code>&lt;em&gt;</code>, no último termo, num nome.</p><p class="e-frase">Quatro canais respondem por <strong>85 % dos clientes novos.</strong></p><p class="nota">O núcleo em 700; o resto em 300.</p></div></div></div></div><aside class="margem fixa"><span class="n">1 por título</span><p>Um <code>&lt;em&gt;</code> por título, sempre no último termo, sempre num nome ou verbo. Preposição, artigo e número não carregam a assinatura.</p><p>Entrelinha 1 no <code>&lt;em&gt;</code> para o itálico maior não abrir a linha; o bloco de título fica entre 1,02 e 1,12.</p><p>O <code>&lt;strong&gt;</code> marca uma ideia só. Duas ideias em negrito na mesma frase é sinal de que a frase tem duas frases.</p></aside></div></section><section class="bloco" id="rotulo"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Rótulo e caixa alta</h2><p class="lead">O rótulo do sistema é <code>.rotulo</code>: caixa baixa, 13 px, peso 600, cor <code>--muted</code>, uma vez por seção ou capítulo. O olho de seção em caixa alta com espacejamento largo saiu do sistema: era o andaime mais reconhecível da geração automática e não carregava informação.</p></div><div class="pilha"><div><div class="pilha-l"><div><span class="rotulo">Capítulo 2</span>
+<p class="e-h2">Diagnóstico: onde a marca já é lembrada</p></div><div><span class="rotulo">Fonte</span>
+<p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas em seis cidades.</p></div></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-rotulo">Copiar</button></div><pre><code id="c-rotulo">&lt;span class="rotulo"&gt;Capítulo 2&lt;/span&gt;
+&lt;p class="e-h2"&gt;Diagnóstico: onde a marca já é lembrada&lt;/p&gt;
+&lt;span class="rotulo"&gt;Fonte&lt;/span&gt;
+&lt;p class="fonte"&gt;Pesquisa de junho de 2026, 1.240 entrevistas em seis cidades.&lt;/p&gt;</code></pre></details></div><div class="pilha"><h3>Caixa alta</h3><p class="corpo">Caixa alta fica em dois lugares: na moldura do visualizador do deck, que é mobília da sala e não da peça, e em sigla (IBGE, PDF, NPS). No texto corrido, nunca: nem em título, nem em botão, nem em cabeçalho de tabela, que fica em caixa baixa e peso 600.</p><div class="antes-agora"><div><span class="rotulo">Antes</span><p class="olho-antigo">02 · Diagnóstico</p><p class="e-h2">Onde a marca já é lembrada</p><p class="nota">Olho em caixa alta, 0,2em de espacejamento, ponto no meio. Repetido em toda seção.</p></div><div><span class="rotulo">Agora</span><span class="rotulo">Capítulo 2</span>
+<p class="e-h2">Diagnóstico: onde a marca já é lembrada</p><p class="nota">Rótulo em caixa baixa, 600, <code>--muted</code>. Uma vez, e só quando a ordem carrega informação.</p></div></div></div></div><aside class="margem fixa"><span class="n">1 por seção</span><p>O rótulo aparece uma vez por seção ou capítulo, e nunca acima de todo título: se todo título tem rótulo, nenhum tem.</p><p>Sigla em caixa alta sem espacejamento extra: IBGE, PDF. Unidade em caixa baixa: px, ch, ms.</p><p>O número de seção existe quando a ordem importa (capítulo, passo). Em tinta, peso 300, nunca em laranja.</p></aside></div></section><section class="bloco" id="numerais"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Numerais tabulares</h2><p class="lead">Todo número que se compara com outro usa <code>font-variant-numeric: tabular-nums</code>: cada algarismo ocupa a mesma largura e as colunas alinham. A classe <code>.num</code> faz isso em qualquer elemento; em <code>td.num</code> e <code>th.num</code> a tabela também alinha à direita.</p></div><div class="pilha"><div><div class="antes-agora">
+  <div><span class="rotulo">Proporcional</span><div class="e-num proporcional"><span>1.240</span><span>2.316</span><span>1.111</span><span>4.444</span></div><p class="nota">O 1 é estreito e a coluna dança.</p></div>
+  <div><span class="rotulo">Tabular, <code>.num</code></span><div class="e-num num"><span>1.240</span><span>2.316</span><span>1.111</span><span>4.444</span></div><p class="nota">Cada algarismo com a largura do 0; a coluna alinha.</p></div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-numerais">Copiar</button></div><pre><code id="c-numerais">&lt;div class="antes-agora"&gt;
+  &lt;div&gt;&lt;span class="rotulo"&gt;Proporcional&lt;/span&gt;&lt;div class="e-num proporcional"&gt;&lt;span&gt;1.240&lt;/span&gt;&lt;span&gt;2.316&lt;/span&gt;&lt;span&gt;1.111&lt;/span&gt;&lt;span&gt;4.444&lt;/span&gt;&lt;/div&gt;&lt;p class="nota"&gt;O 1 é estreito e a coluna dança.&lt;/p&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="rotulo"&gt;Tabular, &lt;code&gt;.num&lt;/code&gt;&lt;/span&gt;&lt;div class="e-num num"&gt;&lt;span&gt;1.240&lt;/span&gt;&lt;span&gt;2.316&lt;/span&gt;&lt;span&gt;1.111&lt;/span&gt;&lt;span&gt;4.444&lt;/span&gt;&lt;/div&gt;&lt;p class="nota"&gt;Cada algarismo com a largura do 0; a coluna alinha.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div><div class="pilha"><h3>Na tabela</h3><div class="pilha"><div><table class="tabela">
+<thead><tr><th>Cidade</th><th class="num">Lembrança</th><th class="num">Compra em 12 meses</th></tr></thead>
+<tbody>
+<tr><td>Rio Verde</td><td class="num">71 %</td><td class="num">52 %</td></tr>
+<tr><td>Jataí</td><td class="num">64 %</td><td class="num">41 %</td></tr>
+<tr><td>Chapadão do Céu</td><td class="num">55 %</td><td class="num">30 %</td></tr>
+<tr><td>Montividiu</td><td class="num">33 %</td><td class="num">19 %</td></tr>
+</tbody></table>
+<p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas. Compra em 12 meses: valores fictícios de amostra.</p></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-numerais-tabela">Copiar</button></div><pre><code id="c-numerais-tabela">&lt;table class="tabela"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Cidade&lt;/th&gt;&lt;th class="num"&gt;Lembrança&lt;/th&gt;&lt;th class="num"&gt;Compra em 12 meses&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Rio Verde&lt;/td&gt;&lt;td class="num"&gt;71 %&lt;/td&gt;&lt;td class="num"&gt;52 %&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Jataí&lt;/td&gt;&lt;td class="num"&gt;64 %&lt;/td&gt;&lt;td class="num"&gt;41 %&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Chapadão do Céu&lt;/td&gt;&lt;td class="num"&gt;55 %&lt;/td&gt;&lt;td class="num"&gt;30 %&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Montividiu&lt;/td&gt;&lt;td class="num"&gt;33 %&lt;/td&gt;&lt;td class="num"&gt;19 %&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p class="fonte"&gt;Pesquisa de junho de 2026, 1.240 entrevistas. Compra em 12 meses: valores fictícios de amostra.&lt;/p&gt;</code></pre></details></div></div></div><aside class="margem fixa"><span class="n">1 largura</span><p>Vale para contador, tabela, eixo de gráfico, número em linha, rodapé de slide e o número da margem. O texto de SVG com valor (<code>text.valor</code>, <code>text.tique</code>) já vem tabular pela camada.</p><p>Em prosa o numeral é proporcional, porque ali ninguém compara colunas.</p></aside></div></section><section class="bloco" id="medida"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Medida e entrelinha</h2><p class="lead">A prosa mede no máximo 64ch (<code>--measure</code>). O corpo de página lê a 15 px com entrelinha 1,6; o book lê a 17 px com 1,65. Título usa <code>text-wrap: balance</code>, para as linhas terminarem parecidas; prosa usa <code>text-wrap: pretty</code>, para não sobrar palavra sozinha na última linha.</p></div><div class="pilha"><h3>Prosa de book: 17 px, 1,65, 64ch</h3><div class="pilha"><div><p class="e-leitura-book">A Casa do Campo tem doze lojas em seis cidades e quarenta anos de porta aberta. É lembrada onde está há mais tempo e desconhecida a cinquenta quilômetros de qualquer loja. A comunicação até hoje foi feita loja a loja: a rádio local, o patrocínio da festa, o cartaz na feira. Nada disso está errado. O que falta é o sistema: uma mensagem que valha para as seis cidades, um calendário que não dependa do gerente de cada loja e um jeito de medir se a marca está sendo lembrada por quem ainda não comprou.</p></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-medida">Copiar</button></div><pre><code id="c-medida">&lt;p class="e-leitura-book"&gt;A Casa do Campo tem doze lojas em seis cidades e quarenta anos de porta aberta. É lembrada onde está há mais tempo e desconhecida a cinquenta quilômetros de qualquer loja. A comunicação até hoje foi feita loja a loja: a rádio local, o patrocínio da festa, o cartaz na feira. Nada disso está errado. O que falta é o sistema: uma mensagem que valha para as seis cidades, um calendário que não dependa do gerente de cada loja e um jeito de medir se a marca está sendo lembrada por quem ainda não comprou.&lt;/p&gt;</code></pre></details></div></div><div class="pilha"><h3>Título com e sem <code>balance</code></h3><div class="pilha"><div><div class="antes-agora">
+  <div><span class="rotulo">Sem <code>balance</code></span><p class="e-h2 sem-balance medida-demo">Onde a marca já é lembrada e onde a concorrente chegou primeiro</p><p class="nota">A última linha fica com uma palavra.</p></div>
+  <div><span class="rotulo">Com <code>text-wrap: balance</code></span><p class="e-h2 balance medida-demo">Onde a marca já é lembrada e onde a concorrente chegou primeiro</p><p class="nota">As linhas terminam parecidas. A camada aplica em <code>h1</code> a <code>h4</code>.</p></div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-balance">Copiar</button></div><pre><code id="c-balance">&lt;div class="antes-agora"&gt;
+  &lt;div&gt;&lt;span class="rotulo"&gt;Sem &lt;code&gt;balance&lt;/code&gt;&lt;/span&gt;&lt;p class="e-h2 sem-balance medida-demo"&gt;Onde a marca já é lembrada e onde a concorrente chegou primeiro&lt;/p&gt;&lt;p class="nota"&gt;A última linha fica com uma palavra.&lt;/p&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span class="rotulo"&gt;Com &lt;code&gt;text-wrap: balance&lt;/code&gt;&lt;/span&gt;&lt;p class="e-h2 balance medida-demo"&gt;Onde a marca já é lembrada e onde a concorrente chegou primeiro&lt;/p&gt;&lt;p class="nota"&gt;As linhas terminam parecidas. A camada aplica em &lt;code&gt;h1&lt;/code&gt; a &lt;code&gt;h4&lt;/code&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div></div><aside class="margem fixa"><span class="n">64ch</span><p>64 caracteres por linha no corpo; 15 no display (<code>max-width: 15ch</code>); 18 no statement; 22 na frase central do slide; 30 no número em linha.</p><p>Entrelinha cai quando o tamanho sobe: 1,6 no corpo, 1,5 no lead, 1,15 no título, 1,02 no display, 1 no numeral.</p><p>Quem escreve o texto controla a medida pela classe (<code>.lead</code>, <code>.corpo</code>, <code>.leitura</code>), não por <code>width</code> no elemento.</p></aside></div></section><section class="bloco" id="slide"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>No slide</h2><p class="lead">O slide de 1280 por 720 tem escala própria: menor que a de página em proporção, maior em pixels, porque é lido a distância e projetado. O piso é 14 px efetivos. Texto de SVG conta multiplicado pela escala do <code>viewBox</code>: 12 px num <code>viewBox</code> de 640 exibido a 853 medem 16 e passam; os mesmos 12 px num <code>viewBox</code> de 1088 exibido a 1088 medem 12 e reprovam.</p></div><div class="rolagem"><table class="papeis">
+<thead><tr><th>Elemento</th><th>Tamanho</th><th>Peso</th><th>Onde e limite</th></tr></thead>
+<tbody>
+<tr><td>Título da faixa</td><td>36 px</td><td>700</td><td><code>.faixa h2</code>; até 48 caracteres; o <code>&lt;em&gt;</code> em 800 só na capa</td></tr>
+<tr><td>Frase central</td><td>22 px; 24 na faixa laranja</td><td>300, núcleo em 700</td><td><code>.faixa .frase</code>; até 110 caracteres; obrigatória em toda faixa</td></tr>
+<tr><td>Título do slide quieto</td><td>40 px</td><td>700</td><td><code>.s-quieto .conteudo h2</code>; até 60 caracteres</td></tr>
+<tr><td>Statement</td><td>64 px; 48 sobre foto</td><td>300, núcleo em 800</td><td><code>.s-cheio .statement</code>; até 70 caracteres; 16ch de medida</td></tr>
+<tr><td>Citação</td><td>44 px</td><td>300, núcleo em 700</td><td><code>.citacao</code>; até 120 caracteres; atribuição em 17 px</td></tr>
+<tr><td>Subtítulo</td><td>24 px</td><td>600</td><td><code>.conteudo h3</code></td></tr>
+<tr><td>Corpo</td><td>19 px</td><td>400</td><td><code>.conteudo</code>, <code>.duas-colunas</code>; entrelinha 1,45 a 1,5</td></tr>
+<tr><td>Lista</td><td>20 px o título, 17 a descrição</td><td>600 e 400</td><td><code>.recap</code>, <code>.fase</code>, <code>.atores</code>; título até 50 caracteres, descrição até 110</td></tr>
+<tr><td>Tabela</td><td>17 px; 15 no registro topo</td><td>400, cabeçalho 600 a 15</td><td><code>.tabela</code>; célula até 40 caracteres; seis colunas e seis linhas no topo</td></tr>
+<tr><td>Fonte, capítulo, contador</td><td>15 px</td><td>400</td><td><code>.fonte</code>, <code>.cap</code>, <code>.pe</code>, <code>.rodape-slide</code></td></tr>
+<tr><td>Rótulo e valor de gráfico</td><td>16 e 17 px</td><td>500 e 600</td><td><code>.grafico text.rotulo</code>, <code>text.valor</code></td></tr>
+<tr><td>Tique de gráfico</td><td>14 px</td><td>400</td><td><code>.grafico text.tique</code>, <code>text.anota</code>; o piso do slide</td></tr>
+<tr><td>Contador da faixa</td><td>28 px</td><td>300</td><td><code>.pe .contador b</code>; no quieto, 32 px em <code>.cromo .contador b</code></td></tr>
+<tr><td>Numeral de separatriz</td><td>260 px</td><td>300</td><td><code>.separatriz-numeral</code>; espacejamento -0,05em; em tinta</td></tr>
+</tbody></table></div><p class="corpo">Os tamanhos do slide ficam em <code>deck.css</code>, em pixel fixo, e não usam os tokens <code>--t-*</code>: o slide não muda com a janela, muda com a escala do visualizador. A escala menor é a regra: título em 36 ou 40, corpo em 19, margens de 72 a 120 px, conteúdo no alto e base livre.</p></div><aside class="margem fixa"><span class="n">14 px</span><p>Piso de 14 px efetivos no slide, contra 11,5 na página, porque o slide é visto de longe e sai em PDF.</p><p>A verificação de cada deck mede a menor fonte efetiva de cada slide, o que sai dos 1280 por 720 e o texto sobre texto. Abaixo de 14, o slide volta.</p></aside></div></section>
+<footer class="rodape"><div class="container">8020-DS, candidato 4.0. Patterns, rodada 7, 2026-09-07.</div></footer>
+<script src="../assets/pagina.js"></script>
+</body>
+</html>

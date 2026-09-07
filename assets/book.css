@@ -1,0 +1,129 @@
+/* ============================================================
+   8020-DS 4.0, assets/book.css
+   A camada de book: a margem viva como instrumento de leitura. Hub
+   como mapa, trilha e progresso no topo, abertura de parte com
+   numeral, capítulo com notas de rodapé na margem, figura com legenda
+   na margem, scrollytelling dirigido pela margem (a mecânica está em
+   regua.css), fichas de público, foto ao lado de texto, recap,
+   anterior e próximo, atalhos e impressão. Depende de tokens/8020.css
+   e de assets/regua.css; o book.js dá vida à margem.
+   ============================================================ */
+
+/* ---------- topo: trilha, progresso e atalhos ---------- */
+.progresso-leitura { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: var(--ink); z-index: 30; }
+.topo .trilha { display: flex; align-items: baseline; gap: 10px; font-size: var(--t-small); color: var(--muted); min-width: 0; }
+.topo .trilha .sep { color: var(--rule-strong); }
+.topo .trilha .atual { color: var(--ink); font-weight: var(--w-rotulo); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topo .direita { margin-left: auto; display: flex; align-items: center; gap: var(--s-5); }
+.pular { position: absolute; left: -999px; top: 8px; z-index: 40; background: var(--ink); color: var(--paper); padding: 8px 12px; font-size: var(--t-small); }
+.pular:focus { left: 8px; }
+
+/* ---------- hub: o mapa das partes ---------- */
+.hub { padding: var(--s-9) 0 var(--s-8); }
+.hub h1 { font-size: var(--t-display); font-weight: var(--w-fino); letter-spacing: -.03em; line-height: 1.02; max-width: 14ch; }
+.hub h1 strong { font-weight: var(--w-display); }
+.hub .capa-meta { display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-6); font-size: var(--t-small); color: var(--meta); margin-top: var(--s-5); }
+.hub .capa-meta b { color: var(--ink); font-weight: var(--w-rotulo); }
+.continuar { border-top: 1px solid var(--ink); padding-top: var(--s-4); display: grid; gap: var(--s-3); }
+.continuar p { font-size: var(--t-body); color: var(--ink-body); }
+.mapa { display: grid; gap: var(--s-6); }
+.parte { display: grid; grid-template-columns: 5ch 1fr auto; gap: var(--s-5); align-items: baseline; border-top: 1px solid var(--ink); padding-top: var(--s-3); }
+.parte .num { font-size: var(--t-title); font-weight: var(--w-fino); letter-spacing: -.03em; color: var(--ink); line-height: 1; }
+.parte h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); letter-spacing: -.01em; }
+.parte h3 a { text-decoration: none; }
+.parte h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.parte .tempo { font-size: var(--t-small); color: var(--meta); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.parte ol { list-style: none; margin: var(--s-3) 0 0; padding: 0; display: grid; }
+.parte li { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-3); align-items: baseline; padding: 8px 0; border-top: 1px solid var(--rule); font-size: var(--t-body); }
+.parte li .est { font-size: var(--t-micro); color: var(--meta); white-space: nowrap; }
+.parte li .est.atual { color: var(--ink); font-weight: var(--w-rotulo); }
+.hub-foto { margin-top: var(--s-8); }
+.hub-foto img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+.hub-foto .legenda { margin-top: 12px; }
+
+/* ---------- abertura de parte e cabeça de capítulo ---------- */
+.abre-parte { padding: var(--s-section) 0 var(--s-8); border-top: 1px solid var(--rule); }
+.abre-parte .numeral { font-size: var(--t-numeral); font-weight: var(--w-fino); letter-spacing: -.05em; line-height: .8; color: var(--ink); }
+.abre-parte h1, .abre-parte h2 { font-size: var(--t-title); font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.1; margin-top: var(--s-5); }
+.abre-parte .frase { font-size: var(--t-h3); font-weight: var(--w-fino); line-height: 1.35; color: var(--ink); margin-top: var(--s-4); max-width: 28ch; }
+.abre-parte .frase strong { font-weight: var(--w-titulo); }
+.capitulo { padding: var(--s-8) 0; border-top: 1px solid var(--rule); scroll-margin-top: 72px; }
+.capitulo > .container > .cabeca { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 1fr); column-gap: var(--s-7); margin-bottom: var(--s-7); }
+.capitulo h2 { font-size: var(--t-h2); font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.15; }
+.capitulo .cap-meta { font-size: var(--t-small); color: var(--meta); margin-bottom: var(--s-3); }
+.capitulo .cap-meta b { color: var(--ink); font-weight: var(--w-rotulo); }
+.capitulo .cabeca .margem { border-top: 1px solid var(--ink); padding-top: var(--s-3); }
+
+/* ---------- prosa com notas na margem ---------- */
+.prosa { font-size: var(--t-leitura); line-height: var(--lh-leitura); max-width: var(--measure); color: var(--ink-body); text-wrap: pretty; }
+.prosa p + p { margin-top: 1.2em; }
+.prosa h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); letter-spacing: -.01em; margin: 2em 0 .8em; }
+.prosa ul, .prosa ol { padding-left: 1.2em; margin: 1em 0; }
+.prosa li + li { margin-top: .4em; }
+.prosa .chamada { font-weight: var(--w-rotulo); color: var(--ink); font-size: .8em; vertical-align: super; line-height: 0; margin-left: 2px; text-decoration: none; }
+.prosa .chamada:hover { color: var(--accent); }
+.folha.com-notas { position: relative; }
+.folha.com-notas > .margem { position: relative; min-height: 100%; }
+.nota-m { font-size: var(--t-small); color: var(--muted); line-height: 1.5; border-top: 1px solid var(--rule-strong); padding-top: 8px; }
+.nota-m b { color: var(--ink); font-weight: var(--w-rotulo); margin-right: 6px; }
+.nota-m + .nota-m { margin-top: var(--s-5); }
+@media (min-width: 900px) { .nota-m.posta { position: absolute; left: 0; right: 0; margin-top: 0; } }
+
+/* ---------- figura, foto de página inteira, foto ao lado ---------- */
+.figura img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-media); }
+.figura.tres-dois img { aspect-ratio: 3 / 2; }
+.figura.livre img { aspect-ratio: auto; }
+.cheia { margin: var(--s-8) 0; }
+.cheia img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+.lado { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); align-items: start; margin: var(--s-7) 0; }
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* ---------- fichas de público ---------- */
+.fichas { display: grid; gap: var(--s-7); }
+.ficha { display: grid; grid-template-columns: 220px 1fr; gap: var(--s-6); align-items: start; border-top: 1px solid var(--ink); padding-top: var(--s-5); }
+.ficha img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.ficha h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); letter-spacing: -.01em; }
+.ficha .papel { font-size: var(--t-small); color: var(--meta); margin-top: 4px; }
+.ficha .frase { font-size: var(--t-lead); font-weight: var(--w-fino); line-height: 1.4; color: var(--ink); margin: var(--s-4) 0; max-width: 34ch; }
+.ficha .frase strong { font-weight: var(--w-titulo); }
+.ficha dl { display: grid; grid-template-columns: 14ch 1fr; gap: 6px var(--s-4); margin: 0; font-size: var(--t-small); }
+.ficha dt { color: var(--muted); } .ficha dd { margin: 0; color: var(--ink-body); }
+
+/* ---------- linha do tempo vertical ---------- */
+.linha-tempo { list-style: none; margin: 0; padding: 0; display: grid; }
+.linha-tempo li { display: grid; grid-template-columns: 18ch 1fr; gap: var(--s-5); padding: var(--s-4) 0; border-top: 1px solid var(--rule); font-size: var(--t-body); }
+.linha-tempo li:last-child { border-bottom: 1px solid var(--rule); }
+.linha-tempo .quando { font-variant-numeric: tabular-nums; color: var(--meta); font-size: var(--t-small); }
+.linha-tempo li.agora { border-top: 2px solid var(--ink); }
+.linha-tempo li.agora .quando { color: var(--ink); font-weight: var(--w-rotulo); }
+.linha-tempo li.agora .quando::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--accent); margin-right: 8px; }
+.linha-tempo b { display: block; color: var(--ink); font-weight: var(--w-rotulo); }
+
+/* ---------- recap e navegação entre partes ---------- */
+.navega { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); margin-top: var(--s-7); }
+.navega a { display: grid; gap: 4px; text-decoration: none; border-top: 1px solid var(--ink); padding-top: var(--s-3); }
+.navega a .rot { font-size: var(--t-micro); color: var(--meta); }
+.navega a .tit { font-size: var(--t-lead); font-weight: var(--w-rotulo); color: var(--ink); }
+.navega a.prox { text-align: right; }
+.navega a:hover .tit { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+/* ---------- responsivo ---------- */
+@media (max-width: 899px) {
+  .capitulo > .container > .cabeca { grid-template-columns: 1fr; }
+  .lado, .navega { grid-template-columns: 1fr; }
+  .ficha { grid-template-columns: 1fr; } .ficha img { max-width: 260px; }
+  .linha-tempo li { grid-template-columns: 1fr; gap: 4px; }
+  .topo .trilha { display: none; }
+}
+@media (max-width: 599px) { .topo .direita kbd { display: none; } .parte { grid-template-columns: 4ch 1fr; } .parte .tempo { grid-column: 2; } }
+
+/* ---------- impressão: a margem vira coluna de 20 %, quebra antes de cada capítulo ---------- */
+@media print {
+  .topo, .progresso-leitura, .atalhos, .continuar .tinta, .navega { display: none !important; }
+  .capitulo { break-before: page; }
+  .folha { grid-template-columns: 4fr 1fr; }
+  .nota-m.posta { position: static; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}

@@ -1,0 +1,192 @@
+/* ============================================================
+   8020-DS 4.0, tokens/8020.css
+   A camada de tokens: primitivos, papéis semânticos, escala de
+   tipo, escala de espaço, forma, movimento, a rampa de dado e os
+   dois momentos. As camadas de layout (assets/regua.css, deck.css,
+   book.css) consomem só os papéis, nunca a cor crua.
+   Sem build, sem CDN. Montserrat variável servida de assets/fonts.
+   ============================================================ */
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-variable.ttf") format("truetype");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Italic-variable.ttf") format("truetype");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+
+:root {
+  /* ---------- primitivos: os valores da marca, seis cores e nada mais ---------- */
+  --8020-laranja:   #fa4616;   /* a marca */
+  --8020-laranja-d: #d63a10;   /* laranja aprofundado: superfície dentro do momento laranja */
+  --8020-branco:    #ffffff;
+  --8020-preto:     #0a0a0a;
+  --8020-chumbo:    #15110d;   /* o chão: rodapé, contracapa, moldura do visualizador */
+  --8020-chumbo-2:  #1d1611;   /* superfície dentro do momento escuro */
+  --8020-papel:     #faf7f2;   /* o substrato de toda peça */
+  --8020-areia:     #f3ede4;   /* contenção sem borda sobre o papel */
+  --8020-tinta:     #1a140f;   /* chumbo quente: título, número, ação */
+  --8020-tinta-2:   #2a201a;   /* corpo */
+  --8020-noite:     #120e0b;   /* o papel do momento escuro */
+
+  /* ---------- papéis semânticos, base papel ---------- */
+  --paper:       var(--8020-papel);
+  --surface:     var(--8020-branco);
+  --surface-2:   var(--8020-areia);
+  --ink:         var(--8020-tinta);
+  --ink-body:    var(--8020-tinta-2);
+  --ink-soft:    rgba(26, 20, 15, .72);   /* corpo secundário, lead: 7,0:1 */
+  --muted:       rgba(26, 20, 15, .66);   /* rótulo, legenda, sub: 5,7:1 */
+  --meta:        rgba(26, 20, 15, .60);   /* fonte, meta, contador: 4,7:1, o mínimo do sistema para texto */
+  --rule:        rgba(26, 20, 15, .14);   /* filete estrutural, separador de linha */
+  --rule-strong: rgba(26, 20, 15, .50);   /* filete de abertura, sublinhado de campo: 3,4:1, o mínimo para borda de controle */
+  --hairline:    rgba(26, 20, 15, .07);   /* grade de gráfico, fundo de miniatura */
+  --accent:      var(--8020-laranja);     /* quatro papéis: momento, ação, estado atual, o 20 do dado */
+  --accent-ink:  var(--8020-branco);      /* só em texto de 24 px ou mais sobre o laranja */
+  --floor:       var(--8020-chumbo);
+  --floor-ink:   var(--8020-branco);
+  --focus:       var(--8020-tinta);       /* anel de 2 px com 2 px de afastamento */
+  --negative:    var(--8020-tinta);       /* dado negativo em chumbo, nunca vermelho */
+  --logo-invert: 1;                       /* a logo branca invertida sobre o papel; os momentos zeram */
+
+  /* ---------- a rampa de dado: uma tonalidade, quatro degraus, validada ---------- */
+  --dado-1: var(--ink);
+  --dado-2: rgba(26, 20, 15, .64);
+  --dado-3: rgba(26, 20, 15, .40);
+  --dado-4: rgba(26, 20, 15, .20);
+  --dado-0: var(--surface-2);             /* sem dado */
+
+  /* ---------- tipografia: uma família, a escala com salto ---------- */
+  --font: "Montserrat", system-ui, sans-serif;
+  --w-fino: 300; --w-corpo: 400; --w-medio: 500; --w-rotulo: 600; --w-titulo: 700; --w-display: 800;
+  --t-micro: 11.5px;     /* rodapé de slide, legenda de eixo: o mínimo do sistema */
+  --t-small: 13px;       /* meta, fonte, tabela densa */
+  --t-body: 15px;        /* corpo */
+  --t-leitura: 17px;     /* prosa de book */
+  --t-lead: 18px;        /* abertura de seção, prova */
+  --t-h3: 22px;          /* subtítulo, nome de componente */
+  --t-h2: 28px;          /* título de seção, título de slide quieto */
+  --t-title: 36px;       /* título de página, separatriz, faixa do slide */
+  --t-statement: 48px;   /* statement, citação */
+  --t-display: clamp(56px, 7vw, 96px);        /* capa, hero; 96 é o teto */
+  --t-numeral: clamp(120px, 20vw, 280px);     /* numeral de capítulo, peso 300, em tinta */
+  --lh-tight: 1.05; --lh-title: 1.15; --lh-body: 1.6; --lh-leitura: 1.65;
+
+  /* ---------- espaço: base de 4 px, dez passos e as três distâncias ---------- */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+  --s-section: clamp(64px, 10vw, 160px);  /* entre seções */
+  --measure: 64ch;                        /* largura máxima de prosa */
+  --max: 1240px;
+  --max-prose: 900px;
+  --gutter: clamp(20px, 5vw, 96px);
+
+  /* ---------- forma: reto por padrão ---------- */
+  --r-0: 0;            /* bloco, tabela, controle, foto de slide */
+  --r-media: 6px;      /* só mídia de book */
+  --registro: 4px;     /* o deslocamento da chapa do botão primário */
+
+  /* ---------- movimento: só transform e opacidade, saída exponencial ---------- */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --dur-fast: 120ms; --dur: 260ms; --dur-slow: 480ms;
+
+  /* ---------- slide ---------- */
+  --sl-w: 1280px; --sl-h: 720px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur: 1ms; --dur-fast: 1ms; --dur-slow: 1ms; }
+}
+
+/* impressão: o laranja e o chumbo são identidade, não decoração */
+@media print {
+  :where(html) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ============================================================
+   MOMENTOS. Aplicar em slide, seção ou bloco. Teto: um momento de
+   página inteira por capítulo, nunca em dois slides seguidos; em
+   bloco menor conta no teto de três acentos por página.
+   ============================================================ */
+
+/* laranja: título e statement em branco (24 px ou mais); todo texto
+   pequeno em preto, porque branco sobre laranja fica em 3,5:1. A rampa
+   de dado é de preto e o 20 é branco: o validador reprovou a rampa branca. */
+.tema-laranja {
+  --paper:       var(--8020-laranja);
+  --surface:     var(--8020-laranja-d);
+  --surface-2:   var(--8020-laranja-d);
+  --ink:         var(--8020-branco);
+  --ink-body:    rgba(10, 10, 10, .88);
+  --ink-soft:    rgba(10, 10, 10, .84);
+  --muted:       rgba(10, 10, 10, .84);
+  --meta:        rgba(10, 10, 10, .80);
+  --rule:        rgba(10, 10, 10, .30);
+  --rule-strong: rgba(10, 10, 10, .55);
+  --hairline:    rgba(10, 10, 10, .14);
+  --accent:      var(--8020-branco);
+  --accent-ink:  var(--8020-preto);
+  --focus:       var(--8020-branco);
+  --negative:    var(--8020-preto);
+  --dado-1: var(--8020-preto);
+  --dado-2: rgba(10, 10, 10, .64);
+  --dado-3: rgba(10, 10, 10, .40);
+  --dado-4: rgba(10, 10, 10, .20);
+  --dado-0: rgba(255, 255, 255, .22);
+  --logo-invert: 0;
+  background: var(--paper); color: var(--ink);
+}
+
+/* escuro: branco a 100, 64, 40 e 20 % sobre a noite; o laranja continua o 20 */
+.tema-escuro {
+  --paper:       var(--8020-noite);
+  --surface:     var(--8020-chumbo-2);
+  --surface-2:   var(--8020-chumbo-2);
+  --ink:         var(--8020-branco);
+  --ink-body:    rgba(255, 255, 255, .86);
+  --ink-soft:    rgba(255, 255, 255, .74);
+  --muted:       rgba(255, 255, 255, .66);
+  --meta:        rgba(255, 255, 255, .52);
+  --rule:        rgba(255, 255, 255, .18);
+  --rule-strong: rgba(255, 255, 255, .42);
+  --hairline:    rgba(255, 255, 255, .09);
+  --accent:      var(--8020-laranja);
+  --accent-ink:  var(--8020-branco);
+  --focus:       var(--8020-branco);
+  --negative:    rgba(255, 255, 255, .5);
+  --dado-1: var(--8020-branco);
+  --dado-2: rgba(255, 255, 255, .64);
+  --dado-3: rgba(255, 255, 255, .40);
+  --dado-4: rgba(255, 255, 255, .20);
+  --dado-0: var(--8020-chumbo-2);
+  --logo-invert: 0;
+  background: var(--paper); color: var(--ink);
+}
+
+/* ============================================================
+   BASE. Especificidade baixa, para a camada de layout sobrescrever.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+:where(html) { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { :where(html) { scroll-behavior: auto; } }
+:where(body) {
+  margin: 0; font-family: var(--font); font-weight: var(--w-corpo); font-size: var(--t-body); line-height: var(--lh-body);
+  color: var(--ink-body); background: var(--paper);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+:where(h1, h2, h3, h4) { color: var(--ink); margin: 0; line-height: var(--lh-title); text-wrap: balance; }
+:where(p) { margin: 0; }
+:where(strong, b) { font-weight: var(--w-rotulo); color: var(--ink); }
+:where(em) { font-style: italic; font-weight: var(--w-fino); }
+:where(img, svg) { max-width: 100%; }
+:where(img) { display: block; height: auto; }
+:where(a) { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--rule-strong); transition: text-decoration-color var(--dur-fast) var(--ease-out); }
+:where(a:hover) { text-decoration-color: var(--ink); text-decoration-thickness: 2px; }
+:where(button, input, select, textarea) { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.num, .tab, td.num, th.num { font-variant-numeric: tabular-nums; }
+/* a assinatura da marca: o último termo do título salta para o itálico, um peso acima */
+.assinatura em, h1 > em, .display em { font-style: italic; font-weight: calc(var(--w-display) + 100); font-size: 1.06em; line-height: 1; }

@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book, patterns do 8020-DS 4.0</title>
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="../assets/book.css">
+<link rel="stylesheet" href="_catalogo.css">
+<style>
+/* onze seções não cabem na linha do topo entre 900 e 1099 px; a lista some, como a régua faz abaixo de 700 */
+@media (max-width: 1099px) { .topo nav { display: none; } }
+/* o catálogo aninha um book dentro da própria folha: sem o recuo do container, sem o topo grudado,
+   sem o padding de página dos blocos de book */
+.exemplo .container { padding: 0; max-width: none; }
+.exemplo.topo { position: static; }
+.exemplo.hub, .exemplo.abre-parte, .exemplo.capitulo { padding: 0; border-top: 0; }
+.exemplo.momento { padding: var(--s-7) var(--s-6); }
+/* o título de parte e de capítulo desce um nível no exemplo vivo (a página já tem h1 e h2); no book é h2 */
+.exemplo .titulo-parte { font-size: var(--t-title); font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.1; margin-top: var(--s-5); }
+.exemplo .titulo-cap { font-size: var(--t-h2); font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.15; }
+/* regua.css dá 640 px de teto ao .mapa (o mapa do IBGE); o mapa do hub é outro e ocupa a coluna */
+.hub .mapa { max-width: none; }
+/* a tecla do mapa de teclado, no desenho do kbd do topo */
+.mapa-teclas kbd { font: inherit; font-size: var(--t-micro); color: var(--ink); border: 1px solid var(--rule-strong); padding: 1px 6px; margin-right: 4px; white-space: nowrap; }
+/* os estados do scrollytelling de exemplo, como toda página de book escreve os seus */
+.fixo[data-estado="2"] rect.vinte, .fixo[data-estado="3"] rect.vinte { fill: var(--accent); }
+.fixo[data-estado="3"] rect.resto { opacity: .25; }
+</style>
+</head>
+<body data-book="catalogo-book-8020">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="hachura-laranja" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fa4616"/><line x1="0" y1="0" x2="0" y2="6" stroke="#1a140f" stroke-width="1.2"/></pattern></defs></svg>
+<div class="progresso-leitura" id="progresso" aria-hidden="true"></div>
+<div class="topo"><div class="container"><a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a><nav aria-label="Seções"><a class="peso" data-t="Hub" href="#hub">Hub</a><a class="peso" data-t="Parte" href="#abre-parte">Parte</a><a class="peso" data-t="Capítulo" href="#capitulo">Capítulo</a><a class="peso" data-t="Figura" href="#figura">Figura</a><a class="peso" data-t="Scrolly" href="#scrolly">Scrolly</a><a class="peso" data-t="Fichas" href="#fichas">Fichas</a><a class="peso" data-t="Linha do tempo" href="#linha-tempo">Linha do tempo</a><a class="peso" data-t="Momento" href="#momento">Momento</a><a class="peso" data-t="Anterior e próximo" href="#navega">Anterior e próximo</a><a class="peso" data-t="Trilha" href="#trilha">Trilha</a><a class="peso" data-t="Impressão" href="#impressao">Impressão</a></nav><span class="meta">book.html</span></div></div>
+<section class="abertura"><div class="container folha"><div class="miolo"><h1>Book: a margem <strong>é o instrumento</strong> de leitura.</h1><p class="lead">Quatro partes de conteúdo, uma de margem viva. O book escreve na margem o que a leitura pede naquele ponto: a nota de rodapé ao lado do parágrafo, a legenda ao lado da figura, o passo do scrollytelling, o tempo de cada capítulo. O <code>book.css</code> dá a forma e o <code>book.js</code> dá vida à margem. Os exemplos abaixo são vivos: as notas se alinham, o scrollytelling troca de estado, as teclas respondem.</p></div><aside class="margem fixa"><span class="n">1/5 da folha</span><p>A margem de um quinto é fixa em toda peça: no hub, na abertura de parte, no capítulo, no recap. Abaixo de 900 px ela desce para baixo do conteúdo.</p><p>Aqui os exemplos moram dentro da folha do catálogo, por isso a margem deles é mais estreita que a de um book de verdade.</p><p>Caminhos de imagem em <code>../assets/</code>. No hub do book, <code>../../../assets/</code>; nas partes, <code>../../../../assets/</code>.</p></aside></div></section>
+<section class="bloco" id="hub"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>O hub como mapa</h2><p class="lead">O hub é a capa e o sumário ao mesmo tempo: as partes com os capítulos, o tempo de leitura de cada uma e o estado de cada capítulo pelo quadrado. Na margem, o bloco de continuar de onde parou, que o <code>book.js</code> preenche do navegador.</p></div><div class="hub exemplo">
+  <div class="folha">
+    <div class="miolo">
+      <p class="fonte">Book de plataforma de comunicação, julho de 2026</p>
+      <div class="capa-meta"><span>Para <b>Helena Vasconcelos</b> e a equipe da Casa do Campo</span><span>Três partes, sete capítulos</span><span><b>41 min</b> de leitura</span></div>
+      <div class="mapa" style="margin-top:var(--s-6)">
+        <div class="parte"><span class="num">1</span><div><h3>Leitura do desafio</h3><ol><li><span class="quadrado contorno"></span><a class="peso lido" data-t="A empresa que chega ao Cerrado" href="#hub">A empresa que chega ao Cerrado</a><span class="est">lido</span></li><li><span class="quadrado contorno"></span><a class="peso lido" data-t="O que muda na comunicação da rede" href="#hub">O que muda na comunicação da rede</a><span class="est">lido</span></li></ol></div><span class="tempo">9 min</span></div>
+        <div class="parte"><span class="num">2</span><div><h3>Diagnóstico: onde a marca já é lembrada</h3><ol><li><span class="quadrado tinta"></span><a class="peso" data-t="Onde a marca já é lembrada" href="#cap-1">Onde a marca já é lembrada</a><span class="est atual">você está aqui</span></li><li><span class="quadrado meta"></span><a class="peso" data-t="De onde vêm os clientes novos" href="#scrolly">De onde vêm os clientes novos</a><span class="est">7 min</span></li><li><span class="quadrado meta"></span><a class="peso" data-t="Três públicos, uma frase para cada" href="#fichas">Três públicos, uma frase para cada</a><span class="est">8 min</span></li></ol></div><span class="tempo">19 min</span></div>
+        <div class="parte"><span class="num">3</span><div><h3>Mensagem, canais e cronograma</h3><ol><li><span class="quadrado meta"></span><a class="peso" data-t="A mensagem que cabe na porta do armazém" href="#momento">A mensagem que cabe na porta do armazém</a><span class="est">6 min</span></li><li><span class="quadrado meta"></span><a class="peso" data-t="Cronograma de entrada" href="#linha-tempo">Cronograma de entrada</a><span class="est">7 min</span></li></ol></div><span class="tempo">13 min</span></div>
+      </div>
+    </div>
+    <aside class="margem fixa">
+      <span class="n">3 partes</span>
+      <div class="continuar"><p id="continuar-texto">Você ainda não começou. A parte 1 leva nove minutos.</p><a class="tinta" href="#cap-1" id="continuar-acao">Começar <span class="meta">parte 1, 9 min</span></a></div>
+      <p style="margin-top:var(--s-6)"><span class="quadrado tinta"></span>onde você está<br><span class="quadrado contorno"></span>lido<br><span class="quadrado meta"></span>por ler</p>
+      <p>O progresso fica no seu navegador. Nada sai daqui.</p>
+    </aside>
+  </div>
+</div>
+<p class="nota">O exemplo vivo deixa o <code>h1</code> de fora: a página já tem o seu. No book, o título da peça é o <code>h1</code> do hub, com o último termo em <code>em</code>. Os quadrados dizem o estado de cada capítulo: tinta é onde o leitor está, contorno é lido, meta é por ler. O bloco de continuar e o quadrado de tinta são reescritos pelo <code>book.js</code> a partir do que ficou guardado no navegador; sem nada guardado, o texto e o botão são os que o autor escreveu.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-hub">Copiar</button></div><pre><code id="c-hub">&lt;body data-book="book-casa-do-campo"&gt;
+&lt;div class="progresso-leitura" id="progresso" aria-hidden="true"&gt;&lt;/div&gt;
+&lt;header class="topo"&gt;...&lt;/header&gt;
+
+&lt;section class="hub" id="hub"&gt;
+  &lt;div class="container folha"&gt;
+    &lt;div class="miolo"&gt;
+      &lt;p class="fonte"&gt;Book de plataforma de comunicação, julho de 2026&lt;/p&gt;
+      &lt;h1&gt;Plano de presença de marca no &lt;em&gt;Cerrado&lt;/em&gt;&lt;/h1&gt;
+      &lt;div class="capa-meta"&gt;&lt;span&gt;Para &lt;b&gt;Helena Vasconcelos&lt;/b&gt; e a equipe da Casa do Campo&lt;/span&gt;&lt;span&gt;Três partes, sete capítulos&lt;/span&gt;&lt;span&gt;&lt;b&gt;41 min&lt;/b&gt; de leitura&lt;/span&gt;&lt;/div&gt;
+      &lt;div class="mapa"&gt;
+        &lt;div class="parte"&gt;&lt;span class="num"&gt;1&lt;/span&gt;&lt;div&gt;&lt;h3&gt;Leitura do desafio&lt;/h3&gt;&lt;ol&gt;
+          &lt;li&gt;&lt;span class="quadrado contorno"&gt;&lt;/span&gt;&lt;a class="peso lido" data-t="A empresa que chega ao Cerrado" href="partes/1.html#cap-1"&gt;A empresa que chega ao Cerrado&lt;/a&gt;&lt;span class="est"&gt;lido&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span class="quadrado contorno"&gt;&lt;/span&gt;&lt;a class="peso lido" data-t="O que muda na comunicação da rede" href="partes/1.html#cap-2"&gt;O que muda na comunicação da rede&lt;/a&gt;&lt;span class="est"&gt;lido&lt;/span&gt;&lt;/li&gt;
+        &lt;/ol&gt;&lt;/div&gt;&lt;span class="tempo"&gt;9 min&lt;/span&gt;&lt;/div&gt;
+        &lt;div class="parte"&gt;&lt;span class="num"&gt;2&lt;/span&gt;&lt;div&gt;&lt;h3&gt;Diagnóstico: onde a marca já é lembrada&lt;/h3&gt;&lt;ol&gt;
+          &lt;li&gt;&lt;span class="quadrado tinta"&gt;&lt;/span&gt;&lt;a class="peso" data-t="Onde a marca já é lembrada" href="partes/parte-2.html#cap-1"&gt;Onde a marca já é lembrada&lt;/a&gt;&lt;span class="est atual"&gt;você está aqui&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span class="quadrado meta"&gt;&lt;/span&gt;&lt;a class="peso" data-t="De onde vêm os clientes novos" href="partes/parte-2.html#cap-2"&gt;De onde vêm os clientes novos&lt;/a&gt;&lt;span class="est"&gt;7 min&lt;/span&gt;&lt;/li&gt;
+        &lt;/ol&gt;&lt;/div&gt;&lt;span class="tempo"&gt;19 min&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;aside class="margem fixa"&gt;
+      &lt;span class="n"&gt;3 partes&lt;/span&gt;
+      &lt;div class="continuar"&gt;&lt;p id="continuar-texto"&gt;Você ainda não começou. A parte 1 leva nove minutos.&lt;/p&gt;&lt;a class="tinta" href="partes/1.html#cap-1" id="continuar-acao"&gt;Começar &lt;span class="meta"&gt;parte 1, 9 min&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;
+      &lt;p&gt;&lt;span class="quadrado tinta"&gt;&lt;/span&gt;onde você está&lt;br&gt;&lt;span class="quadrado contorno"&gt;&lt;/span&gt;lido&lt;br&gt;&lt;span class="quadrado meta"&gt;&lt;/span&gt;por ler&lt;/p&gt;
+      &lt;p&gt;O progresso fica no seu navegador. Nada sai daqui.&lt;/p&gt;
+    &lt;/aside&gt;
+  &lt;/div&gt;
+  &lt;div class="container hub-foto"&gt;&lt;img src="../assets/imagens/cerrado-lavoura.jpg" alt="Estrada de terra vermelha entre lavouras de soja, silos no horizonte, céu aberto do Cerrado goiano"&gt;&lt;p class="legenda"&gt;&lt;b&gt;Sudoeste de Goiás.&lt;/b&gt; Seis cidades, doze lojas, quarenta anos de porta aberta. Imagem ilustrativa gerada para o exemplo.&lt;/p&gt;&lt;/div&gt;
+&lt;/section&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">3 estados</span><p>Tinta é onde o leitor está; contorno é lido; meta é por ler. O quadrado é o único ícone, e a cor dele é o estado.</p><p>O tempo por parte e por capítulo é a soma da leitura a 200 palavras por minuto, arredondada. Está escrito à mão.</p><p>Um book com uma parte só dispensa o hub: a abertura de parte faz o papel.</p></aside></div></section>
+<section class="bloco" id="abre-parte"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Abertura de parte</h2><p class="lead">O numeral em peso 300 (de 120 a 280 px, pela largura da tela), o título da parte, a frase central com o núcleo em <code>strong</code>. Na margem, o tempo de cada capítulo e a base da prova.</p></div><section class="abre-parte exemplo">
+  <div class="folha">
+    <div class="miolo">
+      <div class="numeral">2</div>
+      <h3 class="titulo-parte">Diagnóstico: onde a marca já é lembrada</h3>
+      <p class="frase">Três capítulos para provar que <strong>a lembrança acompanha a porta,</strong> não a mídia.</p>
+    </div>
+    <aside class="margem fixa">
+      <span class="n">19 min</span>
+      <p>Onde a marca já é lembrada, 4 min. De onde vêm os clientes novos, 7 min. Três públicos, uma frase para cada, 8 min.</p>
+      <p>Base: 1.240 entrevistas de junho de 2026 e o cadastro de 2.316 clientes novos.</p>
+    </aside>
+  </div>
+</section>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-abre-parte">Copiar</button></div><pre><code id="c-abre-parte">&lt;section class="abre-parte" id="parte-2"&gt;
+  &lt;div class="container folha"&gt;
+    &lt;div class="miolo"&gt;
+      &lt;div class="numeral"&gt;2&lt;/div&gt;
+      &lt;h2&gt;Diagnóstico: onde a marca já é lembrada&lt;/h2&gt;
+      &lt;p class="frase"&gt;Três capítulos para provar que &lt;strong&gt;a lembrança acompanha a porta,&lt;/strong&gt; não a mídia.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;aside class="margem fixa"&gt;
+      &lt;span class="n"&gt;19 min&lt;/span&gt;
+      &lt;p&gt;Onde a marca já é lembrada, 4 min. De onde vêm os clientes novos, 7 min. Três públicos, uma frase para cada, 8 min.&lt;/p&gt;
+      &lt;p&gt;Base: 1.240 entrevistas de junho de 2026 e o cadastro de 2.316 clientes novos.&lt;/p&gt;
+    &lt;/aside&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">280 px</span><p>O teto do numeral, a 20% da largura da tela; o piso é 120. É o maior tipo do sistema e o único que passa de 96 px.</p><p>A frase da parte tem o mesmo limite da frase central do slide: 110 caracteres.</p></aside></div></section>
+<section class="bloco" id="capitulo"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Capítulo com notas na margem</h2><p class="lead">A cabeça do capítulo tem o número, o tempo e o título; na margem, o que o capítulo prova. A prosa a 17 px chama a nota pelo número e a nota nasce na margem, na altura do parágrafo que a chamou. O <code>book.js</code> alinha e não deixa uma nota cobrir a outra.</p></div><article class="capitulo exemplo" id="cap-1" data-titulo="Onde a marca já é lembrada">
+  <div class="container">
+    <div class="cabeca"><div><p class="cap-meta"><b>Capítulo 1</b> de 3, 4 min</p><h3 class="titulo-cap">Onde a marca já é lembrada</h3></div><aside class="margem"><p>O que o capítulo prova: a marca é primeira em quatro das seis cidades, e as duas exceções têm a mesma causa.</p></aside></div>
+    <div class="folha com-notas">
+      <div class="miolo">
+        <div class="prosa">
+          <p>A Casa do Campo é a primeira marca citada no varejo de insumos em Rio Verde, Jataí, Mineiros e Chapadão. Em Caiapônia e Montividiu é a segunda.<a class="chamada" href="#n1" id="r1">1</a> A diferença não é de verba nem de tempo de casa: as seis lojas mais antigas estão espalhadas pelas seis cidades, e o investimento em rádio local foi parecido em todas.</p>
+          <p>O que as duas cidades de segunda posição têm em comum é a concorrente com loja própria, aberta em 2019 em Montividiu e em 2021 em Caiapônia.<a class="chamada" href="#n2" id="r2">2</a> Nas quatro cidades em que a Casa do Campo é primeira, a concorrente vende por representante e não tem porta.</p>
+          <p class="numero-em-linha">A lembrança em Rio Verde subiu de <strong>52%</strong> para <strong>71%</strong> em seis anos <svg viewBox="0 0 96 26" aria-hidden="true"><polyline points="4,20 18,17.5 32,15 46,12.5 60,10 74,6 88,3"/><circle cx="88" cy="3" r="3"/></svg> e a marca é a primeira citada desde 2022.</p>
+          <p>Isso muda a pergunta do plano. Não é "como aparecer mais", e sim "como estar presente onde a porta não está". A feira, a rádio e a indicação fazem esse trabalho nas cidades sem loja da concorrente; onde ela tem porta, o cliente lembra de quem viu.</p>
+        </div>
+      </div>
+      <aside class="margem">
+        <div class="nota-m" id="n1" data-ref="r1"><b>1</b>Lembrança espontânea: primeira marca citada quando se pergunta "que loja de insumos vem à cabeça". Pesquisa de junho de 2026, 1.240 entrevistas nas seis cidades.</div>
+        <div class="nota-m" id="n2" data-ref="r2"><b>2</b>A concorrente é a Rede Terra Forte, com 31 lojas em Goiás e Mato Grosso. As datas vêm do cadastro da junta comercial. Valor fictício.</div>
+      </aside>
+    </div>
+  </div>
+</article>
+<p class="nota">No exemplo vivo o título do capítulo desce para <code>h3</code>, porque a página do catálogo já tem o seu <code>h2</code>; no book ele é <code>h2</code>, como no código. A chamada é um <code>a.chamada</code> com <code>id</code>; a nota traz <code>data-ref</code> com esse <code>id</code> e o <code>book.js</code> a põe na altura do parágrafo, com 16 px de folga da nota anterior. Abaixo de 900 px as notas descem para baixo do texto, na ordem.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-capitulo">Copiar</button></div><pre><code id="c-capitulo">&lt;article class="capitulo" id="cap-1" data-titulo="Onde a marca já é lembrada"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="cabeca"&gt;&lt;div&gt;&lt;p class="cap-meta"&gt;&lt;b&gt;Capítulo 1&lt;/b&gt; de 3, 4 min&lt;/p&gt;&lt;h2&gt;Onde a marca já é lembrada&lt;/h2&gt;&lt;/div&gt;&lt;aside class="margem"&gt;&lt;p&gt;O que o capítulo prova: a marca é primeira em quatro das seis cidades, e as duas exceções têm a mesma causa.&lt;/p&gt;&lt;/aside&gt;&lt;/div&gt;
+    &lt;div class="folha com-notas"&gt;
+      &lt;div class="miolo"&gt;
+        &lt;div class="prosa"&gt;
+          &lt;p&gt;A Casa do Campo é a primeira marca citada no varejo de insumos em Rio Verde, Jataí, Mineiros e Chapadão. Em Caiapônia e Montividiu é a segunda.&lt;a class="chamada" href="#n1" id="r1"&gt;1&lt;/a&gt; A diferença não é de verba nem de tempo de casa: as seis lojas mais antigas estão espalhadas pelas seis cidades, e o investimento em rádio local foi parecido em todas.&lt;/p&gt;
+          &lt;p&gt;O que as duas cidades de segunda posição têm em comum é a concorrente com loja própria, aberta em 2019 em Montividiu e em 2021 em Caiapônia.&lt;a class="chamada" href="#n2" id="r2"&gt;2&lt;/a&gt; Nas quatro cidades em que a Casa do Campo é primeira, a concorrente vende por representante e não tem porta.&lt;/p&gt;
+          &lt;p class="numero-em-linha"&gt;A lembrança em Rio Verde subiu de &lt;strong&gt;52%&lt;/strong&gt; para &lt;strong&gt;71%&lt;/strong&gt; em seis anos &lt;svg viewBox="0 0 96 26" aria-hidden="true"&gt;&lt;polyline points="4,20 18,17.5 32,15 46,12.5 60,10 74,6 88,3"/&gt;&lt;circle cx="88" cy="3" r="3"/&gt;&lt;/svg&gt; e a marca é a primeira citada desde 2022.&lt;/p&gt;
+          &lt;p&gt;Isso muda a pergunta do plano. Não é "como aparecer mais", e sim "como estar presente onde a porta não está". A feira, a rádio e a indicação fazem esse trabalho nas cidades sem loja da concorrente; onde ela tem porta, o cliente lembra de quem viu.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;aside class="margem"&gt;
+        &lt;div class="nota-m" id="n1" data-ref="r1"&gt;&lt;b&gt;1&lt;/b&gt;Lembrança espontânea: primeira marca citada quando se pergunta "que loja de insumos vem à cabeça". Pesquisa de junho de 2026, 1.240 entrevistas nas seis cidades.&lt;/div&gt;
+        &lt;div class="nota-m" id="n2" data-ref="r2"&gt;&lt;b&gt;2&lt;/b&gt;A concorrente é a Rede Terra Forte, com 31 lojas em Goiás e Mato Grosso. As datas vêm do cadastro da junta comercial. Valor fictício.&lt;/div&gt;
+      &lt;/aside&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">17 px</span><p>A prosa do book, com entrelinha de 1,65 e medida de 64 caracteres. O corpo da página é 15; o do slide, 19.</p><p>A nota é o único lugar do sistema para fonte, método e ressalva no meio da leitura. Nada de parênteses longos na prosa.</p><p>Chamada em 600, sobrescrita, sem sublinhado. Ao passar o ponteiro, fica laranja: é ação, não estado.</p></aside></div></section>
+<section class="bloco" id="figura"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Figura e legenda na margem</h2><p class="lead">A legenda não fica embaixo da foto: mora na margem, alinhada ao topo da figura, como uma nota. A foto de página inteira e a foto ao lado de texto são os outros dois lugares da imagem no book.</p></div><div class="padroes">
+<article class="padrao" id="figura-legenda">
+<h3>Figura com legenda na margem</h3>
+<p class="quando"><b>Dentro da folha com notas.</b> A imagem leva <code>id</code>; a legenda é uma <code>.nota-m.legenda-m</code> com <code>data-ref</code> nesse <code>id</code>, e o <code>book.js</code> a alinha ao topo da figura como faz com as notas. Figura em 16 por 9 por padrão.</p>
+<div class="folha com-notas">
+  <div class="miolo">
+    <div class="figura"><img src="../assets/imagens/fachada-rio-verde.jpg" alt="Fachada de uma loja de insumos agrícolas numa cidade pequena, caminhonetes na porta, um produtor de chapéu entrando" id="fig-1"></div>
+  </div>
+  <aside class="margem">
+    <div class="nota-m legenda-m" data-ref="fig-1"><b>Rio Verde,</b> a loja do centro, aberta em 2008. Imagem ilustrativa gerada para o; em peça real, foto da loja.</div>
+  </aside>
+</div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-figura-legenda">Copiar</button></div><pre><code id="c-figura-legenda">&lt;div class="folha com-notas"&gt;
+  &lt;div class="miolo"&gt;
+    &lt;div class="figura"&gt;&lt;img src="../assets/imagens/fachada-rio-verde.jpg" alt="Fachada de uma loja de insumos agrícolas numa cidade pequena, caminhonetes na porta, um produtor de chapéu entrando" id="fig-1"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;aside class="margem"&gt;
+    &lt;div class="nota-m legenda-m" data-ref="fig-1"&gt;&lt;b&gt;Rio Verde,&lt;/b&gt; a loja do centro, aberta em 2008. Imagem ilustrativa gerada para o; em peça real, foto da loja.&lt;/div&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre></details>
+</article>
+<article class="padrao" id="cheia">
+<h3>Foto de página inteira</h3>
+<p class="quando"><b>Fora da folha.</b> <code>.cheia</code> ocupa a largura do container em 21 por 9, com a legenda em filete embaixo. Abre parte, hub ou capítulo; uma por parte.</p>
+<div class="cheia exemplo">
+  <img src="../assets/imagens/cerrado-lavoura.jpg" alt="Estrada de terra vermelha entre lavouras de soja, silos no horizonte, céu aberto do Cerrado goiano">
+  <p class="legenda" style="margin-top:12px"><b>Sudoeste de Goiás.</b> Seis cidades, doze lojas, quarenta anos de porta aberta. Imagem ilustrativa gerada para o exemplo.</p>
+</div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-cheia">Copiar</button></div><pre><code id="c-cheia">&lt;div class="cheia"&gt;
+  &lt;img src="../assets/imagens/cerrado-lavoura.jpg" alt="Estrada de terra vermelha entre lavouras de soja, silos no horizonte, céu aberto do Cerrado goiano"&gt;
+  &lt;p class="legenda" style="margin-top:12px"&gt;&lt;b&gt;Sudoeste de Goiás.&lt;/b&gt; Seis cidades, doze lojas, quarenta anos de porta aberta. Imagem ilustrativa gerada para o.&lt;/p&gt;
+&lt;/div&gt;</code></pre></details>
+</article>
+<article class="padrao" id="lado">
+<h3>Foto ao lado de texto</h3>
+<p class="quando"><b>Duas colunas iguais.</b> <code>.lado</code> com a <code>.figura.tres-dois</code> (3 por 2, cortada do 16 por 9) de um lado e a <code>.prosa</code> do outro. A legenda fica sob a foto, porque aqui não há margem.</p>
+<div class="lado exemplo">
+  <div class="figura tres-dois"><img src="../assets/imagens/balcao-loja.jpg" alt="Balcão de madeira numa loja de insumos, sacos de semente empilhados, vendedor e produtor conversando"><p class="legenda"><b>O balcão</b> decide 46% das compras. Imagem ilustrativa gerada para o exemplo.</p></div>
+  <div class="prosa"><p>O balcão é o único lugar em que os três públicos se encontram. O produtor compra, a vendedora explica, e quem fala da cidade grava. O plano trata o balcão como mídia: quem atende tem nome no crachá e uma frase por safra, e a loja tem um calendário na parede que muda todo mês.</p><p>É barato e é o que a pesquisa pede. Cada real que sai do digital para o balcão paga a lembrança onde ela nasce.</p></div>
+</div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-lado">Copiar</button></div><pre><code id="c-lado">&lt;div class="lado"&gt;
+  &lt;div class="figura tres-dois"&gt;&lt;img src="../assets/imagens/balcao-loja.jpg" alt="Balcão de madeira numa loja de insumos, sacos de semente empilhados, vendedor e produtor conversando"&gt;&lt;p class="legenda"&gt;&lt;b&gt;O balcão&lt;/b&gt; decide 46% das compras. Imagem ilustrativa gerada para o.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="prosa"&gt;&lt;p&gt;O balcão é o único lugar em que os três públicos se encontram. O produtor compra, a vendedora explica, e quem fala da cidade grava. O plano trata o balcão como mídia: quem atende tem nome no crachá e uma frase por safra, e a loja tem um calendário na parede que muda todo mês.&lt;/p&gt;&lt;p&gt;É barato e é o que a pesquisa pede. Cada real que sai do digital para o balcão paga a lembrança onde ela nasce.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article>
+</div></div><aside class="margem fixa"><span class="n">16 : 9</span><p>A figura de book é 16 por 9 por padrão, 3 por 2 com <code>tres-dois</code>, livre com <code>livre</code>. O raio de 6 px é só dela: a única mídia com canto arredondado no sistema.</p><p>A legenda diz o que é e de onde veio. Imagem gerada é apresentada como ilustrativa; foto do cliente leva o crédito.</p></aside></div></section>
+<section class="bloco" id="scrolly"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Scrollytelling dirigido pela margem</h2><p class="lead">A figura fica fixa no miolo e os passos rolam na margem. O passo do meio da tela é o ativo: o <code>book.js</code> copia o <code>data-estado</code> dele para o <code>.fixo</code> e o <code>data-leitura</code> para a <code>.leitura</code>. O CSS da página reage ao estado; o SVG não muda de lugar.</p></div><div class="folha scrolly exemplo">
+  <div class="miolo">
+    <div class="fixo" data-estado="1">
+      <div class="figura">
+        <div class="grafico">
+<svg viewBox="0 0 640 250" role="img" aria-label="Lembrança espontânea por cidade: Rio Verde 71%, Jataí 64%, Mineiros 58%, Chapadão 55%, Caiapônia 39%, Montividiu 33%. As duas últimas são as cidades em que a marca é segunda.">
+  <title>Lembrança espontânea por cidade, junho de 2026</title>
+  <line class="eixo" x1="150" y1="6" x2="150" y2="246"/>
+  <text x="0" y="26">Rio Verde</text><rect class="d1 resto" x="150" y="12" width="312" height="20"/><text class="valor" x="470" y="26">71%</text>
+  <text x="0" y="66">Jataí</text><rect class="d1 resto" x="150" y="52" width="282" height="20"/><text class="valor" x="440" y="66">64%</text>
+  <text x="0" y="106">Mineiros</text><rect class="d1 resto" x="150" y="92" width="255" height="20"/><text class="valor" x="413" y="106">58%</text>
+  <text x="0" y="146">Chapadão</text><rect class="d1 resto" x="150" y="132" width="242" height="20"/><text class="valor" x="400" y="146">55%</text>
+  <text x="0" y="186">Caiapônia</text><rect class="d1 vinte" x="150" y="172" width="172" height="20"/><text class="valor" x="330" y="186">39%</text>
+  <text x="0" y="226">Montividiu</text><rect class="d1 vinte" x="150" y="212" width="145" height="20"/><text class="valor" x="303" y="226">33%</text>
+</svg>
+        </div>
+        <p class="leitura"><strong>Seis cidades,</strong> a lembrança espontânea de cada uma. Pesquisa de junho de 2026, 1.240 entrevistas.</p>
+        <details class="razao"><summary>Livro-razão</summary><table class="tabela"><thead><tr><th>Cidade</th><th class="num">Lembrança</th><th>Concorrente com loja</th></tr></thead><tbody><tr><td>Rio Verde</td><td class="num">71%</td><td>não</td></tr><tr><td>Jataí</td><td class="num">64%</td><td>não</td></tr><tr><td>Mineiros</td><td class="num">58%</td><td>não</td></tr><tr><td>Chapadão</td><td class="num">55%</td><td>não</td></tr><tr class="o20"><td>Caiapônia</td><td class="num">39%</td><td>sim, desde 2021</td></tr><tr class="o20"><td>Montividiu</td><td class="num">33%</td><td>sim, desde 2019</td></tr></tbody></table></details>
+      </div>
+    </div>
+  </div>
+  <div class="margem passos-m">
+    <div class="passo-m" data-estado="1" data-leitura="<strong>Seis cidades,</strong> a lembrança espontânea de cada uma. Pesquisa de junho de 2026, 1.240 entrevistas."><div><span class="n">1</span>Seis cidades, a lembrança espontânea de cada uma. A marca é a primeira citada em quatro.</div></div>
+    <div class="passo-m" data-estado="2" data-leitura="<span class='quadrado'></span><strong>Caiapônia e Montividiu:</strong> as duas cidades em que a marca é a segunda citada, 39% e 33%."><div><span class="n">2</span><span class="quadrado"></span>Nas duas últimas a marca é segunda. Não é verba nem tempo de casa: o investimento foi parecido nas seis.</div></div>
+    <div class="passo-m" data-estado="3" data-leitura="<span class='quadrado'></span><strong>O que as duas têm em comum é a loja da concorrente,</strong> aberta em 2019 e em 2021. A lembrança acompanha a porta."><div><span class="n">3</span>O que as duas têm em comum é a concorrente com loja própria. A lembrança acompanha a porta, não a mídia.</div></div>
+  </div>
+</div>
+<p class="nota">Três passos, três estados. O <code>data-estado</code> do passo ativo vai para o <code>.fixo</code>; o CSS da página faz o resto (as duas regras no fim do código). O <code>data-leitura</code> do passo reescreve a leitura em palavras. O SVG tem o valor final escrito: sem script e na impressão, o gráfico mostra o estado que o autor deixou no <code>data-estado</code> inicial do <code>.fixo</code>.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-scrolly">Copiar</button></div><pre><code id="c-scrolly">&lt;div class="folha scrolly"&gt;
+  &lt;div class="miolo"&gt;
+    &lt;div class="fixo" data-estado="1"&gt;
+      &lt;div class="figura"&gt;
+        &lt;div class="grafico"&gt;
+&lt;svg viewBox="0 0 640 250" role="img" aria-label="Lembrança espontânea por cidade: Rio Verde 71%, Jataí 64%, Mineiros 58%, Chapadão 55%, Caiapônia 39%, Montividiu 33%. As duas últimas são as cidades em que a marca é segunda."&gt;
+  &lt;title&gt;Lembrança espontânea por cidade, junho de 2026&lt;/title&gt;
+  &lt;line class="eixo" x1="150" y1="6" x2="150" y2="246"/&gt;
+  &lt;text x="0" y="26"&gt;Rio Verde&lt;/text&gt;&lt;rect class="d1 resto" x="150" y="12" width="312" height="20"/&gt;&lt;text class="valor" x="470" y="26"&gt;71%&lt;/text&gt;
+  &lt;text x="0" y="66"&gt;Jataí&lt;/text&gt;&lt;rect class="d1 resto" x="150" y="52" width="282" height="20"/&gt;&lt;text class="valor" x="440" y="66"&gt;64%&lt;/text&gt;
+  &lt;text x="0" y="106"&gt;Mineiros&lt;/text&gt;&lt;rect class="d1 resto" x="150" y="92" width="255" height="20"/&gt;&lt;text class="valor" x="413" y="106"&gt;58%&lt;/text&gt;
+  &lt;text x="0" y="146"&gt;Chapadão&lt;/text&gt;&lt;rect class="d1 resto" x="150" y="132" width="242" height="20"/&gt;&lt;text class="valor" x="400" y="146"&gt;55%&lt;/text&gt;
+  &lt;text x="0" y="186"&gt;Caiapônia&lt;/text&gt;&lt;rect class="d1 vinte" x="150" y="172" width="172" height="20"/&gt;&lt;text class="valor" x="330" y="186"&gt;39%&lt;/text&gt;
+  &lt;text x="0" y="226"&gt;Montividiu&lt;/text&gt;&lt;rect class="d1 vinte" x="150" y="212" width="145" height="20"/&gt;&lt;text class="valor" x="303" y="226"&gt;33%&lt;/text&gt;
+&lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;p class="leitura"&gt;&lt;strong&gt;Seis cidades,&lt;/strong&gt; a lembrança espontânea de cada uma. Pesquisa de junho de 2026, 1.240 entrevistas.&lt;/p&gt;
+        &lt;details class="razao"&gt;&lt;summary&gt;Livro-razão&lt;/summary&gt;&lt;table class="tabela"&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Cidade&lt;/th&gt;&lt;th class="num"&gt;Lembrança&lt;/th&gt;&lt;th&gt;Concorrente com loja&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Rio Verde&lt;/td&gt;&lt;td class="num"&gt;71%&lt;/td&gt;&lt;td&gt;não&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Jataí&lt;/td&gt;&lt;td class="num"&gt;64%&lt;/td&gt;&lt;td&gt;não&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Mineiros&lt;/td&gt;&lt;td class="num"&gt;58%&lt;/td&gt;&lt;td&gt;não&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chapadão&lt;/td&gt;&lt;td class="num"&gt;55%&lt;/td&gt;&lt;td&gt;não&lt;/td&gt;&lt;/tr&gt;&lt;tr class="o20"&gt;&lt;td&gt;Caiapônia&lt;/td&gt;&lt;td class="num"&gt;39%&lt;/td&gt;&lt;td&gt;sim, desde 2021&lt;/td&gt;&lt;/tr&gt;&lt;tr class="o20"&gt;&lt;td&gt;Montividiu&lt;/td&gt;&lt;td class="num"&gt;33%&lt;/td&gt;&lt;td&gt;sim, desde 2019&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/details&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="margem passos-m"&gt;
+    &lt;div class="passo-m" data-estado="1" data-leitura="&lt;strong&gt;Seis cidades,&lt;/strong&gt; a lembrança espontânea de cada uma. Pesquisa de junho de 2026, 1.240 entrevistas."&gt;&lt;div&gt;&lt;span class="n"&gt;1&lt;/span&gt;Seis cidades, a lembrança espontânea de cada uma. A marca é a primeira citada em quatro.&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="passo-m" data-estado="2" data-leitura="&lt;span class='quadrado'&gt;&lt;/span&gt;&lt;strong&gt;Caiapônia e Montividiu:&lt;/strong&gt; as duas cidades em que a marca é a segunda citada, 39% e 33%."&gt;&lt;div&gt;&lt;span class="n"&gt;2&lt;/span&gt;&lt;span class="quadrado"&gt;&lt;/span&gt;Nas duas últimas a marca é segunda. Não é verba nem tempo de casa: o investimento foi parecido nas seis.&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="passo-m" data-estado="3" data-leitura="&lt;span class='quadrado'&gt;&lt;/span&gt;&lt;strong&gt;O que as duas têm em comum é a loja da concorrente,&lt;/strong&gt; aberta em 2019 e em 2021. A lembrança acompanha a porta."&gt;&lt;div&gt;&lt;span class="n"&gt;3&lt;/span&gt;O que as duas têm em comum é a concorrente com loja própria. A lembrança acompanha a porta, não a mídia.&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  /* os estados, escritos na página do book: o book.js só troca o data-estado do .fixo */
+  .fixo[data-estado="2"] rect.vinte, .fixo[data-estado="3"] rect.vinte { fill: var(--accent); }
+  .fixo[data-estado="3"] rect.resto { opacity: .25; }
+&lt;/style&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">45%</span><p>A faixa do meio da tela que ativa o passo: o script observa cada <code>.passo-m</code> com margem de 45% em cima e embaixo. Cada passo tem 68% da altura da tela.</p><p>Abaixo de 900 px a figura deixa de ser fixa e todos os passos aparecem acesos, com o estado final (ou o de <code>data-estado-estreito</code> no <code>.scrolly</code>).</p><p>Para mover uma marca de lugar entre estados (a transição do dado), o <code>.scrolly</code> leva <code>data-alvo</code> com o <code>id</code> do SVG e o <code>dado.js</code> assume: ver o catálogo de dado.</p></aside></div></section>
+<section class="bloco" id="fichas"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Fichas de público</h2><p class="lead">Retrato em 4 por 5, corte reto, sem máscara; o nome do público no lugar do nome da pessoa; a frase entre aspas é o que o plano quer que a pessoa diga daqui a um ano; abaixo, onde está, o que já sabe e o que o plano faz.</p></div><div class="fichas exemplo">
+  <div class="ficha">
+    <img src="../assets/imagens/retrato-produtor.jpg" alt="Produtor rural de chapéu de palha conferindo um saco de semente num armazém">
+    <div><h3>O produtor que compra no balcão</h3><p class="papel">Quem decide a compra em 46% dos casos</p><p class="frase">"Aqui tem quem <strong>sabe o que eu planto</strong>, e não só o que vende."</p><dl><dt>Onde está</dt><dd>No balcão, na feira, na rádio da manhã a caminho da lavoura</dd><dt>O que já sabe</dt><dd>Conhece a marca há anos; nas cidades com loja da concorrente, compara preço</dd><dt>O que o plano faz</dt><dd>Atendimento com nome, calendário de plantio por cidade, a feira como o dia da marca</dd></dl></div>
+  </div>
+</div>
+<p class="nota">Retrato ilustrativo gerado para o exemplo. Em peça real, foto documental feita na cidade, ou pessoa gerada com o aviso na fonte. A frase entre aspas é o teste de cada ação do plano: se não leva à frase, sai.</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-fichas">Copiar</button></div><pre><code id="c-fichas">&lt;div class="fichas"&gt;
+  &lt;div class="ficha"&gt;
+    &lt;img src="../assets/imagens/retrato-produtor.jpg" alt="Produtor rural de chapéu de palha conferindo um saco de semente num armazém"&gt;
+    &lt;div&gt;&lt;h3&gt;O produtor que compra no balcão&lt;/h3&gt;&lt;p class="papel"&gt;Quem decide a compra em 46% dos casos&lt;/p&gt;&lt;p class="frase"&gt;"Aqui tem quem &lt;strong&gt;sabe o que eu planto&lt;/strong&gt;, e não só o que vende."&lt;/p&gt;&lt;dl&gt;&lt;dt&gt;Onde está&lt;/dt&gt;&lt;dd&gt;No balcão, na feira, na rádio da manhã a caminho da lavoura&lt;/dd&gt;&lt;dt&gt;O que já sabe&lt;/dt&gt;&lt;dd&gt;Conhece a marca há anos; nas cidades com loja da concorrente, compara preço&lt;/dd&gt;&lt;dt&gt;O que o plano faz&lt;/dt&gt;&lt;dd&gt;Atendimento com nome, calendário de plantio por cidade, a feira como o dia da marca&lt;/dd&gt;&lt;/dl&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">4 : 5</span><p>O retrato da ficha. No deck, o mesmo arquivo vira a miniatura quadrada de 72 px do slide de perfis, cortada ao centro.</p><p>Filete de tinta por cima de cada ficha; nada de cartão. Uma ficha por público, três por parte no máximo.</p></aside></div></section>
+<section class="bloco" id="linha-tempo"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Linha do tempo</h2><p class="lead">Vertical, com o quando à esquerda em número tabular e o quê à direita. A linha <code>.agora</code> leva o filete de 2 px em tinta e o quadrado laranja: é o estado atual, o único laranja da lista.</p></div><ol class="linha-tempo exemplo">
+  <li><span class="quando">setembro e outubro de 2026</span><div><b>Pré-assinatura</b>Mapeamento dos veículos, cadastro unificado das doze lojas, roteiro das visitas.</div></li>
+  <li class="agora"><span class="quando">outubro a dezembro de 2026</span><div><b>Mapeamento e visitas</b>Seis redações, os perfis de cidade, a linha de base da medição em novembro.</div></li>
+  <li><span class="quando">dezembro de 2026 e janeiro de 2027</span><div><b>Lançamento</b>As primeiras pautas e a mensagem única nas seis cidades.</div></li>
+  <li><span class="quando">janeiro a abril de 2027</span><div><b>Ações contínuas</b>Relacionamento mensal com as redações e os perfis.</div></li>
+  <li><span class="quando">março de 2027</span><div><b>Primeira medição</b>A mesma pesquisa da linha de base, nas seis cidades.</div></li>
+</ol>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-linha-tempo">Copiar</button></div><pre><code id="c-linha-tempo">&lt;ol class="linha-tempo"&gt;
+  &lt;li&gt;&lt;span class="quando"&gt;setembro e outubro de 2026&lt;/span&gt;&lt;div&gt;&lt;b&gt;Pré-assinatura&lt;/b&gt;Mapeamento dos veículos, cadastro unificado das doze lojas, roteiro das visitas.&lt;/div&gt;&lt;/li&gt;
+  &lt;li class="agora"&gt;&lt;span class="quando"&gt;outubro a dezembro de 2026&lt;/span&gt;&lt;div&gt;&lt;b&gt;Mapeamento e visitas&lt;/b&gt;Seis redações, os perfis de cidade, a linha de base da medição em novembro.&lt;/div&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span class="quando"&gt;dezembro de 2026 e janeiro de 2027&lt;/span&gt;&lt;div&gt;&lt;b&gt;Lançamento&lt;/b&gt;As primeiras pautas e a mensagem única nas seis cidades.&lt;/div&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span class="quando"&gt;janeiro a abril de 2027&lt;/span&gt;&lt;div&gt;&lt;b&gt;Ações contínuas&lt;/b&gt;Relacionamento mensal com as redações e os perfis.&lt;/div&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span class="quando"&gt;março de 2027&lt;/span&gt;&lt;div&gt;&lt;b&gt;Primeira medição&lt;/b&gt;A mesma pesquisa da linha de base, nas seis cidades.&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">1 agora</span><p>Uma linha atual por lista. Feito e futuro se distinguem pelo texto, não por cor.</p><p>No deck, a mesma informação vira o componente de fases, horizontal. Aqui o tempo corre para baixo, com a leitura.</p></aside></div></section>
+<section class="bloco" id="momento"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Momento e recap</h2><p class="lead">O momento laranja marca a mensagem-mãe da parte, uma vez, nunca ao lado de outro momento: <code>section.momento.tema-laranja</code> com o statement e a margem. O recap fecha a parte com cada achado escrito por inteiro e a fonte do método logo abaixo.</p></div><section class="momento tema-laranja exemplo">
+  <div class="container folha">
+    <div class="miolo"><p class="statement">Cada real que sai do digital para o balcão paga a lembrança <strong>onde ela nasce.</strong></p></div>
+    <aside class="margem fixa"><span class="n">1 por parte</span><p>O momento laranja marca a mensagem-mãe da parte, uma vez, nunca ao lado de outro momento.</p></aside>
+  </div>
+</section>
+<section class="capitulo exemplo" id="recap" data-titulo="O que a parte 2 mostrou">
+  <div class="container folha">
+    <div class="miolo">
+      <h3 class="titulo-cap">O que a parte 2 mostrou</h3>
+      <ol class="recap" style="margin-top:var(--s-5)">
+        <li><strong>A lembrança acompanha a porta.</strong> As duas cidades em que a marca é segunda são as duas em que a concorrente tem loja própria.</li>
+        <li><strong>Quatro canais fazem 85% dos clientes novos.</strong> Indicação, loja, feira e rádio; o digital, que leva a maior verba, traz 7%.</li>
+        <li><strong>Os três públicos já existem na cidade.</strong> O plano dá a cada um uma frase e um lugar, e o balcão é onde os três se encontram.</li>
+      </ol>
+      <p class="fonte" style="margin-top:var(--s-4)">Método: pesquisa de lembrança espontânea com 1.240 entrevistas, cadastro de 2.316 clientes novos e vinte entrevistas em profundidade, junho de 2026.</p>
+    </div>
+    <aside class="margem fixa"><span class="n">3 achados</span><p>Cada achado escrito por inteiro, compreensível se lido sozinho, com a fonte do método logo abaixo.</p></aside>
+  </div>
+</section>
+<p class="nota">No book, o título do recap é <code>h2</code>; aqui desce um nível. O recap é um capítulo com <code>data-titulo</code>, para entrar na trilha e nas teclas, mas o <code>book.js</code> não o guarda como lugar de parada (o <code>id</code> contém "recap").</p>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-momento">Copiar</button></div><pre><code id="c-momento">&lt;section class="momento tema-laranja"&gt;
+  &lt;div class="container folha"&gt;
+    &lt;div class="miolo"&gt;&lt;p class="statement"&gt;Cada real que sai do digital para o balcão paga a lembrança &lt;strong&gt;onde ela nasce.&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
+    &lt;aside class="margem fixa"&gt;&lt;span class="n"&gt;1 por parte&lt;/span&gt;&lt;p&gt;O momento laranja marca a mensagem-mãe da parte, uma vez, nunca ao lado de outro momento.&lt;/p&gt;&lt;/aside&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class="capitulo" id="recap" data-titulo="O que a parte 2 mostrou"&gt;
+  &lt;div class="container folha"&gt;
+    &lt;div class="miolo"&gt;
+      &lt;h2&gt;O que a parte 2 mostrou&lt;/h2&gt;
+      &lt;ol class="recap" style="margin-top:var(--s-5)"&gt;
+        &lt;li&gt;&lt;strong&gt;A lembrança acompanha a porta.&lt;/strong&gt; As duas cidades em que a marca é segunda são as duas em que a concorrente tem loja própria.&lt;/li&gt;
+        &lt;li&gt;&lt;strong&gt;Quatro canais fazem 85% dos clientes novos.&lt;/strong&gt; Indicação, loja, feira e rádio; o digital, que leva a maior verba, traz 7%.&lt;/li&gt;
+        &lt;li&gt;&lt;strong&gt;Os três públicos já existem na cidade.&lt;/strong&gt; O plano dá a cada um uma frase e um lugar, e o balcão é onde os três se encontram.&lt;/li&gt;
+      &lt;/ol&gt;
+      &lt;p class="fonte" style="margin-top:var(--s-4)"&gt;Método: pesquisa de lembrança espontânea com 1.240 entrevistas, cadastro de 2.316 clientes novos e vinte entrevistas em profundidade, junho de 2026.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;aside class="margem fixa"&gt;&lt;span class="n"&gt;3 achados&lt;/span&gt;&lt;p&gt;Cada achado escrito por inteiro, compreensível se lido sozinho, com a fonte do método logo abaixo.&lt;/p&gt;&lt;/aside&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">72 px</span><p>O teto do statement no momento: de 40 a 72 px pela largura da tela, peso 300 com o núcleo em 800, até 70 caracteres.</p><p>Dentro do laranja, o texto pequeno é preto e o acento vira branco: a camada resolve pelos papéis, nada a sobrescrever.</p><p>O recap é a regra 28 do sistema aplicada ao book: três achados, inteiros, com método.</p></aside></div></section>
+<section class="bloco" id="navega"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Anterior e próximo</h2><p class="lead">No fim de cada parte, os dois destinos: o anterior à esquerda, o próximo à direita com o tempo de leitura. Filete de tinta por cima, rótulo em micro, título em 600.</p></div><nav class="navega exemplo" aria-label="Partes"><a href="#hub"><span class="rot">Anterior</span><span class="tit">Parte 1: Leitura do desafio</span></a><a class="prox" href="#hub"><span class="rot">Próxima, 13 min</span><span class="tit">Parte 3: Mensagem, canais e cronograma</span></a></nav>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-navega">Copiar</button></div><pre><code id="c-navega">&lt;nav class="navega" aria-label="Partes"&gt;&lt;a href="1.html#cap-1"&gt;&lt;span class="rot"&gt;Anterior&lt;/span&gt;&lt;span class="tit"&gt;Parte 1: Leitura do desafio&lt;/span&gt;&lt;/a&gt;&lt;a class="prox" href="3.html#cap-1"&gt;&lt;span class="rot"&gt;Próxima, 13 min&lt;/span&gt;&lt;span class="tit"&gt;Parte 3: Mensagem, canais e cronograma&lt;/span&gt;&lt;/a&gt;&lt;/nav&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">2 destinos</span><p>Sempre os dois: na primeira parte o anterior é o hub; na última, o próximo é o hub.</p><p>Não imprime. Na impressão, a ordem das partes é a do PDF.</p></aside></div></section>
+<section class="bloco" id="trilha"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Trilha, progresso e atalhos</h2><p class="lead">O topo do book leva a marca do cliente, a trilha (peça, parte, capítulo visível) e o botão de atalhos. A linha de progresso de 2 px mora no alto da página. O diálogo de atalhos abre com <code>?</code> e fecha com <code>Esc</code>.</p></div><header class="topo exemplo">
+  <div class="container">
+    <a class="marca" href="#hub"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>Casa do Campo</span></a>
+    <div class="trilha" aria-label="Onde você está"><span>Plano de presença</span><span class="sep">/</span><span>Parte 2, Diagnóstico</span><span class="sep">/</span><span class="atual" id="trilha-atual">Hub</span></div>
+    <div class="direita"><button class="quieta" type="button" id="abrir-atalhos">Atalhos <kbd>?</kbd></button></div>
+  </div>
+</header>
+<p class="nota">O topo do exemplo está solto na página; no book ele gruda no alto (<code>position: sticky</code>) e a linha de progresso de 2 px corre acima dele, como corre no catálogo. O trecho da trilha com <code>id="trilha-atual"</code> recebe o <code>data-titulo</code> do capítulo visível; role até o capítulo de exemplo e veja o texto mudar.</p>
+<h3>Mapa de teclado</h3>
+<table class="tabela mapa-teclas"><thead><tr><th>Tecla</th><th>O que faz</th></tr></thead><tbody>
+<tr><td><kbd>j</kbd></td><td>Próximo capítulo (o hub conta como primeiro)</td></tr>
+<tr><td><kbd>k</kbd></td><td>Capítulo anterior</td></tr>
+<tr><td><kbd>h</kbd></td><td>Volta ao hub: <code>#hub</code> na mesma página, ou o endereço de <code>data-hub</code> quando a parte é outro arquivo</td></tr>
+<tr><td><kbd>?</kbd></td><td>Abre e fecha o diálogo de atalhos</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Fecha o diálogo; um clique no véu também fecha</td></tr>
+</tbody></table>
+<h3>O que a página define no HTML</h3>
+<div class="anatomia">
+<div><b>data-book</b><span>No <code>body</code>: a chave do progresso no navegador (<code>localStorage</code>). Sem ela, o script deriva uma do endereço. Todas as partes do mesmo book usam a mesma chave.</span></div>
+<div><b>data-hub</b><span>No <code>body</code> de cada parte: o endereço do hub (<code>../index.html</code>), para a tecla <code>h</code> e para o botão de continuar levar à página certa.</span></div>
+<div><b>data-titulo</b><span>Em cada <code>.capitulo</code>: o texto que vai para a trilha e para o bloco de continuar. O <code>id</code> do capítulo é o destino das teclas e do mapa do hub.</span></div>
+<div><b>ids fixos</b><span><code>progresso</code> (a linha), <code>trilha-atual</code>, <code>continuar-texto</code> e <code>continuar-acao</code> (só no hub), <code>abrir-atalhos</code>, <code>fechar-atalhos</code> e <code>atalhos</code> (o diálogo, com <code>hidden</code>).</span></div>
+</div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-trilha">Copiar</button></div><pre><code id="c-trilha">&lt;body data-book="book-casa-do-campo" data-hub="../index.html"&gt;
+&lt;div class="progresso-leitura" id="progresso" aria-hidden="true"&gt;&lt;/div&gt;
+&lt;header class="topo"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="marca" href="../index.html#hub"&gt;&lt;img src="../assets/logos/logo-8020-branco.svg" alt="80 20"&gt;&lt;span&gt;Casa do Campo&lt;/span&gt;&lt;/a&gt;
+    &lt;div class="trilha" aria-label="Onde você está"&gt;&lt;span&gt;Plano de presença&lt;/span&gt;&lt;span class="sep"&gt;/&lt;/span&gt;&lt;span&gt;Parte 2, Diagnóstico&lt;/span&gt;&lt;span class="sep"&gt;/&lt;/span&gt;&lt;span class="atual" id="trilha-atual"&gt;Hub&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="direita"&gt;&lt;button class="quieta" type="button" id="abrir-atalhos"&gt;Atalhos &lt;kbd&gt;?&lt;/kbd&gt;&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;div class="atalhos" id="atalhos" hidden role="dialog" aria-modal="true" aria-label="Atalhos de teclado"&gt;
+  &lt;div class="caixa"&gt;
+    &lt;h2&gt;Atalhos&lt;/h2&gt;
+    &lt;dl&gt;&lt;dt&gt;&lt;kbd&gt;j&lt;/kbd&gt;&lt;/dt&gt;&lt;dd&gt;Próximo capítulo&lt;/dd&gt;&lt;dt&gt;&lt;kbd&gt;k&lt;/kbd&gt;&lt;/dt&gt;&lt;dd&gt;Capítulo anterior&lt;/dd&gt;&lt;dt&gt;&lt;kbd&gt;h&lt;/kbd&gt;&lt;/dt&gt;&lt;dd&gt;Voltar ao hub&lt;/dd&gt;&lt;dt&gt;&lt;kbd&gt;?&lt;/kbd&gt;&lt;/dt&gt;&lt;dd&gt;Abrir e fechar esta lista&lt;/dd&gt;&lt;dt&gt;&lt;kbd&gt;Esc&lt;/kbd&gt;&lt;/dt&gt;&lt;dd&gt;Fechar&lt;/dd&gt;&lt;/dl&gt;
+    &lt;div class="acoes"&gt;&lt;button class="filete" type="button" id="fechar-atalhos"&gt;Fechar&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../../../../assets/book.js"&gt;&lt;/script&gt;
+&lt;script src="../../../../assets/dado.js"&gt;&lt;/script&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">j k h ?</span><p>As quatro teclas do book. Nenhuma pega foco de campo de texto nem atalho com Ctrl, Alt ou Cmd.</p><p>O progresso fica no navegador do leitor, sob a chave de <code>data-book</code>. Nada sai da máquina; o hub avisa isso na margem.</p><p>Abaixo de 900 px a trilha some; abaixo de 600, some a tecla do botão. O botão de atalhos fica.</p></aside></div></section>
+<section class="bloco" id="impressao"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Impressão</h2><p class="lead">O book imprime com a margem no lugar: a folha vira 4 : 1, as notas ficam estáticas ao lado do texto, cada capítulo começa em página nova. Topo, progresso, atalhos, botão de continuar e os destinos de anterior e próximo não imprimem.</p></div><div class="regras">
+<div><strong>A margem fica.</strong> A folha imprime em 4 : 1, como na tela; as notas ficam estáticas ao lado do texto, na ordem, sem o alinhamento do script.</div>
+<div><strong>Capítulo em página nova.</strong> <code>.capitulo</code> leva <code>break-before: page</code>. Hub e abertura de parte seguem o fluxo.</div>
+<div><strong>O que não imprime.</strong> Topo, linha de progresso, diálogo de atalhos, botão de continuar e os destinos de anterior e próximo.</div>
+<div><strong>Figura e scrolly.</strong> A figura fixa vira estática e os passos imprimem todos, com o estado que o autor deixou no <code>data-estado</code>. O laranja do dado vira hachura, como no deck.</div>
+<div><strong>Sem movimento.</strong> O reveal de figura fica visível e sem transição.</div>
+<div><strong>Página do navegador.</strong> O book não fixa <code>@page</code>: imprime em A4 retrato, com as margens do navegador.</div>
+</div>
+<h3>O comando</h3>
+<pre class="codigo">"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf="parte-2.pdf" \
+  "http://localhost:PORTA/templates/book/padrao/partes/parte-2.html"</pre></div><aside class="margem fixa"><span class="n">4 : 1</span><p>A folha na impressão: quatro partes de texto, uma de margem, como na tela.</p><p>Um PDF por parte, nomeado como o arquivo. O hub imprime à parte, se for preciso.</p></aside></div></section>
+<div class="atalhos" id="atalhos" hidden role="dialog" aria-modal="true" aria-label="Atalhos de teclado">
+  <div class="caixa">
+    <h2>Atalhos</h2>
+    <dl><dt><kbd>j</kbd></dt><dd>Próximo capítulo</dd><dt><kbd>k</kbd></dt><dd>Capítulo anterior</dd><dt><kbd>h</kbd></dt><dd>Voltar ao hub</dd><dt><kbd>?</kbd></dt><dd>Abrir e fechar esta lista</dd><dt><kbd>Esc</kbd></dt><dd>Fechar</dd></dl>
+    <div class="acoes"><button class="filete" type="button" id="fechar-atalhos">Fechar</button></div>
+  </div>
+</div>
+<footer class="rodape"><div class="container">8020-DS, candidato 4.0. Patterns, rodada 7, 2026-09-07.</div></footer>
+<script src="../assets/pagina.js"></script>
+<script src="../assets/book.js"></script>
+<script src="../assets/dado.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+Copyright (c) 2026 80 20 Marketing
+
+Este repositório contém três coisas com condições diferentes.
+
+## 1. O código
+
+Os arquivos de código do sistema (CSS, JavaScript, Python, o HTML das
+páginas de catálogo e dos templates) são licenciados sob a licença MIT,
+reproduzida abaixo. Use, copie, modifique e distribua à vontade, inclusive
+como base para o sistema de design de outra casa.
+
+## 2. A identidade da 80 20 Marketing
+
+A licença acima NÃO cobre a identidade da marca: o nome "80 20 Marketing",
+os logotipos em assets/logos/, o laranja #fa4616 como cor de marca, e a
+combinação de nome, logotipo e paleta que identifica a casa. Esses
+elementos continuam de propriedade da 80 20 Marketing e não podem ser
+usados para identificar outra pessoa ou organização, nem de forma que
+sugira associação, patrocínio ou endosso.
+
+Quem parte deste sistema para o próprio trabalho troca os logotipos, o
+nome e a cor de marca pelos seus. A estrutura, as regras e o código ficam.
+
+## 3. O que não é nosso
+
+A família tipográfica Montserrat, em assets/fonts/, é de Julieta Ulanovsky
+e colaboradores, sob a SIL Open Font License 1.1. O texto da licença está
+em assets/fonts/OFL.txt e vale sobre estes termos para aqueles arquivos.
+
+A malha municipal em assets/mapas/fonte/ vem do Instituto Brasileiro de
+Geografia e Estatística e é dado público, sujeito às condições de uso do
+próprio IBGE.
+
+As fotografias em assets/imagens/ foram geradas por modelo de imagem para
+os exemplos deste repositório, e não retratam pessoa real.
+
+---
+
+MIT License, para a parte 1
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

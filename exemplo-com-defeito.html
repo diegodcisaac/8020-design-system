@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Exemplo com defeito: o teste de regressão do verificador</title>
+<link rel="stylesheet" href="tokens/8020.css">
+<link rel="stylesheet" href="assets/regua.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+  /* tudo aqui é proposital: este arquivo existe para o verificador reprovar */
+  .caixa { background: linear-gradient(#2b6cb0, #1a365d); box-shadow: 0 2px 8px rgba(0,0,0,.2); border-radius: 12px; color: var(--8020-branco); padding: 24px; }
+  .surge { animation: entra 400ms ease both; }
+  @keyframes entra { from { opacity: 0 } to { opacity: 1 } }
+</style>
+</head>
+<body>
+<!-- Teste de regressao do verificador. Tudo neste arquivo esta errado de proposito:
+     quatro slides que disparam 35 das 48 checagens de verificar.py, inclusive a
+     imagem sem alt cujo src nao existe. Se ele parar de reprovar, o verificador quebrou.
+     Rodar: python3 verificar.py exemplo-com-defeito.html -->
+<div class="deck" data-marca="Cliente" data-peca="Exemplo com defeito" data-canal="exemplo-defeito">
+
+  <div class="slide s-faixa"><div class="faixa laranja"><div class="cap"><b>Capítulo 1</b> Diagnóstico</div><div><h2>A lembrança cresceu 24 pontos em Jataí desde 2023, o ano da loja</h2></div></div>
+  <div class="conteudo"><div class="caixa">Cartão com gradiente, sombra e raio, tudo fora do sistema.</div>
+  <div class="grafico"><svg viewBox="0 0 640 200"><rect x="0" y="20" width="300" height="24" fill="var(--ink)"/><text x="310" y="38" fill="#2b6cb0">71%</text></svg>
+  <div style="width: 62%; height: 18px; background: var(--accent)"></div></div>
+  <img src="foto.jpg"></div></div>
+
+  <div class="slide s-faixa"><div class="faixa laranja"><div class="cap"><b>Capítulo 1</b> Diagnóstico</div><div><h2>Os seis segmentos</h2><p class="frase">Neste documento, a estratégia de comunicação é a espinha dorsal do plano, e a agencia entrega os insights de awareness ate o proximo mes para a 80 20 validar o budget com o cliente final.</p></div></div>
+  <div class="conteudo"><div class="numeros"><p><strong>71%</strong></p></div>
+  <h4>Um heading que pula do h2 para o h4</h4>
+  <table class="tabela"><tr><th>Uma célula de cabeçalho bem mais longa do que o teto</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr></table></div></div>
+
+  <div class="slide s-cheio tema-laranja"><p class="statement">Primeiro momento de página inteira, dentro do capítulo 1.</p></div>
+  <div class="slide s-cheio tema-escuro"><p class="statement">Segundo momento, colado no anterior, o que a regra 6a proíbe.</p></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cores, patterns do 8020-DS 4.0</title>
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="_catalogo.css">
+<style>
+/* Local desta página: só o que a camada não tem, sempre por papel semântico.
+   .tres-momentos: o mesmo bloco nos três momentos, lado a lado. .momento-demo: respiro
+   de um bloco de momento em linha. .sonda: os elementos invisíveis que a matriz de
+   contraste lê por getComputedStyle. .baixo: a razão abaixo de 4,5:1 em laranja (a classe .aviso
+   do _catalogo.css colide com o componente .aviso do regua.css). .nivel: o nível ao lado da razão. */
+.tres-momentos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
+.tres-momentos > div { padding: var(--s-6); display: grid; gap: var(--s-4); align-content: start; min-width: 0; }
+.tres-momentos > div:first-child { outline: 1px solid var(--rule); outline-offset: -1px; }
+.tres-momentos .t { font-size: var(--t-h2); font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: var(--lh-title); color: var(--ink); }
+.tres-momentos .rotulo { margin: 0; }
+.momento-demo { padding: var(--s-5) var(--s-6); }
+.sonda { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+.validador .baixo { color: var(--accent); font-weight: var(--w-rotulo); }
+.validador .nivel { font-weight: var(--w-corpo); color: var(--muted); margin-left: 6px; }
+.validador h3 { font-size: var(--t-body); font-weight: var(--w-rotulo); }
+.validador h3 span { font-weight: var(--w-corpo); color: var(--meta); }
+.funcional { display: grid; gap: var(--s-6); }
+.figura h4 { font-size: var(--t-h3); font-weight: var(--w-rotulo); letter-spacing: -.01em; line-height: 1.25; }
+@media (max-width: 899px) { .tres-momentos { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="topo"><div class="container"><a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a><nav aria-label="Seções da página"><a class="peso" data-t="Primitivos" href="#primitivos">Primitivos</a><a class="peso" data-t="Papéis" href="#papeis">Papéis</a><a class="peso" data-t="Laranja" href="#laranja">Laranja</a><a class="peso" data-t="Rampa" href="#rampa">Rampa</a><a class="peso" data-t="Contraste" href="#contraste">Contraste</a><a class="peso" data-t="Proibido" href="#proibido">Proibido</a></nav><span class="meta">cores.html</span></div></div>
+<div class="sonda" id="sonda" aria-hidden="true"></div><section class="abertura"><div class="container folha"><div class="miolo"><h1>Cor: <strong>seis valores</strong> e um laranja escasso.</h1><p class="lead">A paleta é fechada: seis cores de marca, cinco variantes de trabalho e nada mais. Toda camada consome papéis semânticos (<code>--paper</code>, <code>--ink</code>, <code>--accent</code>), nunca o valor cru, e os dois momentos, laranja e escuro, trocam o valor de cada papel sem trocar o nome. O laranja tem quatro papéis e um teto de três por página.</p></div><aside class="margem fixa"><span class="n">6 cores</span><p>Laranja, branco, preto, chumbo, papel e tinta. As variantes (laranja aprofundado, chumbo 2, areia, tinta 2, noite) derivam delas e ficam sob o mesmo prefixo <code>--8020-</code>.</p><p>Nenhuma cor fora do prefixo entra em CSS ou SVG. O <code>brand.json</code> guarda a matriz de contraste medida para cada par de texto e fundo.</p></aside></div></section><section class="bloco" id="primitivos"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Os seis primitivos</h2><p class="lead">Os valores da marca vivem em <code>tokens/8020.css</code> com o prefixo <code>--8020-</code>. As seis cores são a identidade; as cinco variantes existem para o momento laranja, o momento escuro, a contenção sem borda e o corpo de texto. Nenhuma camada usa esses valores direto: entram só pelos papéis.</p></div><div class="pilha"><span class="rotulo">As seis cores</span><div class="paleta"><div><span class="amostra grande" style="background:var(--8020-laranja)"></span><b>laranja</b><code>#fa4616</code><span>a marca</span></div><div><span class="amostra grande" style="background:var(--8020-branco)"></span><b>branco</b><code>#ffffff</code><span>superfície; texto grande sobre momento</span></div><div><span class="amostra grande" style="background:var(--8020-preto)"></span><b>preto</b><code>#0a0a0a</code><span>texto pequeno sobre o laranja</span></div><div><span class="amostra grande" style="background:var(--8020-chumbo)"></span><b>chumbo</b><code>#15110d</code><span>o chão: rodapé, contracapa, moldura</span></div><div><span class="amostra grande" style="background:var(--8020-papel)"></span><b>papel</b><code>#faf7f2</code><span>o substrato de toda peça</span></div><div><span class="amostra grande" style="background:var(--8020-tinta)"></span><b>tinta</b><code>#1a140f</code><span>chumbo quente: título, número, ação</span></div></div></div><div class="pilha"><span class="rotulo">As cinco variantes</span><div class="paleta"><div><span class="amostra grande" style="background:var(--8020-laranja-d)"></span><b>laranja d</b><code>#d63a10</code><span>superfície dentro do momento laranja</span></div><div><span class="amostra grande" style="background:var(--8020-chumbo-2)"></span><b>chumbo 2</b><code>#1d1611</code><span>superfície dentro do momento escuro</span></div><div><span class="amostra grande" style="background:var(--8020-areia)"></span><b>areia</b><code>#f3ede4</code><span>contenção sem borda sobre o papel</span></div><div><span class="amostra grande" style="background:var(--8020-tinta-2)"></span><b>tinta 2</b><code>#2a201a</code><span>corpo de texto</span></div><div><span class="amostra grande" style="background:var(--8020-noite)"></span><b>noite</b><code>#120e0b</code><span>o papel do momento escuro</span></div></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-primitivos">Copiar</button></div><pre><code id="c-primitivos">:root {
+  --8020-laranja:   #fa4616;   /* a marca */
+  --8020-laranja-d: #d63a10;   /* laranja aprofundado: superfície dentro do momento laranja */
+  --8020-branco:    #ffffff;
+  --8020-preto:     #0a0a0a;
+  --8020-chumbo:    #15110d;   /* o chão: rodapé, contracapa, moldura do visualizador */
+  --8020-chumbo-2:  #1d1611;   /* superfície dentro do momento escuro */
+  --8020-papel:     #faf7f2;   /* o substrato de toda peça */
+  --8020-areia:     #f3ede4;   /* contenção sem borda sobre o papel */
+  --8020-tinta:     #1a140f;   /* chumbo quente: título, número, ação */
+  --8020-tinta-2:   #2a201a;   /* corpo */
+  --8020-noite:     #120e0b;   /* o papel do momento escuro */
+}</code></pre></details></div><aside class="margem fixa"><span class="n">0 cores novas</span><p>Precisou de uma cor que não está aqui, a resposta é a rampa de tinta ou o laranja no papel certo.</p><p>Vermelho de erro não existe: erro é laranja funcional. Verde de sucesso não existe: sucesso é a palavra escrita. Dado negativo é chumbo.</p></aside></div></section><section class="bloco" id="papeis"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Papéis semânticos</h2><p class="lead">Cada papel diz o que a cor faz, não que cor é. Um título é <code>--ink</code> no papel, no laranja e no escuro; o valor muda, o nome fica. Por isso um componente escrito uma vez funciona nos três momentos.</p></div><div class="rolagem"><table class="papeis"><thead><tr><th>Papel</th><th>Valor na base papel</th><th>Composto sobre o papel</th><th>Uso</th></tr></thead><tbody><tr><td><span class="amostra" style="background:#faf7f2"></span><code>--paper</code></td><td><code>#faf7f2</code></td><td><code>#faf7f2</code></td><td>o substrato: fundo de página, de slide e de campo</td></tr><tr><td><span class="amostra" style="background:#ffffff"></span><code>--surface</code></td><td><code>#ffffff</code></td><td><code>#ffffff</code></td><td>bloco de coleção, chapa clara, célula em destaque</td></tr><tr><td><span class="amostra" style="background:#f3ede4"></span><code>--surface-2</code></td><td><code>#f3ede4</code></td><td><code>#f3ede4</code></td><td>contenção sem borda: nota, código, linha de tabela com o ponteiro sobre</td></tr><tr><td><span class="amostra" style="background:#1a140f"></span><code>--ink</code></td><td><code>#1a140f</code></td><td><code>#1a140f</code></td><td>título, número, ação, filete de abertura, foco</td></tr><tr><td><span class="amostra" style="background:#2a201a"></span><code>--ink-body</code></td><td><code>#2a201a</code></td><td><code>#2a201a</code></td><td>corpo de texto</td></tr><tr><td><span class="amostra" style="background:#59544f"></span><code>--ink-soft</code></td><td><code>rgba(26, 20, 15, .72)</code></td><td><code>#59544f</code></td><td>corpo secundário, lead: 7,0:1</td></tr><tr><td><span class="amostra" style="background:#66615c"></span><code>--muted</code></td><td><code>rgba(26, 20, 15, .66)</code></td><td><code>#66615c</code></td><td>rótulo, legenda, nota, margem: 5,7:1</td></tr><tr><td><span class="amostra" style="background:#746f6a"></span><code>--meta</code></td><td><code>rgba(26, 20, 15, .60)</code></td><td><code>#746f6a</code></td><td>fonte, meta, contador, ajuda: 4,7:1, a cor mais clara permitida para texto</td></tr><tr><td><span class="amostra" style="background:#dbd7d2"></span><code>--rule</code></td><td><code>rgba(26, 20, 15, .14)</code></td><td><code>#dbd7d2</code></td><td>filete estrutural, separador de linha</td></tr><tr><td><span class="amostra" style="background:#8a8680"></span><code>--rule-strong</code></td><td><code>rgba(26, 20, 15, .50)</code></td><td><code>#8a8680</code></td><td>linha de campo e de filete em repouso, eixo de gráfico: 3,4:1, o mínimo para borda de controle</td></tr><tr><td><span class="amostra" style="background:#eae7e2"></span><code>--hairline</code></td><td><code>rgba(26, 20, 15, .07)</code></td><td><code>#eae7e2</code></td><td>grade de gráfico, fundo de miniatura</td></tr><tr><td><span class="amostra" style="background:#fa4616"></span><code>--accent</code></td><td><code>#fa4616</code></td><td><code>#fa4616</code></td><td>os quatro papéis do laranja: momento, ação, estado atual, o 20 do dado</td></tr><tr><td><span class="amostra" style="background:#ffffff"></span><code>--accent-ink</code></td><td><code>#ffffff</code></td><td><code>#ffffff</code></td><td>texto sobre o acento, só a partir de 24 px</td></tr><tr><td><span class="amostra" style="background:#15110d"></span><code>--floor</code></td><td><code>#15110d</code></td><td><code>#15110d</code></td><td>rodapé, contracapa, moldura do visualizador</td></tr><tr><td><span class="amostra" style="background:#ffffff"></span><code>--floor-ink</code></td><td><code>#ffffff</code></td><td><code>#ffffff</code></td><td>texto sobre o chão</td></tr><tr><td><span class="amostra" style="background:#1a140f"></span><code>--focus</code></td><td><code>#1a140f</code></td><td><code>#1a140f</code></td><td>anel de foco de 2 px com 2 px de afastamento</td></tr><tr><td><span class="amostra" style="background:#1a140f"></span><code>--negative</code></td><td><code>#1a140f</code></td><td><code>#1a140f</code></td><td>dado negativo, em chumbo, nunca em vermelho</td></tr></tbody></table></div><p class="corpo">Dois papéis não são cor. <code>--logo-invert</code> vale 1 na base e inverte a logo branca para escura sobre o papel; os momentos zeram e a logo volta a ser branca. <code>--dado-1</code> a <code>--dado-4</code> e <code>--dado-0</code> são a rampa de dado, na seção da rampa.</p><div class="pilha"><h3>O mesmo bloco nos três momentos</h3><p class="corpo">O bloco é o mesmo HTML três vezes. O segundo recebe <code>.tema-laranja</code>, o terceiro <code>.tema-escuro</code>. Título em 28 px porque branco sobre laranja só passa a partir de 24; corpo, rótulo e fonte ficam pretos no laranja pela própria camada.</p><div class="tres-momentos"><div><span class="rotulo">Capítulo 2</span>
+<p class="t">Onde a marca já é lembrada</p>
+<p class="corpo">Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria.</p>
+<p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas.</p>
+<div class="acoes"><button class="tinta" type="button">Ver as seis cidades</button><button class="quieta" type="button">Fonte da pesquisa</button></div></div><div class="tema-laranja"><span class="rotulo">Capítulo 2</span>
+<p class="t">Onde a marca já é lembrada</p>
+<p class="corpo">Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria.</p>
+<p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas.</p>
+<div class="acoes"><button class="tinta" type="button">Ver as seis cidades</button><button class="quieta" type="button">Fonte da pesquisa</button></div></div><div class="tema-escuro"><span class="rotulo">Capítulo 2</span>
+<p class="t">Onde a marca já é lembrada</p>
+<p class="corpo">Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria.</p>
+<p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas.</p>
+<div class="acoes"><button class="tinta" type="button">Ver as seis cidades</button><button class="quieta" type="button">Fonte da pesquisa</button></div></div></div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-tres-momentos">Copiar</button></div><pre><code id="c-tres-momentos">&lt;div&gt;
+&lt;span class="rotulo"&gt;Capítulo 2&lt;/span&gt;
+&lt;p class="t"&gt;Onde a marca já é lembrada&lt;/p&gt;
+&lt;p class="corpo"&gt;Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria.&lt;/p&gt;
+&lt;p class="fonte"&gt;Pesquisa de junho de 2026, 1.240 entrevistas.&lt;/p&gt;
+&lt;div class="acoes"&gt;&lt;button class="tinta" type="button"&gt;Ver as seis cidades&lt;/button&gt;&lt;button class="quieta" type="button"&gt;Fonte da pesquisa&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tema-laranja"&gt;
+&lt;span class="rotulo"&gt;Capítulo 2&lt;/span&gt;
+&lt;p class="t"&gt;Onde a marca já é lembrada&lt;/p&gt;
+&lt;p class="corpo"&gt;Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria.&lt;/p&gt;
+&lt;p class="fonte"&gt;Pesquisa de junho de 2026, 1.240 entrevistas.&lt;/p&gt;
+&lt;div class="acoes"&gt;&lt;button class="tinta" type="button"&gt;Ver as seis cidades&lt;/button&gt;&lt;button class="quieta" type="button"&gt;Fonte da pesquisa&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tema-escuro"&gt;
+&lt;span class="rotulo"&gt;Capítulo 2&lt;/span&gt;
+&lt;p class="t"&gt;Onde a marca já é lembrada&lt;/p&gt;
+&lt;p class="corpo"&gt;Em quatro das seis cidades a marca é a primeira citada no varejo de insumos. Nas outras duas, a segunda: as duas em que a concorrente tem loja própria.&lt;/p&gt;
+&lt;p class="fonte"&gt;Pesquisa de junho de 2026, 1.240 entrevistas.&lt;/p&gt;
+&lt;div class="acoes"&gt;&lt;button class="tinta" type="button"&gt;Ver as seis cidades&lt;/button&gt;&lt;button class="quieta" type="button"&gt;Fonte da pesquisa&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div><aside class="margem fixa"><span class="n">3 momentos</span><p>Papel é a base. Laranja e escuro são momentos: uma classe no slide, na seção ou no bloco, e todos os papéis mudam juntos.</p><p>Dentro do laranja, <code>--accent</code> vira branco e <code>--ink-body</code> vira preto: o texto pequeno nunca fica branco sobre laranja.</p><p>A ação primária dentro do momento laranja é branca com texto preto; a secundária é a quieta, em preto.</p></aside></div></section><section class="bloco" id="laranja"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Os quatro papéis do laranja</h2><p class="lead">O laranja aparece em quatro papéis e só neles: momento (o fundo de <code>.tema-laranja</code> e da <code>.faixa.laranja</code>), ação primária dentro do momento (o botão branco), estado atual (o quadrado de 8 px) e o 20 do dado (o elemento que a leitura em palavras nomeia). Nunca em corpo, nunca em rótulo pequeno, nunca em borda. Escassez é o que dá impacto: no máximo três momentos de acento por página ou slide.</p></div><div class="pilha"><h3>Momento e ação primária dentro dele</h3><p class="corpo">O momento é o fundo laranja de um slide inteiro (<code>.s-cheio.tema-laranja</code>), de uma seção (<code>section.momento.tema-laranja</code>) ou de uma faixa de separatriz. Um por capítulo quando é página inteira, nunca em dois slides seguidos. Dentro dele a ação primária é o bloco branco, e a chapa de registro também é branca. O bloco laranja da seção de papéis semânticos mostra os dois.</p></div><div class="pilha"><h3>Estado atual</h3><p class="corpo">O quadrado de 8 px em laranja marca o que está acontecendo agora: o item em revisão, o selo do que é atual ou novo. Cheio em tinta é informação; contorno é feito; <code>--rule-strong</code> é parado.</p><div class="pilha"><div><p class="acoes"><span class="estado atencao">Em revisão</span><span class="estado">Em produção</span><span class="estado feito">Entregue</span><span class="estado parado">Parado</span></p>
+<p class="acoes"><span class="selo atual">atual</span><span class="selo">v3</span><span class="selo novo">novo</span></p></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-estado-atual">Copiar</button></div><pre><code id="c-estado-atual">&lt;p class="acoes"&gt;&lt;span class="estado atencao"&gt;Em revisão&lt;/span&gt;&lt;span class="estado"&gt;Em produção&lt;/span&gt;&lt;span class="estado feito"&gt;Entregue&lt;/span&gt;&lt;span class="estado parado"&gt;Parado&lt;/span&gt;&lt;/p&gt;
+&lt;p class="acoes"&gt;&lt;span class="selo atual"&gt;atual&lt;/span&gt;&lt;span class="selo"&gt;v3&lt;/span&gt;&lt;span class="selo novo"&gt;novo&lt;/span&gt;&lt;/p&gt;</code></pre></details></div></div><div class="pilha"><h3>O 20 do dado</h3><p class="corpo">Um elemento por gráfico, o que a leitura em palavras nomeia. O resto da série fica na rampa de tinta. O laranja nunca é uma série: é o destaque.</p><div class="pilha"><div><div class="figura">
+  <div class="cabeca"><h3>Lembrança espontânea por cidade</h3><p class="sub">Primeira marca citada no varejo de insumos, em porcentagem dos entrevistados.</p></div>
+  <div class="grafico">
+<svg viewBox="0 0 640 250" role="img" aria-label="Lembrança espontânea por cidade: Rio Verde 71%, Jataí 64%, Mineiros 58%, Chapadão 55%, Caiapônia 39%, Montividiu 33%. Caiapônia e Montividiu em destaque.">
+  <title>Lembrança espontânea por cidade, em porcentagem</title>
+  <line class="eixo" x1="150" y1="6" x2="150" y2="246"/>
+  <g><text class="rotulo" x="0" y="26">Rio Verde</text><rect class="d1" x="150" y="12" width="312.4" height="20"/><text class="valor" x="470.4" y="26">71%</text></g>
+  <g><text class="rotulo" x="0" y="66">Jataí</text><rect class="d1" x="150" y="52" width="281.6" height="20"/><text class="valor" x="439.6" y="66">64%</text></g>
+  <g><text class="rotulo" x="0" y="106">Mineiros</text><rect class="d1" x="150" y="92" width="255.2" height="20"/><text class="valor" x="413.2" y="106">58%</text></g>
+  <g><text class="rotulo" x="0" y="146">Chapadão</text><rect class="d1" x="150" y="132" width="242" height="20"/><text class="valor" x="400" y="146">55%</text></g>
+  <g><text class="rotulo" x="0" y="186">Caiapônia</text><rect class="o20" x="150" y="172" width="171.6" height="20"/><text class="valor" x="329.6" y="186">39%</text></g>
+  <g><text class="rotulo" x="0" y="226">Montividiu</text><rect class="o20" x="150" y="212" width="145.2" height="20"/><text class="valor" x="303.2" y="226">33%</text></g>
+</svg>
+  </div>
+  <p class="leitura"><span class="quadrado"></span>As duas cidades em laranja são as duas em que a concorrente tem loja própria. <strong>A lembrança acompanha a porta.</strong></p>
+  <details class="razao"><summary>Livro-razão</summary><table class="tabela"><thead><tr><th>Cidade</th><th class="num">Lembrança</th></tr></thead><tbody>
+    <tr><td>Rio Verde</td><td class="num">71 %</td></tr><tr><td>Jataí</td><td class="num">64 %</td></tr><tr><td>Mineiros</td><td class="num">58 %</td></tr><tr><td>Chapadão do Céu</td><td class="num">55 %</td></tr><tr class="o20"><td>Caiapônia</td><td class="num">39 %</td></tr><tr class="o20"><td>Montividiu</td><td class="num">33 %</td></tr>
+  </tbody></table></details>
+  <p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas.</p>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-o20">Copiar</button></div><pre><code id="c-o20">&lt;div class="figura"&gt;
+  &lt;div class="cabeca"&gt;&lt;h4&gt;Lembrança espontânea por cidade&lt;/h4&gt;&lt;p class="sub"&gt;Primeira marca citada no varejo de insumos, em porcentagem dos entrevistados.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="grafico"&gt;
+&lt;svg viewBox="0 0 640 250" role="img" aria-label="Lembrança espontânea por cidade: Rio Verde 71%, Jataí 64%, Mineiros 58%, Chapadão 55%, Caiapônia 39%, Montividiu 33%. Caiapônia e Montividiu em destaque."&gt;
+  &lt;title&gt;Lembrança espontânea por cidade, em porcentagem&lt;/title&gt;
+  &lt;line class="eixo" x1="150" y1="6" x2="150" y2="246"/&gt;
+  &lt;g&gt;&lt;text class="rotulo" x="0" y="26"&gt;Rio Verde&lt;/text&gt;&lt;rect class="d1" x="150" y="12" width="312.4" height="20"/&gt;&lt;text class="valor" x="470.4" y="26"&gt;71%&lt;/text&gt;&lt;/g&gt;
+  &lt;g&gt;&lt;text class="rotulo" x="0" y="66"&gt;Jataí&lt;/text&gt;&lt;rect class="d1" x="150" y="52" width="281.6" height="20"/&gt;&lt;text class="valor" x="439.6" y="66"&gt;64%&lt;/text&gt;&lt;/g&gt;
+  &lt;g&gt;&lt;text class="rotulo" x="0" y="106"&gt;Mineiros&lt;/text&gt;&lt;rect class="d1" x="150" y="92" width="255.2" height="20"/&gt;&lt;text class="valor" x="413.2" y="106"&gt;58%&lt;/text&gt;&lt;/g&gt;
+  &lt;g&gt;&lt;text class="rotulo" x="0" y="146"&gt;Chapadão&lt;/text&gt;&lt;rect class="d1" x="150" y="132" width="242" height="20"/&gt;&lt;text class="valor" x="400" y="146"&gt;55%&lt;/text&gt;&lt;/g&gt;
+  &lt;g&gt;&lt;text class="rotulo" x="0" y="186"&gt;Caiapônia&lt;/text&gt;&lt;rect class="o20" x="150" y="172" width="171.6" height="20"/&gt;&lt;text class="valor" x="329.6" y="186"&gt;39%&lt;/text&gt;&lt;/g&gt;
+  &lt;g&gt;&lt;text class="rotulo" x="0" y="226"&gt;Montividiu&lt;/text&gt;&lt;rect class="o20" x="150" y="212" width="145.2" height="20"/&gt;&lt;text class="valor" x="303.2" y="226"&gt;33%&lt;/text&gt;&lt;/g&gt;
+&lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;p class="leitura"&gt;&lt;span class="quadrado"&gt;&lt;/span&gt;As duas cidades em laranja são as duas em que a concorrente tem loja própria. &lt;strong&gt;A lembrança acompanha a porta.&lt;/strong&gt;&lt;/p&gt;
+  &lt;details class="razao"&gt;&lt;summary&gt;Livro-razão&lt;/summary&gt;&lt;table class="tabela"&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Cidade&lt;/th&gt;&lt;th class="num"&gt;Lembrança&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Rio Verde&lt;/td&gt;&lt;td class="num"&gt;71 %&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Jataí&lt;/td&gt;&lt;td class="num"&gt;64 %&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Mineiros&lt;/td&gt;&lt;td class="num"&gt;58 %&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chapadão do Céu&lt;/td&gt;&lt;td class="num"&gt;55 %&lt;/td&gt;&lt;/tr&gt;&lt;tr class="o20"&gt;&lt;td&gt;Caiapônia&lt;/td&gt;&lt;td class="num"&gt;39 %&lt;/td&gt;&lt;/tr&gt;&lt;tr class="o20"&gt;&lt;td&gt;Montividiu&lt;/td&gt;&lt;td class="num"&gt;33 %&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;&lt;/table&gt;&lt;/details&gt;
+  &lt;p class="fonte"&gt;Pesquisa de junho de 2026, 1.240 entrevistas.&lt;/p&gt;
+&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>O laranja funcional, que não conta no teto</h3><p class="corpo">Erro (a linha do campo e do filete), atenção (o aviso e a confirmação), o passo atual do processo e o cursor de texto usam laranja por função. Estão tabelados no <code>brand.json</code> e ficam fora da contagem de três, junto com o 20 do dado.</p><div class="pilha"><div><div class="funcional">
+  <ol class="passos">
+    <li class="passo feito"><span class="n">1</span>Narrativa</li>
+    <li class="passo atual" aria-current="step"><span class="n">2</span>Estrutura</li>
+    <li class="passo"><span class="n">3</span>Direção visual</li>
+  </ol>
+  <div class="aviso atencao"><span><strong>A fonte Montserrat não carregou.</strong> O texto está em system-ui; os pesos não vão corresponder ao sistema.</span><button class="quieta" type="button">Recarregar</button></div>
+  <div class="form-grade">
+    <div class="campo is-error">
+      <label for="c-entrega">Data de entrega</label>
+      <div class="entrada"><input id="c-entrega" type="text" value="31/09/2026" aria-invalid="true" aria-describedby="c-entrega-ajuda"></div>
+      <p class="ajuda" id="c-entrega-ajuda">Setembro tem 30 dias. Use 30/09/2026 ou 01/10/2026.</p>
+    </div>
+    <div class="campo">
+      <label for="c-cliente">Cliente</label>
+      <div class="entrada"><input id="c-cliente" type="text" placeholder="Escreva para ver o cursor"></div>
+      <p class="ajuda">O cursor de texto é laranja: o 20 é onde se escreve.</p>
+    </div>
+  </div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-laranja-funcional">Copiar</button></div><pre><code id="c-laranja-funcional">&lt;div class="funcional"&gt;
+  &lt;ol class="passos"&gt;
+    &lt;li class="passo feito"&gt;&lt;span class="n"&gt;1&lt;/span&gt;Narrativa&lt;/li&gt;
+    &lt;li class="passo atual" aria-current="step"&gt;&lt;span class="n"&gt;2&lt;/span&gt;Estrutura&lt;/li&gt;
+    &lt;li class="passo"&gt;&lt;span class="n"&gt;3&lt;/span&gt;Direção visual&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;div class="aviso atencao"&gt;&lt;span&gt;&lt;strong&gt;A fonte Montserrat não carregou.&lt;/strong&gt; O texto está em system-ui; os pesos não vão corresponder ao sistema.&lt;/span&gt;&lt;button class="quieta" type="button"&gt;Recarregar&lt;/button&gt;&lt;/div&gt;
+  &lt;div class="form-grade"&gt;
+    &lt;div class="campo is-error"&gt;
+      &lt;label for="c-entrega"&gt;Data de entrega&lt;/label&gt;
+      &lt;div class="entrada"&gt;&lt;input id="c-entrega" type="text" value="31/09/2026" aria-invalid="true" aria-describedby="c-entrega-ajuda"&gt;&lt;/div&gt;
+      &lt;p class="ajuda" id="c-entrega-ajuda"&gt;Setembro tem 30 dias. Use 30/09/2026 ou 01/10/2026.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="campo"&gt;
+      &lt;label for="c-cliente"&gt;Cliente&lt;/label&gt;
+      &lt;div class="entrada"&gt;&lt;input id="c-cliente" type="text" placeholder="Escreva para ver o cursor"&gt;&lt;/div&gt;
+      &lt;p class="ajuda"&gt;O cursor de texto é laranja: o 20 é onde se escreve.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div></div><aside class="margem fixa"><span class="n">3 por página</span><p>Contam no teto: o bloco ou slide laranja, o quadrado de estado atual, o selo de atual ou novo. Três por página; página inteira laranja é uma por capítulo.</p><p>Não contam: erro, atenção, passo atual, cursor de texto e o 20 do dado.</p><p>Laranja como texto só a partir de 24 px (ou 19 px em 700): 3,3:1 sobre o papel.</p></aside></div></section><section class="bloco" id="rampa"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>A rampa de dado</h2><p class="lead">Uma tonalidade, a tinta do momento, em quatro degraus: 100, 64, 40 e 20 por cento. Até três séries usam 100, 55 e 25; a partir da quinta, pequenos múltiplos ou 'outros'. O laranja é o 20: um elemento por gráfico, o que a leitura em palavras nomeia. No momento laranja a rampa é de preto e o 20 é branco, porque a rampa branca sobre laranja reprovou na medição.</p></div><div class="pilha"><div><div class="pilha"><div><span class="rotulo">Papel: a rampa de tinta, o 20 em laranja</span><div class="legenda-rampa"><span><i class="d1"></i>100 %, <code>d1</code></span><span><i class="d2"></i>64 %, <code>d2</code></span><span><i class="d3"></i>40 %, <code>d3</code></span><span><i class="d4"></i>20 %, <code>d4</code></span><span><i class="d0"></i>sem dado, <code>d0</code></span><span><i class="o20"></i>o 20, <code>o20</code></span></div></div><div class="tema-laranja momento-demo"><span class="rotulo">Laranja: a rampa de preto, o 20 em branco</span><div class="legenda-rampa"><span><i class="d1"></i>100 %, <code>d1</code></span><span><i class="d2"></i>64 %, <code>d2</code></span><span><i class="d3"></i>40 %, <code>d3</code></span><span><i class="d4"></i>20 %, <code>d4</code></span><span><i class="d0"></i>sem dado, <code>d0</code></span><span><i class="o20"></i>o 20, <code>o20</code></span></div></div><div class="tema-escuro momento-demo"><span class="rotulo">Escuro: a rampa de branco, o 20 em laranja</span><div class="legenda-rampa"><span><i class="d1"></i>100 %, <code>d1</code></span><span><i class="d2"></i>64 %, <code>d2</code></span><span><i class="d3"></i>40 %, <code>d3</code></span><span><i class="d4"></i>20 %, <code>d4</code></span><span><i class="d0"></i>sem dado, <code>d0</code></span><span><i class="o20"></i>o 20, <code>o20</code></span></div></div></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-legenda-rampa">Copiar</button></div><pre><code id="c-legenda-rampa">&lt;div class="legenda-rampa"&gt;&lt;span&gt;&lt;i class="d1"&gt;&lt;/i&gt;100 %, &lt;code&gt;d1&lt;/code&gt;&lt;/span&gt;&lt;span&gt;&lt;i class="d2"&gt;&lt;/i&gt;64 %, &lt;code&gt;d2&lt;/code&gt;&lt;/span&gt;&lt;span&gt;&lt;i class="d3"&gt;&lt;/i&gt;40 %, &lt;code&gt;d3&lt;/code&gt;&lt;/span&gt;&lt;span&gt;&lt;i class="d4"&gt;&lt;/i&gt;20 %, &lt;code&gt;d4&lt;/code&gt;&lt;/span&gt;&lt;span&gt;&lt;i class="d0"&gt;&lt;/i&gt;sem dado, &lt;code&gt;d0&lt;/code&gt;&lt;/span&gt;&lt;span&gt;&lt;i class="o20"&gt;&lt;/i&gt;o 20, &lt;code&gt;o20&lt;/code&gt;&lt;/span&gt;&lt;/div&gt;</code></pre></details></div><div class="pilha"><h3>Contraste de cada degrau com o chão</h3><p class="corpo">Valores medidos e registrados no <code>brand.json</code>. Degrau abaixo de 3:1 contra o chão exige rótulo direto na marca ou o livro-razão: o 40 e o 20 nunca ficam sem número ao lado.</p><div class="validador"><table>
+<thead><tr><th>Degrau</th><th class="num">Papel, chão #faf7f2</th><th class="num">Laranja, chão #fa4616</th><th class="num">Escuro, chão #120e0b</th></tr></thead>
+<tbody>
+<tr><td><code>d1</code>, 100 %</td><td class="num ok">17,1:1</td><td class="num ok">5,6:1</td><td class="num ok">19,2:1</td></tr>
+<tr><td><code>d2</code>, 64 %</td><td class="num ok">5,3:1</td><td class="num ok">3,5:1</td><td class="num ok">8,1:1</td></tr>
+<tr><td><code>d3</code>, 40 %</td><td class="num baixo">2,6:1, rótulo direto</td><td class="num baixo">2,2:1, rótulo direto</td><td class="num ok">3,8:1</td></tr>
+<tr><td><code>d4</code>, 20 %</td><td class="num baixo">1,5:1, rótulo direto</td><td class="num baixo">1,4:1, rótulo direto</td><td class="num baixo">1,8:1, rótulo direto</td></tr>
+<tr><td><code>o20</code>, o 20</td><td class="num ok">3,3:1, #fa4616</td><td class="num ok">3,5:1, #ffffff</td><td class="num ok">5,4:1, #fa4616</td></tr>
+</tbody></table></div></div></div><aside class="margem fixa"><span class="n">4 degraus</span><p>Os degraus são a tinta do momento com opacidade de 1, 0,64, 0,40 e 0,20. A separação entre vizinhos foi medida em OKLab, em visão normal e nas duas deficiências de cor mais comuns, e passa nos três momentos.</p><p>Na impressão o laranja do dado vira hachura, para a cópia em preto e branco não perder o 20. A regra completa está em <code>dado.html</code>.</p></aside></div></section><section class="bloco" id="contraste"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>A matriz de contraste</h2><p class="lead">Cada papel de texto contra cada fundo, nos três momentos, calculado ao vivo a partir do CSS carregado: a página lê a cor computada de cada papel, compõe a transparência sobre o fundo e aplica a fórmula do WCAG 2. Os valores batem com a matriz medida do <code>brand.json</code>.</p></div><p class="corpo">Níveis: AAA a partir de 7:1; AA a partir de 4,5:1; AA-grande a partir de 3:1, que só serve para texto de 24 px ou de 19 px em peso 700; reprova abaixo de 3:1. O que fica em laranja na tabela só serve para texto grande.</p><div class="validador" id="matriz-contraste"></div><div class="pilha"><h3>A fórmula</h3><p class="corpo">Luminância relativa: cada canal dividido por 255 e linearizado, por 12,92 quando o valor é até 0,03928, senão por ((c + 0,055) / 1,055) elevado a 2,4; L = 0,2126 R + 0,7152 G + 0,0722 B. Razão: (L1 + 0,05) / (L2 + 0,05), com a luminância maior em cima. Cor com transparência é composta sobre o fundo antes da conta: canal do texto vezes alfa, mais canal do fundo vezes (1 menos alfa).</p><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-contraste-js">Copiar</button></div><pre><code id="c-contraste-js">(function () {
+  /* A matriz de contraste, calculada ao vivo a partir do CSS carregado. Para cada momento,
+     cria um elemento de sonda com a classe do momento, lê a cor computada de cada papel de
+     texto e de fundo, compõe a transparência sobre o fundo e aplica a fórmula do WCAG 2. */
+  var alvo = document.getElementById("matriz-contraste"), sonda = document.getElementById("sonda");
+  if (!alvo || !sonda) return;
+  function lin(c) { c = c / 255; return c &lt;= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+  function lum(rgb) { return 0.2126 * lin(rgb[0]) + 0.7152 * lin(rgb[1]) + 0.0722 * lin(rgb[2]); }
+  function razao(a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+  function ler(s) { var m = (s.match(/[\d.]+/g) || []).map(Number); return { rgb: [m[0], m[1], m[2]], a: m.length &gt; 3 ? m[3] : 1 }; }
+  function compor(fg, bg) { return fg.rgb.map(function (v, i) { return Math.round(v * fg.a + bg[i] * (1 - fg.a)); }); }
+  function hex(rgb) { return "#" + rgb.map(function (v) { return v.toString(16).padStart(2, "0"); }).join(""); }
+  function nivel(r) { return r &gt;= 7 ? "AAA" : r &gt;= 4.5 ? "AA" : r &gt;= 3 ? "AA-grande" : "reprova"; }
+  var textos = ["ink", "ink-body", "ink-soft", "muted", "meta", "accent"], fundos = ["paper", "surface", "surface-2"];
+  var momentos = [["papel", ""], ["laranja", "tema-laranja"], ["escuro", "tema-escuro"]];
+  momentos.forEach(function (m) {
+    var caixa = document.createElement("div"); caixa.className = m[1]; sonda.appendChild(caixa);
+    function cor(prop, papel) { var e = document.createElement("i"); e.style[prop] = "var(--" + papel + ")"; caixa.appendChild(e); return ler(getComputedStyle(e)[prop]); }
+    var papel = cor("backgroundColor", "paper").rgb, fundo = {};
+    fundos.forEach(function (f) { fundo[f] = compor(cor("backgroundColor", f), papel); });
+    var cabeca = "&lt;tr&gt;&lt;th&gt;Texto&lt;/th&gt;" + fundos.map(function (f) { return "&lt;th class='num'&gt;&lt;code&gt;--" + f + "&lt;/code&gt; &lt;span class='nivel'&gt;" + hex(fundo[f]) + "&lt;/span&gt;&lt;/th&gt;"; }).join("") + "&lt;/tr&gt;";
+    var linhas = textos.map(function (t) {
+      var fg = cor("color", t);
+      return "&lt;tr&gt;&lt;td&gt;&lt;code&gt;--" + t + "&lt;/code&gt;&lt;/td&gt;" + fundos.map(function (f) {
+        var c = compor(fg, fundo[f]), r = razao(c, fundo[f]);
+        return "&lt;td class='num " + (r &gt;= 4.5 ? "ok" : "baixo") + "'&gt;&lt;span class='sw' style='background:" + hex(c) + "'&gt;&lt;/span&gt;" + r.toFixed(2).replace(".", ",") + ":1&lt;span class='nivel'&gt;" + nivel(r) + "&lt;/span&gt;&lt;/td&gt;";
+      }).join("") + "&lt;/tr&gt;";
+    }).join("");
+    alvo.insertAdjacentHTML("beforeend", "&lt;div&gt;&lt;h3&gt;Momento " + m[0] + " &lt;span&gt;papel " + hex(papel) + "&lt;/span&gt;&lt;/h3&gt;&lt;div class='rolagem'&gt;&lt;table&gt;&lt;thead&gt;" + cabeca + "&lt;/thead&gt;&lt;tbody&gt;" + linhas + "&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;");
+  });
+})();</code></pre></details></div></div><aside class="margem fixa"><span class="n">4,5:1</span><p><code>--meta</code> é a cor mais clara permitida para texto: 4,7:1 sobre o papel, o mínimo do sistema, e só a partir de 11,5 px.</p><p><code>--accent</code> sobre o papel dá 3,3:1: por isso o laranja é acento de título, momento, ação e estado, nunca corpo.</p><p>Branco sobre laranja dá 3,5:1. Só a partir de 24 px, ou 19 px em 700; por isso o texto pequeno do momento laranja é preto.</p></aside></div></section><section class="bloco" id="proibido"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>O que é proibido</h2><p class="lead">Quatro pares e uma regra fecham a paleta. O que está fora entra só por decisão registrada no projeto, nunca por conveniência de um slide.</p></div><div class="regras">
+  <div><strong>Branco sobre laranja abaixo de 24 px</strong>3,5:1 só passa como texto grande (24 px, ou 19 px em 700). O texto pequeno do momento laranja é preto, e a camada resolve isso pelos papéis; não sobrescrever.</div>
+  <div><strong>Laranja sobre papel abaixo de 24 px</strong>3,3:1. O laranja é acento de título, momento, ação e estado, nunca corpo, nunca rótulo pequeno, nunca link.</div>
+  <div><strong>Laranja sobre laranja</strong>Sem contraste. Dentro do momento laranja o acento é o branco: o botão, a chapa, o 20 do dado e o anel de foco ficam brancos.</div>
+  <div><strong>Qualquer cor fora dos seis primitivos</strong>A paleta é fechada. Vermelho de erro, verde de sucesso, azul de link e cinza neutro não existem: erro é laranja funcional, sucesso é palavra, link é tinta sublinhada, cinza é a tinta com transparência.</div>
+  <div><strong>Laranja como série de dado</strong>O laranja é o 20, um elemento por gráfico. Duas séries em laranja, ou o laranja em toda barra, apagam o destaque.</div>
+  <div><strong>Gradiente, sombra e cor sozinha</strong>Sem gradiente em dado nem em fundo, sem sombra em nada. Estado nunca é só cor: vem com forma (linha, peso, sublinhado) ou com texto.</div>
+</div></div><aside class="margem fixa"><span class="n">0 exceções</span><p>As regras duras estão no <code>brand.json</code>, em <code>hard_rules</code>, cada uma com a verificação que a confere: nenhuma cor fora de <code>--8020-*</code> no CSS e no SVG, nenhum <code>box-shadow</code>, nenhum raio fora de <code>--r-media</code>.</p><p>Os pares proibidos estão em <code>forbidden_pairs</code>, com o motivo medido.</p></aside></div></section>
+<footer class="rodape"><div class="container">8020-DS, candidato 4.0. Patterns, rodada 7, 2026-09-07.</div></footer>
+<script src="../assets/pagina.js"></script>
+<script>
+(function () {
+  /* A matriz de contraste, calculada ao vivo a partir do CSS carregado. Para cada momento,
+     cria um elemento de sonda com a classe do momento, lê a cor computada de cada papel de
+     texto e de fundo, compõe a transparência sobre o fundo e aplica a fórmula do WCAG 2. */
+  var alvo = document.getElementById("matriz-contraste"), sonda = document.getElementById("sonda");
+  if (!alvo || !sonda) return;
+  function lin(c) { c = c / 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+  function lum(rgb) { return 0.2126 * lin(rgb[0]) + 0.7152 * lin(rgb[1]) + 0.0722 * lin(rgb[2]); }
+  function razao(a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+  function ler(s) { var m = (s.match(/[\d.]+/g) || []).map(Number); return { rgb: [m[0], m[1], m[2]], a: m.length > 3 ? m[3] : 1 }; }
+  function compor(fg, bg) { return fg.rgb.map(function (v, i) { return Math.round(v * fg.a + bg[i] * (1 - fg.a)); }); }
+  function hex(rgb) { return "#" + rgb.map(function (v) { return v.toString(16).padStart(2, "0"); }).join(""); }
+  function nivel(r) { return r >= 7 ? "AAA" : r >= 4.5 ? "AA" : r >= 3 ? "AA-grande" : "reprova"; }
+  var textos = ["ink", "ink-body", "ink-soft", "muted", "meta", "accent"], fundos = ["paper", "surface", "surface-2"];
+  var momentos = [["papel", ""], ["laranja", "tema-laranja"], ["escuro", "tema-escuro"]];
+  momentos.forEach(function (m) {
+    var caixa = document.createElement("div"); caixa.className = m[1]; sonda.appendChild(caixa);
+    function cor(prop, papel) { var e = document.createElement("i"); e.style[prop] = "var(--" + papel + ")"; caixa.appendChild(e); return ler(getComputedStyle(e)[prop]); }
+    var papel = cor("backgroundColor", "paper").rgb, fundo = {};
+    fundos.forEach(function (f) { fundo[f] = compor(cor("backgroundColor", f), papel); });
+    var cabeca = "<tr><th>Texto</th>" + fundos.map(function (f) { return "<th class='num'><code>--" + f + "</code> <span class='nivel'>" + hex(fundo[f]) + "</span></th>"; }).join("") + "</tr>";
+    var linhas = textos.map(function (t) {
+      var fg = cor("color", t);
+      return "<tr><td><code>--" + t + "</code></td>" + fundos.map(function (f) {
+        var c = compor(fg, fundo[f]), r = razao(c, fundo[f]);
+        return "<td class='num " + (r >= 4.5 ? "ok" : "baixo") + "'><span class='sw' style='background:" + hex(c) + "'></span>" + r.toFixed(2).replace(".", ",") + ":1<span class='nivel'>" + nivel(r) + "</span></td>";
+      }).join("") + "</tr>";
+    }).join("");
+    alvo.insertAdjacentHTML("beforeend", "<div><h3>Momento " + m[0] + " <span>papel " + hex(papel) + "</span></h3><div class='rolagem'><table><thead>" + cabeca + "</thead><tbody>" + linhas + "</tbody></table></div></div>");
+  });
+})();
+</script>
+</body>
+</html>

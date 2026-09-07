@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8020-DS 4.0, o sistema de design da 80 20 Marketing</title>
+<meta name="description" content="Candidato à versão 4 do sistema de design da 80 20 Marketing: tokens, a Régua 80/20, as camadas de deck e de book, os templates e o catálogo, em HTML, CSS e SVG puros.">
+<link rel="stylesheet" href="tokens/8020.css">
+<link rel="stylesheet" href="assets/regua.css">
+<link rel="stylesheet" href="patterns/_catalogo.css">
+<style>
+  /* só desta página: a árvore de arquivos e a lista de camadas */
+  .arvore { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; line-height: 1.6; color: var(--ink-body); background: var(--surface-2); padding: var(--s-5); margin: 0; white-space: pre; overflow-x: auto; }
+  .arvore b { color: var(--ink); font-weight: var(--w-rotulo); }
+  .camadas { list-style: none; margin: 0; padding: 0; display: grid; }
+  .camadas li { display: grid; grid-template-columns: 22ch 1fr; gap: var(--s-5); padding: var(--s-4) 0; border-top: 1px solid var(--rule); font-size: var(--t-body); }
+  .camadas li:last-child { border-bottom: 1px solid var(--rule); }
+  .camadas li b { color: var(--ink); font-weight: var(--w-rotulo); }
+  .camadas li code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--ink); }
+  @media (max-width: 899px) { .camadas li { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+</head>
+<body>
+
+<div class="topo"><div class="container">
+  <a class="marca" href="index.html"><img src="assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0</span></a>
+  <nav aria-label="Seções">
+    <a class="peso" data-t="Catálogo" href="#catalogo">Catálogo</a>
+    <a class="peso" data-t="Templates" href="#templates">Templates</a>
+    <a class="peso" data-t="Camadas" href="#camadas">Camadas</a>
+    <a class="peso" data-t="Acessibilidade" href="#acessibilidade">Acessibilidade</a>
+    <a class="peso" data-t="O que muda" href="#muda">O que muda</a>
+  </nav>
+  <span class="meta">index.html</span>
+</div></div>
+
+<main>
+
+<section class="abertura">
+  <div class="container folha">
+    <div class="miolo">
+      <h1>O sistema que <strong>tira a moldura</strong> e deixa a marca estruturar.</h1>
+      <p class="lead">Papel claro, tinta em chumbo quente, o laranja como momento e Montserrat do corpo ao display: o núcleo da 80 20 continua inteiro. O que sai é a gramática de superfície que qualquer interface gerada usava: cartão, olho de seção, barra lateral, pílula. O que entra é a Régua 80/20: a folha e o slide divididos em quatro para um, o filete que conta o estado, o peso que diz onde você está, o botão que assenta como impressão fora de registro e o estado escrito em palavras. Tudo em HTML, CSS e SVG puros, sem build, sem dependência.</p>
+    </div>
+    <aside class="margem fixa">
+      <span class="n">4 : 1</span>
+      <p>Candidato à versão 4. O que está no ar, a versão 3, segue como padrão até a decisão de publicação.</p>
+      <p>Para montar uma peça: escolha o template, copie a pasta inteira, leia o contrato e as regras, e escreva dentro das camadas. O catálogo tem o código de cada bloco para copiar.</p>
+      <p><span class="quadrado"></span>O laranja aparece em quatro papéis e só neles: momento, ação primária dentro do momento, estado atual, o 20 do dado.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="bloco" id="catalogo">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Catálogo</h2><p class="lead">Dez páginas, cada uma com os blocos ao vivo e o código para copiar. Fundamentos primeiro, depois o conteúdo, depois os dois formatos.</p></div>
+      <div class="indice">
+        <div class="grupo">
+          <div><h3>Fundamentos</h3><p class="sub">O que toda página e todo slide herdam.</p></div>
+          <ol>
+            <li><div><a href="patterns/tipografia.html">Tipografia</a><span class="d">Uma família, a escala com salto, a assinatura em itálico, o rótulo em caixa baixa, os numerais tabulares, os tamanhos do slide.</span></div><span class="arq">tipografia.html</span></li>
+            <li><div><a href="patterns/cores.html">Cores</a><span class="d">Os seis primitivos, os papéis semânticos, os momentos, os quatro papéis do laranja, a rampa de dado e a matriz de contraste medida ao vivo.</span></div><span class="arq">cores.html</span></li>
+            <li><div><a href="patterns/layouts.html">Layouts</a><span class="d">A grade 80/20, a página, a escala de espaço e as três distâncias, os pontos de quebra, os cinco registros do slide, a impressão.</span></div><span class="arq">layouts.html</span></li>
+            <li><div><a href="patterns/estados.html">Estados</a><span class="d">O filete vivo, os três níveis de ação, campos, seleção, navegação, retorno, tabela, o quadrado de 8 px e o foco, com todos os estados escritos.</span></div><span class="arq">estados.html</span></li>
+            <li><div><a href="patterns/proibido.html">O que o sistema recusa</a><span class="d">Dezessete pares de errado ao lado de certo, cada um com a regra que o proíbe e a checagem do verificador que o cobra.</span></div><span class="arq">proibido.html</span></li>
+          </ol>
+        </div>
+        <div class="grupo">
+          <div><h3>Conteúdo</h3><p class="sub">O dado, o diagrama e a imagem, na gramática da casa.</p></div>
+          <ol>
+            <li><div><a href="patterns/dado.html">Dado</a><span class="d">Vinte formas em SVG real para copiar, das barras com o 20 em laranja ao mapa de municípios, com as dezoito regras e o validador de paleta.</span></div><span class="arq">dado.html</span></li>
+            <li><div><a href="patterns/diagramas.html">Diagramas</a><span class="d">Fluxo com caixas, mapa de atores, esquema de fechamento e matriz dois por dois, em ângulo reto e com seta por marcador.</span></div><span class="arq">diagramas.html</span></li>
+            <li><div><a href="patterns/imagens.html">Imagens</a><span class="d">A política de imagem, os quatro formatos, o prompt base do gerador, as onze cenas com os candidatos e onde cada imagem entra.</span></div><span class="arq">imagens.html</span></li>
+          </ol>
+        </div>
+        <div class="grupo">
+          <div><h3>Formatos</h3><p class="sub">O que cada camada de layout oferece.</p></div>
+          <ol>
+            <li><div><a href="patterns/deck.html">Deck</a><span class="d">Os cinco registros, a faixa, os vinte e sete tipos de slide, o visualizador com o mapa de teclado, os limites de texto e a impressão.</span></div><span class="arq">deck.html</span></li>
+            <li><div><a href="patterns/book.html">Book</a><span class="d">O hub como mapa, a abertura de parte, as notas na margem, o scrollytelling dirigido pela margem, as fichas, o recap e a navegação.</span></div><span class="arq">book.html</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <aside class="margem fixa"><span class="n">10 páginas</span><p>Toda página do catálogo se lê como a peça se lê: quatro partes de conteúdo, uma de margem viva com o dado e a nota.</p><p>O código de cada bloco abre no botão "Código" e copia com um clique.</p></aside>
+  </div>
+</section>
+
+<section class="bloco" id="templates">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Templates</h2><p class="lead">Três esqueletos completos com conteúdo fictício da Casa do Campo, cada um com o seu contrato. Copie a pasta inteira, não só o arquivo.</p></div>
+      <div class="indice">
+        <div class="grupo">
+          <div><h3>Deck</h3><p class="sub">1280 por 720, um slide por página na impressão.</p></div>
+          <ol>
+            <li><div><a href="templates/deck/padrao/deck.html">Deck padrão</a><span class="d">Vinte e dois slides, três capítulos com separatriz e recap, esquema de fechamento e contracapa. Para plano, diagnóstico e decisão. <a href="templates/deck/padrao/CONTRATO.md">Contrato</a>.</span></div><span class="arq">templates/deck/padrao/</span></li>
+            <li><div><a href="templates/deck/editorial/deck.html">Deck editorial</a><span class="d">Dezessete slides com mais foto e respiro: visão, cultura e caminho, para reunião de abertura e peça institucional. <a href="templates/deck/editorial/CONTRATO.md">Contrato</a>.</span></div><span class="arq">templates/deck/editorial/</span></li>
+          </ol>
+        </div>
+        <div class="grupo">
+          <div><h3>Book</h3><p class="sub">Leitura no próprio ritmo, com a margem viva.</p></div>
+          <ol>
+            <li><div><a href="templates/book/padrao/index.html">Book padrão</a><span class="d">Hub como mapa e três partes com sete capítulos: notas na margem, scrollytelling, fichas, momento, recap. <a href="templates/book/padrao/CONTRATO.md">Contrato</a>.</span></div><span class="arq">templates/book/padrao/</span></li>
+          </ol>
+        </div>
+        <div class="grupo">
+          <div><h3>Documentos</h3><p class="sub">Chegam na próxima rodada.</p></div>
+          <ol>
+            <li class="pendente"><div><a href="#templates">Regras, guia e porta de entrada</a><span class="d">RULES.md revisado, GUIA.md e llms.txt apontando para o catálogo novo, o guia de migração da 3 para a 4 e o verificador que lê a peça e aponta o que a regra proíbe.</span></div><span class="arq">em preparação</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <aside class="margem fixa"><span class="n">22, 17 e 7</span><p>Vinte e dois slides no deck padrão, dezessete no editorial, sete capítulos no book. Todo o conteúdo é fictício e toda imagem é gerada e marcada como ilustrativa.</p><p>O contador, o trilho e a moldura do deck são escritos pelo sistema. O autor escreve só os slides.</p></aside>
+  </div>
+</section>
+
+<section class="bloco" id="camadas">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Como o sistema está organizado</h2><p class="lead">Quatro camadas, nesta ordem de dependência. Cada uma consome só o que a de baixo define; nenhuma usa cor crua.</p></div>
+      <ol class="camadas">
+        <li><b>Tokens</b><span><code>tokens/8020.css</code> define os primitivos, os papéis semânticos, a escala de tipo, a escala de espaço, a forma, o movimento, a rampa de dado e os dois momentos. <code>tokens/brand.json</code> repete tudo em três camadas legíveis por máquina, com a matriz de contraste medida; <code>gerar-brand.py</code> o produz a partir do CSS.</span></li>
+        <li><b>A régua</b><span><code>assets/regua.css</code> é a camada compartilhada: a grade 80/20, a página, os controles com os estados, a tabela, as listas, o número em linha, o livro-razão e toda a gramática de dado. <code>assets/dado.js</code> dá a leitura em palavras e a transição; <code>assets/pagina.js</code> cuida do topo, das abas, do toast e do copiar.</span></li>
+        <li><b>Deck e book</b><span><code>assets/deck.css</code> e <code>deck.js</code>: o slide nos cinco registros, o visualizador, as miniaturas, a visão do apresentador e a impressão. <code>assets/book.css</code> e <code>book.js</code>: o hub, a margem viva, as notas, o scrollytelling e os atalhos.</span></li>
+        <li><b>Templates e catálogo</b><span><code>templates/</code> traz os três esqueletos com contrato. <code>patterns/</code> traz as dez páginas do catálogo, sobre <code>patterns/_catalogo.css</code>, que é cromo de documentação e não entra na peça.</span></li>
+      </ol>
+      <pre class="arvore"><b>v4/</b>
+  index.html                    esta página
+  <b>tokens/</b>   8020.css  brand.json  gerar-brand.py
+  <b>assets/</b>   regua.css  deck.css  deck.js  book.css  book.js  dado.js  pagina.js
+            fonts/  logos/  imagens/  mapas/
+  <b>patterns/</b> tipografia  cores  layouts  estados  proibido  dado  diagramas  imagens  deck  book  (.html) + _catalogo.css
+  <b>templates/</b>
+    deck/padrao/     deck.html  CONTRATO.md
+    deck/editorial/  deck.html  CONTRATO.md
+    book/padrao/     index.html  partes/parte-1.html  parte-2.html  parte-3.html  CONTRATO.md</pre>
+    </div>
+    <aside class="margem fixa"><span class="n">0 build</span><p>Nenhum passo de compilação, nenhuma dependência, nenhuma chamada externa. Todo arquivo abre direto no navegador e imprime do mesmo arquivo.</p><p>As fontes vivem em <code>assets/fonts/</code> sob licença aberta; a base geográfica do IBGE em <code>assets/mapas/</code>, refeita por <code>construir.py</code>.</p></aside>
+  </div>
+</section>
+
+<section class="bloco" id="acessibilidade">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>Acessibilidade</h2><p class="lead">Seis compromissos que as camadas cumprem por construção e que o verificador cobra na peça.</p></div>
+      <div class="regras">
+        <div><strong>Contraste medido, não estimado.</strong> Todo par de texto e fundo dos três momentos está na matriz do <code>brand.json</code> e na página de cores. O menor texto do sistema, em <code>--meta</code>, passa de 4,5:1 sobre o papel; branco sobre laranja só a partir de 24 px.</div>
+        <div><strong>Foco visível em tudo.</strong> Anel de 2 px em <code>--focus</code> com 2 px de afastamento, nunca removido. No momento laranja o anel é branco.</div>
+        <div><strong>Menos movimento quando o leitor pede.</strong> Com <code>prefers-reduced-motion</code> as durações caem para um milissegundo, a coreografia do slide e o desenho da linha desligam, a transição de dado é imediata. Na impressão nada se move.</div>
+        <div><strong>Todo dado tem papel e tabela.</strong> SVG de dado com <code>role="img"</code>, <code>aria-label</code> e <code>title</code>; a leitura em palavras no lugar da dica flutuante; o livro-razão com a tabela sob toda figura. SVG decorativo com <code>aria-hidden</code>.</div>
+        <div><strong>Piso de fonte.</strong> Nada abaixo de 11,5 px na página e de 14 px efetivos no slide, medido no tamanho real do texto de SVG.</div>
+        <div><strong>Teclado inteiro.</strong> O deck e o book navegam sem ponteiro; a tecla <code>?</code> abre a lista de atalhos nos dois. Estado nunca é só cor: vem com forma (filete, peso, quadrado) ou com a palavra.</div>
+      </div>
+    </div>
+    <aside class="margem fixa"><span class="n">4,7:1</span><p>O contraste do texto mais claro do sistema sobre o papel. Foi a correção desta versão: o cinza de 50 por cento da prova ficava em 3,4:1.</p></aside>
+  </div>
+</section>
+
+<section class="bloco decisao" id="muda">
+  <div class="container folha">
+    <div class="miolo pilha-l">
+      <div class="pilha"><h2>O que muda em relação à versão 3</h2><p class="lead">O núcleo de marca não muda: paleta fechada, momentos com teto, Montserrat única, assinatura em itálico, ângulo reto, sem sombra, o contrato didático do deck. Muda a moldura.</p></div>
+      <dl>
+        <dt>Grade</dt><dd>Folha e slide em quatro para um. A margem viva carrega número, nota, estado e o cromo do deck; nunca decoração.</dd>
+        <dt>Superfície</dt><dd>O filete de 1 px é o separador padrão. Cartão só para coleção, sem borda, raio zero, nunca aninhado. Sem barra lateral, sem caixa de ícone, sem pílula, sem deslocamento ao passar o ponteiro.</dd>
+        <dt>Tipografia</dt><dd>Escala com salto de 1,25, display até 96 px e peso 300 como voz nova, rótulo em caixa baixa, olho de seção uma vez por capítulo. O número faz parte da frase.</dd>
+        <dt>Filete vivo</dt><dd>Todo controle textual sobre uma linha que conta o estado: fina, cheia, grossa, pontilhada, laranja, varrendo.</dd>
+        <dt>Peso como estado</dt><dd>Navegação, abas e sumário mudam de peso, não de cor, com a largura reservada no peso máximo.</dd>
+        <dt>Registro</dt><dd>O botão primário em ângulo reto, com a chapa deslocada no ponteiro e o assentamento no clique. Sem sombra.</dd>
+        <dt>Estado em palavras</dt><dd>Enviar, enviando, enviado às 14:32. Erro vem com a frase que resolve.</dd>
+        <dt>Deck</dt><dd>A faixa de um terço carrega capítulo, título descritivo e frase central; cinco registros escolhidos pelo papel do slide; o sistema escreve contador e trilho; o mesmo arquivo imprime; visão do apresentador.</dd>
+        <dt>Book</dt><dd>A margem viva como instrumento de leitura: notas ao lado do parágrafo, scrollytelling dirigido pela margem, hub como mapa com o progresso guardado.</dd>
+        <dt>Dado</dt><dd>O laranja é o 20, um por gráfico; rampa validada; leitura em palavras no lugar da dica; livro-razão sempre; mapa, rede, fluxo, anotação e transição como formas do sistema.</dd>
+        <dt>Imagem</dt><dd>Documental, lugar descrito, sem texto legível, retângulo reto; gerada com o prompt base quando a foto não existe, e marcada.</dd>
+        <dt>Contraste</dt><dd>Os cinzas de texto subiram para passar o AA no tamanho em que são usados; o texto pequeno dentro do laranja é preto.</dd>
+      </dl>
+    </div>
+    <aside class="margem fixa"><span class="n">1 ícone</span><p>O quadrado de 8 px, em quatro preenchimentos: tinta é informação, laranja é atenção, contorno é feito, meta é parado. Nenhuma biblioteca de ícones.</p></aside>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape"><div class="container">8020-DS, candidato à versão 4. Rodada 7, 2026-09-07. 80 20 Marketing, São Paulo, Campo Grande e Cuiabá.</div></footer>
+<script src="assets/pagina.js"></script>
+</body>
+</html>

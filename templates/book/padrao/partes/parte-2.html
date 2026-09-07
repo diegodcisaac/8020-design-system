@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parte 2, Diagnóstico: onde a marca já é lembrada. Plano de presença de marca no Cerrado</title>
+<meta name="description" content="Parte 2 do exemplo fictício de book do 8020-DS 4.0: onde a marca já é lembrada, de onde vêm os clientes novos e os três públicos do plano.">
+<link rel="stylesheet" href="../../../../tokens/8020.css">
+<link rel="stylesheet" href="../../../../assets/regua.css">
+<link rel="stylesheet" href="../../../../assets/book.css">
+<style>
+  /* Ajustes locais só desta parte, consumindo papéis semânticos. */
+
+  /* Estados do scrollytelling do Pareto. O book.js copia o data-estado do passo ativo para o .fixo;
+     as regras abaixo dizem o que cada estado acende. O .oculto da camada deixa linha, marca de 80 % e
+     anotação em opacidade 0; os estados 3 e 4 os mostram. */
+  .fixo #p-linha, .fixo #p-80, .fixo #p-80t, .fixo #p-85 { transition: opacity var(--dur) var(--ease-out); }
+  .fixo #p-80t { fill: var(--accent); }
+  .fixo[data-estado="1"] #p-b1 rect { fill: var(--accent); }
+  .fixo[data-estado="1"] #p-b2 rect, .fixo[data-estado="1"] #p-b3 rect, .fixo[data-estado="1"] #p-b4 rect, .fixo[data-estado="1"] #p-b5 rect, .fixo[data-estado="1"] #p-b6 rect, .fixo[data-estado="1"] #p-b7 rect { fill: var(--dado-4); }
+  .fixo[data-estado="2"] #p-b5 rect, .fixo[data-estado="2"] #p-b6 rect, .fixo[data-estado="2"] #p-b7 rect { fill: var(--dado-4); }
+  .fixo[data-estado="3"] #p-b5 rect, .fixo[data-estado="3"] #p-b6 rect, .fixo[data-estado="3"] #p-b7 rect { fill: var(--dado-3); }
+  .fixo[data-estado="3"] #p-linha, .fixo[data-estado="3"] #p-80, .fixo[data-estado="3"] #p-80t, .fixo[data-estado="3"] #p-85,
+  .fixo[data-estado="4"] #p-linha, .fixo[data-estado="4"] #p-80, .fixo[data-estado="4"] #p-80t { opacity: 1; }
+  .fixo[data-estado="3"] #p-cruz { fill: var(--accent); }
+  .fixo[data-estado="4"] #p-b5 rect, .fixo[data-estado="4"] #p-b6 rect, .fixo[data-estado="4"] #p-b7 rect { fill: var(--accent); }
+  .fixo[data-estado="4"] #p-b1 rect, .fixo[data-estado="4"] #p-b2 rect, .fixo[data-estado="4"] #p-b3 rect, .fixo[data-estado="4"] #p-b4 rect { fill: var(--dado-4); }
+
+  /* Texto de SVG entre 600 e 699 px de largura: a camada só sobe a fonte do gráfico até 599 px,
+     e nessa faixa o viewBox de 640 encolhe o texto abaixo de 11,5 px. */
+</style>
+</head>
+<body class="book" data-book="book-casa-do-campo" data-hub="../index.html">
+
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+<div class="progresso-leitura" id="progresso" aria-hidden="true"></div>
+
+<header class="topo">
+  <div class="container">
+    <a class="marca" href="../index.html"><img src="../../../../assets/logos/logo-8020-branco.svg" alt="80 20"><span>Casa do Campo</span></a>
+    <div class="trilha" aria-label="Onde você está"><span>Plano de presença</span><span class="sep">/</span><span>Parte 2, Diagnóstico</span><span class="sep">/</span><span class="atual" id="trilha-atual">Onde a marca já é lembrada</span></div>
+    <div class="direita"><button class="quieta" type="button" id="abrir-atalhos">Atalhos <kbd>?</kbd></button></div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ================================================================ abertura da parte -->
+<section class="abre-parte" id="parte-2">
+  <div class="container folha">
+    <div class="miolo">
+      <div class="numeral">2</div>
+      <h1>Diagnóstico: onde a marca já é lembrada</h1>
+      <p class="frase">A pesquisa e o cadastro mostram que <strong>a lembrança acompanha a porta,</strong> não a mídia.</p>
+    </div>
+    <aside class="margem fixa">
+      <span class="n">19 min</span>
+      <p>Onde a marca já é lembrada, 4 min. De onde vêm os clientes novos, 7 min. Três públicos, uma frase para cada, 8 min.</p>
+      <p>Base: 1.240 entrevistas de junho de 2026 e o cadastro de 2.316 clientes novos.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ================================================================ capítulo 1 -->
+<article class="capitulo" id="cap-1" data-titulo="Onde a marca já é lembrada">
+  <div class="container">
+    <div class="cabeca"><div><p class="cap-meta"><b>Capítulo 1</b> de 3 · 4 min</p><h2>Onde a marca já é lembrada</h2></div><aside class="margem"><p><b>O que o capítulo prova:</b> a marca é primeira em quatro das seis cidades, e as duas exceções têm a mesma causa.</p></aside></div>
+    <div class="folha com-notas">
+      <div class="miolo pilha-l">
+        <div class="prosa">
+          <p>A Casa do Campo é a primeira marca citada no varejo de insumos em Rio Verde, Jataí, Mineiros e Chapadão. Em Caiapônia e Montividiu é a segunda.<a class="chamada" href="#n1" id="r1">1</a> A diferença não é de verba nem de tempo de casa: as seis lojas mais antigas estão espalhadas pelas seis cidades, e o investimento em rádio local foi parecido em todas.</p>
+          <p>O que as duas cidades de segunda posição têm em comum é a concorrente com loja própria, aberta em 2019 em Montividiu e em 2021 em Caiapônia.<a class="chamada" href="#n2" id="r2">2</a> Nas quatro cidades em que a Casa do Campo é primeira, a concorrente vende por representante e não tem porta.</p>
+          <p class="numero-em-linha">A lembrança em Rio Verde subiu de <strong>52%</strong> para <strong>71%</strong> em seis anos <svg viewBox="0 0 96 26" aria-hidden="true"><polyline points="4,20 18,17.5 32,15 46,12.5 60,10 74,6 88,3"/><circle cx="88" cy="3" r="3"/></svg> e a marca é a primeira citada desde 2022.</p>
+          <p>Isso muda a pergunta do plano, de "como aparecer mais" para "como estar presente onde a porta não está".<a class="chamada" href="#n3" id="r3">3</a> A feira, a rádio e a indicação fazem esse trabalho nas cidades sem loja da concorrente; onde ela tem porta, o cliente lembra de quem viu.</p>
+        </div>
+        <div class="figura">
+          <div class="cabeca"><h3>Lembrança espontânea por cidade</h3><p class="sub">Primeira marca citada, em parte das entrevistas</p></div>
+          <div class="grafico">
+            <svg viewBox="0 0 640 250" role="img" aria-label="Lembrança espontânea por cidade: Rio Verde 71%, Jataí 64%, Mineiros 58%, Chapadão 55%, Caiapônia 39%, Montividiu 33%. Caiapônia e Montividiu, em laranja, têm loja da concorrente."><title>Lembrança espontânea por cidade</title>
+              <line class="eixo" x1="150" y1="6" x2="150" y2="246"/>
+              <g tabindex="0" data-leitura="<strong>Rio Verde, 71%.</strong> A maior lembrança da rede; 48% compraram nos últimos doze meses."><text class="rotulo" x="0" y="26">Rio Verde</text><rect class="d1" x="150" y="12" width="312" height="20"/><text class="valor" x="470" y="26">71%</text></g>
+              <g tabindex="0" data-leitura="<strong>Jataí, 64%.</strong> Subiu 24 pontos desde 2023, o ano da loja nova; 41% compraram."><text class="rotulo" x="0" y="66">Jataí</text><rect class="d1" x="150" y="52" width="282" height="20"/><text class="valor" x="440" y="66">64%</text></g>
+              <g tabindex="0" data-leitura="<strong>Mineiros, 58%.</strong> Primeira marca citada; 35% compraram nos últimos doze meses."><text class="rotulo" x="0" y="106">Mineiros</text><rect class="d1" x="150" y="92" width="255" height="20"/><text class="valor" x="413" y="106">58%</text></g>
+              <g tabindex="0" data-leitura="<strong>Chapadão, 55%.</strong> Lembra e não compra: 30% compraram, 25 pontos abaixo da lembrança."><text class="rotulo" x="0" y="146">Chapadão</text><rect class="d1" x="150" y="132" width="242" height="20"/><text class="valor" x="400" y="146">55%</text></g>
+              <g tabindex="0" data-leitura="<span class='quadrado'></span><strong>Caiapônia, 39%.</strong> Segunda marca citada; a concorrente abriu loja em 2021. 18% compraram."><text class="rotulo" x="0" y="186">Caiapônia</text><rect class="o20" x="150" y="172" width="172" height="20"/><text class="valor" x="330" y="186">39%</text></g>
+              <g tabindex="0" data-leitura="<span class='quadrado'></span><strong>Montividiu, 33%.</strong> Segunda marca citada; a concorrente abriu loja em 2019. 12% compraram."><text class="rotulo" x="0" y="226">Montividiu</text><rect class="o20" x="150" y="212" width="145" height="20"/><text class="valor" x="303" y="226">33%</text></g>
+            </svg>
+          </div>
+          <p class="leitura"><strong>A marca é a primeira citada em quatro das seis cidades.</strong> Em Caiapônia e Montividiu, as duas em laranja, a concorrente tem loja própria e a Casa do Campo é a segunda.</p>
+          <details class="razao"><summary>Livro-razão</summary><table class="tabela"><thead><tr><th>Cidade</th><th class="num">Lembrança</th><th class="num">Comprou em 12 meses</th><th>Concorrente com loja</th></tr></thead><tbody><tr><td>Rio Verde</td><td class="num">71%</td><td class="num">48%</td><td>não</td></tr><tr><td>Jataí</td><td class="num">64%</td><td class="num">41%</td><td>não</td></tr><tr><td>Mineiros</td><td class="num">58%</td><td class="num">35%</td><td>não</td></tr><tr><td>Chapadão</td><td class="num">55%</td><td class="num">30%</td><td>não</td></tr><tr class="o20"><td>Caiapônia</td><td class="num">39%</td><td class="num">18%</td><td>desde 2021</td></tr><tr class="o20"><td>Montividiu</td><td class="num">33%</td><td class="num">12%</td><td>desde 2019</td></tr></tbody></table></details>
+          <p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas nas seis cidades. As barras em laranja são as duas cidades em que a concorrente tem loja própria.</p>
+        </div>
+        <div class="figura" id="fig-1"><img src="../../../../assets/imagens/fachada-rio-verde.jpg" alt="Fachada de uma loja de insumos agrícolas numa cidade pequena, caminhonetes na porta, um produtor de chapéu entrando"></div>
+        <p class="statement-inline">Onde a concorrente tem porta, <strong>o cliente lembra de quem viu.</strong></p>
+      </div>
+      <aside class="margem">
+        <div class="nota-m" id="n1" data-ref="r1"><b>1</b>Lembrança espontânea: primeira marca citada quando se pergunta "que loja de insumos vem à cabeça". Pesquisa de junho de 2026, 1.240 entrevistas nas seis cidades.</div>
+        <div class="nota-m" id="n2" data-ref="r2"><b>2</b>A concorrente é a Rede Terra Forte, com 31 lojas em Goiás e Mato Grosso. As datas vêm do cadastro da junta comercial.</div>
+        <div class="nota-m" id="n3" data-ref="r3"><b>3</b>A verba de 2025 foi 62% digital e 38% local. A decisão de compra é 46% no balcão e 12% no digital.</div>
+        <div class="nota-m legenda-m" data-ref="fig-1"><b>Rio Verde,</b> a loja do centro, a mais antiga da rede. Imagem ilustrativa gerada para o exemplo; em peça real, foto da loja.</div>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<!-- ================================================================ capítulo 2: scrollytelling na margem -->
+<article class="capitulo" id="cap-2" data-titulo="De onde vêm os clientes novos">
+  <div class="container">
+    <div class="cabeca"><div><p class="cap-meta"><b>Capítulo 2</b> de 3 · 7 min</p><h2>De onde vêm os clientes novos</h2></div><aside class="margem"><p><b>O que o capítulo prova:</b> quatro canais trazem 85% dos clientes novos, e nenhum deles é o que leva a maior verba.</p></aside></div>
+    <div class="folha scrolly" id="scrolly" data-estado-estreito="3">
+      <div class="miolo">
+        <div class="fixo figura" data-estado="0">
+          <div class="grafico" id="g-pareto">
+            <svg viewBox="0 0 640 290" role="img" aria-label="Pareto dos canais de origem dos clientes novos: indicação 38%, loja 24%, feira 14%, rádio 9%, Instagram 7%, jornal 4%, outros 4%; o acumulado cruza 80% no quarto canal.">
+              <title>Origem dos clientes novos, participação e acumulado</title>
+              <text class="tique" x="46" y="244" text-anchor="end">0</text><text class="tique" x="46" y="144" text-anchor="end">50%</text><text class="tique" x="46" y="44" text-anchor="end">100%</text>
+              <line class="grade" x1="60" y1="140" x2="600" y2="140"/><line class="grade" x1="60" y1="40" x2="600" y2="40"/>
+              <line class="eixo" x1="60" y1="240" x2="600" y2="240"/>
+              <line class="marca-80 oculto" id="p-80" x1="60" y1="80" x2="600" y2="80"/><text class="anota oculto" id="p-80t" x="600" y="76" text-anchor="end">80%</text>
+              <g id="p-b1"><rect class="d1" x="76.5" y="164" width="44" height="76"/><text class="valor" x="98.5" y="156" text-anchor="middle">38%</text><text class="rotulo" x="98.5" y="262" text-anchor="middle">Indicação</text></g>
+              <g id="p-b2"><rect class="d1" x="153.5" y="192" width="44" height="48"/><text class="valor" x="175.5" y="184" text-anchor="middle">24%</text><text class="rotulo" x="175.5" y="262" text-anchor="middle">Loja</text></g>
+              <g id="p-b3"><rect class="d1" x="230.5" y="212" width="44" height="28"/><text class="valor" x="252.5" y="204" text-anchor="middle">14%</text><text class="rotulo" x="252.5" y="262" text-anchor="middle">Feira</text></g>
+              <g id="p-b4"><rect class="d1" x="307.5" y="222" width="44" height="18"/><text class="valor" x="329.5" y="214" text-anchor="middle">9%</text><text class="rotulo" x="329.5" y="262" text-anchor="middle">Rádio</text></g>
+              <g id="p-b5"><rect class="d1" x="384.5" y="226" width="44" height="14"/><text class="valor" x="406.5" y="218" text-anchor="middle">7%</text><text class="rotulo" x="406.5" y="262" text-anchor="middle">Instagram</text></g>
+              <g id="p-b6"><rect class="d1" x="461.5" y="232" width="44" height="8"/><text class="valor" x="483.5" y="224" text-anchor="middle">4%</text><text class="rotulo" x="483.5" y="262" text-anchor="middle">Jornal</text></g>
+              <g id="p-b7"><rect class="d1" x="538.5" y="232" width="44" height="8"/><text class="valor" x="560.5" y="224" text-anchor="middle">4%</text><text class="rotulo" x="560.5" y="262" text-anchor="middle">Outros</text></g>
+              <g id="p-linha" class="oculto"><polyline class="linha" points="98.5,164 175.5,116 252.5,88 329.5,70 406.5,56 483.5,48 560.5,40"/><circle class="ponto" cx="98.5" cy="164" r="4"/><circle class="ponto" cx="175.5" cy="116" r="4"/><circle class="ponto" cx="252.5" cy="88" r="4"/><circle class="ponto" id="p-cruz" cx="329.5" cy="70" r="5"/><circle class="ponto" cx="406.5" cy="56" r="4"/><circle class="ponto" cx="483.5" cy="48" r="4"/><circle class="ponto" cx="560.5" cy="40" r="4"/><text class="anota oculto" id="p-85" x="345" y="100">85% acumulado</text></g>
+            </svg>
+          </div>
+          <p class="leitura" id="leitura-pareto"><strong>Sete canais de origem,</strong> informados no cadastro de 2.316 clientes novos nos doze meses até junho de 2026.</p>
+          <details class="razao"><summary>Livro-razão</summary><table class="tabela"><thead><tr><th>Canal</th><th class="num">Participação</th><th class="num">Acumulado</th></tr></thead><tbody><tr><td>Indicação</td><td class="num">38%</td><td class="num">38%</td></tr><tr><td>Loja</td><td class="num">24%</td><td class="num">62%</td></tr><tr><td>Feira</td><td class="num">14%</td><td class="num">76%</td></tr><tr class="o20"><td>Rádio</td><td class="num">9%</td><td class="num">85%</td></tr><tr><td>Instagram</td><td class="num">7%</td><td class="num">92%</td></tr><tr><td>Jornal</td><td class="num">4%</td><td class="num">96%</td></tr><tr><td>Outros</td><td class="num">4%</td><td class="num">100%</td></tr></tbody></table></details>
+        </div>
+      </div>
+      <div class="margem passos-m" id="passos">
+        <div class="passo-m" data-estado="0" data-leitura="<strong>Sete canais de origem,</strong> informados no cadastro de 2.316 clientes novos nos doze meses até junho de 2026."><div><span class="n">1</span>Sete canais informados no cadastro. A pergunta era uma só: como você ficou sabendo da loja.</div></div>
+        <div class="passo-m" data-estado="1" data-leitura="<span class='quadrado'></span><strong>A indicação traz 38% dos clientes novos.</strong> Nenhuma verba paga por isso."><div><span class="n">2</span><span class="quadrado"></span>A indicação traz 38% dos clientes novos: um vizinho, um técnico, um parente. Nenhuma verba paga por isso.</div></div>
+        <div class="passo-m" data-estado="2" data-leitura="<strong>Indicação, loja, feira e rádio.</strong> Quatro canais, todos ligados à porta ou à cidade."><div><span class="n">3</span>Indicação, loja, feira e rádio: quatro canais, todos ligados à porta ou à cidade. Os outros três ficam apagados.</div></div>
+        <div class="passo-m" data-estado="3" data-leitura="<span class='quadrado'></span><strong>O acumulado cruza os 80% no quarto canal, com 85%.</strong> Quatro canais bastam."><div><span class="n">4</span><span class="quadrado"></span>O acumulado cruza a linha de 80% no quarto canal, com 85%. Quatro canais respondem por mais de quatro em cada cinco clientes novos.</div></div>
+        <div class="passo-m" data-estado="4" data-leitura="<span class='quadrado'></span><strong>Instagram, jornal e outros somam 15%.</strong> O digital levou 62% da verba de 2025 e trouxe 7% dos clientes novos."><div><span class="n">5</span>Instagram, jornal e outros somam 15%. O digital, que levou 62% da verba de 2025, trouxe 7% dos clientes novos.</div></div>
+      </div>
+    </div>
+    <div class="folha com-notas" style="margin-top:var(--s-7)">
+      <div class="miolo prosa"><p>O plano não abandona o digital: ele deixa de ser o centro. A verba de setembro a abril inverte a proporção, e o que sai do digital paga a presença nas três feiras regionais, a rádio da manhã nas seis cidades e as visitas às redações.<a class="chamada" href="#n4" id="r4">4</a></p></div>
+      <aside class="margem"><div class="nota-m" id="n4" data-ref="r4"><b>Método</b>Canal de origem informado no cadastro da primeira compra. Cliente que citou dois canais entrou nos dois; por isso a soma passa de 100 antes do arredondamento.</div></aside>
+    </div>
+  </div>
+</article>
+
+<!-- ================================================================ capítulo 3: fichas -->
+<article class="capitulo" id="cap-3" data-titulo="Três públicos, uma frase para cada">
+  <div class="container">
+    <div class="cabeca"><div><p class="cap-meta"><b>Capítulo 3</b> de 3 · 8 min</p><h2>Três públicos, uma frase para cada</h2></div><aside class="margem"><p><b>O que o capítulo prova:</b> os três públicos que decidem a lembrança já existem na cidade; o plano dá a cada um uma frase e um lugar.</p></aside></div>
+    <div class="folha">
+      <div class="miolo fichas">
+        <div class="ficha">
+          <img src="../../../../assets/imagens/retrato-produtor.jpg" alt="Produtor rural de chapéu de palha conferindo um saco de semente num armazém">
+          <div><h3>O produtor que compra no balcão</h3><p class="papel">Quem decide a compra em 46% dos casos</p><p class="frase">"Aqui tem quem <strong>sabe o que eu planto</strong>, e não só o que vende."</p><dl><dt>Onde está</dt><dd>No balcão, na feira, na rádio da manhã a caminho da lavoura</dd><dt>O que já sabe</dt><dd>Conhece a marca há anos; nas cidades com loja da concorrente, compara preço</dd><dt>O que o plano faz</dt><dd>Atendimento com nome, calendário de plantio por cidade, a feira como o dia da marca</dd></dl></div>
+        </div>
+        <div class="ficha">
+          <img src="../../../../assets/imagens/retrato-marta.jpg" alt="Mulher filmando uma barraca de feira com o celular num tripé pequeno">
+          <div><h3>Quem fala da cidade</h3><p class="papel">Perfis de cotidiano, seis cidades, 160 mil seguidores somados</p><p class="frase">"Fui na Casa do Campo hoje e <strong>a moça me explicou tudo</strong>."</p><dl><dt>Onde está</dt><dd>Feira, festa, rua do comércio; fala de tudo o que a cidade vive</dd><dt>O que já sabe</dt><dd>Já cita a loja sem ninguém pedir; não sabe que existe plano</dd><dt>O que o plano faz</dt><dd>Convite para a feira e para a abertura de safra, sem contrato e sem roteiro; pauta de cidade, não de agronegócio</dd></dl></div>
+        </div>
+        <div class="ficha">
+          <img src="../../../../assets/imagens/retrato-radio.jpg" alt="Locutor de rádio de cidade pequena falando num microfone antigo, fones no ouvido">
+          <div><h3>Quem a cidade ouve de manhã</h3><p class="papel">Rádio local e portal, um ou dois por cidade</p><p class="frase">"Tem gente da Casa do Campo aqui no estúdio <strong>falando de chuva</strong>."</p><dl><dt>Onde está</dt><dd>No estúdio às seis da manhã, no portal ao meio-dia</dd><dt>O que já sabe</dt><dd>Recebe o comércio local todo dia; a Casa do Campo nunca foi</dd><dt>O que o plano faz</dt><dd>Uma visita por cidade com o gerente junto, pauta semanal que vem da loja, o gerente como fonte de clima e safra</dd></dl></div>
+        </div>
+      </div>
+      <aside class="margem fixa">
+        <span class="n">3 públicos</span>
+        <p>A frase entre aspas é o que o plano quer que a pessoa diga daqui a um ano. É o teste de cada ação: se não leva à frase, sai.</p>
+        <p>Cada ficha é de um tipo de pessoa, não de um indivíduo; por isso leva o nome do público.</p>
+        <p>Retratos gerados para o exemplo. Em peça real, foto documental feita na cidade.</p>
+      </aside>
+    </div>
+    <div class="lado">
+      <div class="figura tres-dois"><img src="../../../../assets/imagens/balcao-loja.jpg" alt="Balcão de madeira numa loja de insumos, sacos de semente empilhados, vendedor e produtor conversando"><p class="legenda"><b>O balcão</b> decide 46% das compras. Imagem ilustrativa gerada para o exemplo.</p></div>
+      <div class="prosa"><p>O balcão é o único lugar em que os três públicos se encontram. O produtor compra, a vendedora explica, e quem fala da cidade grava. O plano trata o balcão como mídia: quem atende tem nome no crachá e uma frase por safra, e a loja tem um calendário na parede que muda todo mês.</p><p>É barato, e é o que a pesquisa pede: o balcão vem antes do anúncio.</p></div>
+    </div>
+    <div class="folha">
+      <div class="miolo">
+        <div class="figura">
+          <div class="cabeca"><h3>Onde a compra é decidida</h3><p class="sub">Última compra de insumo, em parte das entrevistas</p></div>
+          <div class="grafico">
+            <svg viewBox="0 0 640 130" role="img" aria-label="Onde a última compra foi decidida: no balcão 46%, fora do balcão e do digital 42%, no digital 12%."><title>Onde a compra é decidida</title>
+              <line class="eixo" x1="190" y1="6" x2="190" y2="126"/>
+              <g tabindex="0" data-leitura="<span class='quadrado'></span><strong>No balcão, 46%.</strong> O produtor decide com a vendedora na frente; é onde os três públicos se encontram."><text class="rotulo" x="0" y="26">No balcão</text><rect class="o20" x="190" y="12" width="202" height="20"/><text class="valor" x="400" y="26">46%</text></g>
+              <g tabindex="0" data-leitura="<strong>Fora do balcão e do digital, 42%.</strong> A diferença entre o total e as duas parcelas medidas."><text class="rotulo" x="0" y="66">Fora do balcão e do digital</text><rect class="d1" x="190" y="52" width="185" height="20"/><text class="valor" x="383" y="66">42%</text></g>
+              <g tabindex="0" data-leitura="<strong>No digital, 12%.</strong> O canal que levou 62% da verba de 2025."><text class="rotulo" x="0" y="106">No digital</text><rect class="d1" x="190" y="92" width="53" height="20"/><text class="valor" x="251" y="106">12%</text></g>
+            </svg>
+          </div>
+          <p class="leitura"><span class="quadrado"></span><strong>O balcão decide quase metade das compras.</strong> O digital, que levou a maior verba, decide 12%.</p>
+          <details class="razao"><summary>Livro-razão</summary><table class="tabela"><thead><tr><th>Onde a compra foi decidida</th><th class="num">Parte das entrevistas</th></tr></thead><tbody><tr class="o20"><td>No balcão</td><td class="num">46%</td></tr><tr><td>Fora do balcão e do digital</td><td class="num">42%</td></tr><tr><td>No digital</td><td class="num">12%</td></tr><tr class="total"><td>Total</td><td class="num">100%</td></tr></tbody></table></details>
+          <p class="fonte">Pesquisa de junho de 2026, 1.240 entrevistas: onde a última compra de insumo foi decidida. "Fora do balcão e do digital" é a diferença entre o total e as duas parcelas medidas.</p>
+        </div>
+      </div>
+      <aside class="margem"><p>O 46% do balcão é o número que sustenta as três fichas: é o lugar em que o produtor decide, a vendedora explica e quem fala da cidade grava.</p></aside>
+    </div>
+  </div>
+</article>
+
+<!-- ================================================================ momento: a mensagem-mãe da parte -->
+<section class="momento tema-laranja">
+  <div class="container folha">
+    <div class="miolo"><p class="statement">A lembrança acompanha <strong>a porta,</strong> não a mídia.</p></div>
+    <aside class="margem fixa"><span class="n">Mensagem-mãe</span><p>A frase que resume o diagnóstico e da qual toda peça do plano deriva. Vale para as seis cidades; o exemplo muda em cada loja.</p></aside>
+  </div>
+</section>
+
+<!-- ================================================================ recap e navegação -->
+<section class="capitulo" id="recap" data-titulo="O que a parte 2 mostrou">
+  <div class="container folha">
+    <div class="miolo">
+      <h2>O que a parte 2 mostrou</h2>
+      <ol class="recap" style="margin-top:var(--s-5)">
+        <li><strong>A lembrança acompanha a porta.</strong> As duas cidades em que a marca é segunda são as duas em que a concorrente tem loja própria.</li>
+        <li><strong>Quatro canais fazem 85% dos clientes novos.</strong> Indicação, loja, feira e rádio; o digital, que leva a maior verba, traz 7%.</li>
+        <li><strong>Os três públicos já existem na cidade.</strong> O plano dá a cada um uma frase e um lugar, e o balcão, que decide 46% das compras, é onde os três se encontram.</li>
+      </ol>
+      <p class="fonte" style="margin-top:var(--s-4)">Método: pesquisa de lembrança espontânea com 1.240 entrevistas, cadastro de 2.316 clientes novos e vinte entrevistas em profundidade, junho de 2026.</p>
+      <nav class="navega" aria-label="Partes"><a href="parte-1.html"><span class="rot">Anterior: parte 1, 9 min</span><span class="tit">Leitura do desafio</span></a><a class="prox" href="parte-3.html"><span class="rot">Próxima: parte 3, 13 min</span><span class="tit">Mensagem, canais e cronograma</span></a></nav>
+    </div>
+    <aside class="margem fixa"><span class="n">19 min</span><p>Os três achados do diagnóstico são a base da mensagem, dos canais e do cronograma da parte seguinte.</p></aside>
+  </div>
+</section>
+
+</main>
+
+<div class="atalhos" id="atalhos" hidden role="dialog" aria-modal="true" aria-label="Atalhos de teclado">
+  <div class="caixa">
+    <h2>Atalhos</h2>
+    <dl><dt><kbd>j</kbd></dt><dd>Próximo capítulo</dd><dt><kbd>k</kbd></dt><dd>Capítulo anterior</dd><dt><kbd>h</kbd></dt><dd>Voltar ao início</dd><dt><kbd>?</kbd></dt><dd>Abrir e fechar esta lista</dd><dt><kbd>Esc</kbd></dt><dd>Fechar</dd></dl>
+    <div class="acoes"><button class="filete" type="button" id="fechar-atalhos">Fechar</button></div>
+  </div>
+</div>
+
+<footer class="rodape"><div class="container">Plano de presença de marca no Cerrado, para a Casa do Campo. Julho de 2026. Exemplo fictício do book padrão do 8020-DS 4.0; imagens ilustrativas geradas.</div></footer>
+
+<script src="../../../../assets/book.js"></script>
+<script src="../../../../assets/dado.js"></script>
+</body>
+</html>

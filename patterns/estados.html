@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estados, patterns do 8020-DS 4.0</title>
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="_catalogo.css">
+<style>
+/* Local desta página: só o que a camada não tem, sempre por papel semântico.
+   .momento-demo: respiro de um bloco de momento em linha. .amostras: os quatro
+   preenchimentos do quadrado lado a lado. .foco-demo: a linha de controles para o Tab.
+   .quadrado.tinta: ver o comentário na própria regra. */
+.momento-demo { padding: var(--s-6); display: grid; gap: var(--s-5); }
+.momento-demo .rotulo { margin: 0; }
+.amostras { display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-7); font-size: var(--t-small); color: var(--ink-body); }
+.foco-demo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-6); }
+/* .quadrado.tinta também casa com .tinta, o botão primário do regua.css, e herda o bloco com
+   padding e borda; a regra devolve ao quadrado o tamanho de 8 px. Colisão a corrigir na camada. */
+.quadrado.tinta { display: inline-block; padding: 0; border: 0; width: 8px; height: 8px; }
+/* nove itens no topo: abaixo de 1200 px o vão entre eles cai de 24 para 12 px, senão a navegação
+   passa da calha entre 900 e 1010 px. */
+@media (max-width: 1199px) { .topo nav { gap: var(--s-3); } }
+</style>
+</head>
+<body>
+<div class="toast" role="status" aria-live="polite"><span data-texto></span><button class="quieta" type="button" data-fechar>Fechar</button></div>
+<div class="topo"><div class="container"><a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a><nav aria-label="Seções da página"><a class="peso" data-t="Filete" href="#filete">Filete</a><a class="peso" data-t="Ações" href="#acoes">Ações</a><a class="peso" data-t="Campos" href="#campos">Campos</a><a class="peso" data-t="Seleção" href="#selecao">Seleção</a><a class="peso" data-t="Navegação" href="#navegacao">Navegação</a><a class="peso" data-t="Retorno" href="#retorno">Retorno</a><a class="peso" data-t="Tabela" href="#tabela">Tabela</a><a class="peso" data-t="Quadrado" href="#quadrado">Quadrado</a><a class="peso" data-t="Foco" href="#foco">Foco</a></nav><span class="meta">estados.html</span></div></div>
+<section class="abertura"><div class="container folha"><div class="miolo"><h1>Estados: <strong>o filete vivo</strong>, o peso e a palavra.</h1><p class="lead">Todo controle do sistema tem cinco estados escritos: repouso, ponteiro sobre, foco, ativo ou selecionado, desabilitado. Onde há espera ou falha entram carregando e erro. Estado nunca é só cor: vem com forma (a linha, o peso, o sublinhado) ou com texto ("Enviando", "Enviado às 14:32"). Nenhum botão inflado, nenhuma sombra, nenhum cinza a 40 por cento.</p></div><aside class="margem fixa"><span class="n">5 + 2</span><p>Cinco estados para todo controle, mais carregando e erro onde há espera ou falha.</p><p>O laranja aqui é função: erro, atenção, o passo atual, o cursor de texto. Cada uso funcional está tabelado no <code>brand.json</code> e fica fora do teto de três momentos por página.</p><p>Desabilitado é forma, não opacidade: linha pontilhada e texto em <code>--meta</code>.</p></aside></div></section><section class="bloco" id="filete"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>O filete vivo</h2><p class="lead">Um controle textual é uma palavra sobre uma linha, e a linha conta o estado: 1 px em <code>--rule-strong</code> no repouso; 2 px de tinta crescendo da esquerda em 260 ms com o ponteiro sobre; 4 px no clique; 2 px fixos e peso 700 quando selecionado; pontilhada e texto em <code>--meta</code> quando desabilitado; um segmento de 20 por cento varrendo a linha enquanto carrega; 2 px em laranja no erro. A linha faz o trabalho que antes cabia à caixa, à cor de fundo e à opacidade.</p></div><p class="corpo">A matriz mostra cada estado fixo por classe (<code>is-hover</code>, <code>is-focus</code>, <code>is-active</code>, <code>is-selected</code>, <code>is-disabled</code>, <code>is-loading</code>, <code>is-error</code>), para documentação e captura. Na peça, os estados vêm do ponteiro, do teclado e do clique; as classes só entram quando o estado é escrito pelo sistema, como carregando e erro.</p><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-filete">Copiar</button></div><pre><code id="c-filete">&lt;button class="filete" type="button"&gt;Ver o plano&lt;/button&gt;
+&lt;button class="filete is-hover" type="button"&gt;Ver o plano&lt;/button&gt;
+&lt;button class="filete is-focus" type="button"&gt;Ver o plano&lt;/button&gt;
+&lt;button class="filete is-active" type="button"&gt;Ver o plano&lt;/button&gt;
+&lt;button class="filete is-selected" type="button" aria-pressed="true"&gt;Ver o plano&lt;/button&gt;
+&lt;button class="filete is-disabled" type="button" disabled&gt;Ver o plano&lt;/button&gt;
+&lt;button class="filete is-loading" type="button"&gt;Abrindo&lt;/button&gt;
+&lt;button class="filete is-error" type="button"&gt;Não abriu&lt;/button&gt;</code></pre></details></div><aside class="margem fixa"><span class="n">1, 2 e 4 px</span><p>Repouso 1 px, ponteiro sobre e selecionado 2 px, clique 4 px. A largura da linha é o estado.</p><p>Com <code>prefers-reduced-motion</code> a varredura de carregando vira pulso no lugar, e todas as durações caem a 1 ms.</p><p>Sucesso e erro trocam o texto: "Enviado às 14:32", "Não enviou". A linha acompanha; a palavra manda.</p></aside></div><div class="container matriz-larga"><div class="rolagem"><table class="matriz">
+  <thead><tr><th>Componente</th><th>Repouso</th><th>Ponteiro sobre</th><th>Foco</th><th>Ativo</th><th>Selecionado</th><th>Desabilitado</th><th>Carregando</th><th>Erro</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Ação secundária<small>.filete</small></td>
+      <td><button class="filete" type="button">Ver o plano</button></td>
+      <td><button class="filete is-hover" type="button">Ver o plano</button></td>
+      <td><button class="filete is-focus" type="button">Ver o plano</button></td>
+      <td><button class="filete is-active" type="button">Ver o plano</button></td>
+      <td><button class="filete is-selected" type="button" aria-pressed="true">Ver o plano</button></td>
+      <td><button class="filete is-disabled" type="button" disabled>Ver o plano</button></td>
+      <td><button class="filete is-loading" type="button">Abrindo</button></td>
+      <td><button class="filete is-error" type="button">Não abriu</button></td>
+    </tr>
+    <tr>
+      <td>Ação primária<small>.tinta</small></td>
+      <td><button class="tinta" type="button">Enviar</button></td>
+      <td><button class="tinta is-hover" type="button">Enviar</button></td>
+      <td><button class="tinta is-focus" type="button">Enviar</button></td>
+      <td><button class="tinta is-active" type="button">Enviar</button></td>
+      <td><span class="vazio">não se aplica</span></td>
+      <td><button class="tinta is-disabled" type="button" disabled>Enviar</button></td>
+      <td><button class="tinta is-loading" type="button">Enviando</button></td>
+      <td><button class="tinta is-error" type="button">Não enviou</button></td>
+    </tr>
+    <tr>
+      <td>Ação quieta<small>.quieta</small></td>
+      <td><button class="quieta" type="button">Descartar</button></td>
+      <td><button class="quieta is-hover" type="button">Descartar</button></td>
+      <td><button class="quieta is-focus" type="button">Descartar</button></td>
+      <td><button class="quieta is-hover" type="button">Descartar</button></td>
+      <td><span class="vazio">não se aplica</span></td>
+      <td><button class="quieta is-disabled" type="button" disabled>Descartar</button></td>
+      <td><span class="vazio">não se aplica</span></td>
+      <td><span class="vazio">não se aplica</span></td>
+    </tr>
+    <tr>
+      <td>Item de navegação<small>.peso</small></td>
+      <td><span class="peso" data-t="Estrutura">Estrutura</span></td>
+      <td><span class="peso is-hover" data-t="Estrutura">Estrutura</span></td>
+      <td><span class="peso is-hover" data-t="Estrutura" style="outline:2px solid var(--focus);outline-offset:2px">Estrutura</span></td>
+      <td><span class="peso is-current" data-t="Estrutura">Estrutura</span></td>
+      <td><span class="peso is-current" data-t="Estrutura">Estrutura</span></td>
+      <td><span class="peso is-disabled" data-t="Estrutura">Estrutura</span></td>
+      <td><span class="vazio">não se aplica</span></td>
+      <td><span class="vazio">não se aplica</span></td>
+    </tr>
+    <tr>
+      <td>Link no texto<small>a</small></td>
+      <td><a href="#filete">o livro-razão</a></td>
+      <td><a href="#filete" style="text-decoration-color:var(--ink);text-decoration-thickness:2px">o livro-razão</a></td>
+      <td><a href="#filete" style="outline:2px solid var(--focus);outline-offset:2px">o livro-razão</a></td>
+      <td><a href="#filete" style="text-decoration-color:var(--ink);text-decoration-thickness:2px">o livro-razão</a></td>
+      <td><span class="vazio">não se aplica</span></td>
+      <td><span class="vazio">não se aplica</span></td>
+      <td><span class="vazio">não se aplica</span></td>
+      <td><span class="vazio">não se aplica</span></td>
+    </tr>
+  </tbody>
+</table></div></div></section><section class="bloco" id="acoes"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Ações</h2><p class="lead">Três níveis e só três: <code>.tinta</code> para a ação primária, <code>.filete</code> para a secundária, <code>.quieta</code> para a terciária. O nível diz a importância; a forma diz o nível. A primária é um bloco de tinta em ângulo reto: com o ponteiro sobre, aparece por trás uma chapa deslocada 4 px, um contorno de 1 px, como impressão fora de registro; no clique o bloco assenta sobre a chapa. É o único movimento do botão, e não há sombra.</p></div><div class="pilha"><div><div class="linha-demo">
+  <button class="tinta" type="button" id="demo-enviar">Enviar proposta <span class="meta">2 arquivos</span></button>
+  <button class="filete" type="button">Salvar rascunho</button>
+  <button class="quieta" type="button">Descartar</button>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-acoes">Copiar</button></div><pre><code id="c-acoes">&lt;div class="linha-demo"&gt;
+  &lt;button class="tinta" type="button" id="demo-enviar"&gt;Enviar proposta &lt;span class="meta"&gt;2 arquivos&lt;/span&gt;&lt;/button&gt;
+  &lt;button class="filete" type="button"&gt;Salvar rascunho&lt;/button&gt;
+  &lt;button class="quieta" type="button"&gt;Descartar&lt;/button&gt;
+&lt;/div&gt;</code></pre></details></div><p class="nota">Clique em "Enviar proposta": o bloco perde o preenchimento, vira "Enviando" com a varredura na borda de baixo e termina em "Enviado às" com a hora, por extenso.</p><div class="pilha"><h3>Número dentro da ação</h3><p class="corpo">Quando a ação tem um número, ele vai dentro do bloco, em <code>.meta</code>: "Baixar o PDF, 2,4 MB". O número faz parte da frase, não fica ao lado.</p><div class="pilha"><div><button class="tinta" type="button">Baixar o PDF <span class="meta">2,4 MB</span></button></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-numero-acao">Copiar</button></div><pre><code id="c-numero-acao">&lt;button class="tinta" type="button"&gt;Baixar o PDF &lt;span class="meta"&gt;2,4 MB&lt;/span&gt;&lt;/button&gt;</code></pre></details></div></div><div class="pilha"><h3>Selo</h3><p class="corpo">Etiqueta de uma palavra, 11,5 px, peso 600, contorno de 1 px em <code>--rule-strong</code>, sem fundo. Laranja só quando o estado é "atual" ou "novo".</p><div class="pilha"><div><p class="acoes"><span class="selo">v3</span><span class="selo atual">atual</span><span class="selo novo">novo</span></p></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-selo">Copiar</button></div><pre><code id="c-selo">&lt;p class="acoes"&gt;&lt;span class="selo"&gt;v3&lt;/span&gt;&lt;span class="selo atual"&gt;atual&lt;/span&gt;&lt;span class="selo novo"&gt;novo&lt;/span&gt;&lt;/p&gt;</code></pre></details></div></div><div class="pilha"><h3>No momento laranja</h3><p class="corpo">Dentro de <code>.tema-laranja</code> o bloco e a chapa ficam brancos, com o texto em preto. A secundária no momento é a quieta, em preto; o filete de 13 px em branco não passa no contraste.</p><div class="pilha"><div><div class="tema-laranja momento-demo">
+  <span class="rotulo">Dentro do momento laranja</span>
+  <p class="statement-inline" style="margin:0">A lembrança acompanha <strong>a porta,</strong> não a mídia.</p>
+  <div class="acoes"><button class="tinta" type="button">Ver o plano de entrada <span class="meta">12 páginas</span></button><button class="quieta" type="button">Voltar ao diagnóstico</button></div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-momento-acoes">Copiar</button></div><pre><code id="c-momento-acoes">&lt;div class="tema-laranja momento-demo"&gt;
+  &lt;span class="rotulo"&gt;Dentro do momento laranja&lt;/span&gt;
+  &lt;p class="statement-inline" style="margin:0"&gt;A lembrança acompanha &lt;strong&gt;a porta,&lt;/strong&gt; não a mídia.&lt;/p&gt;
+  &lt;div class="acoes"&gt;&lt;button class="tinta" type="button"&gt;Ver o plano de entrada &lt;span class="meta"&gt;12 páginas&lt;/span&gt;&lt;/button&gt;&lt;button class="quieta" type="button"&gt;Voltar ao diagnóstico&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>O que saiu</h3><div class="antes-agora">
+  <div>
+    <span class="rotulo">Antes</span>
+    <div class="linha-demo"><button class="antigo" type="button">Enviar</button><button class="antigo desab" type="button">Em revisão</button></div>
+    <input class="antigo-campo" type="text" value="Casa do Campo" aria-label="Campo da versão anterior">
+    <p class="nota">Bloco com 4 px de raio, ponteiro que só escurece, desabilitado a 40 por cento de opacidade, campo em caixa.</p>
+  </div>
+  <div>
+    <span class="rotulo">Agora</span>
+    <div class="linha-demo"><button class="tinta" type="button">Enviar</button><button class="tinta" type="button" disabled>Em revisão</button></div>
+    <div class="campo is-filled"><div class="entrada"><input type="text" value="Casa do Campo" aria-label="Campo do sistema"></div></div>
+    <p class="nota">Ângulo reto, chapa de registro com o ponteiro sobre, desabilitado em pontilhado, campo sobre a linha com cursor laranja.</p>
+  </div>
+</div></div></div><aside class="margem fixa"><span class="n">3 níveis</span><p>Tinta, filete, quieta. Uma primária por bloco; se duas ações parecem primárias, uma delas não é.</p><p>Sem sombra: a chapa é um contorno de 1 px deslocado 4 px (<code>--registro</code>); nada difuso.</p><p>Desabilitado: sem preenchimento, contorno pontilhado, texto em <code>--meta</code>. Carregando e sucesso também perdem o preenchimento, porque o bloco cheio é a promessa de que o clique vai fazer algo.</p></aside></div></section><section class="bloco" id="campos"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Campos</h2><p class="lead">Sem caixa. O campo é a linha: rótulo em 600 acima, valor em 15 px sobre 1 px em <code>--rule-strong</code>, ajuda em 11,5 px abaixo. Foco é a linha crescendo em tinta; preenchido é a linha em tinta; erro é a linha em laranja com a frase que resolve e o quadrado laranja; sucesso é a linha em tinta com o quadrado em tinta; desabilitado é pontilhado. O cursor de texto é laranja.</p></div><div class="pilha"><div><form class="form-grade" onsubmit="return false">
+  <div class="campo is-filled">
+    <label for="f-projeto">Nome do projeto</label>
+    <div class="entrada"><input id="f-projeto" type="text" value="Plano de presença de marca no Cerrado"></div>
+    <p class="ajuda">Como vai aparecer na capa e na pasta do projeto.</p>
+  </div>
+  <div class="campo">
+    <label for="f-cliente">Cliente</label>
+    <div class="entrada"><input id="f-cliente" type="text" placeholder="Casa do Campo"></div>
+  </div>
+  <div class="campo is-error">
+    <label for="f-entrega">Data de entrega</label>
+    <div class="entrada"><input id="f-entrega" type="text" value="31/09/2026" aria-invalid="true" aria-describedby="f-entrega-ajuda"></div>
+    <p class="ajuda" id="f-entrega-ajuda">Setembro tem 30 dias. Use 30/09/2026 ou 01/10/2026.</p>
+  </div>
+  <div class="campo is-success">
+    <label for="f-contato">Contato no cliente</label>
+    <div class="entrada"><input id="f-contato" type="email" value="helena@casadocampo.com.br"></div>
+    <p class="ajuda">Endereço confirmado no cadastro.</p>
+  </div>
+  <div class="campo">
+    <label for="f-territorio">Território</label>
+    <div class="entrada seleciona"><select id="f-territorio"><option>Cerrado</option><option>Matopiba</option><option>Pantanal</option><option>Litoral norte</option></select></div>
+  </div>
+  <div class="campo is-disabled">
+    <label for="f-numero">Número do projeto</label>
+    <div class="entrada"><input id="f-numero" type="text" value="029" disabled></div>
+    <p class="ajuda">Atribuído pelo sistema quando a pasta nasce.</p>
+  </div>
+  <div class="campo largo">
+    <label for="f-obs">Observações <span class="opcional">opcional</span></label>
+    <div class="entrada"><textarea id="f-obs" maxlength="280" placeholder="O que o cliente disse e não está no proposta escrito."></textarea><span class="contagem" id="f-obs-contagem">0 / 280</span></div>
+  </div>
+  <div class="largo acoes">
+    <button class="tinta" type="button" id="demo-enviar-2">Enviar proposta</button>
+    <button class="filete" type="button">Salvar rascunho</button>
+    <button class="quieta" type="button">Descartar</button>
+  </div>
+</form></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-form">Copiar</button></div><pre><code id="c-form">&lt;form class="form-grade" onsubmit="return false"&gt;
+  &lt;div class="campo is-filled"&gt;
+    &lt;label for="f-projeto"&gt;Nome do projeto&lt;/label&gt;
+    &lt;div class="entrada"&gt;&lt;input id="f-projeto" type="text" value="Plano de presença de marca no Cerrado"&gt;&lt;/div&gt;
+    &lt;p class="ajuda"&gt;Como vai aparecer na capa e na pasta do projeto.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="campo"&gt;
+    &lt;label for="f-cliente"&gt;Cliente&lt;/label&gt;
+    &lt;div class="entrada"&gt;&lt;input id="f-cliente" type="text" placeholder="Casa do Campo"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="campo is-error"&gt;
+    &lt;label for="f-entrega"&gt;Data de entrega&lt;/label&gt;
+    &lt;div class="entrada"&gt;&lt;input id="f-entrega" type="text" value="31/09/2026" aria-invalid="true" aria-describedby="f-entrega-ajuda"&gt;&lt;/div&gt;
+    &lt;p class="ajuda" id="f-entrega-ajuda"&gt;Setembro tem 30 dias. Use 30/09/2026 ou 01/10/2026.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="campo is-success"&gt;
+    &lt;label for="f-contato"&gt;Contato no cliente&lt;/label&gt;
+    &lt;div class="entrada"&gt;&lt;input id="f-contato" type="email" value="helena@casadocampo.com.br"&gt;&lt;/div&gt;
+    &lt;p class="ajuda"&gt;Endereço confirmado no cadastro.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="campo"&gt;
+    &lt;label for="f-territorio"&gt;Território&lt;/label&gt;
+    &lt;div class="entrada seleciona"&gt;&lt;select id="f-territorio"&gt;&lt;option&gt;Cerrado&lt;/option&gt;&lt;option&gt;Matopiba&lt;/option&gt;&lt;option&gt;Pantanal&lt;/option&gt;&lt;option&gt;Litoral norte&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="campo is-disabled"&gt;
+    &lt;label for="f-numero"&gt;Número do projeto&lt;/label&gt;
+    &lt;div class="entrada"&gt;&lt;input id="f-numero" type="text" value="029" disabled&gt;&lt;/div&gt;
+    &lt;p class="ajuda"&gt;Atribuído pelo sistema quando a pasta nasce.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="campo largo"&gt;
+    &lt;label for="f-obs"&gt;Observações &lt;span class="opcional"&gt;opcional&lt;/span&gt;&lt;/label&gt;
+    &lt;div class="entrada"&gt;&lt;textarea id="f-obs" maxlength="280" placeholder="O que o cliente disse e não está no proposta escrito."&gt;&lt;/textarea&gt;&lt;span class="contagem" id="f-obs-contagem"&gt;0 / 280&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="largo acoes"&gt;
+    &lt;button class="tinta" type="button" id="demo-enviar-2"&gt;Enviar proposta&lt;/button&gt;
+    &lt;button class="filete" type="button"&gt;Salvar rascunho&lt;/button&gt;
+    &lt;button class="quieta" type="button"&gt;Descartar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre></details></div><p class="nota">Os campos respondem de verdade: clique num deles para ver a linha crescer, escreva nas observações para ver a contagem. A seleção aparece na seção seguinte.</p></div><aside class="margem fixa"><span class="n">1 a 2 px</span><p>A linha de 1 px é o repouso; 2 px de tinta é foco; 2 px de laranja é erro. Nada mais muda.</p><p>Erro nunca é só cor: vem com a frase que resolve ("Setembro tem 30 dias. Use 30/09/2026") e com <code>aria-invalid</code> e <code>aria-describedby</code> apontando para ela.</p><p>Ajuda em <code>--meta</code> a 11,5 px: o mínimo do sistema, e só porque fica ao lado do valor.</p></aside></div></section><section class="bloco" id="selecao"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Seleção</h2><p class="lead">Quadrados, nunca círculos. Caixa e rádio são quadrados de 14 px com contorno de 1 px em tinta: a caixa preenche, o rádio marca com um quadrado de 6 px dentro, a indeterminada preenche metade. O controle segmentado separa as células por filete e inverte a ativa. O interruptor é tipográfico: as duas palavras são os estados, e o bloco de tinta cobre a vigente.</p></div><div class="pilha"><h3>Caixa e rádio</h3><div class="pilha"><div><div class="form-grade"><fieldset>
+  <legend>Entregas</legend>
+  <div class="opcoes coluna">
+    <label class="marca-opcao"><input type="checkbox" checked><span>Deck de apresentação</span></label>
+    <label class="marca-opcao"><input type="checkbox" checked><span>Versão para impressão <span class="meta">deck-print.html</span></span></label>
+    <label class="marca-opcao"><input type="checkbox" id="chk-indet"><span>Book de detalhamento <span class="meta">indeterminada</span></span></label>
+    <label class="marca-opcao"><input type="checkbox"><span>Página de resumo</span></label>
+    <label class="marca-opcao"><input type="checkbox" disabled><span>Plataforma interativa</span></label>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>Profundidade</legend>
+  <div class="opcoes coluna">
+    <label class="marca-opcao"><input type="radio" name="tier" value="0"><span>Básica <span class="meta">toda peça</span></span></label>
+    <label class="marca-opcao"><input type="radio" name="tier" value="1" checked><span>Com dado <span class="meta">peça com dado ou recomendação</span></span></label>
+    <label class="marca-opcao"><input type="radio" name="tier" value="2"><span>Completa <span class="meta">board, longform, plataforma</span></span></label>
+    <label class="marca-opcao"><input type="radio" name="tier" value="3" disabled><span>Sob medida</span></label>
+  </div>
+</fieldset></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-opcoes">Copiar</button></div><pre><code id="c-opcoes">&lt;fieldset&gt;
+  &lt;legend&gt;Entregas&lt;/legend&gt;
+  &lt;div class="opcoes coluna"&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="checkbox" checked&gt;&lt;span&gt;Deck de apresentação&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="checkbox" checked&gt;&lt;span&gt;Versão para impressão &lt;span class="meta"&gt;deck-print.html&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="checkbox" id="chk-indet"&gt;&lt;span&gt;Book de detalhamento &lt;span class="meta"&gt;indeterminada&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="checkbox"&gt;&lt;span&gt;Página de resumo&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="checkbox" disabled&gt;&lt;span&gt;Plataforma interativa&lt;/span&gt;&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;
+&lt;fieldset&gt;
+  &lt;legend&gt;Profundidade&lt;/legend&gt;
+  &lt;div class="opcoes coluna"&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="radio" name="tier" value="0"&gt;&lt;span&gt;Básica &lt;span class="meta"&gt;toda peça&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="radio" name="tier" value="1" checked&gt;&lt;span&gt;Com dado &lt;span class="meta"&gt;peça com dado ou recomendação&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="radio" name="tier" value="2"&gt;&lt;span&gt;Completa &lt;span class="meta"&gt;board, longform, plataforma&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="marca-opcao"&gt;&lt;input type="radio" name="tier" value="3" disabled&gt;&lt;span&gt;Sob medida&lt;/span&gt;&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre></details></div></div><div class="pilha"><h3>Controle segmentado</h3><p class="corpo">Para dois a quatro estados que se excluem. Acima disso, <code>select</code>. A célula ativa leva <code>aria-pressed="true"</code>.</p><div class="pilha"><div><div class="controle"><span class="t">Formato</span>
+  <div class="segmentos" role="group" aria-label="Formato" id="seg-formato">
+    <button type="button" aria-pressed="true">Deck</button>
+    <button type="button" aria-pressed="false">Book</button>
+    <button type="button" aria-pressed="false">Ambos</button>
+    <button type="button" aria-pressed="false" disabled>Plataforma</button>
+  </div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-segmentos">Copiar</button></div><pre><code id="c-segmentos">&lt;div class="controle"&gt;&lt;span class="t"&gt;Formato&lt;/span&gt;
+  &lt;div class="segmentos" role="group" aria-label="Formato" id="seg-formato"&gt;
+    &lt;button type="button" aria-pressed="true"&gt;Deck&lt;/button&gt;
+    &lt;button type="button" aria-pressed="false"&gt;Book&lt;/button&gt;
+    &lt;button type="button" aria-pressed="false"&gt;Ambos&lt;/button&gt;
+    &lt;button type="button" aria-pressed="false" disabled&gt;Plataforma&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>Interruptor</h3><p class="corpo"><code>role="switch"</code> e <code>aria-checked</code>; o clique inverte. Sem bolinha que desliza: a palavra vigente ganha o bloco de tinta.</p><div class="pilha"><div><div class="controle"><span class="t">Aparecimento no book</span>
+  <button class="interruptor" type="button" role="switch" aria-checked="true" id="sw-reveal"><span>Desligado</span><span>Ligado</span></button>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-interruptor">Copiar</button></div><pre><code id="c-interruptor">&lt;div class="controle"&gt;&lt;span class="t"&gt;Aparecimento no book&lt;/span&gt;
+  &lt;button class="interruptor" type="button" role="switch" aria-checked="true" id="sw-reveal"&gt;&lt;span&gt;Desligado&lt;/span&gt;&lt;span&gt;Ligado&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details></div></div></div><aside class="margem fixa"><span class="n">14 px</span><p>Caixa e rádio com 14 px e 1 px de contorno em tinta; o ponteiro sobre escurece o fundo em <code>--rule</code>; desabilitado é contorno pontilhado e texto em <code>--meta</code>.</p><p>O foco na caixa e no rádio é o anel de 2 px do sistema, no próprio <code>input</code>.</p><p>A indeterminada só existe por script (<code>input.indeterminate = true</code>): é o estado da caixa "todos" quando parte está marcada.</p></aside></div></section><section class="bloco" id="navegacao"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Navegação</h2><p class="lead">Abas, passos, paginação e sumário usam o mesmo par: peso para dizer onde você está, um segmento de tinta que se move para dizer para onde foi. Item em 400, 500 com o ponteiro sobre, 700 no atual; a largura de cada palavra é reservada no peso máximo por um pseudo-elemento, então nada salta. O laranja marca só o passo atual do processo, um quadrado de 8 px.</p></div><div class="pilha"><h3>Abas</h3><p class="corpo">O <code>pagina.js</code> move o trilho de 2 px por <code>transform</code> e troca o painel pelo texto de <code>data-painel</code>. <code>data-t</code> repete o texto do item: é o que reserva a largura no peso 700.</p><div class="pilha"><div><div class="pilha">
+  <div class="abas" role="tablist" aria-label="Fases do trabalho">
+    <button class="peso" role="tab" data-t="Narrativa" aria-selected="true" aria-current="true" data-painel="Seis perguntas e o teste do inassinável, registradas antes de qualquer HTML.">Narrativa</button>
+    <button class="peso" role="tab" data-t="Estrutura" aria-selected="false" data-painel="Book, deck ou os dois, e o roteiro: capa, sumário, separatrizes e contracapa.">Estrutura</button>
+    <button class="peso" role="tab" data-t="Direção visual" aria-selected="false" data-painel="Passada de referência e a rota: papel e tinta por padrão, tokens de marca ou vibe.">Direção visual</button>
+    <button class="peso" role="tab" data-t="Produção" aria-selected="false" data-painel="A base e os engines. Todo gráfico passa pela gramática de dado antes de virar SVG.">Produção</button>
+    <button class="peso" role="tab" data-t="Qualidade" aria-selected="false" data-painel="Polimento, lista de verificação, medição em 600, 900 e 1440, revisão final do texto.">Qualidade</button>
+    <span class="trilho" aria-hidden="true"></span>
+  </div>
+  <div class="painel-aba corpo">Seis perguntas e o teste do inassinável, registradas antes de qualquer HTML.</div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-abas">Copiar</button></div><pre><code id="c-abas">&lt;div class="pilha"&gt;
+  &lt;div class="abas" role="tablist" aria-label="Fases do trabalho"&gt;
+    &lt;button class="peso" role="tab" data-t="Narrativa" aria-selected="true" aria-current="true" data-painel="Seis perguntas e o teste do inassinável, registradas antes de qualquer HTML."&gt;Narrativa&lt;/button&gt;
+    &lt;button class="peso" role="tab" data-t="Estrutura" aria-selected="false" data-painel="Book, deck ou os dois, e o roteiro: capa, sumário, separatrizes e contracapa."&gt;Estrutura&lt;/button&gt;
+    &lt;button class="peso" role="tab" data-t="Direção visual" aria-selected="false" data-painel="Passada de referência e a rota: papel e tinta por padrão, tokens de marca ou vibe."&gt;Direção visual&lt;/button&gt;
+    &lt;button class="peso" role="tab" data-t="Produção" aria-selected="false" data-painel="A base e os engines. Todo gráfico passa pela gramática de dado antes de virar SVG."&gt;Produção&lt;/button&gt;
+    &lt;button class="peso" role="tab" data-t="Qualidade" aria-selected="false" data-painel="Polimento, lista de verificação, medição em 600, 900 e 1440, revisão final do texto."&gt;Qualidade&lt;/button&gt;
+    &lt;span class="trilho" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="painel-aba corpo"&gt;Seis perguntas e o teste do inassinável, registradas antes de qualquer HTML.&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>Passos</h3><p class="corpo">Passo feito: linha de 2 px em tinta. Atual: 700 e o quadrado laranja, com <code>aria-current="step"</code>. Futuro: linha fina, texto em <code>--muted</code>.</p><div class="pilha"><div><ol class="passos">
+  <li class="passo feito"><span class="n">0</span>Ingestão</li>
+  <li class="passo feito"><span class="n">1</span>Narrativa</li>
+  <li class="passo feito"><span class="n">2</span>Estrutura</li>
+  <li class="passo atual" aria-current="step"><span class="n">3</span>Direção visual</li>
+  <li class="passo"><span class="n">4</span>Produção</li>
+  <li class="passo"><span class="n">5</span>Qualidade</li>
+</ol></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-passos">Copiar</button></div><pre><code id="c-passos">&lt;ol class="passos"&gt;
+  &lt;li class="passo feito"&gt;&lt;span class="n"&gt;0&lt;/span&gt;Ingestão&lt;/li&gt;
+  &lt;li class="passo feito"&gt;&lt;span class="n"&gt;1&lt;/span&gt;Narrativa&lt;/li&gt;
+  &lt;li class="passo feito"&gt;&lt;span class="n"&gt;2&lt;/span&gt;Estrutura&lt;/li&gt;
+  &lt;li class="passo atual" aria-current="step"&gt;&lt;span class="n"&gt;3&lt;/span&gt;Direção visual&lt;/li&gt;
+  &lt;li class="passo"&gt;&lt;span class="n"&gt;4&lt;/span&gt;Produção&lt;/li&gt;
+  &lt;li class="passo"&gt;&lt;span class="n"&gt;5&lt;/span&gt;Qualidade&lt;/li&gt;
+&lt;/ol&gt;</code></pre></details></div></div><div class="pilha"><h3>Paginação</h3><p class="corpo">Dois filetes e o contador no meio. O destino da próxima página vai em <code>.meta</code> dentro do botão.</p><div class="pilha"><div><div class="paginacao">
+  <button class="filete" type="button">Anterior</button>
+  <span class="contador">Capítulo <strong>3</strong> de 7</span>
+  <button class="filete" type="button">Próximo <span class="meta">Públicos</span></button>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-paginacao">Copiar</button></div><pre><code id="c-paginacao">&lt;div class="paginacao"&gt;
+  &lt;button class="filete" type="button"&gt;Anterior&lt;/button&gt;
+  &lt;span class="contador"&gt;Capítulo &lt;strong&gt;3&lt;/strong&gt; de 7&lt;/span&gt;
+  &lt;button class="filete" type="button"&gt;Próximo &lt;span class="meta"&gt;Públicos&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>Sumário</h3><p class="corpo">Número em <code>--meta</code>, título em <code>.peso</code>, página à direita. Capítulo lido fica em <code>--muted</code>; o atual ganha 700 e o filete de 2 px por baixo.</p><div class="pilha"><div><ol class="sumario">
+  <li class="lido"><span class="n">1</span><a class="peso" data-t="Onde a Casa do Campo já é lembrada" href="#navegacao">Onde a Casa do Campo já é lembrada</a><span class="pg">4</span></li>
+  <li class="lido"><span class="n">2</span><a class="peso" data-t="O que o Cerrado espera de uma marca de fora" href="#navegacao">O que o Cerrado espera de uma marca de fora</a><span class="pg">9</span></li>
+  <li class="atual" aria-current="page"><span class="n">3</span><a class="peso" data-t="Três públicos, uma frase para cada" href="#navegacao">Três públicos, uma frase para cada</a><span class="pg">14</span></li>
+  <li><span class="n">4</span><a class="peso" data-t="A mensagem que cabe na porta do armazém" href="#navegacao">A mensagem que cabe na porta do armazém</a><span class="pg">21</span></li>
+  <li><span class="n">5</span><a class="peso" data-t="Cronograma de entrada" href="#navegacao">Cronograma de entrada</a><span class="pg">27</span></li>
+</ol></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-sumario">Copiar</button></div><pre><code id="c-sumario">&lt;ol class="sumario"&gt;
+  &lt;li class="lido"&gt;&lt;span class="n"&gt;1&lt;/span&gt;&lt;a class="peso" data-t="Onde a Casa do Campo já é lembrada" href="#navegacao"&gt;Onde a Casa do Campo já é lembrada&lt;/a&gt;&lt;span class="pg"&gt;4&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="lido"&gt;&lt;span class="n"&gt;2&lt;/span&gt;&lt;a class="peso" data-t="O que o Cerrado espera de uma marca de fora" href="#navegacao"&gt;O que o Cerrado espera de uma marca de fora&lt;/a&gt;&lt;span class="pg"&gt;9&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="atual" aria-current="page"&gt;&lt;span class="n"&gt;3&lt;/span&gt;&lt;a class="peso" data-t="Três públicos, uma frase para cada" href="#navegacao"&gt;Três públicos, uma frase para cada&lt;/a&gt;&lt;span class="pg"&gt;14&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span class="n"&gt;4&lt;/span&gt;&lt;a class="peso" data-t="A mensagem que cabe na porta do armazém" href="#navegacao"&gt;A mensagem que cabe na porta do armazém&lt;/a&gt;&lt;span class="pg"&gt;21&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span class="n"&gt;5&lt;/span&gt;&lt;a class="peso" data-t="Cronograma de entrada" href="#navegacao"&gt;Cronograma de entrada&lt;/a&gt;&lt;span class="pg"&gt;27&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre></details></div></div></div><aside class="margem fixa"><span class="n">400 a 700</span><p>A aba atual é 700; as outras, 400. O <code>data-t</code> com o mesmo texto do item reserva a largura no peso máximo, então nada salta quando o peso muda.</p><p>Navegação nunca muda de cor para dizer o estado: muda de peso. O laranja fica só no passo atual do processo.</p><p>No topo da página o <code>pagina.js</code> marca o item da seção visível com <code>aria-current</code>.</p></aside></div></section><section class="bloco" id="retorno"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Retorno</h2><p class="lead">Aviso, progresso, espera e confirmação usam a gramática do resto: linha, quadrado, peso e frase. O aviso de atenção troca a linha de cima e o quadrado para laranja; o resto fica em tinta. Progresso é a linha do filete com a tinta por cima e o número por extenso ao lado. Espera é o pontilhado do desabilitado na forma do texto que vem, nunca bloco cinza. Confirmação é uma linha que desce do topo, fica quatro segundos e sobe.</p></div><div class="pilha"><h3>Aviso</h3><div class="pilha"><div><div class="aviso"><span><strong>Rascunho salvo</strong> às 14:32. A versão anterior continua em v1/.</span><button class="quieta" type="button">Ver versões</button></div>
+<div class="aviso atencao"><span><strong>A fonte Montserrat não carregou.</strong> O texto está em system-ui; os pesos não vão corresponder ao sistema.</span><button class="quieta" type="button">Recarregar</button></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-avisos">Copiar</button></div><pre><code id="c-avisos">&lt;div class="aviso"&gt;&lt;span&gt;&lt;strong&gt;Rascunho salvo&lt;/strong&gt; às 14:32. A versão anterior continua em v1/.&lt;/span&gt;&lt;button class="quieta" type="button"&gt;Ver versões&lt;/button&gt;&lt;/div&gt;
+&lt;div class="aviso atencao"&gt;&lt;span&gt;&lt;strong&gt;A fonte Montserrat não carregou.&lt;/strong&gt; O texto está em system-ui; os pesos não vão corresponder ao sistema.&lt;/span&gt;&lt;button class="quieta" type="button"&gt;Recarregar&lt;/button&gt;&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>Progresso</h3><p class="corpo">Nunca só a barra: o número vai ao lado, "11 de 17 slides", e <code>role="progressbar"</code> leva os valores.</p><div class="pilha"><div><div class="progresso" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" aria-label="Produção do deck">
+  <div class="legenda"><span>Produção do deck</span><span><strong>11</strong> de 17 slides</span></div>
+  <div class="linha"><span style="width:64%"></span></div>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-progresso">Copiar</button></div><pre><code id="c-progresso">&lt;div class="progresso" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" aria-label="Produção do deck"&gt;
+  &lt;div class="legenda"&gt;&lt;span&gt;Produção do deck&lt;/span&gt;&lt;span&gt;&lt;strong&gt;11&lt;/strong&gt; de 17 slides&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="linha"&gt;&lt;span style="width:64%"&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>Espera</h3><p class="corpo">Carregando o capítulo. O esqueleto é o pontilhado do desabilitado, na forma do texto que vem: uma linha de título mais curta e grossa, três de corpo.</p><div class="pilha"><div><div class="esqueleto" aria-hidden="true"><div class="l t"></div><div class="l"></div><div class="l"></div><div class="l c"></div></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-esqueleto">Copiar</button></div><pre><code id="c-esqueleto">&lt;div class="esqueleto" aria-hidden="true"&gt;&lt;div class="l t"&gt;&lt;/div&gt;&lt;div class="l"&gt;&lt;/div&gt;&lt;div class="l"&gt;&lt;/div&gt;&lt;div class="l c"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre></details></div></div><div class="pilha"><h3>Confirmação</h3><p class="corpo">Os dois botões mostram a confirmação no topo da página: uma linha que desce, fica quatro segundos e sobe. Sem cartão flutuante, sem ícone. "Fechar" encerra antes.</p><div class="linha-demo">
+  <button class="filete" type="button" id="demo-toast">Salvar rascunho</button>
+  <button class="filete" type="button" id="demo-toast-atencao">Publicar sem revisar</button>
+</div><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-toast">Copiar</button></div><pre><code id="c-toast">&lt;!-- no início do body, uma vez por página --&gt;
+&lt;div class="toast" role="status" aria-live="polite"&gt;&lt;span data-texto&gt;&lt;/span&gt;&lt;button class="quieta" type="button" data-fechar&gt;Fechar&lt;/button&gt;&lt;/div&gt;
+
+&lt;!-- para mostrar: o pagina.js expõe window.toast8020(html, atencao) --&gt;
+&lt;script&gt;
+  document.getElementById("demo-toast").addEventListener("click", function () {
+    window.toast8020("&lt;strong&gt;Rascunho salvo&lt;/strong&gt; às 14:32. A versão anterior continua em v1/.");
+  });
+  document.getElementById("demo-toast-atencao").addEventListener("click", function () {
+    window.toast8020("&lt;strong&gt;Publicado sem revisão.&lt;/strong&gt; O revisor final não rodou neste texto.", true);
+  });
+&lt;/script&gt;</code></pre></details></div></div><aside class="margem fixa"><span class="n">4 s</span><p>A confirmação fica quatro segundos e some; <code>role="status"</code> e <code>aria-live="polite"</code> leem o texto para quem não vê a linha descer.</p><p>Aviso é bloco de página, entre filetes; confirmação é a linha fixa no topo. O aviso fica; a confirmação passa.</p><p>O esqueleto leva <code>aria-hidden</code>: para o leitor de tela, o que ainda não chegou não existe.</p></aside></div></section><section class="bloco" id="tabela"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Tabela</h2><p class="lead">Filete entre linhas, cabeçalho em caixa baixa e 600, sem zebra, sem borda vertical. Com o ponteiro sobre, a linha ganha <code>--surface-2</code>; selecionada, fica em 600 com o filete inferior em tinta; a coluna ordenada fica em tinta com o triângulo. Número é tabular e alinha à direita. A caixa "todos" do cabeçalho fica indeterminada quando parte das linhas está marcada.</p></div><div class="pilha"><div><div class="rolagem"><table class="tabela">
+  <thead><tr><th><span class="marca-opcao"><input type="checkbox" id="chk-todos" aria-label="Selecionar todos"></span></th><th>Projeto</th><th>Cliente</th><th>Formato</th><th class="ordena num"><button type="button">Entrega</button></th><th>Estado</th></tr></thead>
+  <tbody id="tabela-corpo">
+    <tr class="selecionada"><td><label class="marca-opcao"><input type="checkbox" checked aria-label="Selecionar Plano de presença"></label></td><td>Plano de presença no Cerrado</td><td>Casa do Campo</td><td>Deck e book</td><td class="num">30/09/2026</td><td><span class="estado">Em produção</span></td></tr>
+    <tr><td><label class="marca-opcao"><input type="checkbox" aria-label="Selecionar Relatório de safra"></label></td><td>Relatório de safra 2026</td><td>Vale Verde Sementes</td><td>Book</td><td class="num">14/10/2026</td><td><span class="estado">Em produção</span></td></tr>
+    <tr><td><label class="marca-opcao"><input type="checkbox" aria-label="Selecionar Manual de operações"></label></td><td>Manual de operações</td><td>Instituto Maré</td><td>Plataforma</td><td class="num">04/09/2026</td><td><span class="estado entregue">Entregue</span></td></tr>
+    <tr><td><label class="marca-opcao"><input type="checkbox" aria-label="Selecionar Campanha de inverno"></label></td><td>Campanha de inverno</td><td>Rede Sol</td><td>Deck</td><td class="num">sem data</td><td><span class="estado parado">Parado</span></td></tr>
+  </tbody>
+</table>
+<p class="fonte">Nomes fictícios, montados para demonstrar o sistema.</p></div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-tabela">Copiar</button></div><pre><code id="c-tabela">&lt;div class="rolagem"&gt;&lt;table class="tabela"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;span class="marca-opcao"&gt;&lt;input type="checkbox" id="chk-todos" aria-label="Selecionar todos"&gt;&lt;/span&gt;&lt;/th&gt;&lt;th&gt;Projeto&lt;/th&gt;&lt;th&gt;Cliente&lt;/th&gt;&lt;th&gt;Formato&lt;/th&gt;&lt;th class="ordena num"&gt;&lt;button type="button"&gt;Entrega&lt;/button&gt;&lt;/th&gt;&lt;th&gt;Estado&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody id="tabela-corpo"&gt;
+    &lt;tr class="selecionada"&gt;&lt;td&gt;&lt;label class="marca-opcao"&gt;&lt;input type="checkbox" checked aria-label="Selecionar Plano de presença"&gt;&lt;/label&gt;&lt;/td&gt;&lt;td&gt;Plano de presença no Cerrado&lt;/td&gt;&lt;td&gt;Casa do Campo&lt;/td&gt;&lt;td&gt;Deck e book&lt;/td&gt;&lt;td class="num"&gt;30/09/2026&lt;/td&gt;&lt;td&gt;&lt;span class="estado"&gt;Em produção&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;label class="marca-opcao"&gt;&lt;input type="checkbox" aria-label="Selecionar Relatório de safra"&gt;&lt;/label&gt;&lt;/td&gt;&lt;td&gt;Relatório de safra 2026&lt;/td&gt;&lt;td&gt;Vale Verde Sementes&lt;/td&gt;&lt;td&gt;Book&lt;/td&gt;&lt;td class="num"&gt;14/10/2026&lt;/td&gt;&lt;td&gt;&lt;span class="estado"&gt;Em produção&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;label class="marca-opcao"&gt;&lt;input type="checkbox" aria-label="Selecionar Manual de operações"&gt;&lt;/label&gt;&lt;/td&gt;&lt;td&gt;Manual de operações&lt;/td&gt;&lt;td&gt;Instituto Maré&lt;/td&gt;&lt;td&gt;Plataforma&lt;/td&gt;&lt;td class="num"&gt;04/09/2026&lt;/td&gt;&lt;td&gt;&lt;span class="estado entregue"&gt;Entregue&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;label class="marca-opcao"&gt;&lt;input type="checkbox" aria-label="Selecionar Campanha de inverno"&gt;&lt;/label&gt;&lt;/td&gt;&lt;td&gt;Campanha de inverno&lt;/td&gt;&lt;td&gt;Rede Sol&lt;/td&gt;&lt;td&gt;Deck&lt;/td&gt;&lt;td class="num"&gt;sem data&lt;/td&gt;&lt;td&gt;&lt;span class="estado parado"&gt;Parado&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p class="fonte"&gt;Nomes fictícios, montados para demonstrar o sistema.&lt;/p&gt;&lt;/div&gt;</code></pre></details></div></div><aside class="margem fixa"><span class="n">1 filete</span><p>A linha de 1 px em <code>--rule</code> separa; a de tinta abre o cabeçalho; a de tinta embaixo marca a selecionada. A linha de total leva o filete de tinta em cima.</p><p>Tabela larga rola dentro de <code>.rolagem</code>; a página nunca rola na horizontal.</p><p>No slide a tabela sobe para 17 px, e para 15 no registro topo, com até seis colunas.</p></aside></div></section><section class="bloco" id="quadrado"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>O quadrado</h2><p class="lead">O único ícone do sistema é um quadrado de 8 px em quatro preenchimentos: cheio em tinta é informação; laranja é atenção ou estado atual; contorno é feito; <code>--rule-strong</code> é parado. <code>.quadrado</code> é o marcador solto, com as variantes <code>.tinta</code>, <code>.contorno</code> e <code>.meta</code>; <code>.estado</code> é o quadrado com a palavra ao lado, com <code>.atencao</code> (ou <code>.revisao</code>), <code>.feito</code> (ou <code>.entregue</code>) e <code>.parado</code>.</p></div><div class="pilha"><div><div class="amostras">
+  <span><span class="quadrado tinta"></span>tinta: informação</span>
+  <span><span class="quadrado"></span>laranja: atenção, estado atual</span>
+  <span><span class="quadrado contorno"></span>contorno: feito</span>
+  <span><span class="quadrado meta"></span>meta: parado</span>
+</div>
+<div class="amostras">
+  <span class="estado">Em produção</span>
+  <span class="estado atencao">Em revisão</span>
+  <span class="estado feito">Entregue</span>
+  <span class="estado parado">Parado</span>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-quadrado">Copiar</button></div><pre><code id="c-quadrado">&lt;div class="amostras"&gt;
+  &lt;span&gt;&lt;span class="quadrado tinta"&gt;&lt;/span&gt;tinta: informação&lt;/span&gt;
+  &lt;span&gt;&lt;span class="quadrado"&gt;&lt;/span&gt;laranja: atenção, estado atual&lt;/span&gt;
+  &lt;span&gt;&lt;span class="quadrado contorno"&gt;&lt;/span&gt;contorno: feito&lt;/span&gt;
+  &lt;span&gt;&lt;span class="quadrado meta"&gt;&lt;/span&gt;meta: parado&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="amostras"&gt;
+  &lt;span class="estado"&gt;Em produção&lt;/span&gt;
+  &lt;span class="estado atencao"&gt;Em revisão&lt;/span&gt;
+  &lt;span class="estado feito"&gt;Entregue&lt;/span&gt;
+  &lt;span class="estado parado"&gt;Parado&lt;/span&gt;
+&lt;/div&gt;</code></pre></details></div></div><aside class="margem fixa"><span class="n">8 px</span><p>Nenhuma biblioteca de ícones, nenhum emoji. O mesmo quadrado marca a leitura em palavras, o nó da rede, o item da lista de comparação e o erro do campo.</p><p>Contorno é feito porque o que já foi feito não pede tinta. Meta é parado porque o que parou perde cor, não forma.</p><p>O quadrado laranja de estado atual conta no teto de três acentos por página; o de erro e o de atenção, não.</p></aside></div></section><section class="bloco" id="foco"><div class="container folha"><div class="miolo pilha-l"><div class="pilha"><h2>Foco</h2><p class="lead">Tudo que recebe teclado mostra um anel de 2 px em <code>--focus</code> com 2 px de afastamento, por <code>:focus-visible</code>. Nunca é removido, nem com <code>outline: none</code>. No momento laranja e no escuro o anel é branco. O campo é a exceção de forma: o foco é a linha crescendo em tinta, e o <code>input</code> fica sem anel porque a linha já mostra onde o cursor está.</p></div><div class="pilha"><div><div class="foco-demo">
+  <button class="tinta" type="button">Enviar</button>
+  <button class="filete" type="button">Salvar rascunho</button>
+  <button class="quieta" type="button">Descartar</button>
+  <label class="marca-opcao"><input type="checkbox"><span>Book</span></label>
+  <a href="#foco">um link no texto</a>
+</div></div>
+<details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-foco">Copiar</button></div><pre><code id="c-foco">&lt;div class="foco-demo"&gt;
+  &lt;button class="tinta" type="button"&gt;Enviar&lt;/button&gt;
+  &lt;button class="filete" type="button"&gt;Salvar rascunho&lt;/button&gt;
+  &lt;button class="quieta" type="button"&gt;Descartar&lt;/button&gt;
+  &lt;label class="marca-opcao"&gt;&lt;input type="checkbox"&gt;&lt;span&gt;Book&lt;/span&gt;&lt;/label&gt;
+  &lt;a href="#foco"&gt;um link no texto&lt;/a&gt;
+&lt;/div&gt;</code></pre></details></div><p class="nota">Use Tab para percorrer os controles e ver o anel. Com o ponteiro, <code>:focus-visible</code> não acende; com o teclado, sempre.</p><details class="codigo"><summary>Código</summary><div class="acoes"><button type="button" class="filete copiar" data-alvo="c-foco-css">Copiar</button></div><pre><code id="c-foco-css">:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.tema-laranja { --focus: var(--8020-branco); }
+.tema-escuro { --focus: var(--8020-branco); }
+/* o campo troca o anel pela linha que cresce; o input fica sem outline porque a .entrada mostra o foco */
+.campo input, .campo textarea, .campo select { outline: none; }
+.campo .entrada:focus-within::before { transform: scaleX(1); }</code></pre></details></div><aside class="margem fixa"><span class="n">2 + 2 px</span><p>Anel de 2 px, afastado 2 px, na cor <code>--focus</code>: tinta no papel, branco nos momentos.</p><p><code>.is-focus</code> é só a classe de documentação da matriz; na peça o estado vem do teclado.</p><p>Alvo de toque de 44 px nos controles da moldura do visualizador; na página, o filete de 13 px tem 30 px de altura de clique.</p></aside></div></section>
+<footer class="rodape"><div class="container">8020-DS, candidato 4.0. Patterns, rodada 7, 2026-09-07.</div></footer>
+<script src="../assets/pagina.js"></script>
+<script>
+(function () {
+  var reduz = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ação primária: registro, carregando, enviado por extenso */
+  function sequenciaEnvio(btn) {
+    if (btn.dataset.ocupado) return;
+    btn.dataset.ocupado = "1";
+    var original = btn.innerHTML;
+    btn.classList.add("is-loading"); btn.textContent = "Enviando";
+    setTimeout(function () {
+      btn.classList.remove("is-loading"); btn.classList.add("is-success");
+      var agora = new Date();
+      btn.innerHTML = 'Enviado <span class="meta">às ' + String(agora.getHours()).padStart(2, "0") + ":" + String(agora.getMinutes()).padStart(2, "0") + "</span>";
+      setTimeout(function () { btn.classList.remove("is-success"); btn.innerHTML = original; delete btn.dataset.ocupado; }, 3200);
+    }, reduz ? 600 : 1500);
+  }
+  ["demo-enviar", "demo-enviar-2"].forEach(function (id) {
+    var b = document.getElementById(id); if (b) b.addEventListener("click", function () { sequenciaEnvio(b); });
+  });
+
+  /* controle segmentado */
+  var seg = document.getElementById("seg-formato");
+  if (seg) seg.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b || b.disabled) return;
+    seg.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+  });
+
+  /* interruptor */
+  var sw = document.getElementById("sw-reveal");
+  if (sw) sw.addEventListener("click", function () { sw.setAttribute("aria-checked", sw.getAttribute("aria-checked") === "true" ? "false" : "true"); });
+
+  /* caixa indeterminada de exemplo */
+  var ind = document.getElementById("chk-indet"); if (ind) ind.indeterminate = true;
+
+  /* contagem do textarea */
+  var ta = document.getElementById("f-obs"), cont = document.getElementById("f-obs-contagem");
+  if (ta && cont) ta.addEventListener("input", function () { cont.textContent = ta.value.length + " / 280"; });
+
+  /* confirmação: o pagina.js expõe window.toast8020 */
+  var t1 = document.getElementById("demo-toast"), t2 = document.getElementById("demo-toast-atencao");
+  if (t1) t1.addEventListener("click", function () { var d = new Date(); window.toast8020("<strong>Rascunho salvo</strong> às " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0") + ". A versão anterior continua em v1/."); });
+  if (t2) t2.addEventListener("click", function () { window.toast8020("<strong>Publicado sem revisão.</strong> O revisor final não rodou neste texto.", true); });
+
+  /* tabela: selecionar linha e a caixa "todos" */
+  var corpo = document.getElementById("tabela-corpo"), todos = document.getElementById("chk-todos");
+  if (corpo) corpo.addEventListener("change", function (e) {
+    var cb = e.target; if (cb.type !== "checkbox") return;
+    cb.closest("tr").classList.toggle("selecionada", cb.checked);
+    var caixas = corpo.querySelectorAll('input[type="checkbox"]'), marcadas = corpo.querySelectorAll('input[type="checkbox"]:checked');
+    if (todos) { todos.checked = marcadas.length === caixas.length; todos.indeterminate = marcadas.length > 0 && marcadas.length < caixas.length; }
+  });
+  if (todos) { todos.indeterminate = true; todos.addEventListener("change", function () {
+    corpo.querySelectorAll('input[type="checkbox"]').forEach(function (cb) { cb.checked = todos.checked; cb.closest("tr").classList.toggle("selecionada", todos.checked); });
+  }); }
+})();
+</script>
+</body>
+</html>
