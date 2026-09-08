@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Exemplo com defeito: o teste de regressão do verificador</title>
-<link rel="stylesheet" href="tokens/8020.css">
-<link rel="stylesheet" href="assets/regua.css">
-<link rel="stylesheet" href="assets/deck.css">
+<title>Teste do verificador: este arquivo tem de reprovar</title>
+<link rel="stylesheet" href="../tokens/8020.css">
+<link rel="stylesheet" href="../assets/regua.css">
+<link rel="stylesheet" href="../assets/deck.css">
 <style>
   /* tudo aqui é proposital: este arquivo existe para o verificador reprovar */
   .caixa { background: linear-gradient(#2b6cb0, #1a365d); box-shadow: 0 2px 8px rgba(0,0,0,.2); border-radius: 12px; color: var(--8020-branco); padding: 24px; }
@@ -14,10 +14,11 @@
 </style>
 </head>
 <body>
-<!-- Teste de regressao do verificador. Tudo neste arquivo esta errado de proposito:
-     quatro slides que disparam 35 das 49 checagens de verificar.py, inclusive a
-     imagem sem alt cujo src nao existe. Se ele parar de reprovar, o verificador quebrou.
-     Rodar: python3 verificar.py exemplo-com-defeito.html -->
+<!-- ESTE ARQUIVO ESTA ERRADO DE PROPOSITO. Nao e exemplo, nao e template,
+     nao copie nada daqui. E o teste do verificador: quatro slides que disparam
+     35 das 49 checagens de verificar.py, inclusive a imagem sem alt cujo src
+     nao existe. Se ele parar de reprovar, o verificador quebrou.
+     Rodar da raiz: python3 verificar.py testes/verificador-deve-reprovar.html -->
 <div class="deck" data-marca="Cliente" data-peca="Exemplo com defeito" data-canal="exemplo-defeito">
 
   <div class="slide s-faixa"><div class="faixa laranja"><div class="cap"><b>Capítulo 1</b> Diagnóstico</div><div><h2>A lembrança cresceu 24 pontos em Jataí desde 2023, o ano da loja</h2></div></div>

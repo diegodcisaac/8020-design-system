@@ -22,13 +22,14 @@ As regras estão em [RULES.md](RULES.md) e valem sobre qualquer vontade pontual.
 ```
 8020-design-system/
   README.md  RULES.md  GUIA.md  MIGRACAO.md  llms.txt  index.html
-  verificar.py  verificar-geometria.js  exemplo-com-defeito.html  conferir.py
+  verificar.py  verificar-geometria.js  conferir.py
   tokens/     8020.css  brand.json  gerar-brand.py
   voice/      plataforma.md  tom-de-voz.md  vocabulario.md
   assets/     regua.css  deck.css  deck.js  book.css  book.js  dado.js  pagina.js
               fonts/  logos/  imagens/  mapas/
   patterns/   tipografia  cores  layouts  estados  proibido
               dado  diagramas  imagens  deck  book   (.html) + _catalogo.css
+  testes/     README.md  verificador-deve-reprovar.html
   templates/  deck/padrao/     deck.html  CONTRATO.md     22 slides
               deck/editorial/  deck.html  CONTRATO.md     17 slides
               book/padrao/     index.html  partes/  CONTRATO.md
@@ -67,7 +68,7 @@ python3 verificar.py caminho/da/peca.html
 python3 conferir.py
 ```
 
-`exemplo-com-defeito.html` é o teste de regressão: quatro slides escritos de propósito para reprovar, que disparam 35 das 49 checagens. Se ele parar de reprovar, o verificador quebrou.
+`testes/verificador-deve-reprovar.html` é o teste de regressão: quatro slides escritos de propósito para reprovar, que disparam 35 das 49 checagens. Se ele parar de reprovar, o verificador quebrou.
 
 ## Impressão
 

@@ -97,7 +97,7 @@ def afirmacoes(c):
         ("index.html", "as {N} regras", c["regras de dado"]),
         ("index.html", "traz as {N} páginas do catálogo", c["paginas de catalogo"]),
         ("patterns/dado.html", "As {N} regras de dado", c["regras de dado"]),
-        ("exemplo-com-defeito.html", "disparam 35 das {N} checagens", c["checagens"]),
+        ("testes/verificador-deve-reprovar.html", "disparam 35 das {N} checagens", c["checagens"]),
     ]
 
 
@@ -135,7 +135,7 @@ def links():
         for f in arqs:
             if not f.endswith((".html", ".md", ".txt")):
                 continue
-            if f == "exemplo-com-defeito.html":
+            if f == "verificador-deve-reprovar.html":
                 continue   # o teste de regressao aponta de proposito para uma imagem que nao existe
             p = os.path.join(raiz, f)
             s = open(p, encoding="utf-8", errors="replace").read()
@@ -150,10 +150,10 @@ def links():
 
 def regressao():
     """o exemplo com defeito tem de continuar reprovando"""
-    r = subprocess.run([sys.executable, "verificar.py", "--sem-cor", "--so-erros", "exemplo-com-defeito.html"],
+    r = subprocess.run([sys.executable, "verificar.py", "--sem-cor", "--so-erros", "testes/verificador-deve-reprovar.html"],
                        cwd=AQUI, capture_output=True, text=True)
     if r.returncode == 0:
-        return ["exemplo-com-defeito.html passou no verificador: o verificador quebrou"]
+        return ["testes/verificador-deve-reprovar.html passou no verificador: o verificador quebrou"]
     return []
 
 
