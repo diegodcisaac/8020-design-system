@@ -1,9 +1,8 @@
 {
   "system": "8020-DS",
-  "version": "4.0",
-  "candidato": true,
+  "version": "4.1",
   "gerado_por": "tokens/gerar-brand.py a partir de tokens/8020.css",
-  "data": "2026-09-07",
+  "data": "2026-10-21",
   "primitivos": {
     "cores": {
       "8020-laranja": "#fa4616",
@@ -29,8 +28,9 @@
         "medio": 500,
         "rotulo": 600,
         "titulo": 700,
-        "display": 800
-      }
+        "display": 700
+      },
+      "italico": "só na prosa corrida, nunca em título, statement ou frase"
     },
     "escala_tipo": {
       "t-micro": "11.5px",
@@ -568,6 +568,24 @@
       "tooltip flutuante (a leitura em palavras substitui)",
       "legenda em caixa (rótulo direto)"
     ]
+  },
+  "status_execucao": {
+    "feito": {
+      "marcador": "#2f7d4b",
+      "grifo": "rgba(47, 125, 75, .16)",
+      "marcador_contra_o_papel": 4.73,
+      "tinta_sobre_o_grifo": 13.89,
+      "cor_como_texto_sobre_o_papel": 4.73,
+      "uso": "marcador e grifo; a etiqueta fica na tinta"
+    },
+    "andamento": {
+      "marcador": "#a8720f",
+      "grifo": "rgba(214, 158, 46, .24)",
+      "marcador_contra_o_papel": 3.87,
+      "tinta_sobre_o_grifo": 14.23,
+      "cor_como_texto_sobre_o_papel": 3.87,
+      "uso": "marcador e grifo; a etiqueta fica na tinta"
+    }
   },
   "contrast_matrix": [
     {
@@ -1108,12 +1126,12 @@
   "hard_rules": [
     {
       "id": "paleta-fechada",
-      "regra": "só os seis primitivos e os papéis derivados deles",
-      "check": "nenhuma cor fora de --8020-* no CSS e no SVG"
+      "regra": "só os seis primitivos e os papéis derivados deles; a única exceção é o status de execução (--status-*), só em plano com execução acompanhada",
+      "check": "nenhuma cor fora de --8020-* e --status-* no CSS e no SVG"
     },
     {
       "id": "papel-substrato",
-      "regra": "o papel é o fundo de toda peça; laranja e escuro entram como momento",
+      "regra": "o papel é o fundo padrão de toda peça; a noite (body.noite) é a alternativa para book e página lidos na tela; laranja e escuro entram como momento; a impressão sai no papel",
       "check": "--paper da base é #faf7f2"
     },
     {

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>O que o sistema recusa, patterns do 8020-DS 4.0</title>
-<meta name="description" content="Os 18 antipadrões do 8020-DS 4.0, errado ao lado de certo, cada um com a regra que o proíbe e a checagem do verificador que o cobra.">
+<title>O que o sistema recusa, patterns do 8020-DS 4.1</title>
+<meta name="description" content="Os 20 antipadrões do 8020-DS 4.1, errado ao lado de certo, cada um com a regra que o proíbe e a checagem do verificador que o cobra.">
 <link rel="stylesheet" href="../tokens/8020.css">
 <link rel="stylesheet" href="../assets/regua.css">
 <link rel="stylesheet" href="_catalogo.css">
@@ -65,7 +65,7 @@
 <body>
 
 <div class="topo"><div class="container">
-  <a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.0, patterns</span></a>
+  <a class="marca" href="../index.html"><img src="../assets/logos/logo-8020-branco.svg" alt="80 20"><span>8020-DS 4.1, patterns</span></a>
   <nav aria-label="Seções"><a class="peso" data-t="Superfície" href="#superficie">Superfície</a><a class="peso" data-t="Dado" href="#dado">Dado</a><a class="peso" data-t="Narrativa e texto" href="#narrativa">Narrativa e texto</a><a class="peso" data-t="Imagem" href="#imagem">Imagem</a></nav>
   <span class="meta">proibido.html</span>
 </div></div>
@@ -79,7 +79,7 @@
       <p class="lead">Cada par mostra a forma que a 4.0 não aceita ao lado da que ela usa, com a regra que a proíbe e a checagem do verificador que a cobra. A coluna da esquerda é reprodução fiel: o cartão tem sombra de verdade, o gradiente é gradiente, a barra é uma caixa esticada. É a única página do catálogo onde isso aparece.</p>
     </div>
     <aside class="margem fixa">
-      <span class="n">18</span>
+      <span class="n">20</span>
       <p>Pares. Todos saem de erro que já apareceu em peça, não de hipótese.</p>
       <p><span class="quadrado"></span>O código ao pé de cada par é o da checagem em <code>verificar.py</code>. Rodar o verificador na peça encontra o mesmo problema sem ninguém precisar lembrar da página.</p>
     </aside>
@@ -191,12 +191,26 @@
   </div>
   <p class="cobra">regra 21 e 38 · <code>titulo-com-achado</code> <code>faixa-sem-frase</code></p>
 </div><div class="pilha par">
-  <div class="pilha"><h3>Título que inventaria</h3><p class="porque">Contar os itens não informa nada: o leitor conta sozinho quando chegar. O título afirma o aprendizado.</p></div>
+  <div class="pilha"><h3>Título que inventaria</h3><p class="porque">Contar os itens não informa nada: o leitor conta sozinho quando chegar. O título diz do que trata.</p></div>
   <div class="antes-agora">
     <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-h2">Os seis segmentos</p><p class="d-h2">As quatro fases do plano</p><p class="nota">Duas contagens e nenhuma tese.</p></div>
     <div><span class="rotulo">Dentro</span><p class="d-h2">Onde a marca já é lembrada</p><p class="d-h2">O que começa assim que o plano for aprovado</p><p class="nota">O assunto, direto, sem o número na frente.</p></div>
   </div>
   <p class="cobra">regra 21 · <code>titulo-com-contagem</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Título que não informa</h3><p class="porque">Uma palavra que serviria em qualquer peça não diz nada sobre esta. O título nomeia o assunto concreto do slide ou da seção.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-h2">Contexto</p><p class="d-h2">Visão geral</p><p class="nota">Dois rótulos de categoria; o leitor ainda não sabe do que se trata.</p></div>
+    <div><span class="rotulo">Dentro</span><p class="d-h2">Onde a marca já é lembrada</p><p class="d-h2">Pré-assinatura: o que roda agora</p><p class="nota">O assunto do slide, dito por inteiro.</p></div>
+  </div>
+  <p class="cobra">regra 21 · <code>titulo-generico</code></p>
+</div><div class="pilha par">
+  <div class="pilha"><h3>Itálico de destaque no título</h3><p class="porque">O termo em itálico no fim do título é o padrão que a geração automática repete, e o leitor já o reconhece. O destaque é peso, e no título nem isso: o título é inteiro em 700.</p></div>
+  <div class="antes-agora">
+    <div data-antipadrao><span class="rotulo">Fora do sistema</span><p class="d-h2">Plano de presença de marca no <em>Cerrado</em></p><p class="nota">Um termo salta para o itálico sem dizer nada a mais.</p></div>
+    <div><span class="rotulo">Dentro</span><p class="d-h2">Plano de presença de marca no Cerrado</p><p class="nota">O título inteiro no mesmo peso.</p></div>
+  </div>
+  <p class="cobra">regra 5 · <code>italico-em-titulo</code></p>
 </div><div class="pilha par">
   <div class="pilha"><h3>Número grande sozinho</h3><p class="porque">O número sem a frase que o nomeia vira ornamento. Ao lado dele, o que se mede e por que importa.</p></div>
   <div class="antes-agora">
@@ -227,7 +241,7 @@
   <p class="cobra">regra 22 · <code>autorreferencia</code></p>
 </div>
     </div>
-    <aside class="margem fixa"><span class="n">6</span><p>pares nesta seção.</p></aside>
+    <aside class="margem fixa"><span class="n">8</span><p>pares nesta seção.</p></aside>
   </div>
 </section>
 
@@ -258,7 +272,7 @@
 
 </main>
 
-<footer class="rodape"><div class="container">8020-DS 4.0. Antipadrões, rodada 8. 80 20 Marketing, São Paulo, Campo Grande e Cuiabá.</div></footer>
+<footer class="rodape"><div class="container">8020-DS 4.1. Antipadrões. 80 20 Marketing, São Paulo, Campo Grande e Cuiabá.</div></footer>
 <script src="../assets/pagina.js"></script>
 </body>
 </html>

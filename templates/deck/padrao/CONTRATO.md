@@ -1,4 +1,4 @@
-# Contrato, deck padrão (8020-DS 4.0)
+# Contrato, deck padrão (8020-DS 4.1)
 
 ## Quando usar
 Peça densa, didática e sequencial: plano, diagnóstico, estratégia com capítulos, prova e número a cada passo, decisão a ser tomada numa sala. Se a peça é institucional, de visão ou de abertura de relação, com mais imagem e respiro do que argumento encadeado, use o deck editorial (`templates/deck/editorial/`).
@@ -10,46 +10,45 @@ Cinco registros, escolhidos pelo papel do slide na narrativa:
 
 - `.slide.s-faixa`: faixa de tinta à esquerda (um terço) com `.faixa` e o conteúdo em `.conteudo`. É o padrão de todo slide de evidência: texto, lista, gráfico, comparação, perfis, atores, passos, números, próximos passos.
 - `.slide.s-topo`: faixa de 240 px no topo, para conteúdo largo: tabela de muitas colunas, fases, fluxo, esquema. O conteúdo tem 392 px úteis.
-- `.slide.s-quieto`: a margem 80/20, com `.conteudo` e `.cromo`. Sumário, recap de capítulo, transições. Não tem faixa, logo não tem `.cap`: o recap que não vem logo depois do capítulo que fecha declara qual é em `data-capitulo="Capítulo N"` no slide.
+- `.slide.s-quieto`: a margem 80/20, com `.conteudo` e `.cromo`. Sumário, transições e, só em capítulo longo, o recap. Não tem faixa, logo não tem `.cap`: o recap que não vem logo depois do capítulo que fecha declara qual é em `data-capitulo="Capítulo N"` no slide.
 - `.slide.s-cheio` com `.tema-laranja` ou `.tema-escuro`: os momentos. Mensagem-mãe em laranja; aparte, foto de respiro (`.com-foto`, com `.foto-cheia`, `.veu` e `.sobre`) e contracapa em escuro.
 - `.faixa.laranja` dentro de `.s-faixa`: a abertura de capítulo e a capa. Uma por capítulo, nunca em dois slides seguidos.
 
 O registro define a largura do `.conteudo`, e o conteúdo tem de caber nela: 685 px na faixa à esquerda, 808 px no quieto, 1088 px no topo. SVG com viewBox mais largo encolhe e derruba o texto abaixo do piso de 14 px; o verificador cobra isso em `svg-largo-demais`.
 
-A faixa carrega: `.cap` (`<b>Capítulo N</b> Nome`, até 30 caracteres), `h2` (título descritivo, até 48 caracteres, nunca o achado), `.frase` (a frase central, obrigatória, até 110 caracteres, com o núcleo em `<strong>`) e o `.pe`, que o sistema escreve. Na capa o `.pe` pode trazer `<span class="quando">` com a data; o contador entra ao lado. Na capa o último termo do título vai em `<em>`: é a assinatura da marca.
+A faixa carrega: `.cap` (`<b>Capítulo N</b> Nome`, até 30 caracteres), `h2` (título descritivo, até 48 caracteres, nunca o achado), `.frase` (a frase central, obrigatória, até 110 caracteres, com o núcleo em `<strong>`) e o `.pe`, que o sistema escreve. Na capa o `.pe` pode trazer `<span class="quando">` com a data; o contador entra ao lado. A capa é descritiva: título e frase dizem o que a peça é, para quem e quando, e o achado principal fica para o capítulo que o constrói. Nenhum título leva itálico.
 
 Blocos de conteúdo (todos em `deck.css` e `regua.css`): `.duas-colunas`, `.comparacao` (`.hoje` e `.depois`), `.numeros`, `.grafico` (SVG real com `role="img"`, `aria-label` e `<title>`), `.matriz`, `.citacao` com `.atrib`, `.recap`, `.statement`, `.perfis` com `.perfil`, `.atores-mapa`, `.fases` com `.fase` (`feita`, `atual`, `futura`), `.tabela` (`.proximos`, `.orcamento`), `.sumario-slide`, `.separatriz` com `.separatriz-numeral` e `.separatriz-lista`, `.foto-area`, `.foto-legenda`, `.lista-razao`, `.metas`, `.equipe`, `.esquema`, `.enderecos`. Cada slide leva um `<aside class="notas">` com a nota do apresentador (até 300 caracteres), invisível no deck e lida na visão do apresentador.
 
 ## Esqueleto do exemplo
-Vinte e dois slides, três capítulos. Todo capítulo abre com separatriz e fecha com "O que aprendemos no capítulo N" (regra 28); o deck fecha com o esquema (regra 29) e a contracapa descritiva.
+Dezenove slides, três capítulos. Todo capítulo abre com separatriz. Nenhum fecha com recap, porque são curtos: o recap só entra em capítulo de oito slides de conteúdo ou mais (regra 28). O deck fecha com os próximos passos, o esquema (regra 29) e a contracapa descritiva.
+
+A escala é a leve da regra 16a: título de slide a 28 px, corpo a 15 px, um assunto por slide. Todo slide de evidência tem um dispositivo visual (regra 15a); o texto em duas colunas do slide 04 vem com dois números em linha.
 
 | Slide | Tipo | Registro | Capítulo |
 |---|---|---|---|
 | 01 | capa descritiva com foto | faixa laranja | |
 | 02 | sumário | quieto | |
 | 03 | separatriz | faixa laranja | 1, Leitura do desafio |
-| 04 | texto em duas colunas | faixa | 1 |
+| 04 | texto em duas colunas com dois números | faixa | 1 |
 | 05 | comparação hoje e com o plano | faixa | 1 |
-| 06 | recap | quieto | 1 |
-| 07 | separatriz | faixa laranja | 2, Diagnóstico |
-| 08 | números em linha | faixa | 2 |
-| 09 | barras com o 20 em laranja | faixa | 2 |
-| 10 | Pareto | faixa | 2 |
-| 11 | matriz dois por dois | faixa | 2 |
-| 12 | aparte, citação | cheio, escuro | 2 |
-| 13 | recap | quieto | 2 |
-| 14 | separatriz | faixa laranja | 3, Públicos e plano |
-| 15 | perfis com retrato | faixa | 3 |
-| 16 | mapa de atores | faixa | 3 |
-| 17 | mensagem-mãe | cheio, laranja | 3 |
-| 18 | fases | topo | 3 |
-| 19 | próximos passos | faixa | 3 |
-| 20 | recap | quieto | 3 |
-| 21 | esquema de fechamento | topo | Fechamento |
-| 22 | contracapa com os endereços | cheio, escuro | |
+| 06 | separatriz | faixa laranja | 2, Diagnóstico |
+| 07 | números em linha | faixa | 2 |
+| 08 | barras com o 20 em laranja | faixa | 2 |
+| 09 | Pareto | faixa | 2 |
+| 10 | matriz dois por dois | faixa | 2 |
+| 11 | aparte, citação | cheio, escuro | 2 |
+| 12 | separatriz | faixa laranja | 3, Públicos e plano |
+| 13 | perfis com retrato | faixa | 3 |
+| 14 | mapa de atores | faixa | 3 |
+| 15 | mensagem-mãe | cheio, laranja | 3 |
+| 16 | fases | topo | 3 |
+| 17 | próximos passos | faixa | 3 |
+| 18 | esquema de fechamento | topo | Fechamento |
+| 19 | contracapa com os endereços | cheio, escuro | |
 
 ## Momentos e tetos
-Momento de página inteira (`.s-cheio` com tema): no máximo um por capítulo, nunca em dois slides seguidos. No exemplo, o aparte escuro no 12 e a mensagem-mãe laranja no 17. A faixa laranja de separatriz é uma por capítulo. O laranja dentro do conteúdo é o 20 do dado (um por gráfico) e o quadrado de estado; nada mais. Branco sobre laranja só a partir de 24 px; o texto pequeno da faixa laranja é preto, e a camada já resolve isso.
+Momento de página inteira (`.s-cheio` com tema): no máximo um por capítulo, nunca em dois slides seguidos. No exemplo, o aparte escuro no 11 e a mensagem-mãe laranja no 15. A faixa laranja de separatriz é uma por capítulo. O laranja dentro do conteúdo é o 20 do dado (um por gráfico) e o quadrado de estado; nada mais. Branco sobre laranja só a partir de 24 px; o texto pequeno da faixa laranja é preto, e a camada já resolve isso.
 
 ## Visualizador e teclado
 O `deck.js` monta a moldura em chumbo com a marca (`data-marca`), a peça (`data-peca`), o capítulo e o título do slide atual no topo; o contador, as teclas, anterior e próximo e o trilho de progresso na base. O endereço guarda o slide (`#12`). `data-canal` nomeia o canal que sincroniza as janelas.
@@ -69,21 +68,22 @@ O `deck.js` monta a moldura em chumbo com a marca (`data-marca`), a peça (`data
 A visão do apresentador mostra o slide atual, as notas, o tempo decorrido, o contador e o próximo slide. As duas janelas ficam no mesmo slide; avança-se de qualquer uma.
 
 ## Limites de texto
-Título da faixa 48 caracteres; frase central 110; título de slide quieto 60; statement 70; citação 120; título de item de lista 50 e descrição 110; célula de tabela 40 e no máximo seis colunas na faixa do topo; legenda de foto 120; nota do apresentador 300; capítulo mais rótulo 30. Nada abaixo de 14 px efetivos. Nenhum elemento sai dos 1280 por 720; no registro topo, título de até duas linhas e tabela de até seis linhas a 15 px. O verificador mede caixa fora do slide, texto sobre texto, texto contra traço em SVG e a fonte mínima.
+Título de slide em 28 px e corpo em 15 px. Título da faixa 48 caracteres; frase central 110; título de slide quieto 60; statement 70; citação 120; título de item de lista 50 e descrição 110; célula de tabela 40 e no máximo seis colunas na faixa do topo; legenda de foto 120; nota do apresentador 300; capítulo mais rótulo 30. Nada abaixo de 14 px efetivos. Nenhum elemento sai dos 1280 por 720; no registro topo, título de até duas linhas a 28 px e tabela de até seis linhas a 15 px. O verificador mede caixa fora do slide, texto sobre texto, texto contra traço em SVG e a fonte mínima.
 
 ## Impressão
-O mesmo arquivo imprime um slide por página (`@page` de 1280 por 720), com a faixa colorida, o contador no rodapé e o laranja do dado em hachura. Comando:
+O mesmo arquivo imprime um slide por página (`@page` de 1280 por 720), com a faixa colorida, o contador no rodapé e o laranja do dado em hachura. O PDF sai quando a peça vai circular em PDF, pelo motor do sistema, que confere páginas, tamanho e fonte:
 
 ```bash
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="deck.pdf" --print-to-pdf-no-header "file:///caminho/absoluto/da/peca/deck.html"
+python3 imprimir.py caminho/da/peca/deck.html --previa
 ```
 
 ## Checklist de saída
 - [ ] Copiou a pasta inteira e substituiu todo o conteúdo fictício, inclusive as imagens e os endereços da contracapa?
 - [ ] Caminhos de `tokens/` e `assets/` apontando para a peça nova? `data-marca`, `data-peca` e `data-canal` preenchidos?
-- [ ] Toda faixa com título descritivo e frase central; capa e contracapa descritivas; sumário; separatriz e recap em todo capítulo; esquema de fechamento?
+- [ ] Toda faixa com título descritivo e frase central; capa e contracapa descritivas, sem o achado principal; sumário; separatriz em todo capítulo; recap só em capítulo longo; próximos passos e esquema de fechamento?
+- [ ] Todo slide de evidência com um dispositivo visual (gráfico, diagrama, número, tabela, imagem); nenhum título com itálico; nenhum metadado (versão, tempo de leitura)?
 - [ ] Momentos dentro do teto; faixa laranja uma por capítulo; nenhum laranja além do 20 do dado e do estado?
 - [ ] Acentuação conferida em caixa alta e nos `alt`; sem travessão; nada abaixo de 14 px?
 - [ ] Toda imagem com `alt` descritivo e, se gerada, marcada como ilustrativa?
 - [ ] Verificador geométrico sem corte, sem sobreposição e sem texto contra traço?
-- [ ] PDF gerado pelo Chrome e lido página a página?
+- [ ] Se a peça vai circular em PDF: gerado pelo `imprimir.py`, sem erro, e lido página a página na prévia?

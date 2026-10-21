@@ -1,7 +1,7 @@
 /* ============================================================
-   verificar-geometria.js  ·  8020-DS 4.0
+   verificar-geometria.js  ·  8020-DS 4.1
    A segunda passada do verificador: o que so a renderizacao mostra.
-   Cobra as regras 47 e 49 do RULES.md.
+   Cobra as regras 47, 47a e 49 do RULES.md.
 
      - caixa fora dos 1280 por 720 do slide
      - texto sobre texto
@@ -9,7 +9,8 @@
      - piso de fonte efetivo (texto de SVG vezes a escala do viewBox)
      - altura da faixa e folga na base do conteudo
      - imagem que nao carregou
-     - na pagina: rolagem horizontal e piso de 11,5 px
+     - na pagina: rolagem horizontal da pagina e de cada grafico (regra 47a:
+       na largura de leitura nenhum grafico rola) e piso de 11,5 px
 
    Elemento com data-antipadrao, e tudo dentro dele, sai das duas medicoes:
    e contraexemplo declarado, como na pagina patterns/proibido.html.
@@ -17,7 +18,9 @@
    Como rodar. O Playwright nao abre file://, entao a peca precisa estar
    num servidor local (basta um python3 -m http.server na pasta da peca).
    Trocar __URL__ pelo endereco da peca e __DIR__ pela pasta das capturas,
-   e passar o arquivo inteiro para browser_run_code_unsafe.
+   e passar o arquivo inteiro para browser_run_code_unsafe. Na pagina, LARGURA
+   e a largura de leitura; rodar uma vez para cada largura em que a peca vai
+   ser lida (900 e 600 so quando ela circular no celular).
 
    Devolve uma linha por slide (ou uma por secao, na pagina) e o resumo.
    Zero erro e a condicao de saida da peca.
@@ -27,8 +30,16 @@ async (page) => {
   const URL = '__URL__';
   const SL_W = 1280, SL_H = 720;
   const PISO_SLIDE = 14, PISO_PAGINA = 11.5;
+  const LARGURA = 1328;   /* a largura de leitura da pagina; o deck usa sempre 1328 */
 
-  await page.setViewportSize({ width: 1328, height: 856 });
+  /* o navegador do Playwright guarda CSS em cache entre navegacoes: sem desligar o
+     cache, a medicao depois de mudar o CSS devolve o valor antigo */
+  await page.unroute('**/*').catch(() => {});
+  try {
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send('Network.setCacheDisabled', { cacheDisabled: true });
+  } catch (e) { /* fora do Chromium o cache fica; recarregar a pagina antes de medir */ }
+  await page.setViewportSize({ width: LARGURA, height: 856 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(URL, { waitUntil: 'load' });
   await page.waitForFunction(() => document.fonts.status === 'loaded');
@@ -40,13 +51,18 @@ async (page) => {
   /* ---------------------------------------------------------------- pagina */
   if (!ehDeck) {
     const r = await page.evaluate((PISO) => {
-      const out = { rolagem: document.documentElement.scrollWidth > window.innerWidth + 1, pequenos: [], quebradas: [], svgFora: [] };
+      const out = { rolagem: document.documentElement.scrollWidth > window.innerWidth + 1, pequenos: [], quebradas: [], svgFora: [], graficoRola: [] };
+      document.querySelectorAll('.grafico').forEach((g) => {
+        if (g.closest('[data-antipadrao]')) return;
+        if (g.scrollWidth > g.clientWidth + 1) out.graficoRola.push(`"${(g.querySelector('title') || g).textContent.trim().slice(0, 32)}" (${g.scrollWidth} em ${g.clientWidth})`);
+      });
       document.querySelectorAll('*').forEach((el) => {
         if (el.closest('[data-antipadrao]')) return;   // contraexemplo declarado
         const cx = getComputedStyle(el);
         if (cx.display === 'none' || cx.visibility === 'hidden') return;
         const proprio = Array.from(el.childNodes).some((n) => n.nodeType === 3 && n.textContent.trim());
-        if (proprio) {
+        /* slide de demonstracao no catalogo e miniatura: a regra 47 nao conta (o deck se mede no modo deck) */
+        if (proprio && !el.closest('.slide')) {
           const svg = el.ownerSVGElement;
           let esc = 1;
           if (svg && svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width) esc = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
@@ -65,9 +81,10 @@ async (page) => {
       });
       return out;
     }, PISO_PAGINA);
-    await page.screenshot({ path: `${DIR}/pagina-1328.png`, fullPage: true });
+    await page.screenshot({ path: `${DIR}/pagina-${LARGURA}.png`, fullPage: true });
     const linhas = [];
-    if (r.rolagem) linhas.push('ROLAGEM HORIZONTAL na largura de 1328');
+    if (r.rolagem) linhas.push(`ROLAGEM HORIZONTAL na largura de ${LARGURA}`);
+    if (r.graficoRola.length) linhas.push(`GRAFICO que rola de lado na largura de leitura (${LARGURA}): ${r.graficoRola.slice(0, 8).join(' | ')}`);
     if (r.pequenos.length) linhas.push(`FONTE abaixo de ${PISO_PAGINA}px: ${r.pequenos.slice(0, 12).join(' | ')}`);
     if (r.quebradas.length) linhas.push(`IMAGEM que nao carregou: ${r.quebradas.join(', ')}`);
     if (r.svgFora.length) linhas.push(`TEXTO fora da caixa do SVG: ${r.svgFora.slice(0, 12).join(' | ')}`);

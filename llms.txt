@@ -1,8 +1,11 @@
-# 8020-DS 4.0
+# 8020-DS 4.1
 
 > Sistema de design da 80 20 Marketing para peças de comunicação em HTML puro
-> (books e decks). Papel claro, tinta em chumbo quente, o laranja como momento,
-> Montserrat única, paleta fechada, ângulo reto, sem sombra e sem gradiente.
+> (books e decks). Papel claro por padrão (a noite para book e página lidos na
+> tela), tinta em chumbo quente, o laranja como momento, Montserrat única sem
+> itálico em título, peso até 700, paleta fechada, ângulo reto, sem sombra e
+> sem gradiente. Dois modos: expresso (o template inteiro) e sob medida (logo,
+> cor, fonte e o núcleo das regras, com a composição livre).
 > Zero build, zero dependência, zero chamada externa.
 > Para montar uma peça, leia nesta ordem. O mapa do repositório está no
 > [README.md](README.md); a licença, em [LICENSE](LICENSE): o código é MIT,
@@ -11,15 +14,15 @@
 ## 1. Regras (obrigatório)
 
 - [RULES.md](RULES.md): as regras de 1 a 50, agrupadas em marca, construção,
-  facilitação, editorial, didática, Régua 80/20, deck, dado e verificação. Em conflito com
-  qualquer vontade pontual, a regra vence. A tabela do fim liga cada checagem
-  do verificador à regra que ela cobra.
+  facilitação, editorial, didática, Régua 80/20, deck, dado e verificação. O
+  preâmbulo define os dois modos e o núcleo; o núcleo vence qualquer vontade
+  pontual. A tabela do fim liga cada checagem do verificador à regra que ela cobra.
 - [MIGRACAO.md](MIGRACAO.md): o que muda da versão 3 para a 4, o que se converte
   por regra e o que exige decisão. Leia antes de converter uma peça antiga.
 
 ## 2. Escolha do formato
 
-- [GUIA.md](GUIA.md): as duas perguntas que levam ao formato e ao template, o
+- [GUIA.md](GUIA.md): as três perguntas que levam ao modo, ao formato e ao template, o
   fluxo da pasta copiada até a peça entregue, a receita de cada tipo de slide e
   de cada seção de book. Comece por ele.
 
@@ -36,8 +39,8 @@
   registros de slide, o visualizador, as miniaturas, a visão do apresentador e a
   impressão. O script escreve o cromo; o autor escreve só os slides.
 - [assets/book.css](assets/book.css) e [assets/book.js](assets/book.js): o hub, a
-  margem viva, as notas alinhadas ao parágrafo, o scrollytelling por `data-estado`
-  e o "continuar de onde parou".
+  margem viva, as notas alinhadas ao parágrafo e o scrollytelling por `data-estado`.
+  Nada fica guardado no navegador.
 - [assets/dado.js](assets/dado.js): a leitura em palavras, a transição entre
   estados e a hachura de impressão. [assets/pagina.js](assets/pagina.js): topo,
   abas, copiar e aviso.
@@ -45,17 +48,17 @@
 ## 4. Template da peça (escolher um e ler o contrato)
 
 - [templates/deck/padrao/CONTRATO.md](templates/deck/padrao/CONTRATO.md):
-  deck denso, didático, sequencial, 22 slides no contrato. Esqueleto:
+  deck denso, didático, sequencial, 19 slides no contrato. Esqueleto:
   templates/deck/padrao/deck.html
 - [templates/deck/editorial/CONTRATO.md](templates/deck/editorial/CONTRATO.md):
-  deck de respiro, imagem e statement, 17 slides. Esqueleto:
+  deck de respiro, imagem e statement, 14 slides. Esqueleto:
   templates/deck/editorial/deck.html
 - [templates/book/padrao/CONTRATO.md](templates/book/padrao/CONTRATO.md):
   longform com hub e três partes. Esqueleto: templates/book/padrao/index.html
 
 ## 5. Catálogo (consultar conforme a peça pede)
 
-- [patterns/tipografia.html](patterns/tipografia.html): escala, pesos, a assinatura em itálico
+- [patterns/tipografia.html](patterns/tipografia.html): escala, pesos, o destaque por peso
 - [patterns/cores.html](patterns/cores.html): papéis, momentos, os quatro papéis do laranja, contraste ao vivo
 - [patterns/layouts.html](patterns/layouts.html): grade, espaço, pontos de quebra, os cinco registros
 - [patterns/estados.html](patterns/estados.html): filete vivo, ações, campos, seleção, navegação, retorno
@@ -64,7 +67,7 @@
 - [patterns/diagramas.html](patterns/diagramas.html): fluxo, mapa de atores, esquema, matriz
 - [patterns/imagens.html](patterns/imagens.html): política, formatos, prompt base, as onze cenas
 - [patterns/deck.html](patterns/deck.html): registros, tipos de slide, visualizador, limites
-- [patterns/book.html](patterns/book.html): hub, margem viva, scrollytelling, fichas, recap
+- [patterns/book.html](patterns/book.html): hub, margem viva, scrollytelling, fichas, recap opcional
 
 ## 6. Verificação (obrigatória antes de entregar)
 
@@ -80,8 +83,12 @@
   existe (checagens, páginas, formas, regras, slides) e confere contra o que o
   README, o guia, este arquivo e o índice afirmam, mais os links internos, o teste
   de regressão e o próprio sistema. `python3 conferir.py`.
+- [imprimir.py](imprimir.py): o motor de PDF, para quando a peça vai circular
+  em PDF. `python3 imprimir.py peca.html` no deck; no book, o `index.html` do hub,
+  e ele junta hub e partes num arquivo só. Confere páginas, tamanho e fonte, e
+  `--previa` gera uma imagem por página para a leitura página a página.
 - [testes/verificador-deve-reprovar.html](testes/verificador-deve-reprovar.html): o teste de regressão do
-  verificador. Quatro slides escritos para reprovar, que disparam 35 das 49
+  verificador. Seis slides escritos para reprovar, que disparam 41 das 55
   checagens. Se ele parar de reprovar, o verificador quebrou.
 - Bloco que mostra de propósito o que o sistema recusa se declara com
   `data-antipadrao`, e no CSS entre `/* antipadrão: */` e `/* fim do antipadrão */`.

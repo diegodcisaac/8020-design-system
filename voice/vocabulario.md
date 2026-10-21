@@ -32,7 +32,7 @@ Lista viva de substituições recorrentes. A coluna da direita não é traduçã
 | anatomia (da peça) | a estrutura da peça |
 | zona cinzenta | dúvida de responsabilidade |
 | matéria-prima (editorial) | fonte de conteúdo |
-| paradoxo em título | afirmar o aprendizado de forma direta |
+| paradoxo em título | título que diz do que a seção trata |
 | conceito agindo ("a estatística conta") | a pessoa ou o fato ("a taxa cai depois") |
 
 ## Vícios de linguagem

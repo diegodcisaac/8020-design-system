@@ -1,5 +1,5 @@
 /* ============================================================
-   8020-DS 4.0, assets/regua.css
+   8020-DS 4.1, assets/regua.css
    A Régua 80/20: a camada compartilhada por deck, book e catálogo.
    Grade 80/20 (folha e margem viva), tipografia de página, filete
    vivo, os três níveis de ação, peso como estado, campos, seleção,
@@ -122,6 +122,17 @@ section.bloco h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); letter-
 .quieta:hover, .quieta.is-hover { color: var(--ink); text-decoration-color: var(--ink); }
 .quieta.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
 .quieta:disabled, .quieta.is-disabled { color: var(--meta); text-decoration: underline dotted; text-decoration-color: var(--rule-strong); cursor: default; }
+
+/* status de execução (regra 6c): a única cor fora da paleta. A cor vai no quadrado e no
+   grifo; a etiqueta é uma palavra em caixa alta na tinta, porque o amarelo não passa
+   o contraste como texto pequeno. Marcação: <li class="status feito"><span class="grifo">
+   o item</span><span class="etiqueta">Concluído</span></li> */
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 10px; vertical-align: 1px; background: var(--st-cor); }
+.status .grifo { background: var(--st-fundo); padding: 1px 4px; margin: 0 -4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; color: var(--ink); }
+.status .etiqueta { margin-left: 12px; font-size: var(--t-small); font-weight: var(--w-rotulo); letter-spacing: .04em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.status.feito { --st-cor: var(--status-feito); --st-fundo: var(--status-feito-fundo); }
+.status.andamento { --st-cor: var(--status-andamento); --st-fundo: var(--status-andamento-fundo); }
+@media print { .status .grifo, .status::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 
 /* selo de estado: etiqueta de uma palavra, contorno, laranja só em atual ou novo */
 .selo { display: inline-block; font-size: var(--t-micro); font-weight: var(--w-rotulo); color: var(--ink); border: 1px solid var(--rule-strong); padding: 2px 8px; line-height: 1.4; }
@@ -456,6 +467,17 @@ svg.mapa { max-width: 640px; }
   .grafico *, .mapa * { transition: none !important; animation: none !important; }
   .scrolly .fixo, .margem.fixa { position: static; }
   .toast, .topo nav, .controle { display: none !important; }
+  /* figura em bloco: em grade, a fonte sobrepõe a tabela que quebra de página */
+  .figura { display: block; }
+  .figura > * + * { margin-top: var(--s-4); }
+  /* no papel o gráfico não rola: a coluna é estreita, e o mínimo da tela cortaria o diagrama */
+  .grafico { overflow: visible; }
+  .grafico > svg, .fluxo > svg, .esquema > svg, .atores-mapa > svg { min-width: 0 !important; }
+  /* fonte, leitura e legenda não se partem; parágrafo não deixa linha sozinha */
+  .fonte, .leitura, .legenda, figcaption { break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  /* a linha que se desenha na tela sai inteira no papel */
+  .desenha .linha { stroke-dasharray: none; stroke-dashoffset: 0; }
 }
 
 /* ---------- responsivo ---------- */

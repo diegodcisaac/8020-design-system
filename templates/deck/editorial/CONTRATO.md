@@ -1,6 +1,6 @@
 # Deck editorial, contrato de uso
 
-Template do 8020-DS 4.0 para peça institucional em slide. O exemplo pronto é `deck.html`, a "Visão 2027 da Casa do Campo": 17 slides, três capítulos, universo fictício. Quem copia a pasta troca o conteúdo e mantém a gramática.
+Template do 8020-DS 4.1 para peça institucional em slide. O exemplo pronto é `deck.html`, a "Visão 2027 da Casa do Campo": 14 slides, três capítulos, universo fictício. Quem copia a pasta troca o conteúdo e mantém a gramática.
 
 ## Quando usar
 
@@ -16,14 +16,14 @@ Cada slide é um filho direto de `.deck`, com um comentário `<!-- NN · tipo --
 
 | Tipo | O que o autor escreve | O que o deck.js escreve |
 |---|---|---|
-| Capa | `.slide.s-faixa` com `.faixa.laranja` (`.cap` com a logo, `h2` com o último termo em `<em>`, `p.frase` com o núcleo em `<strong>`, `.pe > .contador > span.quando` com a data) e `.foto-area` (`img` com `alt` e um `span` de legenda) | o "01 de N" ao lado da data e o trilho |
+| Capa | `.slide.s-faixa` com `.faixa.laranja` (`.cap` com a logo, `h2` descritivo e sem itálico, `p.frase` descritiva com o núcleo em `<strong>`, `.pe > .contador > span.quando` com a data) e `.foto-area` (`img` com `alt` e um `span` de legenda) | o "01 de N" ao lado da data e o trilho |
 | Abertura editorial | `.slide.s-faixa` com `.faixa` (`.cap`, `h2`, `p.frase`) e `.conteudo` com `.foto-legenda` (um `div` com `img` e `p.legenda`, outro com dois `p.texto`) e `p.fonte` | `.pe` inteiro: contador e trilho |
 | Sumário | `.slide.s-quieto` com `.conteudo` (`h2`, `ol.sumario-slide` com `li > span.n, span, span.pg`) e `.cromo > .capitulo` com `small` | a linha vertical e o contador do `.cromo` |
 | Separatriz | `.slide.s-faixa` com `.faixa.laranja` (`.cap` com `<b>Capítulo N</b> de 3`, `h2`, `p.frase`) e `.conteudo.separatriz` (`.separatriz-numeral`, `ol.separatriz-lista` com `li > span.n, span`) | contador e trilho |
 | Citação com dado | `.slide.s-faixa` com `.conteudo` (`.pilha` com `p.citacao` e `p.atrib`, `.numeros > p` com o número em `<strong>`, `p.fonte`) | contador e trilho |
 | Fluxo | `.slide.s-topo` com `.faixa` (`.cabeca` com `.cap` e `h2`; `p.frase`) e `.conteudo` com `.grafico.fluxo > svg` (viewBox 1088 por 240, caixas de 196 px, seta por `<marker>` em `<defs>`, `role="img"`, `aria-label`, `<title>`) e `p.fonte` | `.pe` com contador e trilho, na base da faixa |
 | Respiro em foto, foto de seção | `.slide.s-cheio.tema-escuro.com-foto` com `.foto-cheia > img`, `.veu` e `.sobre` (`p.statement` com o núcleo em `<strong>`, `.rodape-slide > span` com o capítulo); `aside.notas` fora do `.sobre` | o `span.tab` com o contador no rodapé |
-| Recap de capítulo | `.slide.s-quieto` com `.conteudo` (`h2`, `ol.recap` com `li > strong` mais uma frase, `p.fonte` com o método) e `.cromo > .capitulo` | linha vertical e contador |
+| Recap, só em capítulo longo | `.slide.s-quieto` com `.conteudo` (`h2`, `ol.recap` com `li > strong` mais uma frase) e `.cromo > .capitulo`. Só em capítulo de oito slides de conteúdo ou mais; o exemplo não tem | linha vertical e contador |
 | Compromissos | `.slide.s-faixa` com `.conteudo` com `ol.lista-razao` (`li > span.n` e `div > b, span`) e `p.fonte` | contador e trilho |
 | Fases | `.slide.s-topo` com `.conteudo` com `.fases > .fase.feita`, `.fase.atual`, `.fase.futura` (`span.quando`, `b`, texto) e `p.fonte` | contador, trilho e a cascata das linhas |
 | Fechamento em esquema | `.slide.s-topo` com `.conteudo` com `.grafico.esquema > svg` (viewBox 1088 por 380: tese em caixa cheia, três desdobramentos, acordo com contorno laranja, "desdobra em" e "sustentado por") | contador e trilho |
@@ -42,24 +42,23 @@ O `deck.js` também monta a moldura em chumbo, o topo com marca, peça e capítu
 | 05 | Citação com dado | `.s-faixa` | Capítulo 1, Visão |
 | 06 | Fluxo | `.s-topo` | Capítulo 1, Visão |
 | 07 | Respiro em foto | `.s-cheio.tema-escuro.com-foto` | Capítulo 1, Visão |
-| 08 | Recap | `.s-quieto` | Capítulo 1, Visão |
-| 09 | Separatriz | `.s-faixa` com `.faixa.laranja` | Capítulo 2, Cultura |
-| 10 | Compromissos | `.s-faixa` | Capítulo 2, Cultura |
-| 11 | Foto de seção | `.s-cheio.tema-escuro.com-foto` | Capítulo 2, Cultura |
-| 12 | Recap | `.s-quieto` | Capítulo 2, Cultura |
-| 13 | Separatriz | `.s-faixa` com `.faixa.laranja` | Capítulo 3, Caminho |
-| 14 | Fases | `.s-topo` | Capítulo 3, Caminho |
-| 15 | Recap | `.s-quieto` | Capítulo 3, Caminho |
-| 16 | Fechamento em esquema | `.s-topo` | Fechamento |
-| 17 | Contracapa | `.s-cheio.tema-escuro` | |
+| 08 | Separatriz | `.s-faixa` com `.faixa.laranja` | Capítulo 2, Cultura |
+| 09 | Compromissos | `.s-faixa` | Capítulo 2, Cultura |
+| 10 | Foto de seção | `.s-cheio.tema-escuro.com-foto` | Capítulo 2, Cultura |
+| 11 | Separatriz | `.s-faixa` com `.faixa.laranja` | Capítulo 3, Caminho |
+| 12 | Fases | `.s-topo` | Capítulo 3, Caminho |
+| 13 | Fechamento em esquema | `.s-topo` | Fechamento |
+| 14 | Contracapa | `.s-cheio.tema-escuro` | |
+
+A abertura (02) diz de que trata a peça, sem antecipar o achado: o achado principal mora no capítulo que o constrói (regra 38). Nenhum capítulo fecha com recap, porque são curtos (regra 28).
 
 ## Momentos e tetos
 
 O laranja tem quatro papéis: momento (`.faixa.laranja`, `.tema-laranja`), ação primária dentro do momento, estado atual (o quadrado de 8 px) e o 20 do dado. O laranja funcional e o 20 do dado não contam no teto.
 
 - No máximo três momentos de acento por slide.
-- Momento de página inteira (`.s-cheio` com tema): um por capítulo, nunca em dois slides seguidos. No exemplo, o slide 07 é o do capítulo 1 e o slide 11 é o do capítulo 2; o capítulo 3 não tem. A contracapa vem depois do esquema, que não é momento.
-- Faixa laranja: a capa e uma separatriz por capítulo. No exemplo são quatro: slides 01, 04, 09 e 13.
+- Momento de página inteira (`.s-cheio` com tema): um por capítulo, nunca em dois slides seguidos. No exemplo, o slide 07 é o do capítulo 1 e o slide 10 é o do capítulo 2; o capítulo 3 não tem. A contracapa vem depois do esquema, que não é momento.
+- Faixa laranja: a capa e uma separatriz por capítulo. No exemplo são quatro: slides 01, 04, 08 e 11.
 - Branco sobre laranja só a partir de 24 px, ou 19 px em peso 700. O texto pequeno dentro do momento laranja fica preto pelos papéis da camada; não sobrescrever.
 - Todo slide de capítulo leva `.cap` com `<b>Capítulo N</b> Nome`, até 30 caracteres somados.
 
@@ -98,7 +97,7 @@ Medidos em caracteres, com espaço. Passou do limite, o slide corta ou o texto s
 | Nota do apresentador (`.notas`) | 300 |
 | Capítulo mais rótulo (`.cap`) | 30 |
 
-No registro topo a faixa tem 240 px fixos e o conteúdo tem 392 px úteis; título de até duas linhas a 36 px; tabela de até seis linhas a 15 px. Nenhum texto do slide fica abaixo de 14 px efetivos (texto de SVG multiplicado pela escala do viewBox). Nada sai dos 1280 por 720.
+Título de slide em 28 px e corpo em 15 px (regra 16a). No registro topo a faixa tem 240 px fixos e o conteúdo tem 392 px úteis; título de até duas linhas a 28 px; tabela de até seis linhas a 15 px. Nenhum texto do slide fica abaixo de 14 px efetivos (texto de SVG multiplicado pela escala do viewBox). Nada sai dos 1280 por 720.
 
 ## Imagens
 
@@ -113,23 +112,24 @@ Toda `img` leva `alt` descritivo, ou `alt=""` quando é decorativa ao lado do no
 
 ## Impressão
 
-O mesmo arquivo imprime um slide por página em 1280 por 720, sem moldura, sem notas e sem animação; o laranja do dado vira hachura. Pelo Chrome headless:
+O mesmo arquivo imprime um slide por página em 1280 por 720, sem moldura, sem notas e sem animação; o laranja do dado vira hachura. O PDF sai quando a peça vai circular em PDF, pelo motor do sistema:
 
-```
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf=deck.pdf --print-to-pdf-no-header "file:///caminho/absoluto/da/peca/deck.html"
+```bash
+python3 imprimir.py caminho/da/peca/deck.html --previa
 ```
 
-Conferir o PDF página a página antes de enviar: o que passa na tela passa no papel, e o contrário também.
+Conferir a prévia página a página antes de enviar: o que passa na tela passa no papel, e o contrário também.
 
 ## Checklist de saída
 
 - [ ] Copiou a pasta inteira e substituiu todo o conteúdo fictício: textos, nomes, números, notas e imagens.
 - [ ] Os caminhos de tokens e assets apontam para `../../../tokens/` e `../../../assets/`, ou para onde a cópia mora.
 - [ ] Toda faixa tem título descritivo e frase central com o núcleo em `<strong>`; o achado está na frase, não no título.
-- [ ] Todo capítulo tem separatriz laranja e recap com os achados por inteiro e a fonte do método.
-- [ ] O esquema fecha a peça antes da contracapa; capa e contracapa dizem nome, cliente, data e o que a peça contém.
+- [ ] Todo capítulo tem separatriz laranja; recap só em capítulo longo, sem linha de método.
+- [ ] O esquema fecha a peça antes da contracapa; capa, abertura e contracapa dizem nome, cliente, data e o que a peça contém, sem antecipar o achado.
+- [ ] Todo slide de evidência tem dispositivo visual; nenhum título com itálico; nenhum metadado (versão, tempo de leitura).
 - [ ] Os momentos estão no teto: um de página inteira por capítulo, nunca dois seguidos, até três acentos por slide.
 - [ ] Acentuação correta em tudo, inclusive em caixa alta, `alt`, `aria-label` e comentários.
 - [ ] Toda imagem tem `alt` e, se foi gerada, a marcação na legenda ou na fonte.
-- [ ] O PDF foi gerado e lido página a página.
-- [ ] O verificador geométrico rodou nos 17 slides sem corte, sem sobreposição e com a menor fonte em 14 px ou mais.
+- [ ] Se a peça vai circular em PDF: gerado pelo `imprimir.py`, sem erro, e lido página a página.
+- [ ] O verificador geométrico rodou nos 14 slides sem corte, sem sobreposição e com a menor fonte em 14 px ou mais.

@@ -1,11 +1,11 @@
 /* ============================================================
-   8020-DS 4.0, assets/book.css
+   8020-DS 4.1, assets/book.css
    A camada de book: a margem viva como instrumento de leitura. Hub
    como mapa, trilha e progresso no topo, abertura de parte com
    numeral, capítulo com notas de rodapé na margem, figura com legenda
    na margem, scrollytelling dirigido pela margem (a mecânica está em
-   regua.css), fichas de público, foto ao lado de texto, recap,
-   anterior e próximo, atalhos e impressão. Depende de tokens/8020.css
+   regua.css), fichas de público, foto ao lado de texto, anterior e
+   próximo, atalhos e impressão. Depende de tokens/8020.css
    e de assets/regua.css; o book.js dá vida à margem.
    ============================================================ */
 
@@ -24,19 +24,17 @@
 .hub h1 strong { font-weight: var(--w-display); }
 .hub .capa-meta { display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-6); font-size: var(--t-small); color: var(--meta); margin-top: var(--s-5); }
 .hub .capa-meta b { color: var(--ink); font-weight: var(--w-rotulo); }
-.continuar { border-top: 1px solid var(--ink); padding-top: var(--s-4); display: grid; gap: var(--s-3); }
-.continuar p { font-size: var(--t-body); color: var(--ink-body); }
+/* o mapa não marca lido nem "você está aqui": a peça não guarda onde o leitor parou (regra 22a) */
+.hub .comecar { display: inline-block; margin-top: var(--s-5); }
 .mapa { display: grid; gap: var(--s-6); }
-.parte { display: grid; grid-template-columns: 5ch 1fr auto; gap: var(--s-5); align-items: baseline; border-top: 1px solid var(--ink); padding-top: var(--s-3); }
+.parte { display: grid; grid-template-columns: 5ch 1fr; gap: var(--s-5); align-items: baseline; border-top: 1px solid var(--ink); padding-top: var(--s-3); }
 .parte .num { font-size: var(--t-title); font-weight: var(--w-fino); letter-spacing: -.03em; color: var(--ink); line-height: 1; }
 .parte h3 { font-size: var(--t-h3); font-weight: var(--w-rotulo); letter-spacing: -.01em; }
 .parte h3 a { text-decoration: none; }
 .parte h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.parte .tempo { font-size: var(--t-small); color: var(--meta); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .parte ol { list-style: none; margin: var(--s-3) 0 0; padding: 0; display: grid; }
-.parte li { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-3); align-items: baseline; padding: 8px 0; border-top: 1px solid var(--rule); font-size: var(--t-body); }
-.parte li .est { font-size: var(--t-micro); color: var(--meta); white-space: nowrap; }
-.parte li .est.atual { color: var(--ink); font-weight: var(--w-rotulo); }
+.parte li { display: grid; grid-template-columns: 3ch 1fr; gap: var(--s-3); align-items: baseline; padding: 8px 0; border-top: 1px solid var(--rule); font-size: var(--t-body); }
+.parte li .n { color: var(--meta); font-variant-numeric: tabular-nums; }
 .hub-foto { margin-top: var(--s-8); }
 .hub-foto img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
 .hub-foto .legenda { margin-top: 12px; }
@@ -101,7 +99,7 @@
 .linha-tempo li.agora .quando::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--accent); margin-right: 8px; }
 .linha-tempo b { display: block; color: var(--ink); font-weight: var(--w-rotulo); }
 
-/* ---------- recap e navegação entre partes ---------- */
+/* ---------- navegação entre partes ---------- */
 .navega { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); margin-top: var(--s-7); }
 .navega a { display: grid; gap: 4px; text-decoration: none; border-top: 1px solid var(--ink); padding-top: var(--s-3); }
 .navega a .rot { font-size: var(--t-micro); color: var(--meta); }
@@ -117,12 +115,15 @@
   .linha-tempo li { grid-template-columns: 1fr; gap: 4px; }
   .topo .trilha { display: none; }
 }
-@media (max-width: 599px) { .topo .direita kbd { display: none; } .parte { grid-template-columns: 4ch 1fr; } .parte .tempo { grid-column: 2; } }
+@media (max-width: 599px) { .topo .direita kbd { display: none; } .parte { grid-template-columns: 4ch 1fr; } }
 
 /* ---------- impressão: a margem vira coluna de 20 %, quebra antes de cada capítulo ---------- */
 @media print {
-  .topo, .progresso-leitura, .atalhos, .continuar .tinta, .navega { display: none !important; }
-  .capitulo { break-before: page; }
+  @page { size: A4; margin: 16mm 14mm 18mm; }
+  html, body.book { background: #fff; }
+  .topo, .progresso-leitura, .atalhos, .hub .comecar, .navega { display: none !important; }
+  /* sem o respiro do fim: ele caía sozinho numa página antes da quebra do capítulo seguinte */
+  .capitulo { break-before: page; padding-bottom: 0; }
   .folha { grid-template-columns: 4fr 1fr; }
   .nota-m.posta { position: static; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }

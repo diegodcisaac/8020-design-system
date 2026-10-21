@@ -1,6 +1,6 @@
 # Da versão 3 para a 4
 
-O núcleo de marca não muda: paleta fechada, momentos com teto, Montserrat única, assinatura em itálico, ângulo reto, sem sombra, contrato didático do deck. Muda a moldura, e ela muda inteira.
+O núcleo de marca não muda: paleta fechada, momentos com teto, Montserrat única, ângulo reto, sem sombra, contrato didático do deck. Muda a moldura, e ela muda inteira. O que a 4.1 ajustou sobre a 4.0 está no fim deste guia.
 
 Este guia diz o que quebra numa peça da versão 3, o que se converte por regra e o que exige decisão de quem migra.
 
@@ -49,7 +49,7 @@ O motivo é mecânico. A camada de layout foi reescrita: o `deck.css` da versão
 | Slide de título centralizado, texto solto no meio | Cinco registros escolhidos pelo papel do slide, com faixa de um terço (regra 37) |
 | Autor numerando o slide à mão | O `deck.js` escreve contador e trilho; o autor escreve só os slides (regra 39) |
 | `deck-print.html` separado | O mesmo arquivo imprime, um slide por página (regra 40) |
-| Grade de cartões no hub do book | O hub é um mapa: partes, capítulos, tempo de leitura e o "continuar de onde parou" |
+| Grade de cartões no hub do book | O hub é um mapa: partes e capítulos numerados de 1 a N, sem tempo de leitura e sem "continuar de onde parou" |
 | Nota de rodapé no fim da página | Nota na margem, ao lado do parágrafo que a chama |
 | Dica flutuante no gráfico | Leitura em palavras, visível em repouso, com o livro-razão embaixo (regra 42) |
 | Série de dado em duas ou três cores | Uma tonalidade em quatro degraus; o laranja é o 20, um por gráfico (regra 41) |
@@ -78,4 +78,28 @@ Três coisas o sistema não decide sozinho, porque dependem do argumento da peç
 
 ## O que não muda
 
-Vale repetir, porque na hora da migração dá vontade de mexer: a paleta continua fechada nas mesmas seis cores, a logo continua sem recoloração, Montserrat continua sendo a única família, a assinatura do itálico no último termo continua, o ângulo reto continua, e as regras editoriais de 18 a 27 continuam idênticas. Texto aprovado na versão 3 passa na 4.0 sem uma vírgula de diferença.
+Vale repetir, porque na hora da migração dá vontade de mexer: a paleta continua fechada nas mesmas seis cores, a logo continua sem recoloração, Montserrat continua sendo a única família, o ângulo reto continua, e as regras editoriais de 18 a 27 continuam idênticas. Texto aprovado na versão 3 passa na 4.0 sem uma vírgula de diferença; na 4.1, só o itálico de título e os metadados saem.
+
+## Da 4.0 para a 4.1
+
+A 4.1, de outubro de 2026, alinha o sistema ao que os decks e books reais pediram depois da 4.0. Nenhuma regra mudou de número; as novas entram com letra.
+
+| Mudou | Na 4.0 | Na 4.1 |
+|---|---|---|
+| Modos de trabalho | As regras valiam inteiras em toda peça | Expresso (o template inteiro) ou sob medida (logo, cor, fonte e o núcleo das regras, com a composição livre) |
+| Substrato | Papel claro em toda peça | Papel claro por padrão; a noite (`body.noite`) para book e página lidos na tela; impressão sempre no papel |
+| Itálico | Assinatura em `<em>` no título de capa, hero e abertura | Sem itálico em título, statement e frase; o destaque é peso |
+| Peso de display | 800, e 900 no itálico | Até 700 (regra 5a) |
+| Recap | Obrigatório em todo capítulo do deck e em toda parte do book | Só em capítulo longo, de oito slides ou mais (regra 28); os templates não têm |
+| Deck | Título a 36 e 40 px, corpo a 19 px | Título a 28 px, corpo a 15 px, um assunto por slide; o filete entre as partes fica (regra 16a) |
+| Visual | Gráfico ou dispositivo em toda declaração massiva | Dispositivo visual em todo slide de evidência e capítulo, animado para ser lido, com a direção partindo de referência concreta (15a a 15c) |
+| Book | Tempo de leitura e "continuar de onde parou" guardado no navegador | Nada guardado e nenhum tempo de leitura (22a); capítulos numerados de 1 a N também entre partes |
+| Bastidor | "Como ler", "O que o capítulo prova", "Base:" e o método no recap | Fora: a peça fala do assunto, não de si (22 e 22a) |
+| Título | Descritivo, sem o achado | Descritivo e com informação: nunca uma palavra genérica como "Contexto" (21) |
+| Capa | Frase central da faixa onde mora o achado | Frase descritiva na capa e na separatriz; o achado principal fica no capítulo que o constrói (38) |
+| Status de execução | Não existia | Verde e amarelo, a única cor fora da paleta, com a palavra junto (6c) |
+| PDF | Gerado a cada entrega, por comando solto | Sob demanda, pelo `imprimir.py`, que confere páginas, tamanho e fonte |
+| Verificação | Em 1440, 900 e 600 sempre | Nas larguras em que a peça vai ser lida; nenhum gráfico rola na largura de leitura (47a, 50) |
+
+Peça montada na 4.0 continua abrindo com os próprios arquivos. Para levar uma peça da 4.0 à 4.1: trocar `tokens/` e `assets/` pelos da 4.1, tirar o `<em>` dos títulos, tirar os recaps de capítulo curto, tirar o bloco de continuar e os tempos do book, renumerar os capítulos de 1 a N e rodar o verificador, que aponta o resto.
+

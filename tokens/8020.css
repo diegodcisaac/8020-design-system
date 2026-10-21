@@ -1,8 +1,8 @@
 /* ============================================================
-   8020-DS 4.0, tokens/8020.css
+   8020-DS 4.1, tokens/8020.css
    A camada de tokens: primitivos, papéis semânticos, escala de
-   tipo, escala de espaço, forma, movimento, a rampa de dado e os
-   dois momentos. As camadas de layout (assets/regua.css, deck.css,
+   tipo, escala de espaço, forma, movimento, a rampa de dado, os
+   dois momentos, a noite e o status de execução. As camadas de layout (assets/regua.css, deck.css,
    book.css) consomem só os papéis, nunca a cor crua.
    Sem build, sem CDN. Montserrat variável servida de assets/fonts.
    ============================================================ */
@@ -26,11 +26,11 @@
   --8020-preto:     #0a0a0a;
   --8020-chumbo:    #15110d;   /* o chão: rodapé, contracapa, moldura do visualizador */
   --8020-chumbo-2:  #1d1611;   /* superfície dentro do momento escuro */
-  --8020-papel:     #faf7f2;   /* o substrato de toda peça */
+  --8020-papel:     #faf7f2;   /* o substrato padrão de toda peça */
   --8020-areia:     #f3ede4;   /* contenção sem borda sobre o papel */
   --8020-tinta:     #1a140f;   /* chumbo quente: título, número, ação */
   --8020-tinta-2:   #2a201a;   /* corpo */
-  --8020-noite:     #120e0b;   /* o papel do momento escuro */
+  --8020-noite:     #120e0b;   /* o papel do momento escuro e da peça noite */
 
   /* ---------- papéis semânticos, base papel ---------- */
   --paper:       var(--8020-papel);
@@ -61,7 +61,7 @@
 
   /* ---------- tipografia: uma família, a escala com salto ---------- */
   --font: "Montserrat", system-ui, sans-serif;
-  --w-fino: 300; --w-corpo: 400; --w-medio: 500; --w-rotulo: 600; --w-titulo: 700; --w-display: 800;
+  --w-fino: 300; --w-corpo: 400; --w-medio: 500; --w-rotulo: 600; --w-titulo: 700; --w-display: 700;   /* regra 5a: nada acima de 700 */
   --t-micro: 11.5px;     /* rodapé de slide, legenda de eixo: o mínimo do sistema */
   --t-small: 13px;       /* meta, fonte, tabela densa */
   --t-body: 15px;        /* corpo */
@@ -69,7 +69,7 @@
   --t-lead: 18px;        /* abertura de seção, prova */
   --t-h3: 22px;          /* subtítulo, nome de componente */
   --t-h2: 28px;          /* título de seção, título de slide quieto */
-  --t-title: 36px;       /* título de página, separatriz, faixa do slide */
+  --t-title: 36px;       /* título de página e de abertura de parte */
   --t-statement: 48px;   /* statement, citação */
   --t-display: clamp(56px, 7vw, 96px);        /* capa, hero; 96 é o teto */
   --t-numeral: clamp(120px, 20vw, 280px);     /* numeral de capítulo, peso 300, em tinta */
@@ -92,6 +92,14 @@
   /* ---------- movimento: só transform e opacidade, saída exponencial ---------- */
   --ease-out: cubic-bezier(.22, 1, .36, 1);
   --dur-fast: 120ms; --dur: 260ms; --dur-slow: 480ms;
+
+  /* ---------- status de execução (regra 6c): a única cor fora da paleta ----------
+     a cor vai no marcador e no grifo; a etiqueta fica na tinta, porque o amarelo
+     dá 3,9:1 sobre o papel e não passa como texto pequeno */
+  --status-feito:           #2f7d4b;                  /* marcador: 4,7:1 sobre o papel */
+  --status-feito-fundo:     rgba(47, 125, 75, .16);   /* grifo; a tinta sobre ele dá 14:1 */
+  --status-andamento:       #a8720f;                  /* marcador: 3,9:1 sobre o papel */
+  --status-andamento-fundo: rgba(214, 158, 46, .24);  /* grifo; a tinta sobre ele dá 14:1 */
 
   /* ---------- slide ---------- */
   --sl-w: 1280px; --sl-h: 720px;
@@ -140,8 +148,10 @@
   background: var(--paper); color: var(--ink);
 }
 
-/* escuro: branco a 100, 64, 40 e 20 % sobre a noite; o laranja continua o 20 */
-.tema-escuro {
+/* escuro: branco a 100, 64, 40 e 20 % sobre a noite; o laranja continua o 20.
+   body.noite (regra 1) é o mesmo papel como substrato de book e página lidos na
+   tela; nela o momento é só o laranja, e a impressão volta ao papel (abaixo). */
+.tema-escuro, body.noite {
   --paper:       var(--8020-noite);
   --surface:     var(--8020-chumbo-2);
   --surface-2:   var(--8020-chumbo-2);
@@ -166,6 +176,20 @@
   background: var(--paper); color: var(--ink);
 }
 
+/* a peça noite imprime no papel: os papéis da base voltam no body */
+@media print {
+  body.noite {
+    --paper: var(--8020-papel); --surface: var(--8020-branco); --surface-2: var(--8020-areia);
+    --ink: var(--8020-tinta); --ink-body: var(--8020-tinta-2); --ink-soft: rgba(26, 20, 15, .72);
+    --muted: rgba(26, 20, 15, .66); --meta: rgba(26, 20, 15, .60); --rule: rgba(26, 20, 15, .14);
+    --rule-strong: rgba(26, 20, 15, .50); --hairline: rgba(26, 20, 15, .07);
+    --accent: var(--8020-laranja); --accent-ink: var(--8020-branco); --focus: var(--8020-tinta);
+    --negative: var(--8020-tinta); --logo-invert: 1;
+    --dado-1: var(--8020-tinta); --dado-2: rgba(26, 20, 15, .64); --dado-3: rgba(26, 20, 15, .40);
+    --dado-4: rgba(26, 20, 15, .20); --dado-0: var(--8020-areia);
+  }
+}
+
 /* ============================================================
    BASE. Especificidade baixa, para a camada de layout sobrescrever.
    ============================================================ */
@@ -188,5 +212,5 @@
 :where(button, input, select, textarea) { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .num, .tab, td.num, th.num { font-variant-numeric: tabular-nums; }
-/* a assinatura da marca: o último termo do título salta para o itálico, um peso acima */
-.assinatura em, h1 > em, .display em { font-style: italic; font-weight: calc(var(--w-display) + 100); font-size: 1.06em; line-height: 1; }
+/* regra 5: sem itálico em título; o destaque dentro do título é peso */
+:where(h1, h2, h3, h4) em { font-style: normal; font-weight: inherit; }

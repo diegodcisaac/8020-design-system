@@ -83,10 +83,10 @@ def afirmacoes(c):
     return [
         ("README.md", "São {N} checagens", c["checagens"]),
         ("README.md", "traz as {N} páginas do catálogo", c["paginas de catalogo"]),
-        ("README.md", "que disparam 35 das {N} checagens", c["checagens"]),
+        ("README.md", "que disparam 41 das {N} checagens", c["checagens"]),
         ("README.md", "deck/padrao/     deck.html  CONTRATO.md     {N} slides", c["slides do deck padrao"]),
         ("README.md", "deck/editorial/  deck.html  CONTRATO.md     {N} slides", c["slides do editorial"]),
-        ("llms.txt", "disparam 35 das {N} checagens", c["checagens"]),
+        ("llms.txt", "disparam 41 das {N} checagens", c["checagens"]),
         ("llms.txt", "deck denso, didático, sequencial, {N} slides", c["slides do deck padrao"]),
         ("llms.txt", "deck de respiro, imagem e statement, {N} slides", c["slides do editorial"]),
         ("GUIA.md", "{N} páginas com os blocos ao vivo", c["paginas de catalogo"]),
@@ -97,7 +97,7 @@ def afirmacoes(c):
         ("index.html", "as {N} regras", c["regras de dado"]),
         ("index.html", "traz as {N} páginas do catálogo", c["paginas de catalogo"]),
         ("patterns/dado.html", "As {N} regras de dado", c["regras de dado"]),
-        ("testes/verificador-deve-reprovar.html", "disparam 35 das {N} checagens", c["checagens"]),
+        ("testes/verificador-deve-reprovar.html", "disparam 41 das {N} checagens", c["checagens"]),
     ]
 
 

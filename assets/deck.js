@@ -1,5 +1,5 @@
 /* ============================================================
-   8020-DS 4.0, assets/deck.js
+   8020-DS 4.1, assets/deck.js
    O visualizador de deck (regra 8f): monta a moldura em chumbo com
    todo controle fora do slide, escreve o contador e o trilho de cada
    faixa (o autor não numera slide à mão), abre as miniaturas na tecla

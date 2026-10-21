@@ -1,5 +1,5 @@
 /* ============================================================
-   8020-DS 4.0, assets/deck.css
+   8020-DS 4.1, assets/deck.css
    A camada de deck: o slide de 1280 por 720 em cinco registros
    (faixa à esquerda, faixa no topo, quieto, cheio, e a faixa laranja
    como abertura de capítulo), os blocos de conteúdo, o visualizador
@@ -7,11 +7,13 @@
    atalhos, a visão do apresentador, a coreografia de entrada e a
    impressão de um slide por página. Depende de tokens/8020.css e de
    assets/regua.css. O deck.js monta a moldura e escreve os contadores.
+   Escala leve (regra 16a): título de slide em 28 px, corpo em 15 px,
+   nada abaixo de 14 px; o filete entre as partes fica.
    ============================================================ */
 
 /* ============ o slide ============ */
 .deck { background: var(--paper); }
-.deck .slide { width: var(--sl-w); height: var(--sl-h); position: relative; overflow: hidden; background: var(--paper); color: var(--ink-body); font-size: 19px; line-height: 1.45; display: grid; }
+.deck .slide { width: var(--sl-w); height: var(--sl-h); position: relative; overflow: hidden; background: var(--paper); color: var(--ink-body); font-size: 15px; line-height: 1.55; display: grid; }
 .slide h2, .slide h3 { text-wrap: balance; }
 .slide .fonte { font-size: 15px; color: var(--meta); }
 .slide .tab { font-variant-numeric: tabular-nums; }
@@ -26,11 +28,8 @@ html.js .deck .slide.atual { display: grid; }
 .faixa.laranja { --fx-bg: var(--accent); --fx-ink: #ffffff; --fx-soft: #ffffff; --fx-meta: rgba(10, 10, 10, .8); --fx-strong: #0a0a0a; --fx-rule: rgba(10, 10, 10, .35); --fx-accent: #ffffff; }
 .faixa .cap { font-size: 15px; color: var(--fx-meta); display: flex; gap: 12px; align-items: baseline; }
 .faixa .cap b { font-weight: var(--w-rotulo); color: var(--fx-strong); }
-.slide .faixa h2 { font-size: 36px; font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.12; color: var(--fx-ink); margin: 0; text-wrap: balance; }
-/* a assinatura da marca no título de capa: o último termo salta para o itálico, um peso acima */
-.faixa h2 em, .s-cheio .statement em, .s-quieto .conteudo h2 em { font-style: italic; font-weight: calc(var(--w-titulo) + 100); font-size: 1.06em; }
-.s-cheio .statement em { font-weight: var(--w-display); }
-.faixa .frase { font-size: 22px; font-weight: var(--w-fino); line-height: 1.35; color: var(--fx-soft); margin-top: 24px; max-width: 22ch; }
+.slide .faixa h2 { font-size: 28px; font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.12; color: var(--fx-ink); margin: 0; text-wrap: balance; }
+.faixa .frase { font-size: 20px; font-weight: var(--w-fino); line-height: 1.35; color: var(--fx-soft); margin-top: 24px; max-width: 22ch; }
 .faixa .frase strong { font-weight: var(--w-titulo); color: var(--fx-ink); }
 .faixa.laranja .frase { font-size: 24px; max-width: 20ch; }
 .faixa .pe { display: grid; gap: 12px; font-size: 15px; color: var(--fx-meta); }
@@ -51,11 +50,11 @@ html.js .deck .slide.atual { display: grid; }
 .s-topo .faixa .frase { margin-top: 0; max-width: 30ch; }
 .s-topo .faixa .pe { grid-column: 1 / -1; gap: 8px; }
 .s-topo .conteudo { padding: 40px 96px 48px 96px; min-width: 0; display: grid; align-content: start; gap: 24px; }
-/* registro: quieto, a margem 80/20; sumário, recap e transições */
+/* registro: quieto, a margem 80/20; sumário, transição e o recap de capítulo longo */
 .s-quieto { grid-template-columns: 4fr 1fr; }
 .s-quieto .conteudo { padding: 96px 96px 72px 120px; display: grid; align-content: start; gap: 32px; min-width: 0; }
-.s-quieto .conteudo h2 { font-size: 40px; font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.1; }
-.s-quieto .cromo { border-left: 1px solid var(--rule); padding: 96px 40px 72px; display: grid; grid-template-rows: auto 1fr auto; gap: 32px; font-size: 17px; color: var(--muted); }
+.s-quieto .conteudo h2 { font-size: 28px; font-weight: var(--w-titulo); letter-spacing: -.02em; line-height: 1.1; }
+.s-quieto .cromo { border-left: 1px solid var(--rule); padding: 96px 40px 72px; display: grid; grid-template-rows: auto 1fr auto; gap: 32px; font-size: 15px; color: var(--muted); }
 .s-quieto .cromo .capitulo { font-weight: var(--w-rotulo); color: var(--ink); line-height: 1.3; }
 .s-quieto .cromo .capitulo small { display: block; font-weight: var(--w-corpo); color: var(--muted); font-size: 15px; margin-top: 6px; }
 .s-quieto .cromo .vertical { position: relative; width: 1px; background: var(--rule-strong); justify-self: start; }
@@ -75,39 +74,41 @@ html.js .deck .slide.atual { display: grid; }
 .s-cheio.com-foto .statement { font-size: 48px; max-width: 18ch; }
 
 /* ---- blocos de conteúdo do slide ---- */
-.slide .duas-colunas { columns: 2; column-gap: 48px; font-size: 19px; line-height: 1.5; }
+/* status de execução no slide (regra 6c): a etiqueta não desce do piso de 14 px */
+.slide .status .etiqueta { font-size: 14px; }
+.slide .duas-colunas { columns: 2; column-gap: 48px; font-size: 15px; line-height: 1.6; }
 .slide .duas-colunas p + p { margin-top: 16px; }
-.slide .conteudo h3 { font-size: 24px; font-weight: var(--w-rotulo); letter-spacing: -.01em; line-height: 1.25; }
+.slide .conteudo h3 { font-size: 19px; font-weight: var(--w-rotulo); letter-spacing: -.01em; line-height: 1.25; }
 .slide .grafico text { font-size: 17px; }
 .slide .grafico text.valor { font-size: 17px; }
 .slide .grafico text.tique { font-size: 14px; }
 .slide .grafico text.rotulo { font-size: 16px; }
 .slide .grafico text.anota { font-size: 14px; }
-.slide .tabela { font-size: 17px; }
+.slide .tabela { font-size: 15px; }
 .slide .tabela th { padding: 0 16px 10px 0; font-size: 15px; }
 .slide .tabela td { padding: 12px 16px 12px 0; vertical-align: top; }
 .s-topo .tabela { font-size: 15px; }
 .s-topo .tabela td { padding: 10px 16px 10px 0; }
-.slide .tabela.orcamento td { padding: 8px 16px 8px 0; font-size: 16px; }
+.slide .tabela.orcamento td { padding: 8px 16px 8px 0; font-size: 15px; }
 .slide .tabela.orcamento th { padding-bottom: 8px; }
 .slide .tabela.proximos td:first-child { font-weight: var(--w-rotulo); color: var(--ink); }
 .slide .fases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.slide .fase { position: relative; padding-top: 16px; font-size: 17px; }
+.slide .fase { position: relative; padding-top: 16px; font-size: 15px; }
 .slide .fase::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--rule-strong); }
 .slide .fase.atual::before, .slide .fase.feita::before { height: 3px; background: var(--ink); }
 .slide .fase.atual::after { content: ""; position: absolute; top: -3px; left: 0; width: 10px; height: 10px; background: var(--accent); }
 .slide .fase .quando { display: block; font-size: 15px; color: var(--meta); margin-bottom: 4px; font-variant-numeric: tabular-nums; }
-.slide .fase b { display: block; font-weight: var(--w-rotulo); color: var(--ink); font-size: 20px; margin-bottom: 6px; }
+.slide .fase b { display: block; font-weight: var(--w-rotulo); color: var(--ink); font-size: 17px; margin-bottom: 6px; }
 .slide .fase.futura { color: var(--muted); } .slide .fase.futura b { color: var(--muted); }
 .slide .perfis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 40px; }
-.slide .perfil { display: grid; gap: 12px; align-content: start; font-size: 16px; line-height: 1.4; }
+.slide .perfil { display: grid; gap: 12px; align-content: start; font-size: 15px; line-height: 1.45; }
 .slide .perfil .foto { width: 72px; height: 72px; background: var(--surface-2); border: 1px solid var(--rule); overflow: hidden; }
 .slide .perfil .foto img { width: 100%; height: 100%; object-fit: cover; }
-.slide .perfil b { display: block; font-weight: var(--w-rotulo); color: var(--ink); font-size: 18px; }
+.slide .perfil b { display: block; font-weight: var(--w-rotulo); color: var(--ink); font-size: 16px; }
 .slide .perfil .papel { display: block; color: var(--meta); font-size: 15px; margin-bottom: 4px; }
 .slide .atores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .slide .atores h3 { font-size: 15px; font-weight: var(--w-rotulo); color: var(--muted); border-bottom: 1px solid var(--ink); padding-bottom: 8px; margin: 0 0 8px; }
-.slide .atores ul { list-style: none; margin: 0; padding: 0; font-size: 17px; }
+.slide .atores ul { list-style: none; margin: 0; padding: 0; font-size: 15px; }
 .slide .atores li { padding: 8px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 2px; }
 .slide .atores li span { color: var(--meta); font-size: 15px; font-variant-numeric: tabular-nums; }
 /* o slide tem largura fixa e piso proprio de 14 px: o grafico nao rola dentro dele */
@@ -115,64 +116,64 @@ html.js .deck .slide.atual { display: grid; }
 .slide .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 .slide .comparacao > div { border-top: 1px solid var(--ink); padding-top: 16px; }
 .slide .comparacao h3 { font-size: 15px; font-weight: var(--w-rotulo); color: var(--muted); margin: 0 0 12px; }
-.slide .comparacao ul { list-style: none; margin: 0; padding: 0; font-size: 18px; display: grid; gap: 10px; }
+.slide .comparacao ul { list-style: none; margin: 0; padding: 0; font-size: 15px; display: grid; gap: 12px; }
 .slide .comparacao .depois h3 { color: var(--ink); }
 .slide .comparacao .depois li::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--accent); margin-right: 12px; vertical-align: 1px; }
 .slide .comparacao .hoje li::before { content: ""; display: inline-block; width: 8px; height: 8px; border: 1px solid var(--ink); margin-right: 12px; vertical-align: 1px; }
-.slide .citacao { font-size: 44px; font-weight: var(--w-fino); line-height: 1.15; letter-spacing: -.02em; color: var(--ink); max-width: 22ch; }
+.slide .citacao { font-size: 36px; font-weight: var(--w-fino); line-height: 1.15; letter-spacing: -.02em; color: var(--ink); max-width: 22ch; }
 .slide .citacao strong { font-weight: var(--w-titulo); }
-.slide .atrib { font-size: 17px; color: var(--muted); max-width: 60ch; }
+.slide .atrib { font-size: 15px; color: var(--muted); max-width: 60ch; }
 .slide .atrib b { color: var(--ink); font-weight: var(--w-rotulo); }
 .slide .numeros { display: grid; gap: 0; }
-.slide .numeros p { font-size: 24px; font-weight: var(--w-fino); line-height: 1.4; padding: 20px 0; border-top: 1px solid var(--rule); color: var(--ink); }
+.slide .numeros p { font-size: 20px; font-weight: var(--w-fino); line-height: 1.4; padding: 20px 0; border-top: 1px solid var(--rule); color: var(--ink); }
 .slide .numeros p:last-child { border-bottom: 1px solid var(--rule); }
 .slide .numeros strong { font-weight: var(--w-titulo); }
 .slide .numeros svg { display: inline-block; width: 88px; height: 24px; vertical-align: -4px; margin: 0 4px; }
 .slide .numeros svg polyline { fill: none; stroke: var(--dado-3); stroke-width: 2; }
 .slide .numeros svg circle { fill: var(--accent); }
-.slide .recap li { padding: 20px 0; font-size: 20px; line-height: 1.4; }
-.slide .recap li strong { font-size: 21px; margin-bottom: 4px; }
+.slide .recap li { padding: 16px 0; font-size: 15px; line-height: 1.5; }
+.slide .recap li strong { font-size: 17px; margin-bottom: 4px; }
 .slide .esquema text, .slide .matriz svg text, .slide .atores-mapa svg text, .slide .fluxo svg text { font-family: var(--font); }
 .slide .sumario-slide { list-style: none; margin: 0; padding: 0; display: grid; }
-.slide .sumario-slide li { display: grid; grid-template-columns: 56px 1fr auto; gap: 24px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--rule); font-size: 24px; color: var(--ink); }
+.slide .sumario-slide li { display: grid; grid-template-columns: 56px 1fr auto; gap: 24px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--rule); font-size: 20px; color: var(--ink); }
 .slide .sumario-slide li:last-child { border-bottom: 1px solid var(--rule); }
-.slide .sumario-slide .n { font-size: 24px; font-weight: var(--w-fino); color: var(--meta); font-variant-numeric: tabular-nums; }
-.slide .sumario-slide .pg { font-size: 17px; color: var(--meta); font-variant-numeric: tabular-nums; }
+.slide .sumario-slide .n { font-size: 20px; font-weight: var(--w-fino); color: var(--meta); font-variant-numeric: tabular-nums; }
+.slide .sumario-slide .pg { font-size: 15px; color: var(--meta); font-variant-numeric: tabular-nums; }
 .slide .foto-area { background: var(--surface-2); position: relative; overflow: hidden; }
 .slide .foto-area img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .slide .foto-area:not(:has(img))::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(135deg, transparent 0 14px, var(--rule) 14px 15px); }
 /* regra 3: texto sobre foto vai direto ou na base sobre véu de chumbo, nunca em caixa */
 .slide .foto-area:has(img):has(span)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(to top, rgba(18, 14, 11, .85) 0%, rgba(18, 14, 11, 0) 100%); pointer-events: none; }
-.slide .foto-area span { position: absolute; left: 24px; right: 24px; bottom: 18px; font-size: 15px; color: rgba(255, 255, 255, .86); }
+.slide .foto-area span { position: absolute; z-index: 1; left: 24px; right: 24px; bottom: 18px; font-size: 15px; color: rgba(255, 255, 255, .86); }   /* acima do véu, senão o ::after cobre a legenda */
 .slide .foto-cheia { position: absolute; inset: 0; }
 .slide .foto-cheia img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .slide .veu { position: absolute; left: 0; right: 0; bottom: 0; height: 62%; background: linear-gradient(to top, rgba(18, 14, 11, .92) 0%, rgba(18, 14, 11, .55) 55%, rgba(18, 14, 11, 0) 100%); pointer-events: none; }
 .slide .separatriz { grid-template-columns: auto 1fr; gap: 64px; align-items: start; }
 .slide .separatriz-numeral { font-size: 260px; font-weight: var(--w-fino); letter-spacing: -.05em; line-height: .8; color: var(--ink); }
-.slide .separatriz-lista { list-style: none; margin: 0; padding: 0; font-size: 20px; display: grid; }
+.slide .separatriz-lista { list-style: none; margin: 0; padding: 0; font-size: 17px; display: grid; }
 .slide .separatriz-lista li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid var(--rule); }
 .slide .separatriz-lista li:last-child { border-bottom: 1px solid var(--rule); }
 .slide .separatriz-lista .n { color: var(--meta); font-variant-numeric: tabular-nums; }
-.slide .enderecos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; font-size: 17px; color: var(--ink-soft); line-height: 1.5; }
+.slide .enderecos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
 .slide .enderecos b { display: block; color: var(--ink); font-weight: var(--w-rotulo); margin-bottom: 4px; }
 .slide .foto-legenda { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 .slide .foto-legenda img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
 .slide .foto-legenda .legenda { font-size: 15px; margin-top: 12px; }
-.slide .foto-legenda p.texto { font-size: 19px; line-height: 1.5; }
+.slide .foto-legenda p.texto { font-size: 15px; line-height: 1.6; }
 .slide .foto-legenda p.texto + p.texto { margin-top: 14px; }
 .slide .metas { display: grid; gap: 0; }
 .slide .meta-linha { display: grid; grid-template-columns: 1fr 260px; gap: 40px; align-items: center; padding: 22px 0; border-top: 1px solid var(--rule); }
 .slide .meta-linha:last-child { border-bottom: 1px solid var(--rule); }
-.slide .meta-linha p { font-size: 22px; font-weight: var(--w-fino); line-height: 1.35; color: var(--ink); }
+.slide .meta-linha p { font-size: 19px; font-weight: var(--w-fino); line-height: 1.35; color: var(--ink); }
 .slide .meta-linha p strong { font-weight: var(--w-titulo); }
 .slide .meta-linha p small { display: block; font-size: 15px; color: var(--muted); margin-top: 4px; }
 .slide .meta-linha svg { width: 100%; height: auto; display: block; overflow: visible; }
 .slide .meta-linha svg text { font-family: var(--font); font-size: 14px; fill: var(--meta); font-variant-numeric: tabular-nums; }
 .slide .equipe { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
-.slide .pessoa { display: grid; gap: 10px; font-size: 16px; line-height: 1.4; }
+.slide .pessoa { display: grid; gap: 10px; font-size: 15px; line-height: 1.45; }
 .slide .pessoa .foto { width: 100%; aspect-ratio: 1; overflow: hidden; border: 1px solid var(--rule); background: var(--surface-2); }
 .slide .pessoa .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.slide .pessoa b { display: block; font-weight: var(--w-rotulo); color: var(--ink); font-size: 17px; }
+.slide .pessoa b { display: block; font-weight: var(--w-rotulo); color: var(--ink); font-size: 16px; }
 .slide .pessoa .papel { display: block; color: var(--meta); font-size: 15px; margin-bottom: 4px; }
 .slide .lista-razao li { padding: 18px 0; }
 

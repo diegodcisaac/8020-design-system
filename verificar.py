@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-verificar.py: le o HTML de uma peca do 8020-DS 4.0 e aponta o que a regra proibe.
+verificar.py: le o HTML de uma peca do 8020-DS 4.1 e aponta o que a regra proibe.
 Cobre estrutura, acessibilidade, momentos, dado, limites de texto e editorial;
 a geometria do slide fica com verificar-geometria.js, que roda no Playwright.
 Sem dependencia: so a biblioteca padrao do Python 3.
@@ -16,7 +16,7 @@ As regras estao em RULES.md; cada achado aponta a sua.
 import argparse, json, os, re, sys, unicodedata
 from html.parser import HTMLParser
 
-VERSAO = "4.0"
+VERSAO = "4.1"
 
 # ------------------------------------------------------------------ arvore
 VAZIOS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta",
@@ -310,6 +310,8 @@ DIFICEIS = ["declarada", "declarado", "declaradas", "declarados", "eleitos", "el
             "empoderar", "disruptivo", "escalável", "acionável"]
 
 AUTORREFERENCIA = ["neste documento", "nesta apresentação", "neste deck", "neste material",
+                   "neste book", "como ler", "o que o capítulo prova", "o que a parte mostra",
+                   "este capítulo", "esta parte",
                    "este material", "esta apresentação", "o presente documento",
                    "a seguir veremos", "como veremos", "no próximo slide",
                    "nas próximas páginas", "ao longo deste", "ao longo desta"]
@@ -331,6 +333,22 @@ ENDERECO_RE = re.compile(r"\S+@\S+|https?://\S+|\S*/\S*|"
                           r"\b[\w.-]+\.(?:com|br|org|net|gov|html|css|js|svg|jpg|png|json|py|md)\b", re.I)
 
 DIAGRAMAS = {"esquema", "fluxo", "atores-mapa", "matriz", "diagrama", "rede"}
+
+# titulo que serviria em qualquer peca: nomeia a categoria, nao o assunto (regra 21)
+GENERICOS = {"contexto", "introdução", "visão geral", "panorama", "cenário", "cenário atual",
+             "diagnóstico", "análise", "resumo", "destaques", "considerações",
+             "considerações finais", "observações", "desafios", "oportunidades",
+             "estratégia", "proposta", "solução", "resultados", "objetivos", "premissas"}
+
+# o que conta como dispositivo visual de um slide de evidencia ou de um capitulo (regra 15a)
+VISUAIS = {"grafico", "numeros", "fases", "metas", "perfis", "equipe", "comparacao", "esquema",
+           "atores-mapa", "atores", "lista-razao", "foto-legenda", "foto-area", "foto-cheia",
+           "citacao", "statement", "figura", "fichas", "lado", "numero-em-linha", "linha-tempo",
+           "mapa", "matriz", "fluxo", "tabela"}
+
+# metadado de leitura ou de producao (regra 22a)
+METADADO = [r"\bmin(?:utos)? de leitura\b", r"\bvocê parou\b", r"continuar de onde parou",
+            r"\bcontinuar a leitura\b", r"\bvers[ãa]o\s+\d", r"\bpreparad[oa] por\b"]
 
 # largura util do .conteudo em cada registro, medida no template do deck padrao.
 # viewBox maior que isso encolhe o SVG e derruba o texto abaixo do piso de 14 px.
@@ -380,6 +398,37 @@ def c_sombra(p):
             yield n, "A peça usa `box-shadow`. A profundidade vem do filete de 1 px, nunca de sombra."
     if "box-shadow" in p.estilo:
         yield p.body, "O `<style>` da peça usa `box-shadow`. A profundidade vem do filete de 1 px."
+
+
+@checagem("deck-no-escuro", "aviso", 1, escopos=("deck",))
+def c_deck_escuro(p):
+    for n in (p.body, p.deck):
+        if n is not None and n.classes & {"noite", "tema-escuro"}:
+            yield n, "Deck no substrato escuro. O deck fica no papel claro; a noite é para book e página lidos na tela."
+            return
+
+
+@checagem("italico-em-titulo", "erro", 5, escopos=("deck", "parte", "hub", "pagina"))
+def c_italico(p):
+    for e in p.raiz.desc(("em", "i")):
+        alvo = e.ancestral(("h1", "h2", "h3", "h4", "h5", "h6"))
+        if alvo is None:
+            for c in ("statement", "frase", "cap", "titulo"):
+                alvo = e.ancestral(classe=c)
+                if alvo is not None:
+                    break
+        if alvo is not None:
+            yield e, f"Itálico em título ou frase: \"{e.txt()[:40]}\". O destaque é peso (`<strong>`), nunca itálico."
+
+
+@checagem("status-sem-palavra", "erro", "6c")
+def c_status(p):
+    for n in p.raiz.desc(classe="status"):
+        if not n.classes & {"feito", "andamento"}:
+            continue
+        et = n.um(classe="etiqueta")
+        if et is None or not et.txt():
+            yield n, "Status de execução sem a palavra. A cor sozinha não diz o estado: a etiqueta em caixa alta vai junto (\"Concluído\", \"Em andamento\")."
 
 
 @checagem("raio", "aviso", 31)
@@ -523,7 +572,7 @@ def c_leitura(p):
             yield f, "Figura de dado sem a leitura em palavras. A página tem de informar parada."
 
 
-@checagem("dado-sem-fonte", "aviso", 23, escopos=("deck",))
+@checagem("dado-sem-fonte", "aviso", 42, escopos=("deck",))
 def c_fonte(p):
     for s in p.slides:
         g = s.um(classe="grafico")
@@ -541,7 +590,9 @@ def c_alt(p):
 @checagem("imagem-gerada-sem-marca", "aviso", 3, escopos=("deck", "parte", "hub", "pagina"))
 def c_imagem_marcada(p):
     texto = p.raiz.txt().lower()
-    if p.raiz.um(("img",)) is not None and "ilustrativa" not in texto and "ilustrativas" not in texto:
+    # a logo nao e imagem gerada: conta so a imagem de conteudo
+    fotos = [i for i in p.raiz.desc(("img",)) if "logos/" not in (i.attrs.get("src") or "") and "logo" not in i.classes]
+    if fotos and "ilustrativa" not in texto and "ilustrativas" not in texto:
         yield p.body, "A peça tem imagem e não diz em lugar nenhum que a imagem é ilustrativa. Toda imagem gerada é marcada."
 
 
@@ -651,12 +702,17 @@ def c_separatriz(p):
             yield p.body, f"{c} não tem separatriz numerada."
 
 
-@checagem("capitulo-sem-recap", "erro", 28, escopos=("deck",))
+@checagem("recap-em-capitulo-curto", "aviso", 28, escopos=("deck",))
 def c_recap(p):
-    com = {p.cap(s) for s in p.slides if s.um(classe="recap") is not None}
-    for c in capitulos_do_deck(p):
-        if c not in com:
-            yield p.body, f"{c} não fecha com \"O que aprendemos no capítulo\"."
+    for s in p.slides:
+        if s.um(classe="recap") is None:
+            continue
+        c = p.cap(s)
+        conteudo = [x for x in p.slides if p.cap(x) == c and x is not s
+                    and x.um(classe="separatriz") is None and x.um(classe="recap") is None]
+        if len(conteudo) < 8:
+            yield s, (f"Recap em {c}, que tem {len(conteudo)} slides de conteúdo. O recap só entra em "
+                      f"capítulo longo, de oito slides ou mais; o curto passa direto ao próximo.")
 
 
 @checagem("svg-largo-demais", "erro", 47, escopos=("deck",))
@@ -698,10 +754,40 @@ def c_tabela(p):
 
 
 # ------------------------------------------------------------------ book
-@checagem("book-sem-chave", "erro", 30, escopos=("parte", "hub"))
-def c_chave(p):
-    if not p.body.attrs.get("data-book"):
-        yield p.body, "O `body` não tem `data-book`. Sem a chave, o book não guarda onde o leitor parou."
+@checagem("capitulo-fora-de-sequencia", "aviso", 30, escopos=("parte", "hub", "pagina"))
+def c_sequencia(p):
+    ant = None
+    for m in p.raiz.desc(classe="cap-meta"):
+        b = m.um(("b",))
+        r = re.search(r"(\d+)", b.txt() if b is not None else m.txt())
+        if not r:
+            continue
+        n = int(r.group(1))
+        if ant is not None and n != ant + 1:
+            yield m, f"Capítulo {n} depois do {ant}. A numeração corre de 1 a N pela peça inteira, também entre partes."
+        ant = n
+
+
+@checagem("sem-visual", "aviso", "15a", escopos=("deck", "parte", "pagina"))
+def c_visual(p):
+    def tem_visual(no):
+        if any(d.tag in ("svg", "img", "table") for d in no.desc()):
+            return True
+        return any(d.classes & VISUAIS for d in no.desc())
+    if p.escopo == "deck":
+        for s in p.slides:
+            if "s-faixa" not in s.classes and "s-topo" not in s.classes:
+                continue
+            f = s.um(classe="faixa")
+            if f is not None and "laranja" in f.classes:
+                continue
+            c = s.um(classe="conteudo")
+            if c is not None and not tem_visual(c):
+                yield s, "Slide de evidência só com texto. A história se conta também pelo visual: gráfico, diagrama, número em destaque, tabela ou imagem."
+    else:
+        for cap in p.raiz.desc(("article",)):
+            if "capitulo" in cap.classes and not tem_visual(cap):
+                yield cap, "Capítulo sem dispositivo visual. Pelo menos uma figura, gráfico, diagrama, tabela ou número em destaque."
 
 
 @checagem("passo-sem-estado", "erro", 30, escopos=("parte", "hub", "pagina"))
@@ -825,7 +911,32 @@ def c_titulo_contagem(p):
     for h in p.raiz.desc(("h1", "h2", "h3")):
         t = h.txt()
         if re.match(r"^(os|as)\s+" + num + r"\b", t, re.I) or re.match(r"^" + num + r"\s+\w+", t, re.I):
-            yield h, f"Título que inventaria: \"{t[:56]}\". O título afirma o aprendizado, não conta os itens."
+            yield h, f"Título que inventaria: \"{t[:56]}\". O título diz do que trata, não conta os itens."
+
+
+@checagem("titulo-generico", "aviso", 21, escopos=("deck", "parte", "hub", "pagina"))
+def c_titulo_generico(p):
+    for h in p.raiz.desc(("h1", "h2", "h3")):
+        t = re.sub(r"[.:!?]+$", "", h.txt()).strip().lower()
+        if t in GENERICOS:
+            yield h, f"Título sem informação: \"{h.txt()}\". Diga do que a seção trata, com o assunto concreto."
+
+
+@checagem("metadado-na-peca", "erro", "22a", escopos=("deck", "parte", "hub", "pagina"))
+def c_metadado(p):
+    for n in p.raiz.desc():
+        if n.attrs.get("id") in ("continuar-texto", "continuar-acao"):
+            yield n, "Bloco de \"continuar de onde parou\". A peça não guarda nem anuncia onde o leitor parou."
+    vistas = set()
+    for n, t in textos_visiveis(p):
+        b = t.lower()
+        for r in METADADO:
+            if re.search(r, b) and r not in vistas:
+                vistas.add(r)
+                yield n, f"Metadado de leitura ou de produção: \"{t[:56]}\". Tempo de leitura, \"você parou em\" e versão não entram na peça."
+        if p.escopo != "deck" and re.search(r"\b\d+\s*min\b", b) and "min" not in vistas:
+            vistas.add("min")
+            yield n, f"\"{t[:40]}\" parece tempo de leitura. A peça não traz tempo de leitura.", "aviso"
 
 
 @checagem("marca-no-texto", "aviso", 24, escopos=("deck", "parte", "hub", "pagina"))
@@ -840,7 +951,7 @@ def c_marca(p):
 # ------------------------------------------------------------------ execucao
 # o contrato didatico do deck inteiro: so cobravel quando a peca esta fechada
 CONTRATO_INTEIRO = {"deck-sem-sumario", "deck-sem-esquema", "deck-sem-contracapa",
-                    "capitulo-sem-separatriz", "capitulo-sem-recap"}
+                    "capitulo-sem-separatriz"}
 
 
 def verificar(caminho, tipo=None, fragmento=False):
@@ -893,7 +1004,7 @@ def main():
     ap.add_argument("--regras", action="store_true", help="lista as checagens e sai")
     ap.add_argument("--tipo", choices=TODOS, help="forca o escopo em vez de deduzir do arquivo")
     ap.add_argument("--fragmento", action="store_true",
-                    help="peca em construcao ou recorte: sumario, separatriz, recap, esquema e "
+                    help="peca em construcao ou recorte: sumario, separatriz, esquema e "
                          "contracapa viram aviso, porque ainda nao existem")
     ap.add_argument("--sem-cor", action="store_true")
     a = ap.parse_args()

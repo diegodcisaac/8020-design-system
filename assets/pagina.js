@@ -1,5 +1,5 @@
 /* ============================================================
-   8020-DS 4.0, assets/pagina.js
+   8020-DS 4.1, assets/pagina.js
    O mínimo de uma página do catálogo ou de uma peça longa que não é
    book: o item atual do topo acompanha a seção visível (peso como
    estado), os botões .copiar copiam o código do alvo, as abas movem o

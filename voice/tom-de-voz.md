@@ -1,6 +1,6 @@
 # Tom de voz
 
-Vale para o 8020-DS 4.0. A referência canônica e completa de tom vive no vault do operador. Este arquivo é o contrato de tom que o sistema de design carrega para gerar peça no padrão da casa, e basta para isso. Em caso de conflito, a referência do operador vence.
+Vale para o 8020-DS 4.1. A referência canônica e completa de tom vive no vault do operador. Este arquivo é o contrato de tom que o sistema de design carrega para gerar peça no padrão da casa, e basta para isso. Em caso de conflito, a referência do operador vence.
 
 ## A voz
 
@@ -23,12 +23,12 @@ Consultiva, em português do Brasil, falando para o cliente final. Observa e sug
 
 O texto explica e educa; não impressiona. As regras abaixo são inegociáveis e vieram de feedback direto do operador:
 
-- **Sem paradoxo.** "O programa que tenta mudar tudo não muda nada" vira "Concentrar em poucos comportamentos aumenta o efeito". O título afirma o aprendizado, não o enigma.
+- **Sem paradoxo.** "O programa que tenta mudar tudo não muda nada" vira "Concentrar em poucos comportamentos aumenta o efeito". O título diz do que a seção trata, com o assunto concreto; o achado vai na frase central.
 - **Sem metáfora nem figura de linguagem difusa.** Terreno, palco, espinha, guardião, mapa, anatomia, zona cinzenta, matéria-prima: tudo isso sai. Dizer o que é, literalmente: canal principal, estrutura da peça, fonte de conteúdo.
 - **Sem personificação de conceito.** "A estatística conta", "a leitura sabe o que lhe falta", "o clima conta essa história": conceito não age. "A percepção melhora antes de a taxa de acidentes cair."
 - **Peça funcional tem nome funcional.** Sumário chama-se Sumário. Índice chama-se índice. Sem título criativo para seção de navegação.
 - **Palavra difícil no contexto sai.** "Eleitos" vira "escolhidos". "Declarada" e derivações não entram em peça nenhuma: virar "definida" ou reescrever a frase.
-- **Conclusão marca o conhecimento adquirido.** Todo capítulo de deck fecha com "O que aprendemos no capítulo NN", e cada aprendizado se sustenta lido isoladamente, com a fonte junto.
+- **A conclusão vem uma vez, no fim.** Capítulo curto não fecha com recap; o recap ("O que aprendemos no capítulo NN", cada aprendizado inteiro e compreensível sozinho) só entra em capítulo longo, e a síntese da peça inteira fica no esquema de fechamento.
 
 ## Densidade
 

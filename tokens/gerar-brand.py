@@ -12,7 +12,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 CSS = open(os.path.join(AQUI, "8020.css"), encoding="utf-8").read()
 
 def bloco(seletor):
-    m = re.search(re.escape(seletor) + r"\s*\{(.*?)\n\}", CSS, re.S); return m.group(1)
+    m = re.search(re.escape(seletor) + r"[^{;]*\{(.*?)\n\}", CSS, re.S); return m.group(1)   # aceita lista de seletores (.tema-escuro, body.noite)
 def tokens(txt):
     out = {}
     for m in re.finditer(r"--([a-z0-9-]+)\s*:\s*([^;]+);", txt): out[m.group(1)] = m.group(2).strip()
@@ -80,11 +80,23 @@ for nome, ctx in MOMENTOS:
                     "separacao_oklab_adjacente": [round(dE(degraus[i], degraus[i + 1]), 1) for i in range(3)],
                     "separacao_para_o_20": [round(dE(d, o20), 1) for d in degraus], "o20": hexa(o20)}
 
+# status de execucao (regra 6c): a unica cor fora da paleta. O marcador e grafico
+# (3:1 contra o papel basta); a etiqueta e a tinta sobre o grifo, que tem de passar como texto
+papel = cor(valor("paper", {})); tinta = cor(valor("ink", {}))
+status = {}
+for nome in ("feito", "andamento"):
+    marcador = cor(RAIZ["status-" + nome]); fundo = compor(cor(RAIZ["status-" + nome + "-fundo"]), papel)
+    status[nome] = {"marcador": RAIZ["status-" + nome], "grifo": RAIZ["status-" + nome + "-fundo"],
+                    "marcador_contra_o_papel": round(contraste(marcador, papel), 2),
+                    "tinta_sobre_o_grifo": round(contraste(tinta, fundo), 2),
+                    "cor_como_texto_sobre_o_papel": round(contraste(marcador, papel), 2),
+                    "uso": "marcador e grifo; a etiqueta fica na tinta"}
+
 brand = {
-  "system": "8020-DS", "version": "4.0", "candidato": True, "gerado_por": "tokens/gerar-brand.py a partir de tokens/8020.css", "data": "2026-09-07",
+  "system": "8020-DS", "version": "4.1", "gerado_por": "tokens/gerar-brand.py a partir de tokens/8020.css", "data": "2026-10-21",
   "primitivos": {
     "cores": {k: RAIZ[k] for k in RAIZ if k.startswith("8020-")},
-    "fonte": {"familia": "Montserrat", "variavel": True, "licenca": "OFL", "servida_de": "assets/fonts/", "pesos": {"fino": 300, "corpo": 400, "medio": 500, "rotulo": 600, "titulo": 700, "display": 800}},
+    "fonte": {"familia": "Montserrat", "variavel": True, "licenca": "OFL", "servida_de": "assets/fonts/", "pesos": {"fino": 300, "corpo": 400, "medio": 500, "rotulo": 600, "titulo": 700, "display": 700}, "italico": "só na prosa corrida, nunca em título, statement ou frase"},
     "escala_tipo": {k: RAIZ[k] for k in RAIZ if k.startswith("t-")},
     "entrelinha": {k: RAIZ[k] for k in RAIZ if k.startswith("lh-")},
     "escala_espaco": {k: RAIZ[k] for k in RAIZ if k.startswith("s-")},
@@ -111,6 +123,7 @@ brand = {
     "marcas": {"barra": "até 24 px, reta, 2 px de papel entre segmentos", "linha": "2 px", "ponto": "8 px com anel de papel de 2 px", "no_de_rede": "quadrado de 8 px", "banda_de_fluxo": "reta, 1 px de papel entre bandas"},
     "proibido": ["pizza e rosca", "eixo duplo", "radar", "gradiente em dado", "laranja como série", "tooltip flutuante (a leitura em palavras substitui)", "legenda em caixa (rótulo direto)"]
   },
+  "status_execucao": status,
   "contrast_matrix": matriz,
   "forbidden_pairs": [
     {"fg": "branco", "bg": "laranja", "context": "texto abaixo de 24 px (ou 19 px em 700)", "motivo": "3,5:1: só passa como texto grande"},
@@ -119,8 +132,8 @@ brand = {
     {"fg": "laranja", "bg": "laranja", "motivo": "sem contraste; dentro do momento laranja o acento é o branco"}
   ],
   "hard_rules": [
-    {"id": "paleta-fechada", "regra": "só os seis primitivos e os papéis derivados deles", "check": "nenhuma cor fora de --8020-* no CSS e no SVG"},
-    {"id": "papel-substrato", "regra": "o papel é o fundo de toda peça; laranja e escuro entram como momento", "check": "--paper da base é #faf7f2"},
+    {"id": "paleta-fechada", "regra": "só os seis primitivos e os papéis derivados deles; a única exceção é o status de execução (--status-*), só em plano com execução acompanhada", "check": "nenhuma cor fora de --8020-* e --status-* no CSS e no SVG"},
+    {"id": "papel-substrato", "regra": "o papel é o fundo padrão de toda peça; a noite (body.noite) é a alternativa para book e página lidos na tela; laranja e escuro entram como momento; a impressão sai no papel", "check": "--paper da base é #faf7f2"},
     {"id": "raio-zero", "regra": "0 em bloco, tabela, controle e foto de slide; 6 só em mídia de book", "check": "border-radius fora de --r-media só na moldura do visualizador"},
     {"id": "sem-sombra", "regra": "nada de box-shadow nem drop-shadow; profundidade vem de cor e filete", "check": "nenhum box-shadow"},
     {"id": "sem-moldura", "regra": "sem barra lateral colorida, sem caixa de ícone, sem pílula de conteúdo, sem hover que desloca; cartão só para coleção, sem borda", "check": "nenhum border-left colorido, nenhum translateY em hover"},

@@ -1,61 +1,35 @@
 /* ============================================================
-   8020-DS 4.0, assets/book.js
+   8020-DS 4.1, assets/book.js
    A margem viva do book: progresso de leitura, trilha com o capítulo
-   visível, "continuar de onde parou" guardado no navegador, notas de
-   rodapé alinhadas ao parágrafo que as chama, scrollytelling dirigido
-   pela margem (o passo do meio da tela troca o estado da figura e a
-   leitura em palavras), reveal só em figura, atalhos (j, k, h, ?).
+   visível, notas de rodapé alinhadas ao parágrafo que as chama,
+   scrollytelling dirigido pela margem (o passo do meio da tela troca o
+   estado da figura e a leitura em palavras), reveal só em figura,
+   atalhos (j, k, h, ?). Nada fica guardado no navegador: a peça não
+   lembra onde o leitor parou (regra 22a).
    Nenhum conteúdo nasce aqui. Vanilla, zero dependência.
-   O book declara em <body data-book="chave"> a chave do progresso.
-   Capítulos são [data-titulo]; o hub é #hub; o mapa é .mapa .peso.
+   Capítulos são [data-titulo]; o hub é #hub; as partes declaram
+   data-hub no body para a tecla h.
    ============================================================ */
 (function () {
   "use strict";
   var reduz = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var chave = document.body.getAttribute("data-book") || ("book-8020-" + location.pathname.split("/").slice(-2).join("-"));
 
   /* ---- progresso de leitura ---- */
   var barra = document.getElementById("progresso") || document.querySelector(".progresso-leitura");
   function progresso() { if (!barra) return; var h = document.documentElement; var max = h.scrollHeight - h.clientHeight; var p = max > 0 ? h.scrollTop / max : 0; barra.style.width = (Math.max(0, Math.min(1, p)) * 100) + "%"; }
   window.addEventListener("scroll", progresso, { passive: true }); progresso();
 
-  /* ---- onde esta página está em relação ao hub: "index.html" no hub, "partes/parte-2.html" numa parte ---- */
   var hubHref = document.body.getAttribute("data-hub") || "";
-  var hubDir = (function () { try { return new URL(hubHref || location.href, location.href).pathname.replace(/[^/]*$/, ""); } catch (e) { return location.pathname.replace(/[^/]*$/, ""); } })();
-  var paginaRel = location.pathname.indexOf(hubDir) === 0 ? location.pathname.slice(hubDir.length) : location.pathname.split("/").pop();
 
-  /* ---- trilha: o capítulo visível; guarda onde o leitor está ---- */
+  /* ---- trilha: o capítulo visível no topo ---- */
   var caps = document.querySelectorAll("[data-titulo]"), trilha = document.getElementById("trilha-atual");
-  var pesosMapa = Array.prototype.slice.call(document.querySelectorAll(".mapa .peso"));
   var atualId = null;
-  function guardar(id, titulo) { try { if (!id || /recap/.test(id)) return; localStorage.setItem(chave, JSON.stringify({ id: id, titulo: titulo, pagina: paginaRel, quando: Date.now() })); } catch (e) {} }
   if ("IntersectionObserver" in window && caps.length) {
-    var obs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { atualId = e.target.id; if (trilha) trilha.textContent = e.target.getAttribute("data-titulo"); guardar(e.target.id, e.target.getAttribute("data-titulo")); } }); }, { rootMargin: "-30% 0px -60% 0px" });
+    var obs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { atualId = e.target.id; if (trilha) trilha.textContent = e.target.getAttribute("data-titulo"); } }); }, { rootMargin: "-30% 0px -60% 0px" });
     caps.forEach(function (c) { obs.observe(c); });
     var hub = document.getElementById("hub");
-    if (hub) { var hubObs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { if (trilha) trilha.textContent = "Hub"; atualId = null; } }); }, { rootMargin: "-30% 0px -60% 0px" }); hubObs.observe(hub); }
+    if (hub) { var hubObs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { if (trilha) trilha.textContent = "Início"; atualId = null; } }); }, { rootMargin: "-30% 0px -60% 0px" }); hubObs.observe(hub); }
   }
-
-  /* ---- continuar de onde parou: só onde existe o bloco. O mapa do hub marca o capítulo atual
-     (quadrado de tinta, "você está aqui") e os anteriores como lidos (contorno, "lido"). ---- */
-  (function () {
-    var texto = document.getElementById("continuar-texto"), acao = document.getElementById("continuar-acao"); if (!texto || !acao) return;
-    try {
-      var g = JSON.parse(localStorage.getItem(chave) || "null");
-      if (!g || !g.id || !g.pagina) { pesosMapa.forEach(function (a) { a.removeAttribute("aria-current"); }); return; }
-      var dias = Math.round((Date.now() - g.quando) / 864e5);
-      var quando = dias === 0 ? "hoje" : dias === 1 ? "ontem" : "há " + dias + " dias";
-      texto.innerHTML = "Você parou em <strong>" + g.titulo + "</strong>, " + quando + ".";
-      var alvo = (g.pagina === paginaRel ? "" : g.pagina) + "#" + g.id;
-      acao.setAttribute("href", alvo); acao.innerHTML = "Continuar";
-      var achou = false;
-      pesosMapa.forEach(function (a) {
-        a.removeAttribute("aria-current"); var li = a.closest("li"), q = li && li.querySelector(".quadrado"), e = li && li.querySelector(".est");
-        if (a.getAttribute("href") === alvo) { achou = true; a.setAttribute("aria-current", "true"); if (q) q.className = "quadrado tinta"; if (e) { e.className = "est atual"; e.textContent = "você está aqui"; } }
-        else if (!achou) { a.classList.add("lido"); if (q) q.className = "quadrado contorno"; if (e) e.textContent = "lido"; }
-      });
-    } catch (e) {}
-  })();
 
   /* ---- notas na margem, alinhadas ao parágrafo que as chama ---- */
   function posicionar() {

@@ -1,5 +1,5 @@
 /* ============================================================
-   8020-DS 4.0, assets/dado.js
+   8020-DS 4.1, assets/dado.js
    A interação de dado do sistema, sem tooltip: a leitura em palavras
    (o ponteiro ou o foco sobre uma marca reescreve a .leitura da
    figura), a rede que acende as arestas do nó em foco, a transição
